@@ -1,7 +1,7 @@
 """
 Python bindings to odesk API
 python-odesk version 0.5
-(C) 2010-2011 oDesk
+(C) 2010-2013 oDesk
 """
 import urllib
 
@@ -22,7 +22,7 @@ class Task(Namespace):
         Parameters
           company_id    Company ID
         """
-        url = 'tasks/companies/%s/tasks' % str(company_id)
+        url = 'tasks/companies/{0}/tasks'.format(company_id)
         result = self.get(url)
         try:
             return result["tasks"] or []
@@ -39,8 +39,8 @@ class Task(Namespace):
           company_id    Company ID
           team_id       Team ID
         """
-        url = 'tasks/companies/%s/teams/%s/tasks' % (str(company_id),
-                                                     str(team_id))
+        url = 'tasks/companies/{0}/teams/{1}/tasks'.format(company_id,
+                                                           team_id)
         result = self.get(url)
         try:
             return result["tasks"] or []
@@ -58,8 +58,8 @@ class Task(Namespace):
           team_id       Team ID
           user_id       User ID
         """
-        url = 'tasks/companies/%s/teams/%s/users/%s/tasks' % (str(company_id),
-                                                    str(team_id), str(user_id))
+        url = 'tasks/companies/{0}/teams/{1}/users/{2}/tasks'.format(
+            company_id, team_id, user_id)
         result = self.get(url)
         try:
             return result["tasks"] or []
@@ -76,7 +76,7 @@ class Task(Namespace):
         Parameters
           company_id    Company ID
         """
-        url = 'tasks/companies/%s/tasks/full_list' % str(company_id)
+        url = 'tasks/companies/{0}/tasks/full_list'.format(company_id)
         result = self.get(url)
         try:
             return result["tasks"] or []
@@ -94,8 +94,8 @@ class Task(Namespace):
           company_id    Company ID
           team_id       Team ID
         """
-        url = 'tasks/companies/%s/teams/%s/tasks/full_list' %\
-                                             (str(company_id), str(team_id))
+        url = 'tasks/companies/{0}/teams/{1}/tasks/full_list'.format(
+            company_id, team_id)
         result = self.get(url)
         try:
             return result["tasks"] or []
@@ -114,8 +114,8 @@ class Task(Namespace):
           team_id       Team ID
           user_id       User ID
         """
-        url = 'tasks/companies/%s/teams/%s/users/%s/tasks/full_list' %\
-                                (str(company_id), str(team_id), str(user_id))
+        url = 'tasks/companies/{0}/teams/{1}/users/{2}/tasks/full_list'.format(
+            company_id, team_id, user_id)
         result = self.get(url)
         try:
             return result["tasks"] or []
@@ -135,7 +135,7 @@ class Task(Namespace):
         """
         if isinstance(task_codes, (list, tuple)):
             task_codes = ';'.join(map(str, task_codes))
-        url = 'tasks/companies/%s/tasks/%s' % (company_id, task_codes)
+        url = 'tasks/companies/{0}/tasks/{1}'.format(company_id, task_codes)
         result = self.get(url)
         return result.get("tasks", result)
 
@@ -150,8 +150,8 @@ class Task(Namespace):
         """
         if isinstance(task_codes, (list, tuple)):
             task_codes = ';'.join(map(str, task_codes))
-        url = 'tasks/companies/%s/teams/%s/tasks/%s' %\
-                                (company_id, team_id, task_codes)
+        url = 'tasks/companies/{0}/teams/{1}/tasks/{2}'.format(
+            company_id, team_id, task_codes)
         result = self.get(url)
         try:
             return result["tasks"] or []
@@ -171,8 +171,8 @@ class Task(Namespace):
         """
         if isinstance(task_codes, (list, tuple)):
             task_codes = ';'.join(map(str, task_codes))
-        url = 'tasks/companies/%s/teams/%s/users/%s/tasks/%s' %\
-                                (company_id, team_id, user_id, task_codes)
+        url = 'tasks/companies/{0}/teams/{1}/users/{2}/tasks/{3}'.format(
+            company_id, team_id, user_id, task_codes)
         result = self.get(url)
         try:
             return result["tasks"] or []
@@ -190,7 +190,7 @@ class Task(Namespace):
           description   Task description
           url           Task URL
         """
-        url = 'tasks/companies/%s/tasks' % str(company_id)
+        url = 'tasks/companies/{0}/tasks'.format(company_id)
         data = {'code': code,
                 'description': description,
                 'url': url}
@@ -209,8 +209,8 @@ class Task(Namespace):
           description   Task description
           url           Task URL
         """
-        post_url = 'tasks/companies/%s/teams/%s/tasks' % (
-            str(company_id), str(team_id))
+        post_url = 'tasks/companies/{0}/teams/{1}/tasks'.format(
+            company_id, team_id)
         data = {'code': code,
                 'description': description,
                 'url': url}
@@ -230,8 +230,8 @@ class Task(Namespace):
           description   Task description
           url           Task URL
         """
-        post_url = 'tasks/companies/%s/teams/%s/users/%s/tasks' % (
-            str(company_id), str(team_id), str(user_id))
+        post_url = 'tasks/companies/{0}/teams/{1}/users/{2}/tasks'.format(
+            company_id, team_id, user_id)
         data = {'code': code,
                 'description': description,
                 'url': url}
@@ -249,7 +249,7 @@ class Task(Namespace):
           description   Task description
           url           Task URL
         """
-        put_url = 'tasks/companies/%s/tasks/%s' % (str(company_id), str(code))
+        put_url = 'tasks/companies/{0}/tasks/{1}'.format(company_id, code)
         data = {'code': code,
                 'description': description,
                 'url': url}
@@ -268,8 +268,8 @@ class Task(Namespace):
           description   Task description
           url           Task URL
         """
-        put_url = 'tasks/companies/%s/teams/%s/tasks/%s' % (
-            str(company_id), str(team_id), str(code))
+        put_url = 'tasks/companies/{0}/teams/{1}/tasks/{2}'.format(
+            company_id, team_id, code)
         data = {'code': code,
                 'description': description,
                 'url': url}
@@ -289,8 +289,8 @@ class Task(Namespace):
           description   Task description
           url           Task URL
         """
-        put_url = 'tasks/companies/%s/teams/%s/users/%s/tasks/%s' % (
-            str(company_id), str(team_id), str(user_id), str(code))
+        put_url = 'tasks/companies/{0}/teams/{1}/users/{2}/tasks/{3}'.format(
+            company_id, team_id, user_id, code)
         data = {'code': code,
                 'description': description,
                 'url': url}
@@ -307,7 +307,7 @@ class Task(Namespace):
         """
         if isinstance(task_codes, (list, tuple)):
             task_codes = ';'.join(map(str, task_codes))
-        url = 'tasks/companies/%s/tasks/%s' % (company_id, task_codes)
+        url = 'tasks/companies/{0}/tasks/{1}'.format(company_id, task_codes)
         return self.delete(url, {})
 
     def delete_team_task(self, company_id, team_id, task_codes):
@@ -321,8 +321,8 @@ class Task(Namespace):
         """
         if isinstance(task_codes, (list, tuple)):
             task_codes = ';'.join(map(str, task_codes))
-        url = 'tasks/companies/%s/teams/%s/tasks/%s' %\
-                                (company_id, team_id, task_codes)
+        url = 'tasks/companies/{0}/teams/{1}/tasks/{2}'.format(
+            company_id, team_id, task_codes)
         return self.delete(url, {})
 
     def delete_user_task(self, company_id, team_id, user_id, task_codes):
@@ -337,8 +337,8 @@ class Task(Namespace):
         """
         if isinstance(task_codes, (list, tuple)):
             task_codes = ';'.join(map(str, task_codes))
-        url = 'tasks/companies/%s/teams/%s/users/%s/tasks/%s' %\
-                                 (company_id, team_id, user_id, task_codes)
+        url = 'tasks/companies/{0}/teams/{1}/users/{2}/tasks/{3}'.format(
+            company_id, team_id, user_id, task_codes)
         return self.delete(url, {})
 
     def delete_all_company_tasks(self, company_id):
@@ -349,7 +349,7 @@ class Task(Namespace):
           company_id    Company ID
           task_codes    Task codes (must be a list, even of 1 item)
         """
-        url = 'tasks/companies/%s/tasks/all_tasks' % (str(company_id))
+        url = 'tasks/companies/{0}/tasks/all_tasks'.format(company_id)
         return self.delete(url, {})
 
     def delete_all_team_tasks(self, company_id, team_id):
@@ -361,8 +361,8 @@ class Task(Namespace):
           team_id       Team ID
           task_codes    Task codes (must be a list, even of 1 item)
         """
-        url = 'tasks/companies/%s/teams/%s/tasks/all_tasks' % (str(company_id),
-                                                      str(team_id))
+        url = 'tasks/companies/{0}/teams/{1}/tasks/all_tasks'.format(
+            company_id, team_id)
         return self.delete(url, {})
 
     def delete_all_user_tasks(self, company_id, team_id, user_id):
@@ -375,8 +375,8 @@ class Task(Namespace):
           user_id       User ID
           task_codes    Task codes (must be a list, even of 1 item)
         """
-        url = 'tasks/companies/%s/teams/%s/users/%s/tasks/all_tasks' %\
-                     (str(company_id), str(team_id), str(user_id))
+        url = 'tasks/companies/{0}/teams/{1}/users/{2}/tasks/all_tasks'.format(
+            company_id, team_id, user_id)
         return self.delete(url, {})
 
     def update_batch_tasks(self, company_id, csv_data):
@@ -389,5 +389,6 @@ class Task(Namespace):
           company_id    Company ID
           csv_data      Contents of the csv file
         """
-        url = 'tasks/companies/%s/tasks/batch:%s' % (str(company_id), csv_data)
+        url = 'tasks/companies/{0}/tasks/batch:{1}'.format(company_id,
+                                                           csv_data)
         return self.put(url, {})

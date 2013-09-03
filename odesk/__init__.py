@@ -1,22 +1,22 @@
 """
 Python bindings to odesk API
 python-odesk version 0.5
-(C) 2010-2011 oDesk
+(C) 2010-2013 oDesk
 """
-VERSION = (0, 5, 0, 'alpha', 1)
+VERSION = (0, 5, 0, 'beta', 1)
 
 
 def get_version():
-    version = '%s.%s' % (VERSION[0], VERSION[1])
+    version = '{0}.{1}'.format(VERSION[0], VERSION[1])
     if VERSION[2]:
-        version = '%s.%s' % (version, VERSION[2])
+        version = '{0}.{1}'.format(version, VERSION[2])
     if VERSION[3:] == ('alpha', 0):
-        version = '%s pre-alpha' % version
+        version = '{0} pre-alpha'.format(version)
     else:
         if VERSION[3] != 'final':
-            version = "%s %s" % (version, VERSION[3])
+            version = "{0} {1}".format(version, VERSION[3])
             if VERSION[4] != 0:
-                version = '%s %s' % (version, VERSION[4])
+                version = '{0} {1}'.format(version, VERSION[4])
     return version
 
 
@@ -76,10 +76,11 @@ def signed_urlencode(secret, query=None):
     message = secret
     for key in sorted(query.keys()):
         try:
-            message += _utf8_str(key) + _utf8_str(query[_utf8_str(key)])
+            message = '{0}{1}{2}'.format(message, _utf8_str(key),
+                                         _utf8_str(query[_utf8_str(key)]))
         except Exception, e:
-            logger.debug("Error while trying to sign key: %s'+\
-                ' and query %s" % (key, query[key]))
+            logger.debug("Error while trying to sign key: {0}"
+                         " and query {1}".format(key, query[key]))
             raise e
     #query = query.copy()
     _query = {}
@@ -158,7 +159,8 @@ class BaseClient(object):
 
         else:
             raise Exception('Wrong http method: {0}. Supported'
-                            'methods are: GET, POST, PUT, DELETE')
+                            'methods are: '
+                            'GET, POST, PUT, DELETE'.format(method))
 
     def read(self, url, data=None, method='GET', format_='json'):
         """

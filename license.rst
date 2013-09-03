@@ -5,7 +5,7 @@
 BSD license
 ***************
 
-Copyright (c) 2010-2011, oDesk http://www.odesk.com
+Copyright (c) 2010-2013, oDesk http://www.odesk.com
 
 All rights reserved.
 

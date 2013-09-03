@@ -23,23 +23,24 @@ class Job(Namespace):
 
         """
         max_keys = 20
-        url = 'jobs/%s'
+        url = 'jobs/{0}'
         # Check job key(s)
         if not job_key.__class__ in [str, int, list, tuple]:
             raise ValueError(
                 'Invalid job key. Job recno, key or list of keys expected, ' +
-                '%s given' % job_key.__class__)
+                '{0} given'.format(job_key.__class__))
         elif job_key.__class__ in [list, tuple]:
             if len(job_key) > max_keys:
-                raise ValueError('Number of keys per request is limited by %s'
-                    % max_keys)
+                raise ValueError(
+                    'Number of keys per request is limited by {0}'.format(
+                        max_keys))
             elif filter(lambda x: not str(x).startswith('~~'), job_key):
                 raise ValueError(
                     'List should contain only job keys not recno.')
             else:
-                url %= ';'.join(job_key)
+                url = url.format(';'.join(job_key))
         else:
-            url %= job_key
+            url = url.format(job_key)
         result = self.get(url)
         profiles = result.get('profiles', result)
         return profiles.get('profile', result)

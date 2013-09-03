@@ -1,7 +1,7 @@
 """
 Python bindings to odesk API
 python-odesk version 0.5
-(C) 2010-2011 oDesk
+(C) 2010-2013 oDesk
 """
 from odesk.namespaces import Namespace
 
@@ -25,7 +25,7 @@ class Ticket(Namespace):
         Parameters
           ticket_key    Ticket key
         """
-        url = 'tickets/%s' % str(ticket_key)
+        url = 'tickets/{0}'.format(ticket_key)
         result = self.get(url)
         return result.get('ticket', result)
 
@@ -58,7 +58,7 @@ class Ticket(Namespace):
           ticket_key    Ticket key
           message
         """
-        url = 'tickets/%s' % str(ticket_key)
+        url = 'tickets/{0}'.format(ticket_key)
         data = {'message': message}
         result = self.post(url, data)
         return result  # TBD

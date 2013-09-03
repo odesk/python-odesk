@@ -39,13 +39,13 @@ class Q(object):
     def arg_to_string(self, arg):
         if isinstance(arg, self.__class__):
             if arg.operator:
-                return '(%s)' % arg
+                return '({0})'.format(arg)
             else:
                 return arg
         elif isinstance(arg, str):
-            return "'%s'" % arg
+            return "'{0}'".format(arg)
         elif isinstance(arg, date):
-            return "'%s'" % arg.isoformat()
+            return "'{0}'".format(arg.isoformat())
         else:
             return str(arg)
 
@@ -53,7 +53,7 @@ class Q(object):
         if self.operator:
             str1 = self.arg_to_string(self.arg1)
             str2 = self.arg_to_string(self.arg2)
-            return '%s %s %s' % (str1, self.operator, str2)
+            return '{0} {1} {2}'.format(str1, self.operator, str2)
         else:
             return self.arg1
 
@@ -93,7 +93,7 @@ class Query(object):
         select_str = 'SELECT ' + ', '.join(select)
         where_str = ''
         if self.where:
-            where_str = ' WHERE %s' % self.where
+            where_str = ' WHERE {0}'.format(self.where)
         order_by_str = ''
         if self.order_by:
             order_by_str = ' ORDER BY ' + ','.join(self.order_by)

@@ -25,7 +25,6 @@ odesk/routers/finance.py
 odesk/routers/finreport.py
 odesk/routers/hr.py
 odesk/routers/mc.py
-odesk/routers/oconomy.py
 odesk/routers/provider.py
 odesk/routers/task.py
 odesk/routers/team.py

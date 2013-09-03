@@ -1,7 +1,7 @@
 """
 Python bindings to odesk API
 python-odesk version 0.5
-(C) 2010-2011 oDesk
+(C) 2010-2013 oDesk
 """
 from odesk.namespaces import GdsNamespace
 
@@ -22,9 +22,9 @@ class TimeReport(GdsNamespace):
                         hides all
                         financial details (optional: defaults to False)
         '''
-        url = 'providers/%s' % str(provider_id)
+        url = 'providers/{0}'.format(provider_id)
         if hours:
-            url += '/hours'
+            url = '{0}/hours'.format(url)
         tq = str(query)
         result = self.get(url, data={'tq': tq})
         return result
@@ -43,9 +43,9 @@ class TimeReport(GdsNamespace):
                         elements and hides all
                         financial details (optional: defaults to False)
         """
-        url = 'companies/%s' % str(company_id)
+        url = 'companies/{0}'.format(company_id)
         if hours:
-            url += '/hours'
+            url = '{0}/hours'.format(url)
         tq = str(query)
         result = self.get(url, data={'tq': tq})
         return result
@@ -61,9 +61,9 @@ class TimeReport(GdsNamespace):
           hours         Limits the query to hour specific elements and hides
                         all financial details (optional: defaults to False)
         """
-        url = 'companies/%s/teams/%s' % (str(company_id), str(team_id))
+        url = 'companies/{0}/teams/{1}'.format(company_id, team_id)
         if hours:
-            url += '/hours'
+            url = '{0}/hours'.format(url)
         tq = str(query)
         result = self.get(url, data={'tq': tq})
         return result
@@ -79,9 +79,9 @@ class TimeReport(GdsNamespace):
           hours         Limits the query to hour specific elements and hides
                         all financial details (optional: defaults to False)
         """
-        url = 'companies/%s/agencies/%s' % (str(company_id), str(agency_id))
+        url = 'companies/{0}/agencies/{1}'.format(company_id, agency_id)
         if hours:
-            url += '/hours'
+            url = '{0}/hours'.format(url)
         tq = str(query)
         result = self.get(url, data={'tq': tq})
         return result

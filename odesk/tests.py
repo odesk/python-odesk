@@ -44,8 +44,8 @@ def test_signed_urlencode():
     for key in secret_data.keys():
         result = signed_urlencode(key, secret_data[key]['query'])
         assert secret_data[key]['result'] == result, \
-            " %s returned and should be %s" % (result, \
-                                                secret_data[key]['result'])
+            " {0} returned and should be {1}".format(result,
+                                                     secret_data[key]['result'])
 
 
 def test_base_client():
@@ -436,45 +436,6 @@ def test_team():
     assert te.get_workdiaries(1, 1, 1) == (teamrooms_dict['snapshots']['user'], \
         [teamrooms_dict['snapshots']['snapshot']]), te.get_workdiaries(1, 1, 1)
 
-
-stream_dict = {'streams': {'snapshot': [{u'uid': u'test',
- u'portrait_50_img': u'http://www.odesk.com/att/~~test',
- u'account_status': u'',
- u'billing_status': u'billed.active',
- u'screenshot_img_thmb': u'http://team.odesk.com/team/images.cache/test.jpg',
- u'screenshot_url': u'https://team.odesk.com/team/scripts/image.jpg',
- u'timezone': u'', u'digest': u'0', u'user_id': u'test',
- u'company_id': u'test:test', u'report_url': u'http://team.url',
- u'profile_url': u'http://www.odesk.com/users/~~test',
- u'status': u'NORMAL',
- u'report24_img': u'http://chart.apis.google.com/chart.png',
- u'screenshot_img': u'http://team.odesk.com/team/images/test:test/test/2010/01/01/test.jpg',
- u'memo': u'Bug 1: Test:Test',
- u'time': u'test', u'cellts': u'test',
- u'screenshot_img_med': u'http://team.odesk.com/team/scripts/image.jpg',
- u'user': {u'first_name': u'Test', u'last_name': u'Test',
-  u'uid': u'test', u'timezone_offset': u'10000', u'creation_time': u'',
-  u'mail': u'test@odesk.com', u'timezone': u'Europe/Athens',
-  u'messenger_id': u'', u'messenger_type': u''}, u'computer_name': u'laptop',
-  u'active_window_title': u'2010-01-01 - Google Chrome',
-  u'task': {u'code': u'484', u'id': u'{type=bugzilla,cny=test:test,code=1}',
-   u'description': u'Bug 1: Test: Test'},
- u'keyboard_events_count': u'1', u'mouse_events_count': u'1', u'activity': u'1',
- u'client_version': u'Linux/2.0.0', u'screenshot_img_lrg': u'http://test.com',
- u'portrait_img': u'http://www.test.com'}]}}
-
-
-def patched_urlopen_stream(*args, **kwargs):
-    return MicroMock(data=json.dumps(stream_dict), status=200)
-
-
-@patch('urllib3.PoolManager.urlopen', patched_urlopen_stream)
-def test_stream():
-    te = Team(get_client())
-
-    #test get_stream
-    assert te.get_stream('test', 'test') == stream_dict['streams']['snapshot'], \
-         te.get_stream('test', 'test')
 
 teamrooms_dict_none = {'teamrooms': '',
                        'teamroom': '',
@@ -883,12 +844,12 @@ def test_provider():
     assert pr.get_provider_brief(1) == provider_dict['profile'], \
         pr.get_provider_brief(1)
 
-    #test get_providers
-    assert pr.get_providers(data={'a': 1}) == provider_dict['providers'], \
-        pr.get_providers(data={'a': 1})
+    #test search_providers
+    assert pr.search_providers(data={'a': 1}) == provider_dict['providers'], \
+        pr.search_providers(data={'a': 1})
 
-    #test get_jobs
-    assert pr.get_jobs(data={'a': 1}) == provider_dict['jobs'], \
+    #test search_jobs
+    assert pr.search_jobs(data={'a': 1}) == provider_dict['jobs'], \
         pr.get_jobs(data={'a': 1})
 
     assert pr.get_skills(1) == provider_dict['skills'], \
@@ -1609,7 +1570,7 @@ def test_single_job_profile():
     except ValueError, e:
         assert 'Invalid job key' in str(e)
     try:
-        job.get_job_profile(['~~%s' % x for x in range(21)])
+        job.get_job_profile(['~~{0}'.format(x) for x in range(21)])
         raise Exception('Request should raise ValueError exception.')
     except ValueError, e:
         assert 'Number of keys per request is limited' in str(e)

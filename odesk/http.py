@@ -1,7 +1,7 @@
 """
 Python bindings to odesk API
 python-odesk version 0.5
-(C) 2010-2011 oDesk
+(C) 2010-2013 oDesk
 """
 
 import logging
@@ -20,7 +20,6 @@ def raise_http_error(url, response):
     status_code = response.status
 
     headers = response.getheaders()
-    print headers
     odesk_error_code = headers.get(ODESK_ERROR_CODE, 'N/A')
     odesk_error_message = headers.get(ODESK_ERROR_MESSAGE, 'N/A')
 

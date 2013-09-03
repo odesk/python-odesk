@@ -1,7 +1,7 @@
 """
 Python bindings to odesk API
 python-odesk version 0.5
-(C) 2010-2011 oDesk
+(C) 2010-2013 oDesk
 """
 from odesk.namespaces import Namespace
 
@@ -25,9 +25,9 @@ class Team(Namespace):
                         or a string with UNIX timestamp (number of
                         seconds after epoch)
         """
-        url = 'snapshots/%s/%s' % (str(company_id), str(user_id))
+        url = 'snapshots/{0}/{1}'.format(company_id, user_id)
         if datetime:   # date could be a list or a range also
-            url += '/%s' % datetime.isoformat()
+            url = '{0}/{1}'.format(url, datetime.isoformat())
         result = self.get(url)
         if 'snapshot' in result:
             snapshot = result['snapshot']
@@ -53,9 +53,9 @@ class Team(Namespace):
                         seconds after epoch)
           memo          The Memo text
         """
-        url = 'snapshots/%s/%s' % (str(company_id), str(user_id))
+        url = 'snapshots/{0}/{1}'.format(company_id, user_id)
         if datetime:
-            url += '/%s' % datetime.isoformat()
+            url = '{0}/{1}'.format(url, datetime.isoformat())
         return self.post(url, {'memo': memo})
 
     def delete_snapshot(self, company_id, user_id, datetime=None):
@@ -72,9 +72,9 @@ class Team(Namespace):
                         or a string with UNIX timestamp (number of
                         seconds after epoch)
         """
-        url = 'snapshots/%s/%s' % (str(company_id), str(user_id))
+        url = 'snapshots/{0}/{1}'.format(company_id, user_id)
         if datetime:
-            url += '/%s' % datetime.isoformat()
+            url = '{0}/{1}'.format(url, datetime.isoformat())
         return self.delete(url)
 
     def get_workdiaries(self, team_id, username, date=None):
@@ -87,9 +87,9 @@ class Team(Namespace):
           date          A datetime object or a string in yyyymmdd
                         format (optional)
         """
-        url = 'workdiaries/%s/%s' % (str(team_id), str(username))
+        url = 'workdiaries/{0}/{1}'.format(team_id, username)
         if date:
-            url += '/%s' % str(date)
+            url = '{0}/{1}'.format(url, date)
         result = self.get(url)
         if 'error' in result:
             return result
@@ -99,24 +99,6 @@ class Team(Namespace):
             snapshots = [snapshots]
         #not sure we need to return user
         return result['snapshots']['user'], snapshots
-
-    def get_stream(self, team_id, user_id=None,\
-                   from_ts=None):
-        """
-        get_stream(team_id, user_id=None, from_ts=None)
-        """
-        url = 'streams/%s' % (team_id)
-        if user_id:
-            url += '/%s' % (user_id)
-        if from_ts:
-            data = {'from_ts': from_ts}
-        else:
-            data = {}
-        result = self.get(url, data)
-        try:
-            return result['streams']['snapshot']
-        except KeyError:
-            return result
 
     def get_teamrooms(self, target_version=1):
         """
@@ -155,7 +137,7 @@ class Team(Namespace):
                             last 24 hours / all users
           target_version    Version of future requested API
         """
-        url = 'teamrooms/%s' % team_id
+        url = 'teamrooms/{0}'.format(team_id)
         current_version = self.version
         if target_version != current_version:
             self.version = target_version

@@ -1,7 +1,7 @@
 """
 Python bindings to odesk API
 python-odesk version 0.5
-(C) 2010-2011 oDesk
+(C) 2010-2013 oDesk
 """
 
 
@@ -58,3 +58,13 @@ class Auth(Namespace):
         data = {'api_token': self.client.api_token,
                 'api_key': self.client.public_key}
         return self.delete(url, data)
+
+    def get_info(self):
+        """
+        Get a detailed info about current authnticated user
+        and some data from his profile.
+
+        """
+        url = 'info'
+        result = self.get(url)
+        return self.get('info', result)

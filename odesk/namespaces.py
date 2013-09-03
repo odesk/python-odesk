@@ -1,7 +1,7 @@
 """
 Python bindings to odesk API
 python-odesk version 0.5
-(C) 2010-2011 oDesk
+(C) 2010-2013 oDesk
 """
 
 
@@ -21,7 +21,8 @@ class Namespace(object):
         """
         Gets relative URL of API method and returns a full URL
         """
-        return "%s%sv%d/%s" % (self.base_url, self.api_url, self.version, url)
+        return "{0}{1}v{2}/{3}".format(self.base_url,
+                                       self.api_url, self.version, url)
 
     #Proxied client's methods
     def get(self, url, data=None):

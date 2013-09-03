@@ -1,7 +1,7 @@
 """
 Python bindings to odesk API
 python-odesk version 0.5
-(C) 2010-2011 oDesk
+(C) 2010-2013 oDesk
 """
 from odesk.exceptions import APINotImplementedException
 from odesk.namespaces import Namespace
@@ -58,7 +58,58 @@ class HR(Namespace):
     api_url = 'hr/'
     version = 2
 
-    '''user api'''
+    """Custom Payments API"""
+
+    def get_team_adjustments(self, team_reference, engagement_reference):
+        """
+        Get list of bonuses for given engagement.
+
+        Parameters
+          team_reference        The Team reference
+          engagement_reference  The Engagement reference
+
+        """
+        url = 'teams/{0}/adjustments'.format(team_reference)
+        data = {'engagement__reference': engagement_reference}
+        result = self.post(url, data)
+        return result.get('adjustments', result)
+
+    def post_team_adjustment(self, team_reference, engagement_reference,
+                             amount, comments, notes):
+        """
+        Add bonus to an engagement
+
+        Parameters
+          team_reference        The Team reference
+          engagement_reference  The Engagement reference
+          amount                The adjustment/bonus amount
+          comments              Comments
+          notes                 Notes
+
+        """
+        url = 'teams/{0}/adjustments'.format(team_reference)
+        data = {'engagement__reference': engagement_reference,
+                'amount': amount,
+                'comments': comments,
+                'notes': notes}
+        result = self.post(url, data)
+        return result.get('adjustment', result)
+
+    """user api"""
+
+    def get_userroles(self):
+        """
+        Retreive UserRoles object.
+
+        This is a **very important and useful API call**,
+        it returns a complete list of privileges the currently
+        authorized user has within all the teams and companies
+        they have access to.
+
+        """
+        url = 'userroles'
+        result = self.get(url)
+        return result.get('userroles', result)
 
     def get_user(self, user_reference):
         """
@@ -67,11 +118,11 @@ class HR(Namespace):
         Parameters:
           user_reference    The user reference
         """
-        url = 'users/%s' % str(user_reference)
+        url = 'users/{0}'.format(user_reference)
         result = self.get(url)
         return result.get('user', result)
 
-    '''company api'''
+    """company api"""
 
     def get_companies(self):
         """
@@ -90,7 +141,7 @@ class HR(Namespace):
           company_reference     The company reference (can be found using
             get_companies method)
         """
-        url = 'companies/%s' % str(company_referece)
+        url = 'companies/{0}'.format(company_referece)
         result = self.get(url)
         return result.get('company', result)
 
@@ -103,7 +154,7 @@ class HR(Namespace):
           company_reference     The company reference (can be found using
             get_companies method)
         """
-        url = 'companies/%s/teams' % str(company_referece)
+        url = 'companies/{0}/teams'.format(company_referece)
         result = self.get(url)
         return result.get('teams', result)
 
@@ -123,7 +174,7 @@ class HR(Namespace):
             get_companies method)
           active                True/False (default True)
         """
-        url = 'companies/%s/users' % str(company_referece)
+        url = 'companies/{0}/users'.format(company_referece)
         if active:
             data = {'status_in_company': 'active'}
         else:
@@ -131,7 +182,7 @@ class HR(Namespace):
         result = self.get(url, data)
         return result.get('users', result)
 
-    '''team api'''
+    """team api"""
 
     def get_teams(self):
         """
@@ -152,7 +203,7 @@ class HR(Namespace):
           include_users     Whether to include details of users
                             (default: False)
         """
-        url = 'teams/%s' % str(team_reference)
+        url = 'teams/{0}'.format(team_reference)
         result = self.get(url, {'include_users': include_users})
         #TODO: check how included users returned
         return result.get('team', result)
@@ -167,7 +218,7 @@ class HR(Namespace):
         """
         get_team_users(team_reference, active=True)
         """
-        url = 'teams/%s/users' % str(team_reference)
+        url = 'teams/{0}/users'.format(team_reference)
         if active:
             data = {'status_in_team': 'active'}
         else:
@@ -175,37 +226,17 @@ class HR(Namespace):
         result = self.get(url, data)
         return result.get('users', result)
 
-    def post_team_adjustment(self, team_reference, engagement_reference,
-                             amount, comments, notes):
-        '''
-        Add bonus to an engagement
-
-        Parameters
-          team_reference        The Team reference
-          engagement_reference  The Engagement reference
-          amount                The adjustment/bonus amount
-          comments              Comments
-          notes                 Notes
-        '''
-        url = 'teams/%s/adjustments' % str(team_reference)
-        data = {'engagement__reference': engagement_reference,
-                'amount': amount,
-                'comments': comments,
-                'notes': notes}
-        result = self.post(url, data)
-        return result.get('adjustment', result)
-
-    '''task api'''
+    """task api"""
 
     def get_tasks(self):
         "API doesn't support this call yet"
         raise APINotImplementedException("API doesn't support this call yet")
 
-    '''userrole api'''
+    """userrole api"""
 
     def get_user_role(self, user_reference=None, team_reference=None,
                       sub_teams=False):
-        '''
+        """
         Retrieve a complete list of all roles the reference user
         has within the referenced team/sub teams.
 
@@ -214,7 +245,7 @@ class HR(Namespace):
           team_reference    The team reference (optional)
           sub_teams         Whether to include sub team info (optional:
                             defaults to False)
-        '''
+        """
         data = {}
         if user_reference:
             data['user__reference'] = user_reference
@@ -225,7 +256,7 @@ class HR(Namespace):
         result = self.get(url, data)
         return result.get('userroles', result)
 
-    '''job api'''
+    """job api"""
 
     def get_jobs(self, buyer_team_reference=None,
                  include_sub_teams=False,
@@ -270,7 +301,7 @@ class HR(Namespace):
         if created_time_to:
             data['created_time_to'] = created_time_to
 
-        data['page'] = '%d;%d' % (page_offset, page_size)
+        data['page'] = '{0};{1}'.format(page_offset, page_size)
 
         if order_by is not None:
             data['order_by'] = order_by
@@ -288,7 +319,7 @@ class HR(Namespace):
         Parameters
           job_reference     Job reference
         """
-        url = 'jobs/%s' % str(job_reference)
+        url = 'jobs/{0}'.format(job_reference)
         result = self.get(url)
         return result.get('job', result)
 
@@ -314,7 +345,7 @@ class HR(Namespace):
           job_id        Job reference
           job_data      New details of the job
         """
-        url = 'jobs/%s' % str(job_id)
+        url = 'jobs/{0}'.format(job_id)
         return self.put(url, {'job_data': job_data})
 
     def delete_job(self, job_id, reason_code):
@@ -325,10 +356,10 @@ class HR(Namespace):
           job_id        Job reference
           readon_code   The reason code
         """
-        url = 'jobs/%s' % str(job_id)
+        url = 'jobs/{0}'.format(job_id)
         return self.delete(url, {'reason_code': reason_code})
 
-    '''offer api'''
+    """offer api"""
 
     def get_offers(self, buyer_team_reference=None, status=None,
                    job_ref=None, include_sub_teams=None,
@@ -379,7 +410,7 @@ class HR(Namespace):
         if created_time_to:
             data['created_time_to'] = created_time_to
 
-        data['page'] = '%d;%d' % (page_offset, page_size)
+        data['page'] = '{0};{1}'.format(page_offset, page_size)
 
         if order_by is not None:
             data['order_by'] = order_by
@@ -394,11 +425,11 @@ class HR(Namespace):
         Parameters
           offer_reference   Offer reference
         """
-        url = 'offers/%s' % str(offer_reference)
+        url = 'offers/{0}'.format(offer_reference)
         result = self.get(url)
         return result.get('offer', result)
 
-    '''engagement api'''
+    """engagement api"""
 
     def get_engagements(self, buyer_team_reference=None,
                         include_sub_teams=False,
@@ -446,7 +477,7 @@ class HR(Namespace):
         if created_time_to:
             data['created_time_to'] = created_time_to
 
-        data['page'] = '%d;%d' % (page_offset, page_size)
+        data['page'] = '{0};{1}'.format(page_offset, page_size)
 
         if order_by is not None:
             data['order_by'] = order_by
@@ -461,11 +492,11 @@ class HR(Namespace):
         Parameters
           engagement_reference
         """
-        url = 'engagements/%s' % str(engagement_reference)
+        url = 'engagements/{0}'.format(engagement_reference)
         result = self.get(url)
         return result.get('engagement', result)
 
-    '''candidacy api'''
+    """candidacy api"""
 
     def get_candidacy_stats(self):
         """

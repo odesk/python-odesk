@@ -1,7 +1,7 @@
 """
 Python bindings to odesk API
-python-odesk version 0.4
-(C) 2010-2011 oDesk
+python-odesk version 0.5
+(C) 2010-2013 oDesk
 """
 
 import time
@@ -66,7 +66,8 @@ class OAuth(Namespace):
         client = oauth.Client(self.get_oauth_consumer())
         response, content = client.request(self.request_token_url, 'POST')
         if response.get('status') != '200':
-            raise Exception("Invalid request token response: %s." % content)
+            raise Exception(
+                "Invalid request token response: {0}.".format(content))
         request_token = dict(urlparse.parse_qsl(content))
         self.request_token = request_token.get('oauth_token')
         self.request_token_secret = request_token.get('oauth_token_secret')
@@ -83,7 +84,7 @@ class OAuth(Namespace):
                 'oauth_callback': callback_url})
         else:
             params = urllib.urlencode({'oauth_token': oauth_token})
-        return '%s?%s' % (self.authorize_url, params)
+        return '{0}?{1}'.format(self.authorize_url, params)
 
     def get_access_token(self, verifier):
         """
@@ -101,7 +102,8 @@ class OAuth(Namespace):
         client = oauth.Client(self.get_oauth_consumer(), token)
         response, content = client.request(self.access_token_url, 'POST')
         if response.get('status') != '200':
-            raise Exception("Invalid access token response: %s." % content)
+            raise Exception(
+                "Invalid access token response: {0}.".format(content))
         access_token = dict(urlparse.parse_qsl(content))
         self.access_token = access_token.get('oauth_token')
         self.access_token_secret = access_token.get('oauth_token_secret')

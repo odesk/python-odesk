@@ -26,7 +26,6 @@ Package structure
    * hr.py
    * job.py
    * mc.py
-   * oconomy.py
    * provider.py
    * task.py
    * team.py
@@ -235,6 +234,10 @@ routers/
  * get_engagements(self)
  * get_engagement(self, engagement_id)
 
+* HR_V1(Namespace) - routers/hr.py
+
+  * invite_to_interview(job_id, cover, profile_key=None, provider_reference=None)
+
 * MC(Namespace) - routers/mc.py
 
  * get_trays(self, username=None, paging_offset=0, paging_count=20)
@@ -247,10 +250,6 @@ routers/
  * put_threads_deleted(self, username, thread_ids)
  * put_threads_undeleted(self, username, thread_ids)
  * post_message(self, username, recipients, subject, body, thread_id=None)
-
-* Oconomy(GdsNamespace) - routers/oconomy.py
-
-* NonauthOConomy(NonauthGdsNamespace) - routers/oconomy.py
 
 * Provider (Namespace) - routers/provider.py
 

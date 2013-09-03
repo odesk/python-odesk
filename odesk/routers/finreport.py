@@ -1,7 +1,7 @@
 """
 Python bindings to odesk API
 python-odesk version 0.4
-(C) 2010-2011 oDesk
+(C) 2010-2013 oDesk
 """
 
 try:
@@ -25,7 +25,7 @@ class Finreports(GdsNamespace):
           provider_id   Provider ID
           query         The GDS query string
         """
-        url = 'providers/%s/billings' % str(provider_id)
+        url = 'providers/{0}/billings'.format(provider_id)
         tq = str(query)
         result = self.get(url, data={'tq': tq})
         return result
@@ -39,7 +39,7 @@ class Finreports(GdsNamespace):
           provider_team_id  Provider's Team ID
           query             The GDS query string
         """
-        url = 'provider_teams/%s/billings' % str(provider_team_id)
+        url = 'provider_teams/{0}/billings'.format(provider_team_id)
         tq = str(query)
         result = self.get(url, data={'tq': tq})
         return result
@@ -53,7 +53,7 @@ class Finreports(GdsNamespace):
           provider_company_id   Provider's Company ID
           query                 The GDS query string
         """
-        url = 'provider_companies/%s/billings' % str(provider_company_id)
+        url = 'provider_companies/{0}/billings'.format(provider_company_id)
         tq = str(query)
         result = self.get(url, data={'tq': tq})
         return result
@@ -66,7 +66,7 @@ class Finreports(GdsNamespace):
           provider_id   Provider ID
           query         The GDS query string
         """
-        url = 'providers/%s/earnings' % str(provider_id)
+        url = 'providers/{0}/earnings'.format(provider_id)
         tq = str(query)
         result = self.get(url, data={'tq': tq})
         return result
@@ -79,7 +79,7 @@ class Finreports(GdsNamespace):
           provider_team_id  Provider's Team ID
           query             The GDS query string
         """
-        url = 'provider_teams/%s/earnings' % str(provider_team_id)
+        url = 'provider_teams/{0}/earnings'.format(provider_team_id)
         tq = str(query)
         result = self.get(url, data={'tq': tq})
         return result
@@ -92,7 +92,7 @@ class Finreports(GdsNamespace):
           provider_company_id   Provider's Team ID
           query                 The GDS query string
         """
-        url = 'provider_companies/%s/earnings' % str(provider_company_id)
+        url = 'provider_companies/{0}/earnings'.format(provider_company_id)
         tq = str(query)
         result = self.get(url, data={'tq': tq})
         return result
@@ -106,7 +106,7 @@ class Finreports(GdsNamespace):
           buyer_team_id     Buyers's Team ID
           query             The GDS query string
         """
-        url = 'buyer_teams/%s/billings' % str(buyer_team_id)
+        url = 'buyer_teams/{0}/billings'.format(buyer_team_id)
         tq = str(query)
         result = self.get(url, data={'tq': tq})
         return result
@@ -120,7 +120,7 @@ class Finreports(GdsNamespace):
           buyer_company_id  Buyer's Company ID
           query             The GDS query string
         """
-        url = 'buyer_companies/%s/billings' % str(buyer_company_id)
+        url = 'buyer_companies/{0}/billings'.format(buyer_company_id)
         tq = str(query)
         result = self.get(url, data={'tq': tq})
         return result
@@ -133,7 +133,7 @@ class Finreports(GdsNamespace):
           buyer_team_id     Buyer's Team ID
           query             The GDS query string
         """
-        url = 'buyer_teams/%s/earnings' % str(buyer_team_id)
+        url = 'buyer_teams/{0}/earnings'.format(buyer_team_id)
         tq = str(query)
         result = self.get(url, data={'tq': tq})
         return result
@@ -146,7 +146,7 @@ class Finreports(GdsNamespace):
           buyer_company_id  Buyer's Team ID
           query             The GDS query string
         """
-        url = 'buyer_companies/%s/earnings' % str(buyer_company_id)
+        url = 'buyer_companies/{0}/earnings'.format(buyer_company_id)
         tq = str(query)
         result = self.get(url, data={'tq': tq})
         return result
@@ -159,7 +159,7 @@ class Finreports(GdsNamespace):
           accounting_id     ID of an Accounting entity
           query             The GDS query string
         """
-        url = 'financial_accounts/%s' % str(accounting_id)
+        url = 'financial_accounts/{0}'.format(accounting_id)
         tq = str(query)
         result = self.get(url, data={'tq': tq})
         return result
@@ -172,7 +172,7 @@ class Finreports(GdsNamespace):
           provider_id   Provider ID
           query             The GDS query string
         """
-        url = 'financial_account_owner/%s' % str(provider_id)
+        url = 'financial_account_owner/{0}'.format(provider_id)
         tq = str(query)
         result = self.get(url, data={'tq': tq})
         return result
