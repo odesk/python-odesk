@@ -16,3 +16,4 @@ bin/*
 include/*
 man/*
 .env/*
+examples/odesk

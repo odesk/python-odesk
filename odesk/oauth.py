@@ -108,3 +108,13 @@ class OAuth(Namespace):
         self.access_token = access_token.get('oauth_token')
         self.access_token_secret = access_token.get('oauth_token_secret')
         return self.access_token, self.access_token_secret
+
+    def get_info(self):
+        """
+        Get a detailed info about current authnticated user
+        and some data from his profile.
+
+        """
+        url = 'info'
+        result = self.get(url)
+        return self.get('info', result)

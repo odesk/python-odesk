@@ -22,17 +22,16 @@ def get_version():
 
 import os
 import json
-import hashlib
 import logging
-import urllib
 import urllib3
 
 
-from odesk.auth import Auth
+from odesk.oauth import OAuth
 from odesk.http import raise_http_error
 
 
-__all__ = ["get_version", "Client", "utils"]
+__all__ = ["get_version", "Client"]
+
 
 logger = logging.getLogger('python-odesk')
 
@@ -52,67 +51,81 @@ else:
     logger.addHandler(ch)
 
 
-def _utf8_str(obj):
-    try:
-        return unicode(obj).encode("utf8")
-    except UnicodeDecodeError, e:
-        # input could be an utf8 encoded
-        logger.debug(e)
-        obj.decode("utf8")  # check if it is a valid utf8 string
-        return obj
-
-
-def signed_urlencode(secret, query=None):
+class Client(object):
     """
-    Converts a mapping object to signed url query
+    Main API client with oAuth v1 authorization.
 
-    >>> signed_urlencode('some$ecret', {})
-    'api_sig=5da1f8922171fbeffff953b773bcdc7f'
-    >>> signed_urlencode('some$ecret', {'spam':42,'foo':'bar'})
-    'api_sig=11b1fc2e6555297bdc144aed0a5e641c&foo=bar&spam=42'
-    """
-    if query is None:
-        query = {}
-    message = secret
-    for key in sorted(query.keys()):
-        try:
-            message = '{0}{1}{2}'.format(message, _utf8_str(key),
-                                         _utf8_str(query[_utf8_str(key)]))
-        except Exception, e:
-            logger.debug("Error while trying to sign key: {0}"
-                         " and query {1}".format(key, query[key]))
-            raise e
-    #query = query.copy()
-    _query = {}
-    _query['api_sig'] = hashlib.md5(message).hexdigest()
-    for k, v in query.iteritems():
-        _query[_utf8_str(k)] = _utf8_str(v)
-    return urllib.urlencode(_query)
-
-
-class BaseClient(object):
-    """
-    A basic HTTP client which supports signing of requests as well
-    as de-serializing of responses.
     """
 
-    def __init__(self, public_key, secret_key, api_token=None):
+    def __init__(self, public_key, secret_key,
+                 oauth_access_token=None, oauth_access_token_secret=None,
+                 format_='json', finreport=True, hr=True, mc=True,
+                 provider=True, task=True, team=True,
+                 timereport=True, url=True, job=True):
+
         self.public_key = public_key
         self.secret_key = secret_key
-        self.api_token = api_token
-        self.auth = None
+        self.format_ = format_
         self.http = urllib3.PoolManager()
 
-    def urlencode(self, data=None):
-        if data is None:
-            data = {}
-        data['api_key'] = self.public_key
-        if self.api_token:
-            data['api_token'] = self.api_token
-        return signed_urlencode(self.secret_key, data)
+        self.oauth_access_token = oauth_access_token
+        self.oauth_access_token_secret = oauth_access_token_secret
 
+        #Namespaces
+        self.auth = OAuth(self)
+
+        if finreport:
+            from odesk.routers.finreport import Finreports
+            self.finreport = Finreports(self)
+
+        if hr:
+            from odesk.routers.hr import HR_V1, HR
+            self.hr_v1 = HR_V1(self)
+            self.hr = HR(self)
+
+        if mc:
+            from odesk.routers.mc import MC
+            self.mc = MC(self)
+
+        if provider:
+            from odesk.routers.provider import Provider
+            self.provider = Provider(self)
+
+        if task:
+            from odesk.routers.task import Task
+            self.task = Task(self)
+
+        if team:
+            from odesk.routers.team import Team
+            self.team = Team(self)
+
+        if timereport:
+            from odesk.routers.timereport import TimeReport
+            self.timereport = TimeReport(self)
+
+        if url:
+            from odesk.routers.url import Url
+            self.url = Url(self)
+
+        if job:
+            from odesk.routers.job import Job
+            self.job = Job(self)
+
+    #Shortcuts for HTTP methods
+    def get(self, url, data=None):
+        return self.read(url, data, method='GET', format_=self.format_)
+
+    def post(self, url, data=None):
+        return self.read(url, data, method='POST', format_=self.format_)
+
+    def put(self, url, data=None):
+        return self.read(url, data, method='PUT', format_=self.format_)
+
+    def delete(self, url, data=None):
+        return self.read(url, data, method='DELETE', format_=self.format_)
+
+    # The method that actually makes HTTP requests
     def urlopen(self, url, data=None, method='GET', headers=None):
-        from odesk.oauth import OAuth
 
         if data is None:
             data = {}
@@ -120,27 +133,16 @@ class BaseClient(object):
         if headers is None:
             headers = {}
 
-
         self.last_method = method
         self.last_url = url
         self.last_data = data
 
-        if isinstance(self.auth, OAuth):
-            # TODO: Headers are not supported fully yet
-
-            # headers.update(
-            #     self.auth.get_oauth_params(
-            #         url, self.oauth_access_token,
-            #         self.oauth_access_token_secret,
-            #         data, method, to_header=True))
-
-            post_data = self.auth.get_oauth_params(
-                url, self.oauth_access_token,
-                self.oauth_access_token_secret,
-                data, method)
-        else:
-            # TODO: remove key-based api
-            post_data = self.urlencode(data)
+        # TODO: Headers are not supported fully yet
+        # instead we pass oauth parameters in querystring
+        post_data = self.auth.get_oauth_params(
+            url, self.oauth_access_token,
+            self.oauth_access_token_secret,
+            data, method)
 
         if method == 'GET':
             url = '{0}?{1}'.format(url, post_data)
@@ -194,92 +196,6 @@ class BaseClient(object):
                 logger.debug('Response is not a valid json string')
                 pass
         return result
-
-
-class Client(BaseClient):
-    """
-    Main API client
-    """
-
-    def __init__(self, public_key, secret_key, api_token=None,
-                oauth_access_token=None, oauth_access_token_secret=None,
-                format_='json', auth='simple', finance=True, finreport=True,
-                hr=True, mc=True, provider=True,
-                task=True, team=True, ticket=True, timereport=True, url=True,
-                job=True):
-
-        self.public_key = public_key
-        self.secret_key = secret_key
-        self.api_token = api_token
-        self.format_ = format_
-        self.http = urllib3.PoolManager()
-
-        if auth == 'simple':
-            self.auth = Auth(self)
-        elif auth == 'oauth':
-            from odesk.oauth import OAuth
-            self.auth = OAuth(self)
-            self.oauth_access_token = oauth_access_token
-            self.oauth_access_token_secret = oauth_access_token_secret
-
-        #Namespaces
-        if finance:
-            from odesk.routers.finance import Finance
-            self.finance = Finance(self)
-
-        if finreport:
-            from odesk.routers.finreport import Finreports
-            self.finreport = Finreports(self)
-
-        if hr:
-            from odesk.routers.hr import HR_V1, HR
-            self.hr_v1 = HR_V1(self)
-            self.hr = HR(self)
-
-        if mc:
-            from odesk.routers.mc import MC
-            self.mc = MC(self)
-
-        if provider:
-            from odesk.routers.provider import Provider
-            self.provider = Provider(self)
-
-        if task:
-            from odesk.routers.task import Task
-            self.task = Task(self)
-
-        if team:
-            from odesk.routers.team import Team
-            self.team = Team(self)
-
-        if ticket:
-            from odesk.routers.ticket import Ticket
-            self.ticket = Ticket(self)
-
-        if timereport:
-            from odesk.routers.timereport import TimeReport
-            self.timereport = TimeReport(self)
-
-        if url:
-            from odesk.routers.url import Url
-            self.url = Url(self)
-
-        if job:
-            from odesk.routers.job import Job
-            self.job = Job(self)
-
-    #Shortcuts for HTTP methods
-    def get(self, url, data=None):
-        return self.read(url, data, method='GET', format_=self.format_)
-
-    def post(self, url, data=None):
-        return self.read(url, data, method='POST', format_=self.format_)
-
-    def put(self, url, data=None):
-        return self.read(url, data, method='PUT', format_=self.format_)
-
-    def delete(self, url, data=None):
-        return self.read(url, data, method='DELETE', format_=self.format_)
 
 
 if __name__ == "__main__":
