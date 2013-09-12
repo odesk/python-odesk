@@ -3,7 +3,6 @@ Python bindings to odesk API
 python-odesk version 0.5
 (C) 2010-2013 oDesk
 """
-from odesk.exceptions import APINotImplementedException
 from odesk.namespaces import Namespace
 from odesk.utils import assert_parameter, ApiValueError
 
@@ -14,20 +13,6 @@ class HR_V1(Namespace):
     """
     api_url = 'hr/'
     version = 1
-
-    JOB_TYPES = ('hourly', 'fixed-price')
-    JOB_VISIBILITY_OPTIONS = ('public', 'private', 'odesk', 'invite-only')
-    JOB_STATUSES = ('open', 'filled', 'cancelled')
-    JOB_KEEP_OPEN_OPTIONS = ('yes', 'no')
-    CONTRACT_REASON_OPTIONS = (
-        'API_REAS_MISREPRESENTED_SKILLS',
-        'API_REAS_CONTRACTOR_NOT_RESPONSIVE',
-        'API_REAS_HIRED_DIFFERENT',
-        'API_REAS_JOB_COMPLETED_SUCCESSFULLY',
-        'API_REAS_WORK_NOT_NEEDED',
-        'API_REAS_UNPROFESSIONAL_CONDUCT',
-    )
-    CONTRACT_WOULD_HIRE_AGAIN_OPTONS = ('yes', 'no')
 
     def invite_to_interview(self, job_id, cover, profile_key=None,
                             provider_reference=None):
@@ -73,6 +58,20 @@ class HR(Namespace):
     """
     api_url = 'hr/'
     version = 2
+
+    JOB_TYPES = ('hourly', 'fixed-price')
+    JOB_VISIBILITY_OPTIONS = ('public', 'private', 'odesk', 'invite-only')
+    JOB_STATUSES = ('open', 'filled', 'cancelled')
+    JOB_KEEP_OPEN_OPTIONS = ('yes', 'no')
+    CONTRACT_REASON_OPTIONS = (
+        'API_REAS_MISREPRESENTED_SKILLS',
+        'API_REAS_CONTRACTOR_NOT_RESPONSIVE',
+        'API_REAS_HIRED_DIFFERENT',
+        'API_REAS_JOB_COMPLETED_SUCCESSFULLY',
+        'API_REAS_WORK_NOT_NEEDED',
+        'API_REAS_UNPROFESSIONAL_CONDUCT',
+    )
+    CONTRACT_WOULD_HIRE_AGAIN_OPTONS = ('yes', 'no')
 
     """userrole api"""
 
@@ -443,7 +442,7 @@ class HR(Namespace):
         return result
 
     def update_job(self, job_id, buyer_team_reference, title, description,
-                   visibility, category, subcategory, budget=None,
+                   visibility, category=None, subcategory=None, budget=None,
                    duration=None, start_date=None, end_date=None, status=None):
         """
         Update a job
@@ -472,10 +471,11 @@ class HR(Namespace):
                                        where the buyer wants to control
                                        the potential applicants
 
-          category                 The category of job, e.g. 'Web Development'
+          category                 (optional) The category of job, e.g.
+                                   'Web Development'
                                    (where to get? - see Metadata API)
 
-          subcategory              The subcategory of job, e.g.
+          subcategory              (optional) The subcategory of job, e.g.
                                    'Web Programming'
                                    (where to get? - see Metadata API)
 

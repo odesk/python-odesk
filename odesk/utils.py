@@ -5,10 +5,7 @@ python-odesk version 0.5
 """
 
 from datetime import date
-
-
-class ApiValueError(Exception):
-    pass
+from odesk.exceptions import ApiValueError
 
 
 def assert_parameter(parameter_name, value, options_list):

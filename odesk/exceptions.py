@@ -56,3 +56,7 @@ class AuthenticationError(BaseException):
 
 class NotAuthenticatedError(BaseException):
     pass
+
+
+class ApiValueError(BaseException):
+    pass

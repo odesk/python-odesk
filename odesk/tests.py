@@ -4,18 +4,23 @@ Python bindings to odesk API
 python-odesk version 0.4
 (C) 2010 oDesk
 """
-from odesk import Client, BaseClient, utils, get_version, signed_urlencode
-from odesk.exceptions import *
-from odesk.namespaces import *
-from odesk.auth import Auth
+from odesk import Client, get_version
+from odesk import utils
+from odesk.exceptions import (HTTP400BadRequestError,
+                              HTTP401UnauthorizedError,
+                              HTTP403ForbiddenError,
+                              HTTP404NotFoundError,
+                              ApiValueError)
+
+from odesk.namespaces import Namespace
 from odesk.oauth import OAuth
 from odesk.routers.team import Team
 from odesk.http import ODESK_ERROR_CODE, ODESK_ERROR_MESSAGE
 
+from nose.tools import eq_
 from mock import Mock, patch
 import urlparse
 import urllib2
-import urllib3
 import httplib
 
 try:
@@ -28,36 +33,6 @@ class MicroMock(object):
     def __init__(self, **kwargs):
         self.__dict__.update(kwargs)
 
-
-def test_signed_urlencode():
-    secret_data = {
-    'some$ecret': {'query': {},
-                   'result':
-                   'api_sig=5da1f8922171fbeffff953b773bcdc7f'},
-    'some$ecret': {'query': {'spam': 42, 'foo': 'bar'},
-                   'result':
-                   'api_sig=11b1fc2e6555297bdc144aed0a5e641c&foo=bar&spam=42'},
-    'som[&]234e$ecret': {'query': {'spam': 42, 'foo': 'bar'},
-                   'result':
-                   'api_sig=ac0e1b26f401dd4a5ccbaf7f4ea86b2f&foo=bar&spam=42'},
-               }
-    for key in secret_data.keys():
-        result = signed_urlencode(key, secret_data[key]['query'])
-        assert secret_data[key]['result'] == result, \
-            " {0} returned and should be {1}".format(result,
-                                                     secret_data[key]['result'])
-
-
-def test_base_client():
-    public_key = 'public'
-    secret_key = 'secret'
-
-    bc = BaseClient(public_key, secret_key)
-
-    #test urlencode
-    urlresult = bc.urlencode({'spam': 42, 'foo': 'bar'})
-    encodedkey = 'api_sig=8a0da3cab1dbf7451f38fb5f5aec129c&api_key=public&foo=bar&spam=42'
-    assert urlresult == encodedkey, urlresult
 
 sample_json_dict = {u'glossary':
                     {u'GlossDiv':
@@ -81,11 +56,13 @@ def patched_urlopen(*args, **kwargs):
 
 
 @patch('urllib3.PoolManager.urlopen', patched_urlopen)
-def test_base_client_urlopen():
+def test_client_urlopen():
     public_key = 'public'
     secret_key = 'secret'
 
-    bc = BaseClient(public_key, secret_key)
+    client = Client(public_key, secret_key,
+                oauth_access_token='some access token',
+                oauth_access_token_secret='some access token secret')
 
     #test urlopen
     data = [{'url': 'http://test.url',
@@ -117,7 +94,7 @@ def test_base_client_urlopen():
     result_json = json.dumps(sample_json_dict)
 
     for params in data:
-        result = bc.urlopen(url=params['url'],
+        result = client.urlopen(url=params['url'],
                             data=params['data'],
                             method=params['method'])
         assert result.data == result_json, (result.data, result_json)
@@ -162,42 +139,48 @@ def patched_urlopen_500(self, method, url, **kwargs):
 
 
 @patch('urllib3.PoolManager.urlopen', patched_urlopen_400)
-def base_client_read_400(bc, url):
-    return bc.read(url)
+def client_read_400(client, url):
+    return client.read(url)
 
 
 @patch('urllib3.PoolManager.urlopen', patched_urlopen_401)
-def base_client_read_401(bc, url):
-    return bc.read(url)
+def client_read_401(client, url):
+    return client.read(url)
 
 
 @patch('urllib3.PoolManager.urlopen', patched_urlopen_403)
-def base_client_read_403(bc, url):
-    return bc.read(url)
+def client_read_403(client, url):
+    return client.read(url)
 
 
 @patch('urllib3.PoolManager.urlopen', patched_urlopen_404)
-def base_client_read_404(bc, url):
-    return bc.read(url)
+def client_read_404(client, url):
+    return client.read(url)
 
 
 @patch('urllib3.PoolManager.urlopen', patched_urlopen_500)
-def base_client_read_500(bc, url):
-    return bc.read(url)
+def client_read_500(client, url):
+    return client.read(url)
 
 
 @patch('urllib3.PoolManager.urlopen', patched_urlopen)
-def test_base_client_read():
-    """
-    test cases:
+def test_client_read():
+    """Test client read() method.
+
+    Test cases:
       method default (get) - other we already tested
+
       format json|yaml ( should produce error)
+
       codes 200|400|401|403|404|500
+
     """
     public_key = 'public'
     secret_key = 'secret'
 
-    bc = BaseClient(public_key, secret_key)
+    client = Client(public_key, secret_key,
+                oauth_access_token='some access token',
+                oauth_access_token_secret='some access token secret')
     test_url = 'http://test.url'
 
     #produce error on format other then json
@@ -205,20 +188,21 @@ def test_base_client_read():
         pass
 
     try:
-        bc.read(url=test_url, format='yaml')
-        raise NotJsonException()
+        client.read(url=test_url, format='yaml')
+        raise NotJsonException("Client.read() doesn't produce error on "
+                               "yaml format")
     except NotJsonException, e:
-        assert 0, "BaseClient.read() doesn't produce error on yaml format"
-    except:
+        raise e
+    except Exception:
         pass
 
     #test get, all ok
-    result = bc.read(url=test_url)
+    result = client.read(url=test_url)
     assert result == sample_json_dict, result
 
     #test get, 400 error
     try:
-        result = base_client_read_400(bc=bc, url=test_url)
+        result = client_read_400(client=client, url=test_url)
     except HTTP400BadRequestError, e:
         pass
     except Exception, e:
@@ -226,7 +210,7 @@ def test_base_client_read():
 
     #test get, 401 error
     try:
-        result = base_client_read_401(bc=bc, url=test_url)
+        result = client_read_401(client=client, url=test_url)
     except HTTP401UnauthorizedError, e:
         pass
     except Exception, e:
@@ -234,7 +218,7 @@ def test_base_client_read():
 
     #test get, 403 error
     try:
-        result = base_client_read_403(bc=bc, url=test_url)
+        result = client_read_403(client=client, url=test_url)
     except HTTP403ForbiddenError, e:
         pass
     except Exception, e:
@@ -242,7 +226,7 @@ def test_base_client_read():
 
     #test get, 404 error
     try:
-        result = base_client_read_404(bc=bc, url=test_url)
+        result = client_read_404(client=client, url=test_url)
     except HTTP404NotFoundError, e:
         pass
     except Exception, e:
@@ -250,7 +234,7 @@ def test_base_client_read():
 
     #test get, 500 error
     try:
-        result = base_client_read_500(bc=bc, url=test_url)
+        result = client_read_500(client=client, url=test_url)
     except urllib2.HTTPError, e:
         if e.code == httplib.INTERNAL_SERVER_ERROR:
             pass
@@ -263,8 +247,11 @@ def test_base_client_read():
 def get_client():
     public_key = 'public'
     secret_key = 'secret'
-    api_token = 'some_token'
-    return Client(public_key, secret_key, api_token)
+    oauth_access_token = 'some token'
+    oauth_access_token_secret = 'some token secret'
+    return Client(public_key, secret_key,
+                  oauth_access_token,
+                  oauth_access_token_secret)
 
 
 @patch('urllib3.PoolManager.urlopen', patched_urlopen)
@@ -307,86 +294,6 @@ def test_namespace():
     assert result == sample_json_dict, result
 
 
-def setup_auth():
-    return Auth(get_client())
-
-
-def test_auth():
-
-    au = setup_auth()
-
-    #test full_url
-    full_url = au.full_url('test')
-    assert full_url == 'https://www.odesk.com/api/auth/v1/test', full_url
-
-    auth_url = au.auth_url('test')
-    auth_url_result = 'https://www.odesk.com/services/api/auth/?frob=test&api_key=public&api_sig=42b7f18cbc5c16b1f037dbad241f2a6b&api_token=some_token'
-    assert 'frob=test' in auth_url, auth_url
-    assert 'api_key=public' in auth_url, auth_url
-    assert 'api_sig=42b7f18cbc5c16b1f037dbad241f2a6b' in auth_url, auth_url
-
-
-frob_dict = {'frob': 'test'}
-
-
-def patched_urlopen_frob(*args, **kwargs):
-    return MicroMock(data=json.dumps(frob_dict), status=200)
-
-
-@patch('urllib3.PoolManager.urlopen', patched_urlopen_frob)
-def test_auth_get_frob():
-    #test get_frob
-    au = setup_auth()
-    assert au.get_frob() == frob_dict['frob']
-
-
-token_dict = {'token': 'testtoken', 'auth_user': 'test_auth_user'}
-
-
-def patched_urlopen_token(*args, **kwargs):
-    return MicroMock(data=json.dumps(token_dict), status=200)
-
-
-@patch('urllib3.PoolManager.urlopen', patched_urlopen_token)
-def test_auth_get_token():
-    #test get_frob
-    au = setup_auth()
-    token, auth_user = au.get_token('test_token')
-    assert token == token_dict['token'], token
-    assert auth_user == token_dict['auth_user'], auth_user
-
-
-@patch('urllib3.PoolManager.urlopen', patched_urlopen_token)
-def test_check_token_true():
-    #check if ok
-    au = setup_auth()
-    try:
-        au.check_token()
-    except:
-        pass
-    else:
-        assert "Not Raised"
-
-
-@patch('urllib3.PoolManager.urlopen', patched_urlopen_token)
-def test_revoke_token_true():
-    #check if ok
-    au = setup_auth()
-    assert au.revoke_token(), au.revoke_token()
-
-
-@patch('urllib3.PoolManager.urlopen', patched_urlopen_403)
-def test_check_token_false():
-    #check if denied
-    au = setup_auth()
-    try:
-        au.check_token()
-    except:
-        pass
-    else:
-        assert "Not Raised"
-
-
 teamrooms_dict = {'teamrooms':
                   {'teamroom':
                    {u'team_ref': u'1',
@@ -424,17 +331,19 @@ def test_team():
          te.get_snapshots(1)
 
     #test get_snapshot
-    assert te.get_snapshot(1, 1) == teamrooms_dict['snapshot'], te.get_snapshot(1, 1)
+    assert te.get_snapshot(1, 1) == teamrooms_dict['snapshot'], \
+        te.get_snapshot(1, 1)
 
     #test update_snapshot
-    assert te.update_snapshot(1, 1, memo='memo') == teamrooms_dict, te.update_snapshot(1, 1, memo='memo')
+    assert te.update_snapshot(1, 1, memo='memo') == teamrooms_dict, \
+        te.update_snapshot(1, 1, memo='memo')
 
     #test update_snapshot
     assert te.delete_snapshot(1, 1) == teamrooms_dict, te.delete_snapshot(1, 1)
 
     #test get_workdiaries
-    assert te.get_workdiaries(1, 1, 1) == (teamrooms_dict['snapshots']['user'], \
-        [teamrooms_dict['snapshots']['snapshot']]), te.get_workdiaries(1, 1, 1)
+    eq_(te.get_workdiaries(1, 1, 1), (teamrooms_dict['snapshots']['user'],
+        [teamrooms_dict['snapshots']['snapshot']]))
 
 
 teamrooms_dict_none = {'teamrooms': '',
@@ -463,7 +372,7 @@ def test_teamrooms_none():
     assert te.get_snapshots(1) == [], te.get_snapshots(1)
 
     #test get_snapshot
-    assert te.get_snapshot(1, 1) == teamrooms_dict_none['snapshot'], te.get_snapshot(1, 1)
+    eq_(te.get_snapshot(1, 1), teamrooms_dict_none['snapshot'])
 
 
 userroles = {u'userrole':
@@ -585,13 +494,6 @@ company = {u'status': u'active',
              u'company_id': u'1',
              u'owner_user_id': u'1', }
 
-candidacy_stats = {u'job_application_quota': u'20',
-                   u'job_application_quota_remaining': u'20',
-                   u'number_of_applications': u'2',
-                   u'number_of_interviews': u'3',
-                   u'number_of_invites': u'0',
-                   u'number_of_offers': u'0'}
-
 hr_dict = {u'auth_user': auth_user,
            u'server_time': u'0000',
            u'user': user,
@@ -607,8 +509,7 @@ hr_dict = {u'auth_user': auth_user,
             u'offer': offer,
             u'offers': offers,
             u'job': job,
-            u'jobs': jobs,
-            u'candidacy_stats': candidacy_stats}
+            u'jobs': jobs}
 
 
 def patched_urlopen_hr(*args, **kwargs):
@@ -646,21 +547,7 @@ def test_get_hrv2_company_users():
     #test get_company_users
     assert hr.get_company_users(1) == hr_dict['users'], hr.get_company_users(1)
     assert hr.get_company_users(1, False) == hr_dict['users'], \
-         hr.get_company_users(1, False)
-
-
-@patch('urllib3.PoolManager.urlopen', patched_urlopen_hr)
-def test_get_hrv2_company_tasks():
-    hr = get_client().hr
-    #test get_company_tasks
-    try:
-        assert hr.get_company_tasks(1) == hr_dict['tasks'], \
-            hr.get_company_tasks(1)
-    except APINotImplementedException, e:
-        pass
-    except Exception, e:
-        print e
-        assert 0, ("APINotImplementedException not raised", e)
+        hr.get_company_users(1, False)
 
 
 @patch('urllib3.PoolManager.urlopen', patched_urlopen_hr)
@@ -679,46 +566,24 @@ def test_get_hrv2_team_users():
     #test get_team_users
     assert hr.get_team_users(1) == hr_dict[u'users'], hr.get_team_users(1)
     assert hr.get_team_users(1, False) == hr_dict[u'users'], \
-         hr.get_team_users(1, False)
-
-
-@patch('urllib3.PoolManager.urlopen', patched_urlopen_hr)
-def test_get_hrv2_team_tasks():
-    hr = get_client().hr
-    #test get_team_tasks
-    try:
-        assert hr.get_team_tasks(1) == hr_dict['tasks'], hr.get_team_tasks(1)
-    except APINotImplementedException, e:
-        pass
-    except:
-        assert 0, "APINotImplementedException not raised"
+        hr.get_team_users(1, False)
 
 
 @patch('urllib3.PoolManager.urlopen', patched_urlopen_hr)
 def test_get_hrv2_userroles():
     hr = get_client().hr
-    #test get_user_role
-    assert hr.get_user_role(user_reference=1) == hr_dict['userroles'], \
-                                                 hr.get_user_role(user_reference=1)
-    assert hr.get_user_role(team_reference=1) == hr_dict['userroles'], \
-                                                 hr.get_user_role(team_reference=1)
-    assert hr.get_user_role() == hr_dict['userroles'], hr.get_user_role()
-
-    try:
-        assert hr.get_tasks() == hr_dict['tasks'], hr.get_tasks()
-    except APINotImplementedException, e:
-        pass
-    except:
-        assert 0, "APINotImplementedException not raised"
+    #test get_user_roles
+    assert hr.get_user_roles() == hr_dict['userroles'], hr.get_user_role()
 
 
 @patch('urllib3.PoolManager.urlopen', patched_urlopen_hr)
 def test_get_hrv2_jobs():
     hr = get_client().hr
     #test get_jobs
-    assert hr.get_jobs() == hr_dict[u'jobs'], hr.get_jobs()
+    assert hr.get_jobs(1) == hr_dict[u'jobs'], hr.get_jobs()
     assert hr.get_job(1) == hr_dict[u'job'], hr.get_job(1)
-    assert hr.update_job(1, {'status': 'filled'}) == hr_dict, hr.update_job(1, {'status': 'filled'})
+    result = hr.update_job(1, 2, 'title', 'desc', 'public', budget=100)
+    eq_(result, hr_dict)
     assert hr.delete_job(1, 41) == hr_dict, hr.delete_job(1, 41)
 
 
@@ -726,16 +591,24 @@ def test_get_hrv2_jobs():
 def test_get_hrv2_offers():
     hr = get_client().hr
     #test get_offers
-    assert hr.get_offers() == hr_dict[u'offers'], hr.get_offers()
+    assert hr.get_offers(1) == hr_dict[u'offers'], hr.get_offers()
     assert hr.get_offer(1) == hr_dict[u'offer'], hr.get_offer(1)
 
 
 @patch('urllib3.PoolManager.urlopen', patched_urlopen_hr)
 def test_get_hrv2_engagements():
     hr = get_client().hr
-    #test get_engagements
-    assert hr.get_engagements() == hr_dict[u'engagements'], hr.get_engagements()
-    assert hr.get_engagement(1) == hr_dict[u'engagement'], hr.get_engagement(1)
+
+    # test conditional ``provider_reference`` and ``profile_key``
+    try:
+        hr.get_engagements()
+        raise Exception('Neither of ``provider_reference`` and ``profile_key``'
+                        'was specified')
+    except ApiValueError:
+        pass
+    eq_(hr.get_engagements(provider_reference=1), hr_dict[u'engagements'])
+    eq_(hr.get_engagements(profile_key=1), hr_dict[u'engagements'])
+    eq_(hr.get_engagement(1), hr_dict[u'engagement'])
 
 
 adjustments = {u'adjustment': {u'reference': '100'}}
@@ -749,40 +622,76 @@ def patched_urlopen_hradjustment(*args, **kwargs):
 def test_hrv2_post_adjustment():
     hr = get_client().hr
 
-    result = hr.post_team_adjustment(1, 2, 100000, 'test', 'test note')
+    # Using ``amount``
+    result = hr.post_team_adjustment(
+        1, 2, 'a test', amount=100, notes='test note')
     assert result == adjustments[u'adjustment'], result
 
+    # Using ``charge_amount``
+    result = hr.post_team_adjustment(
+        1, 2, 'a test', charge_amount=100, notes='test note')
+    assert result == adjustments[u'adjustment'], result
+
+    try:
+        # Using ``amount`` and ``charge_amount`` will raise error
+        hr.post_team_adjustment(
+            1, 2, 'a test', amount=100, charge_amount=110, notes='test note')
+        raise Exception('No error ApiValueError was raised when using'
+                        'both ``amount`` and ``charge_amount``')
+    except ApiValueError:
+        pass
+
+    try:
+        # If both ``amount`` and ``charge_amount`` are absent,
+        # error should be raised
+        hr.post_team_adjustment(1, 2, 'a test', notes='test note')
+        raise Exception('No error ApiValueError was raised when both'
+                        'both ``amount`` and ``charge_amount`` are absent')
+    except ApiValueError:
+        pass
 
 job_data = {
-                'buyer_team_reference': 111,
-                'title': 'Test job from API',
-                'job_type': 'hourly',
-                'description': 'this is test job, please do not apply to it',
-                'visibility': 'odesk',
-                'duration': 10,
-                'category': 'Web Development',
-                'subcategory': 'Other - Web Development',
-                }
+    'buyer_team_reference': 111,
+    'title': 'Test job from API',
+    'job_type': 'hourly',
+    'description': 'this is test job, please do not apply to it',
+    'visibility': 'odesk',
+    'category': 'Web Development',
+    'subcategory': 'Other - Web Development',
+    'budget': 100,
+    'duration': 10,
+    'start_date': 'some start date',
+    'end_date': 'some end date',
+    'skills': ['Python', 'JS']
+}
 
 
 def patched_urlopen_job_data_parameters(self, method, url, **kwargs):
     post_dict = urlparse.parse_qs(kwargs.get('body'))
-    assert post_dict == {'api_key': ['public'], 'job_data[subcategory]': ['Other - Web Development'], 'job_data[description]': ['this is test job, please do not apply to it'], 'job_data[duration]': ['10'], 'job_data[buyer_team_reference]': ['111'], 'job_data[job_type]': ['hourly'], 'api_token': ['some_token'], 'api_sig': ['830fb250d089dabb2e74a301796c6e6b'], 'job_data[title]': ['Test job from API'], 'job_data[visibility]': ['odesk'], 'job_data[category]': ['Web Development']}, a
+    post_dict.pop('oauth_timestamp')
+    post_dict.pop('oauth_signature')
+    post_dict.pop('oauth_nonce')
+    eq_(
+        dict(post_dict.items()),
+        {'category': ['Web Development'], 'buyer_team__reference': ['111'],
+         'subcategory': ['Other - Web Development'],
+         'end_date': ['some end date'], 'title': ['Test job from API'],
+         'skills': ['Python;JS'], 'job_type': ['hourly'],
+         'oauth_consumer_key': ['public'],
+         'oauth_signature_method': ['HMAC-SHA1'], 'budget': ['100'],
+         'visibility': ['odesk'],
+         'oauth_version': ['1.0'], 'oauth_token': ['some token'],
+         'oauth_body_hash': ['2jmj7l5rSw0yVb/vlWAYkK/YBwk='],
+         'duration': ['10'],
+         'start_date': ['some start date'],
+         'description': ['this is test job, please do not apply to it']})
     return MicroMock(data='{"some":"data"}', status=200)
 
 
 @patch('urllib3.PoolManager.urlopen', patched_urlopen_job_data_parameters)
 def test_job_data_parameters():
     hr = get_client().hr
-    result = hr.post_job(job_data)
-
-
-@patch('urllib3.PoolManager.urlopen', patched_urlopen_hr)
-def test_get_hrv2_candidacy_stats():
-    hr = get_client().hr
-    #test get_candidacy_stats
-    result = hr.get_candidacy_stats()
-    assert result == hr_dict['candidacy_stats'], result
+    hr.post_job(**job_data)
 
 
 provider_dict = {'profile':
@@ -1421,13 +1330,9 @@ def test_gds_namespace_get():
     assert result == sample_json_dict, (result, sample_json_dict)
 
 
-def get_oauth_client():
-    key = '56adf4b66aaf61444a77796c17c0da53'
-    secret = 'e5864a0bcbed2085'
-    return Client(key, secret, auth='oauth')
-
 def setup_oauth():
-    return OAuth(get_oauth_client())
+    return OAuth(get_client())
+
 
 def test_oauth_full_url():
     oa = setup_oauth()
@@ -1435,6 +1340,7 @@ def test_oauth_full_url():
     access_token_url = oa.full_url('oauth/token/access')
     assert request_token_url == oa.request_token_url, request_token_url
     assert access_token_url == oa.access_token_url, access_token_url
+
 
 def patched_httplib2_request(*args, **kwargs):
     return {'status': '200'},\
@@ -1445,6 +1351,7 @@ def test_oauth_get_request_token():
     oa = setup_oauth()
     assert oa.get_request_token() == ('709d434e6b37a25c50e95b0e57d24c46',\
                                     '193ef27f57ab4e37')
+
 
 @patch('httplib2.Http.request', patched_httplib2_request)
 def test_oauth_get_authorize_url():
@@ -1457,6 +1364,7 @@ def test_oauth_get_authorize_url():
 def patched_httplib2_access(*args, **kwargs):
     return {'status': '200'},\
         'oauth_token=aedec833d41732a584d1a5b4959f9cd6&oauth_token_secret=9d9cccb363d2b13e'
+
 
 @patch('httplib2.Http.request', patched_httplib2_access)
 def test_oauth_get_access_token():

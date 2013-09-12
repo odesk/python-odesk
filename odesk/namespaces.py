@@ -5,6 +5,9 @@ python-odesk version 0.5
 """
 
 
+__all__ = ['Namespace', 'GdsNamespace']
+
+
 class Namespace(object):
     """
     A special 'proxy' class to keep API methods organized
