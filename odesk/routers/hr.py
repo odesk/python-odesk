@@ -5,6 +5,7 @@ python-odesk version 0.5
 """
 from odesk.exceptions import APINotImplementedException
 from odesk.namespaces import Namespace
+from odesk.utils import assert_parameter, ApiValueError
 
 
 class HR_V1(Namespace):
@@ -14,20 +15,35 @@ class HR_V1(Namespace):
     api_url = 'hr/'
     version = 1
 
+    JOB_TYPES = ('hourly', 'fixed-price')
+    JOB_VISIBILITY_OPTIONS = ('public', 'private', 'odesk', 'invite-only')
+    JOB_STATUSES = ('open', 'filled', 'cancelled')
+    JOB_KEEP_OPEN_OPTIONS = ('yes', 'no')
+    CONTRACT_REASON_OPTIONS = (
+        'API_REAS_MISREPRESENTED_SKILLS',
+        'API_REAS_CONTRACTOR_NOT_RESPONSIVE',
+        'API_REAS_HIRED_DIFFERENT',
+        'API_REAS_JOB_COMPLETED_SUCCESSFULLY',
+        'API_REAS_WORK_NOT_NEEDED',
+        'API_REAS_UNPROFESSIONAL_CONDUCT',
+    )
+    CONTRACT_WOULD_HIRE_AGAIN_OPTONS = ('yes', 'no')
+
     def invite_to_interview(self, job_id, cover, profile_key=None,
                             provider_reference=None):
         """
         Invite to an interview.
 
         Parameters:
-          job_id               (required) Job reference ID
+          job_id               Job reference ID
 
-          cover                (required) Text of the cover letter
+          cover                Text of the cover letter
 
-          profile_key          Unique contractor's key, e.g. ~~677961dcd7f65c01
+          profile_key          (optional) Unique contractor's key,
+                               e.g. ~~677961dcd7f65c01
 
-          provider_reference   Developer's unique reference ID, e.g. 12345.
-                               Use it if no profile_key available
+          provider_reference   (optional) Developer's unique reference ID,
+                               e.g. 12345. Use it if no profile_key available
 
         Either one of the parameters ``profile_key`` or ``provider_reference``
         should be provided, otherwise error will be raised.
@@ -36,8 +52,8 @@ class HR_V1(Namespace):
         data = {}
 
         if profile_key is None and provider_reference is None:
-            raise Exception('Either one of the parameters ``profile_key`` or '
-                            '``provider_reference`` should be provided')
+            raise ApiValueError('Either one of the parameters ``profile_key`` '
+                                'or ``provider_reference`` should be provided')
 
         if profile_key:
             data['profile_key'] = profile_key
@@ -58,46 +74,9 @@ class HR(Namespace):
     api_url = 'hr/'
     version = 2
 
-    """Custom Payments API"""
+    """userrole api"""
 
-    def get_team_adjustments(self, team_reference, engagement_reference):
-        """
-        Get list of bonuses for given engagement.
-
-        Parameters
-          team_reference        The Team reference
-          engagement_reference  The Engagement reference
-
-        """
-        url = 'teams/{0}/adjustments'.format(team_reference)
-        data = {'engagement__reference': engagement_reference}
-        result = self.post(url, data)
-        return result.get('adjustments', result)
-
-    def post_team_adjustment(self, team_reference, engagement_reference,
-                             amount, comments, notes):
-        """
-        Add bonus to an engagement
-
-        Parameters
-          team_reference        The Team reference
-          engagement_reference  The Engagement reference
-          amount                The adjustment/bonus amount
-          comments              Comments
-          notes                 Notes
-
-        """
-        url = 'teams/{0}/adjustments'.format(team_reference)
-        data = {'engagement__reference': engagement_reference,
-                'amount': amount,
-                'comments': comments,
-                'notes': notes}
-        result = self.post(url, data)
-        return result.get('adjustment', result)
-
-    """user api"""
-
-    def get_userroles(self):
+    def get_user_roles(self):
         """
         Retreive UserRoles object.
 
@@ -111,6 +90,8 @@ class HR(Namespace):
         result = self.get(url)
         return result.get('userroles', result)
 
+    """user api"""
+
     def get_user(self, user_reference):
         """
         Retrieve the user object from the user reference
@@ -119,6 +100,15 @@ class HR(Namespace):
           user_reference    The user reference
         """
         url = 'users/{0}'.format(user_reference)
+        result = self.get(url)
+        return result.get('user', result)
+
+    def get_user_me(self):
+        """
+        Retrieve currently authenticated user object.
+
+        """
+        url = 'users/me'
         result = self.get(url)
         return result.get('user', result)
 
@@ -158,12 +148,6 @@ class HR(Namespace):
         result = self.get(url)
         return result.get('teams', result)
 
-    def get_company_tasks(self, company_referece):
-        """
-        API doesn't support this call yet
-        """
-        raise APINotImplementedException("API doesn't support this call yet")
-
     def get_company_users(self, company_referece, active=True):
         """
         Retrieve a list of all users within the referenced company.
@@ -183,6 +167,74 @@ class HR(Namespace):
         return result.get('users', result)
 
     """team api"""
+
+    def get_team_adjustments(self, team_reference, engagement_reference=None):
+        """
+        Get list of bonuses for given engagement.
+
+        Parameters
+          team_reference        The Team reference ID
+
+          engagement_reference  (optional) The Engagement reference ID
+
+        """
+        url = 'teams/{0}/adjustments'.format(team_reference)
+        data = {}
+
+        if engagement_reference:
+            data['engagement_reference'] = engagement_reference
+
+        result = self.post(url, data)
+        return result.get('adjustments', result)
+
+    def post_team_adjustment(self, team_reference, engagement_reference,
+                             comments, amount=None, charge_amount=None,
+                             notes=None):
+        """
+        Add bonus to an engagement
+
+        Parameters
+          team_reference        The Team reference ID
+
+          engagement_reference  The Engagement reference ID
+
+          comments              Comments about this adjustment, e.g.
+                                "Bonus for a good job"
+
+          amount                (conditionally optional) The amount that
+                                the provider should receive, e.g. 100
+
+          charge_amount         (conditionally optional) The amount that
+                                will be charged to the employer, e.g. 110
+
+          notes                 (optional) Notes
+
+        NOTE: you should use either "amount" parameter or "charge_amount",
+        but not both. Make sure that at least one of them is present.
+
+        """
+        url = 'teams/{0}/adjustments'.format(team_reference)
+        data = {}
+
+        data['engagement_reference'] = engagement_reference
+        data['comments'] = comments
+
+        if (amount and charge_amount) or (amount is None and
+                                          charge_amount is None):
+            raise ApiValueError('Either only one of the parameters ``amount``'
+                                ' or ``charge_amount`` should be specified')
+
+        if amount:
+            data['amount'] = amount
+
+        if charge_amount:
+            data['charge_amount'] = charge_amount
+
+        if notes:
+            data['notes'] = notes
+
+        result = self.post(url, data)
+        return result.get('adjustment', result)
 
     def get_teams(self):
         """
@@ -208,12 +260,6 @@ class HR(Namespace):
         #TODO: check how included users returned
         return result.get('team', result)
 
-    def get_team_tasks(self, team_reference):
-        """
-        API doesn't support this call yet
-        """
-        raise APINotImplementedException("API doesn't support this call yet")
-
     def get_team_users(self, team_reference, active=True):
         """
         get_team_users(team_reference, active=True)
@@ -226,39 +272,9 @@ class HR(Namespace):
         result = self.get(url, data)
         return result.get('users', result)
 
-    """task api"""
-
-    def get_tasks(self):
-        "API doesn't support this call yet"
-        raise APINotImplementedException("API doesn't support this call yet")
-
-    """userrole api"""
-
-    def get_user_role(self, user_reference=None, team_reference=None,
-                      sub_teams=False):
-        """
-        Retrieve a complete list of all roles the reference user
-        has within the referenced team/sub teams.
-
-        Parameters
-          user_reference    The User reference (optional: defaults to API user)
-          team_reference    The team reference (optional)
-          sub_teams         Whether to include sub team info (optional:
-                            defaults to False)
-        """
-        data = {}
-        if user_reference:
-            data['user__reference'] = user_reference
-        if team_reference:
-            data['team__reference'] = team_reference
-        data['include_sub_teams'] = sub_teams
-        url = 'userroles'
-        result = self.get(url, data)
-        return result.get('userroles', result)
-
     """job api"""
 
-    def get_jobs(self, buyer_team_reference=None,
+    def get_jobs(self, buyer_team_reference,
                  include_sub_teams=False,
                  status=None, created_by=None, created_time_from=None,
                  created_time_to=None, page_offset=0, page_size=20,
@@ -268,22 +284,30 @@ class HR(Namespace):
         This API call can be used to find the reference ID of a specific jobi
 
         Parameters
-          buyer_team_reference  (optional)
-          include_sub_teams     (optional: defaults to False)
-          status                (optional)
-          created_by            Creator's user_id (optional)
-          created_time_from     timestamp (optional)
-          created_time_to       timestamp (optional)
-          page_offset           Number of entries to skip (optional)
-          page_size             Page size in number of entries
-                                (optional: default 20)
+          buyer_team_reference  The buyer's team reference ID
+
+          include_sub_teams     (optional) <1|0> Whether to include sub-teams
+
+          status                (optional) Status of a job
+
+          created_by            (optional) Creator's user_id
+
+          created_time_from     (optional) timestamp, e.g. 2009-01-20T00:00:01
+
+          created_time_to       (optional) timestamp, e.g. 2009-02-20T11:59:59
+
+          page_offset           (optional) Number of entries to skip
+
+          page_size             (optional: default 20) Page size in number
+                                of entries
+
           order_by              (optional)
+
         """
         url = 'jobs'
 
         data = {}
-        if buyer_team_reference:
-            data['buyer_team__reference'] = buyer_team_reference
+        data['buyer_team__reference'] = buyer_team_reference
 
         data['include_sub_teams'] = False
         if include_sub_teams:
@@ -323,37 +347,201 @@ class HR(Namespace):
         result = self.get(url)
         return result.get('job', result)
 
-    def post_job(self, job_data):
+    def post_job(self, buyer_team_reference, title, job_type, description,
+                 visibility, category, subcategory, budget=None, duration=None,
+                 start_date=None, end_date=None, skills=None):
         """
-        Post a job
+        Post a job.
 
         Parameters
-          job_data      Details of the job
+          buyer_team_reference     Reference ID of the buyer team that is
+                                   posting the job, e.g. 34567
+
+          title                    Title of the Job
+
+          job_type                 Type of posted job, e.g. "hourly"
+                                   Possible values are: "hourly", "fixed-price"
+
+          description              The job's description
+
+          visibility               The job's visibility, e.g. 'private'.
+                                   Possible values are:
+                                     - 'public' jobs are available to all
+                                       users who search jobs
+                                     - 'private' job is visible to
+                                       employer only
+                                     - 'odesk' jobs appear in search
+                                       results only for oDesk users
+                                       who are logged into the service
+                                     - 'invite-only' jobs do not appear
+                                       in search and are used for jobs
+                                       where the buyer wants to control
+                                       the potential applicants
+
+          category                 The category of job, e.g. 'Web Development'
+                                   (where to get? - see Metadata API)
+
+          subcategory              The subcategory of job, e.g.
+                                   'Web Programming'
+                                   (where to get? - see Metadata API)
+
+          budget                   (conditionally optional) The budget of the
+                                   Job, e.g. 100. Is used for 'fixed-price'
+                                   jobs only.
+
+          duration                 (conditionally optional) The duration of the
+                                   job in hours, e.g. 90. Used for
+                                   'hourly-jobs' only.
+
+          start_date               (optional) The start date of the Job,
+                                   e.g. 06-15-2011. If start_date is not
+                                   included the job will default to
+                                   starting immediately.
+
+          end_date                 (optional) The end date of the Job,
+                                   e.g. 06-30-2011. Only needed if
+                                   job type is 'fixed-price'
+
+          skills                   (optional) Skills required for the job.
+                                   Must be a list or tuple even of one item,
+                                   e.g. ``['python']``
+
         """
         url = 'jobs'
-        job_data_dict = {}
-        for k, v in job_data.items():
-            job_data_dict['job_data['+k+']']=v
-        result = self.post(url, job_data_dict)
+        data = {}
+
+        data['buyer_team__reference'] = buyer_team_reference
+        data['title'] = title
+
+        assert_parameter('job_type', job_type, self.JOB_TYPES)
+        data['job_type'] = job_type
+
+        data['description'] = description
+
+        assert_parameter('visibility', visibility, self.JOB_VISIBILITY_OPTIONS)
+        data['visibility'] = visibility
+
+        data['category'] = category
+        data['subcategory'] = subcategory
+
+        if budget is None and duration is None:
+            raise ApiValueError('Either one of the ``budget``or ``duration`` '
+                                'parameters must be specified')
+
+        if budget:
+            data['budget'] = budget
+        if duration:
+            data['duration'] = duration
+        if start_date:
+            data['start_date'] = start_date
+        if end_date:
+            data['end_date'] = end_date
+        if skills:
+            data['skills'] = ';'.join(skills)
+
+        result = self.post(url, data)
         return result
 
-    def update_job(self, job_id, job_data):
+    def update_job(self, job_id, buyer_team_reference, title, description,
+                   visibility, category, subcategory, budget=None,
+                   duration=None, start_date=None, end_date=None, status=None):
         """
         Update a job
 
         Parameters
-          job_id        Job reference
-          job_data      New details of the job
+          job_id                   Job reference ID
+
+          buyer_team_reference     Reference ID of the buyer team that is
+                                   posting the job, e.g. 34567
+
+          title                    Title of the Job
+
+          description              The job's description
+
+          visibility               The job's visibility, e.g. 'private'.
+                                   Possible values are:
+                                     - 'public' jobs are available to all
+                                       users who search jobs
+                                     - 'private' job is visible to
+                                       employer only
+                                     - 'odesk' jobs appear in search
+                                       results only for oDesk users
+                                       who are logged into the service
+                                     - 'invite-only' jobs do not appear
+                                       in search and are used for jobs
+                                       where the buyer wants to control
+                                       the potential applicants
+
+          category                 The category of job, e.g. 'Web Development'
+                                   (where to get? - see Metadata API)
+
+          subcategory              The subcategory of job, e.g.
+                                   'Web Programming'
+                                   (where to get? - see Metadata API)
+
+          budget                   (conditionally optional) The budget of the
+                                   Job, e.g. 100. Is used for 'fixed-price'
+                                   jobs only.
+
+          duration                 (conditionally optional) The duration of the
+                                   job in hours, e.g. 90. Used for
+                                   'hourly-jobs' only.
+
+          start_date               (optional) The start date of the Job,
+                                   e.g. 06-15-2011. If start_date is not
+                                   included the job will default to
+                                   starting immediately.
+
+          end_date                 (optional) The end date of the Job,
+                                   e.g. 06-30-2011. Only needed if
+                                   job type is 'fixed-price'
+
+          status                   (optional) The status of the job,
+                                   e.g. 'filled'.
+                                   Possible values are:
+                                   - 'open'
+                                   - 'filled'
+                                   - 'cancelled'
+
         """
         url = 'jobs/{0}'.format(job_id)
-        return self.put(url, {'job_data': job_data})
+        data = {}
+
+        data['buyer_team__reference'] = buyer_team_reference
+        data['title'] = title
+        data['description'] = description
+
+        assert_parameter('visibility', visibility, self.JOB_VISIBILITY_OPTIONS)
+        data['visibility'] = visibility
+
+        data['category'] = category
+        data['subcategory'] = subcategory
+
+        if budget is None and duration is None:
+            raise ApiValueError('Either one of the ``budget``or ``duration`` '
+                                'parameters must be specified')
+
+        if budget:
+            data['budget'] = budget
+        if duration:
+            data['duration'] = duration
+        if start_date:
+            data['start_date'] = start_date
+        if end_date:
+            data['end_date'] = end_date
+
+        if status:
+            assert_parameter('status', status, self.JOB_STATUSES)
+            data['status'] = status
+
+        return self.put(url, data)
 
     def delete_job(self, job_id, reason_code):
         """
         Delete a job
 
         Parameters
-          job_id        Job reference
+          job_id        Job reference ID
           readon_code   The reason code
         """
         url = 'jobs/{0}'.format(job_id)
@@ -361,9 +549,9 @@ class HR(Namespace):
 
     """offer api"""
 
-    def get_offers(self, buyer_team_reference=None, status=None,
-                   job_ref=None, include_sub_teams=None,
-                   provider_ref=None, agency_ref=None,
+    def get_offers(self, buyer_team_reference, include_sub_teams=None,
+                   provider_ref=None, profile_key=None, job_ref=None,
+                   agency_ref=None, status=None,
                    created_time_from=None, created_time_to=None,
                    page_offset=0, page_size=20, order_by=None):
         """
@@ -371,29 +559,37 @@ class HR(Namespace):
                 a specific team
 
         Parameters
-          buyer_team_reference  The team reference (optional)
-          status                active/filled (optional: defaults to active)
-          job_ref               The job reference (optional)
-          include_sub_teams     Include sub teams (optional)
-          provider_ref          (optional)
-          agency_ref            (optional)
-          created_time_from     timestamp e.g.'2008-09-09 00:00:01' (optional)
-          created_time_to       timestamp e.g.'2008-09-09 00:00:01' (optional)
-          page_offset           Number of entries to skip (optional)
-          page_size             Page size in number of entries
-                                (optional: default 20)
-          order_by              (optional)
+          buyer_team_reference  The buyer's team reference ID
+
+          include_sub_teams     (optional) <1|0> Whether to include sub teams
+
+          provider_ref          (optional) The provider's reference ID
+
+          profile_key           (optional) Unique profile key, used if
+                                ``provider_reference`` is absent
+
+          job_ref               (optional) The Job's reference ID
+
+          agency_ref            (optional) The Agency's reference ID
+
+          status                (optional) Engagement status,
+                                e.g., status=active;closed
+
+          created_time_from     (optional) timestamp e.g.'2008-09-09 00:00:01'
+
+          created_time_to       (optional) timestamp e.g.'2008-09-09 00:00:01'
+
+          page_offset           (optional) Number of entries to skip
+
+          page_size             (optional: default 20) Page size in number
+                                of entries
+
+          order_by              (optional) Sorting
+
         """
         url = 'offers'
         data = {}
-        if buyer_team_reference:
-            data['buyer_team__reference'] = buyer_team_reference
-
-        if status:
-            data['status'] = status
-
-        if job_ref:
-            data['job__reference'] = job_ref
+        data['buyer_team__reference'] = buyer_team_reference
 
         if include_sub_teams:
             data['include_sub_teams'] = include_sub_teams
@@ -401,8 +597,17 @@ class HR(Namespace):
         if provider_ref:
             data['provider__reference'] = provider_ref
 
+        if profile_key:
+            data['profile_key'] = profile_key
+
+        if job_ref:
+            data['job__reference'] = job_ref
+
         if agency_ref:
             data['agency_team__reference'] = agency_ref
+
+        if status:
+            data['status'] = status
 
         if created_time_from:
             data['created_time_from'] = created_time_from
@@ -423,34 +628,200 @@ class HR(Namespace):
         Retrieve the referenced offer
 
         Parameters
-          offer_reference   Offer reference
+          offer_reference   Offer reference ID
         """
         url = 'offers/{0}'.format(offer_reference)
         result = self.get(url)
         return result.get('offer', result)
 
+    def post_offer(self, job_reference, provider_team_reference=None,
+                   provider_reference=None, profile_key=None,
+                   message_from_buyer=None, engagement_title=None,
+                   attached_doc=None, fixed_charge_amount_agreed=None,
+                   fixed_pay_amount_agreed=None,
+                   fixed_price_upfront_payment=None, hourly_pay_rate=None,
+                   weekly_salary_charge_amount=None,
+                   weekly_salary_pay_amount=None, weekly_stipend_hours=None,
+                   weekly_hours_limit=None, start_date=None, keep_open=None):
+        """Make an offer to the provider.
+
+        Parameters
+          job_reference                    The Job's reference ID
+
+          provider_team_reference          (optional) The reference ID
+                                           of the provider team. If specified,
+                                           the check is performed whether user
+                                           you're making offer to belongs
+                                           to the team
+
+          provider_reference               (conditionally optional)
+                                           The provider's reference. Has
+                                           the override priority over
+                                           ``profile_key`` if both specified.
+
+          profile_key                      (conditionally optional)
+                                           Unique profile key,
+                                           used if ``provider_reference``
+                                           is absent
+
+          message_from_buyer               (optional) Text message
+
+          engagement_title                 (optional) The engagement title
+
+          attached_doc                     (optional) Attachment
+
+          fixed_charge_amount_agreed       (optional) The amount of agreed
+                                           charge, required by fixed-price job
+
+          fixed_pay_amount_agreed          (optional) The amount of agreed pay
+
+          fixed_price_upfront_payment      (optional) The amount of upfront
+                                           payment
+
+          hourly_pay_rate                  (optional) Hourly pay rate
+
+          weekly_salary_charge_amount      (optional) Salary charge amount
+                                           per week
+
+          weekly_salary_pay_amount         (optional) Salary pay amount per
+                                           week, required by fixed-price job
+
+          weekly_stipend_hours             (optional) Stipend hours per week
+
+          weekly_hours_limit               (optional) Limit of hours per week
+
+          start_date                       (optional) The offer start date
+
+          keep_open                        (optional, default: 'no')
+                                           Leave the job opened.
+                                           Possible values are: 'yes', 'no'
+
+        When just job and provider reference params are provided in the request
+        then an invitation for an interview should be send to the according
+        provider. Provider can either choose to accept the invitation and start
+        the communication with the user or decline it, in which case
+        communication between client and provider stops.
+
+        When additionally engagement title and charge amount params are
+        provided in the request, then an actual offer is created for the
+        provider. In this case the provider can either accept the offer
+        and start working or decline the offer.
+
+        """
+        url = 'offers'
+
+        data = {}
+        data['job__reference'] = job_reference
+
+        if provider_team_reference:
+            data['provider_team__reference'] = provider_team_reference
+
+        if profile_key is None and provider_reference is None:
+            raise ApiValueError('Either one of the parameters ``profile_key`` '
+                                'or ``provider_reference`` should be provided')
+
+        if provider_reference:
+            data['provider__reference'] = provider_reference
+        if profile_key:
+            data['profile_key'] = profile_key
+
+        if message_from_buyer:
+            data['message_from_buyer'] = message_from_buyer
+
+        if engagement_title:
+            data['engagement_title'] = engagement_title
+
+        if attached_doc:
+            data['attached_doc'] = attached_doc
+
+        if fixed_charge_amount_agreed:
+            data['fixed_charge_amount_agreed'] = fixed_charge_amount_agreed
+
+        if fixed_pay_amount_agreed:
+            data['fixed_pay_amount_agreed'] = fixed_pay_amount_agreed
+
+        if fixed_price_upfront_payment:
+            data['fixed_price_upfront_payment'] = fixed_price_upfront_payment
+
+        if hourly_pay_rate:
+            data['hourly_pay_rate'] = hourly_pay_rate
+
+        if weekly_salary_charge_amount:
+            data['weekly_salary_charge_amount'] = weekly_salary_charge_amount
+
+        if weekly_salary_pay_amount:
+            data['weekly_salary_pay_amount'] = weekly_salary_pay_amount
+
+        if weekly_stipend_hours:
+            data['weekly_stipend_hours'] = weekly_stipend_hours
+
+        if weekly_hours_limit:
+            data['weekly_hours_limit'] = weekly_hours_limit
+
+        if start_date:
+            data['start_date'] = start_date
+
+        if keep_open:
+            assert_parameter('keep_open', keep_open,
+                             self.JOB_KEEP_OPEN_OPTIONS)
+            data['keep_open'] = keep_open
+
+        return self.post(url, data)
+
     """engagement api"""
 
     def get_engagements(self, buyer_team_reference=None,
-                        include_sub_teams=False,
-                        status=None, provider_ref=None, agency_ref=None,
+                        include_sub_teams=None, provider_reference=None,
+                        profile_key=None, job_reference=None,
+                        agency_team_reference=None, status=None,
                         created_time_from=None, created_time_to=None,
                         page_offset=0, page_size=20, order_by=None):
         """
         Retrieve engagements
 
         Parameters
-          buyer_team_reference  The team reference (optional)
-          include_sub_teams     (optional: default False)
-          status                active/filled (optional: defaults to active)
-          provider_ref          (optional)
-          agency_ref            (optional)
-          created_time_from     timestamp e.g.'2008-09-09 00:00:01' (optional)
-          created_time_to       timestamp e.g.'2008-09-09 00:00:01' (optional)
-          page_offset           Number of entries to skip (optional)
-          page_size             Page size in number of entries
-                                (optional: default 20)
-          order_by              (optional)
+          buyer_team_reference  (optional) The team reference ID
+
+          include_sub_teams     (optional) <0|1> - whether to include info
+                                about sub-teams
+
+          provider_reference    (conditionally optional)
+                                The provider's reference ID.
+                                Has the override priority over ``profile_key``
+                                if both specified.
+
+          profile_key           (conditionally optional) Unique profile key,
+                                used if ``provider_reference`` is absent
+
+          job_reference         (optional) The Job's reference ID
+
+          agency_team_reference (optional) The Agency's reference ID
+
+          status                (optional) Engagement status, e.g.
+                                status=active;closed
+
+          created_time_from     (optional) timestamp e.g.'2008-09-09 00:00:01'
+
+          created_time_to       (optional) timestamp e.g.'2008-09-09 00:00:01'
+
+          page_offset           (optional) Number of entries to skip
+
+          page_size             (optional: default 20) Page size
+                                in number of entries
+
+          order_by              (optional) Sorting, in format
+                                $field_name1;$field_name2;..$field_nameN;AD...A,
+                                where A means asc, D means desc,
+                                available fields are:
+                                    'reference',
+                                    'created_time',
+                                    'offer__reference',
+                                    'job__reference',
+                                    'buyer_team__reference',
+                                    'provider__reference',
+                                    'status',
+                                    'engagement_start_date',
+                                    'engagement_end_date'
         """
         url = 'engagements'
 
@@ -458,18 +829,26 @@ class HR(Namespace):
         if buyer_team_reference:
             data['buyer_team__reference'] = buyer_team_reference
 
-        data['include_sub_teams'] = False
         if include_sub_teams:
             data['include_sub_teams'] = include_sub_teams
 
+        if profile_key is None and provider_reference is None:
+            raise ApiValueError('Either one of the parameters ``profile_key`` '
+                                'or ``provider_reference`` should be provided')
+
+        if provider_reference:
+            data['provider__reference'] = provider_reference
+        if profile_key:
+            data['profile_key'] = profile_key
+
+        if job_reference:
+            data['job__reference'] = job_reference
+
+        if agency_team_reference:
+            data['agency_team_reference'] = agency_team_reference
+
         if status:
             data['status'] = status
-
-        if provider_ref:
-            data['provider_ref'] = provider_ref
-
-        if agency_ref:
-            data['agency_ref'] = agency_ref
 
         if created_time_from:
             data['created_time_from'] = created_time_from
@@ -487,21 +866,107 @@ class HR(Namespace):
 
     def get_engagement(self, engagement_reference):
         """
-        Retrieve referenced engagement
+        Retrieve referenced engagement object.
 
         Parameters
-          engagement_reference
+          engagement_reference    Engagement reference ID
+
         """
         url = 'engagements/{0}'.format(engagement_reference)
         result = self.get(url)
         return result.get('engagement', result)
 
-    """candidacy api"""
+    """contracts api"""
 
-    def get_candidacy_stats(self):
+    def end_contract(self, contract_reference, reason, would_hire_again,
+                     fb_scores=None, fb_comment=None):
         """
-        Retrieve candidacy stats
+        Close the referenced contract.
+
+        Parameters
+          contract_reference    The Contract's reference ID
+
+          reason                The reason key, e.g.
+                                'API_REAS_HIRED_DIFFERENT'.
+                                Possible values are:
+                                 - 'API_REAS_MISREPRESENTED_SKILLS' -
+                                    "Contractor misrepresented his/her skills"
+                                 - 'API_REAS_CONTRACTOR_NOT_RESPONSIVE' -
+                                    "Contractor not responsive"
+                                 - 'API_REAS_HIRED_DIFFERENT' -
+                                    "Hired a different contractor"
+                                 - 'API_REAS_JOB_COMPLETED_SUCCESSFULLY' -
+                                    "Job was completed successfully"
+                                 - 'API_REAS_WORK_NOT_NEEDED' -
+                                    "No longer need this work completed"
+                                 - 'API_REAS_UNPROFESSIONAL_CONDUCT' -
+                                    "Unprofessional conduct"
+
+          would_hire_again       Whether you would hire a contractor again.
+                                 Required if total charge on the contract
+                                 is $0.
+                                 Possible values are: ['yes', 'no']
+
+          fb_scores              (optional) Estimate, could be an array of
+                                 scores, where id is reference to
+                                 score description.
+                                 The feedback scores are optional, but if
+                                 present they must be complete: all scores.
+                                 Possible values are:
+                                   (Feedback on contractor)
+                                     3 - "Skills / competency and skills
+                                         for the job, understanding of
+                                         specifications/instructions"
+                                     4 - "Quality / quality of work
+                                         deliverables"
+                                     5 - "Availability / online presence on a
+                                         consistent schedule"
+                                     6 - "Deadlines / ability to complete tasks
+                                         on time"
+                                     7 - "Communication / communication skills,
+                                         frequent progress updates,
+                                         responsiveness"
+                                     8 - "Cooperation / cooperation and
+                                         flexibility, suggestions for
+                                         improvement"
+
+                                   (Feedback on employer)
+                                     9 - "Skills / competency and skills
+                                         for the job, understanding of task
+                                         complexities"
+                                    10 - "Quality / quality of
+                                         specifications/instructions"
+                                    11 - "Availability / online presence
+                                         on a consistent schedule"
+                                    12 - "Deadlines / understanding of
+                                         complexities and trade-offs"
+                                    13 - "Communication / communication skills
+                                         and responsiveness, feedback and
+                                         guidance"
+                                    14 - "Cooperation / cooperation and
+                                         flexibility, open to suggestions
+                                         for improvement"
+
+          fb_comment             (optional) Feedback comment, some string
+                                 message. It is optional but if present, then
+                                 the scores are required.
+
         """
-        url = 'candidacies/stats'
-        result = self.get(url)
-        return result.get('candidacy_stats', result)
+        url = 'contracts/{0}'.format(contract_reference)
+        data = {}
+
+        assert_parameter('reason', reason, self.CONTRACT_REASON_OPTIONS)
+        data['reason'] = reason
+
+        assert_parameter('would_hire_again', would_hire_again,
+                         self.CONTRACT_WOULD_HIRE_AGAIN_OPTONS)
+        data['would_hire_again'] = would_hire_again
+
+        if fb_scores:
+            data['fb_scores'] = fb_scores
+
+        if fb_comment:
+            data['fb_comment'] = fb_comment
+
+        result = self.delete(url, data)
+        return result

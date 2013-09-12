@@ -7,6 +7,19 @@ python-odesk version 0.5
 from datetime import date
 
 
+class ApiValueError(Exception):
+    pass
+
+
+def assert_parameter(parameter_name, value, options_list):
+    """Raise an exception if parameter's value not in options list."""
+    if value not in options_list:
+        raise ApiValueError(
+            "Incorrect value for {0}: '{1}', "
+            "valid values are {2}".format(
+                parameter_name, value, options_list))
+
+
 class Q(object):
     '''Simple query constructor'''
 
