@@ -183,7 +183,7 @@ class HR(Namespace):
         if engagement_reference:
             data['engagement_reference'] = engagement_reference
 
-        result = self.post(url, data)
+        result = self.get(url, data)
         return result.get('adjustments', result)
 
     def post_team_adjustment(self, team_reference, engagement_reference,
