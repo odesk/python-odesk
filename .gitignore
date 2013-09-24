@@ -17,3 +17,5 @@ include/*
 man/*
 .env/*
 examples/odesk
+odesk/__init__.py.back
+python_odesk.egg-info

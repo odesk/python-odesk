@@ -15,6 +15,9 @@ ODESK_ERROR_CODE = 'x-odesk-error-code'
 ODESK_ERROR_MESSAGE = 'x-odesk-error-message'
 
 
+__all__ = ['raise_http_error']
+
+
 def raise_http_error(url, response):
     '''Raise custom exception'''
     status_code = response.status
