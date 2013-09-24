@@ -17,6 +17,22 @@ def assert_parameter(parameter_name, value, options_list):
                 parameter_name, value, options_list))
 
 
+def decimal_default(obj):
+    """JSON serialization of Decimal.
+
+    Usage:
+      json.dumps(data, default=decimal_default)
+
+    """
+    if obj.__class__.__name__ == 'Decimal':
+        try:
+            value = int(obj)
+        except ValueError:
+            value = float(obj)
+        return value
+    raise TypeError
+
+
 class Q(object):
     '''Simple query constructor'''
 

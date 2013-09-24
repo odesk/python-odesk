@@ -11,6 +11,8 @@ import urllib3
 
 from odesk.oauth import OAuth
 from odesk.http import raise_http_error
+from odesk.utils import decimal_default
+
 
 __all__ = ["Client"]
 
@@ -159,7 +161,11 @@ class Client(object):
 
         logger.debug('Prepairing to make oDesk call')
         logger.debug('URL: {0}'.format(url))
-        logger.debug('Data: {0}'.format(json.dumps(data)))
+        try:
+            logger.debug('Data: {0}'.format(
+                json.dumps(data, default=decimal_default)))
+        except TypeError:
+            logger.debug('Data: {0}'.format(str(data)))
         logger.debug('Method: {0}'.format(method))
         response = self.urlopen(url, data, method)
 
