@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """
 Python bindings to odesk API
-python-odesk version 0.4
-(C) 2010 oDesk
+python-odesk version 0.5
+(C) 2010-2013 oDesk
 """
 from odesk import Client, get_version
 from odesk import utils
@@ -10,14 +10,15 @@ from odesk.exceptions import (HTTP400BadRequestError,
                               HTTP401UnauthorizedError,
                               HTTP403ForbiddenError,
                               HTTP404NotFoundError,
-                              ApiValueError)
+                              ApiValueError,
+                              IncorrectJsonResponseError)
 
 from odesk.namespaces import Namespace
 from odesk.oauth import OAuth
 from odesk.routers.team import Team
 from odesk.http import ODESK_ERROR_CODE, ODESK_ERROR_MESSAGE
 
-from nose.tools import eq_
+from nose.tools import eq_, ok_
 from mock import Mock, patch
 import urlparse
 import urllib2
@@ -101,11 +102,16 @@ def test_client_urlopen():
 
 
 def patched_urlopen_error(method, url, code=httplib.BAD_REQUEST,
-                          message=None, **kwargs):
+                          message=None, data=None, **kwargs):
     getheaders = Mock()
     getheaders.return_value = {ODESK_ERROR_CODE: code,
                                ODESK_ERROR_MESSAGE: message}
-    return MicroMock(data='', getheaders=getheaders, status=code)
+    return MicroMock(data=data, getheaders=getheaders, status=code)
+
+
+def patched_urlopen_incorrect_json(self, method, url, **kwargs):
+    return patched_urlopen_error(
+        method, url, code=httplib.OK, data='Service temporarily unavailable')
 
 
 def patched_urlopen_400(self, method, url, **kwargs):
@@ -136,6 +142,11 @@ def patched_urlopen_500(self, method, url, **kwargs):
     return patched_urlopen_error(
         method, url, code=httplib.INTERNAL_SERVER_ERROR,
         message='Internal server error', **kwargs)
+
+
+@patch('urllib3.PoolManager.urlopen', patched_urlopen_incorrect_json)
+def client_read_incorrect_json(client, url):
+    return client.read(url)
 
 
 @patch('urllib3.PoolManager.urlopen', patched_urlopen_400)
@@ -183,7 +194,7 @@ def test_client_read():
                 oauth_access_token_secret='some access token secret')
     test_url = 'http://test.url'
 
-    #produce error on format other then json
+    # Produce error on format other then json
     class NotJsonException(Exception):
         pass
 
@@ -196,11 +207,23 @@ def test_client_read():
     except Exception:
         pass
 
-    #test get, all ok
+    # Test get, all ok
     result = client.read(url=test_url)
     assert result == sample_json_dict, result
 
-    #test get, 400 error
+    # Test get and status is ok, but json is incorrect,
+    # IncorrectJsonResponseError should be raised
+    try:
+        result = client_read_incorrect_json(client=client, url=test_url)
+        ok_(0, "No exception raised for 200 code and "
+               "incorrect json response: {0}".format(result))
+    except IncorrectJsonResponseError:
+        pass
+    except Exception, e:
+        assert 0, "Incorrect exception raised for 200 code " \
+            "and incorrect json response: " + str(e)
+
+    # Test get, 400 error
     try:
         result = client_read_400(client=client, url=test_url)
     except HTTP400BadRequestError, e:
@@ -208,7 +231,7 @@ def test_client_read():
     except Exception, e:
         assert 0, "Incorrect exception raised for 400 code: " + str(e)
 
-    #test get, 401 error
+    # Test get, 401 error
     try:
         result = client_read_401(client=client, url=test_url)
     except HTTP401UnauthorizedError, e:
@@ -216,7 +239,7 @@ def test_client_read():
     except Exception, e:
         assert 0, "Incorrect exception raised for 401 code: " + str(e)
 
-    #test get, 403 error
+    # Test get, 403 error
     try:
         result = client_read_403(client=client, url=test_url)
     except HTTP403ForbiddenError, e:
@@ -224,7 +247,7 @@ def test_client_read():
     except Exception, e:
         assert 0, "Incorrect exception raised for 403 code: " + str(e)
 
-    #test get, 404 error
+    # Test get, 404 error
     try:
         result = client_read_404(client=client, url=test_url)
     except HTTP404NotFoundError, e:
@@ -232,7 +255,7 @@ def test_client_read():
     except Exception, e:
         assert 0, "Incorrect exception raised for 404 code: " + str(e)
 
-    #test get, 500 error
+    # Test get, 500 error
     try:
         result = client_read_500(client=client, url=test_url)
     except urllib2.HTTPError, e:
@@ -1114,16 +1137,6 @@ def test_get_financial_entities_provider():
 
     read = fr.get_financial_entities_provider('test', utils.Query(select=['1', '2', '3'], where=(utils.Q('2') > 1)))
     assert read == fin_report_dict, read
-
-
-def test_get_version():
-    import odesk
-    odesk.VERSION = (1, 2, 3, 'alpha', 2)
-
-    assert get_version() == '1.2.3 alpha 2', get_version()
-
-    odesk.VERSION = (1, 2, 3, 'alpha', 0)
-    assert get_version() == '1.2.3 pre-alpha', get_version()
 
 
 task_dict = {u'tasks': 'task1'}

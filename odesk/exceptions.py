@@ -60,3 +60,7 @@ class NotAuthenticatedError(BaseException):
 
 class ApiValueError(BaseException):
     pass
+
+
+class IncorrectJsonResponseError(BaseException):
+    pass

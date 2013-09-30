@@ -12,6 +12,7 @@ import urllib3
 from odesk.oauth import OAuth
 from odesk.http import raise_http_error
 from odesk.utils import decimal_default
+from odesk.exceptions import IncorrectJsonResponseError
 
 
 __all__ = ["Client"]
@@ -182,7 +183,10 @@ class Client(object):
             except ValueError:
                 # Not a valid json string
                 logger.debug('Response is not a valid json string')
-                pass
+                raise IncorrectJsonResponseError(
+                    json.dumps({'status': response.status, 'body': result},
+                               default=decimal_default)
+                )
         return result
 
 
