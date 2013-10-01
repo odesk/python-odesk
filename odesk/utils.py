@@ -23,13 +23,11 @@ def decimal_default(obj):
     Usage:
       json.dumps(data, default=decimal_default)
 
+    Convert decimal to string.
+
     """
     if obj.__class__.__name__ == 'Decimal':
-        try:
-            value = int(obj)
-        except ValueError:
-            value = float(obj)
-        return value
+        return str(obj)
     raise TypeError
 
 

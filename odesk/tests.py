@@ -4,6 +4,9 @@ Python bindings to odesk API
 python-odesk version 0.5
 (C) 2010-2013 oDesk
 """
+from decimal import Decimal
+
+
 from odesk import Client, get_version
 from odesk import utils
 from odesk.exceptions import (HTTP400BadRequestError,
@@ -1519,3 +1522,25 @@ def test_multiple_job_profiles():
     assert job.get_job_profile(['~~111111111', '~~222222222']) == \
         job_profiles_dict['profiles']['profile'], \
         job.get_job_profile(['~~111111111', '~~222222222'])
+
+
+#======================
+# UTILS TESTS
+#======================
+def test_decimal_default():
+    from odesk.utils import decimal_default
+
+    value = '0.132'
+
+    eq_('{"value": "0.132"}', json.dumps({'value': Decimal(value)},
+                                         default=decimal_default))
+
+    value = '0'
+
+    eq_('{"value": "0"}', json.dumps({'value': Decimal(value)},
+                                     default=decimal_default))
+
+    value = '10'
+
+    eq_('{"value": "10"}', json.dumps({'value': Decimal(value)},
+                                      default=decimal_default))
