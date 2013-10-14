@@ -181,7 +181,7 @@ class HR(Namespace):
         data = {}
 
         if engagement_reference:
-            data['engagement_reference'] = engagement_reference
+            data['engagement__reference'] = engagement_reference
 
         result = self.get(url, data)
         return result.get('adjustments', result)
@@ -215,7 +215,7 @@ class HR(Namespace):
         url = 'teams/{0}/adjustments'.format(team_reference)
         data = {}
 
-        data['engagement_reference'] = engagement_reference
+        data['engagement__reference'] = engagement_reference
         data['comments'] = comments
 
         if (amount and charge_amount) or (amount is None and
