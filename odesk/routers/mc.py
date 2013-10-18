@@ -208,18 +208,29 @@ class MC(Namespace):
                                                      deleted=False)
 
     def post_message(self, username, recipients, subject, body,
-                     thread_id=None):
+                     thread_id=None, bcc=None, attachment_key=None):
         """
         Send a new message (creating a new thread) or reply to an existing
-        thread
+        thread.
 
         Parameters
-          username      User name (of sender)
-          recipients    Recipient(s)  (a single string or a list/tuple)
-          subject       Message subject
-          body          Message text
-          thread_id     The thread id if replying to an existing thread
-                        (optional)
+          username         User name (of sender)
+
+          recipients       Recipient(s)  (a single string or a list/tuple)
+
+          subject          Message subject
+
+          body             Message text
+
+          thread_id        (optional) The thread id if replying
+                           to an existing thread
+
+          bcc              (optional) List of BCC recipients, user comma (",")
+                           to separate ids in list
+
+          attachment_key   (optional) The unique private key of any attachment
+                           associated with the thread
+
         """
         url = 'threads/{0}'.format(username)
         if not isinstance(recipients, (list, tuple)):
@@ -227,6 +238,15 @@ class MC(Namespace):
         recipients = ','.join(map(str, recipients))
         if thread_id:
             url = '{0}/{1}'.format(url, thread_id)
-        return self.post(url, data={'recipients': recipients,
-                                    'subject': subject,
-                                    'body': body})
+
+        data = {'recipients': recipients,
+                'subject': subject,
+                'body': body}
+
+        if bcc:
+            data['bcc'] = bcc
+
+        if attachment_key:
+            data['attachment-key'] = attachment_key
+
+        return self.post(url, data=data)
