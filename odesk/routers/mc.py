@@ -22,8 +22,8 @@ class MC(Namespace):
         """
         url = 'trays'
         if paging_offset or not paging_count == 20:
-            data = {'paging': '{0};{1}'.format(paging_offset,
-                                               paging_count)}
+            data = {'page': '{0};{1}'.format(paging_offset,
+                                             paging_count)}
         else:
             data = {}
 
@@ -45,8 +45,8 @@ class MC(Namespace):
         """
         url = 'trays/{0}/{1}'.format(username, tray)
         if paging_offset is not None and paging_count is not None:
-            data = {'paging': '{0};{1}'.format(paging_offset,
-                                               paging_count)}
+            data = {'page': '{0};{1}'.format(paging_offset,
+                                             paging_count)}
         else:
             data = {}
 
@@ -70,7 +70,7 @@ class MC(Namespace):
         """
         url = 'threads/{0}/{1}'.format(username, thread_id)
         if paging_offset or not paging_count == 20:
-            data = {'paging': '{0};{1}'.format(paging_offset,
+            data = {'page': '{0};{1}'.format(paging_offset,
                                                paging_count)}
         else:
             data = {}
