@@ -32,8 +32,8 @@ class MC(Namespace):
         result = self.get(url, data=data)
         return result.get("trays", result)
 
-    def get_tray_content(self, username, tray, paging_offset=0,
-                         paging_count=20):
+    def get_tray_content(self, username, tray, paging_offset=None,
+                         paging_count=None):
         """
         Retrieve tray contents
 
@@ -44,7 +44,7 @@ class MC(Namespace):
           paging_count      Page size (number of results)
         """
         url = 'trays/{0}/{1}'.format(username, tray)
-        if paging_offset or not paging_count == 20:
+        if paging_offset is not None and paging_count is not None:
             data = {'paging': '{0};{1}'.format(paging_offset,
                                                paging_count)}
         else:

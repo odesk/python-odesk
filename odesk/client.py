@@ -81,8 +81,9 @@ class Client(object):
             self.task = Task(self)
 
         if team:
-            from odesk.routers.team import Team
+            from odesk.routers.team import Team, Team_V2
             self.team = Team(self)
+            self.team_v2 = Team_V2(self)
 
         if timereport:
             from odesk.routers.timereport import TimeReport
@@ -124,10 +125,16 @@ class Client(object):
 
         # TODO: Headers are not supported fully yet
         # instead we pass oauth parameters in querystring
-        post_data = self.auth.get_oauth_params(
-            url, self.oauth_access_token,
-            self.oauth_access_token_secret,
-            data, method)
+        if method in ('PUT', 'DELETE'):
+            post_data = self.auth.get_oauth_params(
+                url, self.oauth_access_token,
+                self.oauth_access_token_secret,
+                {}, method)  # don't need parameters in url
+        else:
+            post_data = self.auth.get_oauth_params(
+                url, self.oauth_access_token,
+                self.oauth_access_token_secret,
+                data, method)
 
         if method == 'GET':
             url = '{0}?{1}'.format(url, post_data)

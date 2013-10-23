@@ -1,7 +1,7 @@
 """
 Python bindings to odesk API
 python-odesk version 0.5
-(C) 2010-2012 oDesk
+(C) 2010-2013 oDesk
 """
 from odesk.namespaces import Namespace
 
@@ -12,7 +12,8 @@ class Job(Namespace):
 
     def get_job_profile(self, job_key):
         """Returns detailed profile information about job(s).
-        Docmented at 'http://developers.odesk.com/w/page/49065901/Job Profile'
+        Documented at
+        'http://developers.odesk.com/w/page/49065901/Job%20Profile'
 
         Parameters
         job_key     The job key or a list of keys, separated by ";",

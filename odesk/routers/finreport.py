@@ -3,13 +3,6 @@ Python bindings to odesk API
 python-odesk version 0.4
 (C) 2010-2013 oDesk
 """
-
-try:
-    import json
-except ImportError:
-    import simplejson as json
-
-
 from odesk.namespaces import GdsNamespace
 
 
@@ -33,7 +26,8 @@ class Finreports(GdsNamespace):
     def get_provider_teams_billings(self, provider_team_id, query):
         """
         Generate Billing Reports for a Specific Provider's Team
-        The authenticated user must be an admin or a staffing manager of the team
+        The authenticated user must be an admin or
+        a staffing manager of the team
 
         Parameters
           provider_team_id  Provider's Team ID
@@ -100,7 +94,8 @@ class Finreports(GdsNamespace):
     def get_buyer_teams_billings(self, buyer_team_id, query):
         """
         Generate Billing Reports for a Specific Buyer's Team
-        The authenticated user must be an admin or a staffing manager of the team
+        The authenticated user must be an admin or
+        a staffing manager of the team
 
         Parameters
           buyer_team_id     Buyers's Team ID

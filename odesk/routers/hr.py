@@ -496,7 +496,7 @@ class HR(Namespace):
                                    e.g. 06-30-2011. Only needed if
                                    job type is 'fixed-price'
 
-          status                   (optional) The status of the job,
+          status                   (required) The status of the job,
                                    e.g. 'filled'.
                                    Possible values are:
                                    - 'open'
@@ -533,6 +533,8 @@ class HR(Namespace):
         if status:
             assert_parameter('status', status, self.JOB_STATUSES)
             data['status'] = status
+        else:
+            raise ApiValueError('Missing required parameter "status"')
 
         return self.put(url, data)
 

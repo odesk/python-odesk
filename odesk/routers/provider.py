@@ -11,16 +11,6 @@ class Provider(Namespace):
     api_url = 'profiles/'
     version = 1
 
-    resume_info_result_keys = {'otherexp': 'experiences',
-                               'skills': 'skills',
-                               'tests': 'tests',
-                               'certificates': 'certificates',
-                               'employments': 'employments',
-                               'educations': 'educations',
-                               'projects': 'projects',
-                               'quickinfo': 'quick_info'
-                               }
-
     def get_provider(self, provider_ciphertext):
         """
         Retrieve an exhastive list of atributes associated with the referenced
@@ -59,15 +49,96 @@ class Provider(Namespace):
         Search oDesk providers
 
         Parameters
-          data       A dict (q:query, c1:Job Category, c2:Secondary Category,
-                     fb:Feedback, hrs:Hours, ir:Is Recent, min:Min Hourly Rate,
-                     max:Max Hourly Rate, loc:Location, pt:Provider Type,
-                     last:Last Activity, test:Test, port:Total Portfolio Items,
-                     rdy:Is oDesk Ready, ui:English Skills, ag:Agency,
-                     to:Titles Only, g:Group Member)
+
+          data       A dict of the following parameteres
+                     (all paramters are optional):
+
+              q       Search query, e.g. "python".
+                      Any text that appears in a provider's profile
+
+              c1      Category name. Use Metadata API to get the list
+                      of currently valid categories
+
+              c2      Subcategory, which is related to category (c1),
+                      please use c2[] to specify a couple subcategories
+
+              fb      Feedback (adjusted score), e.g. "fb=2.0 - 2.9 Stars"
+                      This searches for providers who have an adjusted
+                      feedback score equal or greater (up to 5) than the number
+                      passed in this parameter (decimals are ok).
+
+              hrs     (Total hours) This searches for providers who have
+                      a total number of hours equal or greater to the number
+                      passed in this parameter.
+
+              ir      This boolean parameter is used in combination with
+                      the total hours worked parameter, and searches providers
+                      who have worked within the last six months.
+                      "Yes" or "No" are the only valid searches.
+                      Omiting this will default to 'No'.
+
+              min     The provider's minimum rate they have charged
+                      in the past. Exludes providers with a public rate
+                      less than this amount.
+
+              max     The provider's maximum rate they have charged
+                      in the past. Exludes providers with a public rate
+                      greater than this amount.
+
+              loc     Country region. Limit your searches to a
+                      specific country region. Possible values:
+                          'Australasia'
+                          'East Asia'
+                          'Eastern Europe'
+                          'North America'
+                          'South Asia'
+                          'Western Europe'
+                          'Misc'
+
+              pt      Provider type. Limit your search to indipendent
+                      or affiliate providers. Possible values:
+                          'Individual'
+                          'Affiliated'
+                      By default both types are returned.
+
+              last    Limit your search to providers who were active
+                      after the date passed in this parameter.
+                      Dates should be formated like: 07-13-2009
+
+              test    Limit your search to providers who have passed
+                      a specific test (based on the test id).
+                      See available tests here: https://www.odesk.com/tests
+                      Only singe value is allowed.
+
+              port    Limit your search to providers who have at least
+                      this number of portfolio items.
+
+              rdy     Only return oDesk ready providers.
+
+              eng     Limit your results to providers who have
+                      at least the rating passed in the parameter.
+                      Only the following english levels are available
+                      (no decimals): [1,2,3,4,5]
+
+              ag      Agency reference. Limit your search to a specific agency.
+
+              to      Search the provider profile title text only.
+                      Possible values: 'yes'|'no', by default 'no'.
+
+              g       Limit your search to a specific group.
+
+              skills  Required skills. A name of the skill.
+                      Multiple values are allowed as a comma-separated string
+
           page_offset Start of page (number of results to skip) (optional)
+
           page_size   Page size (number of results) (optional: default 20)
-          order_by
+
+          order_by    Sorting, in format
+                      $field_name1;$field_name2;..$field_nameN;AD...A,
+                      where 'A' means ascending, 'D' means descending,
+                      the only available sort field as of now is "Date Created"
+
         """
         url = 'search/providers'
         if data is None:
@@ -75,7 +146,7 @@ class Provider(Namespace):
 
         data['page'] = '{0};{1}'.format(page_offset, page_size)
         if order_by is not None:
-            data['order_by'] = order_by
+            data['sort'] = order_by
         result = self.get(url, data=data)
         return result.get('providers', result)
 
@@ -85,161 +156,104 @@ class Provider(Namespace):
         Search oDesk jobs
 
         Parameters
-          data       A dict (q:query, c1:Job Category, c2:Secondary Category,
-                     fb:Feedback, min:Min Budget, max:Max Budget, t:Job Type,
-                     wl:Hours/Week, dur:Duration of Engagement, dp:Date Posted,
-                     st:Status for Search, tba:Total Billed Assignments,
-                     gr:Pref Group, to:Titles Only)
+          data       A dict of the following parameteres
+                     (all paramters are optional):
+
+              q         Query, e.g. "python",
+                        search the text of the job's description.
+
+              c1        Category name. Use Metadata API to get the list
+                        of currently valid categories
+
+              c2        Subcategory, which is related to category (c1),
+                        please use c2[] to specify a couple subcategories
+
+              qs        Skirll required, single value or comma-separated list
+
+              fb        Feedback (adjusted score). Limit your search to buyers
+                        with at least a score of the number passed in this
+                        parameter. Use the following values to filter by score:
+                            none = '0'
+                            1 - 4 Scores = '10'
+                            4 - 4.5 Scores = '40'
+                            4.5 - 5 Scores = '45'
+                            5.0 Scores = '50'
+
+              min       Minimum budget
+
+              max       Maximum budget
+
+              t         Job type. Possible values are:
+                            'Hourly'
+                            'Fixed'
+
+              wl        Hours per week. This parameter can only be used when
+                        searching Hourly jobs. These numbers are
+                        a little arbitrary, so follow the following parameters
+                        in order to successfully use this parameter:
+                            As Needed < 10 Hours/Week = '0'
+                            Part Time: 10-30 hrs/week = '20'
+                            Full Time: 30+ hrs/week = '40'
+
+              dur       Engagement duration. This parameter can only be used
+                        when searching Hourly jobs. These numbers are
+                        a little arbitrary, so follow the following parameters
+                        in order to successfully use this parameter:
+                            Ongoing / More than 6 months = '26'
+                            3 to 6 months = '13'
+                            1 to 3 months = '4'
+                            Less than 1 month = '1'
+                            Less than 1 week = '0'
+
+              dp        Date posted. Search jobs posted according to timeframe.
+                        Use the following parameters to specify a timeframe:
+                            Any Timeframe  = empty
+                            Last 24 hours = '0'
+                            Last 24 hours - 3 Days = '1'
+                            Last 3-7 Days = '3'
+                            Last 7-14 Days - '7'
+                            Last 14-30 Days - '14'
+                            > 30 Days - '30'
+
+              st        Job status. Search for Canceled jobs, In Progress Jobs
+                        and Completed Jobs. Defaults to Open Jobs.
+                        Possible values:
+                            Open Jobs = 'Open'
+                            Jobs in Progress = 'In Progress'
+                            Completed Jobs = 'Completed'
+                            Canceled Jobs = 'Cancelled'
+
+              tba       Total billed assignments.
+                        Limit your search to buyers who completed at least
+                        this number of paid assignments. Possible values:
+                            none = '0'
+                            has 1-5 billed assignments = '1'
+                            has 5-10 billed assignments = '5'
+                            has >10 billed assignments = '10'
+
+              gr        Prefered group. Limits your search to buyers
+                        in a particular group
+
+              to        Search the provider profile title text only.
+                        Possible values: 'yes'|'no', by default 'no'.
+
           page_offset   Start of page (number of results to skip) (optional)
+
           page_size     Page size (number of results) (optional: default 20)
-          order_by
+
+          order_by      Sorting, in format
+                        $field_name1;$field_name2;..$field_nameN;AD...A,
+                        where A eq. asc, D eq. desc, e.g. date_posted;A
+
         """
         url = 'search/jobs'
         if data is None:
             data = {}
         data['page'] = '{0};{1}'.format(page_offset, page_size)
         if order_by is not None:
-            data['order_by'] = order_by
+            data['sort'] = order_by
         result = self.get(url, data=data)
         return result.get('jobs', result)
-
-    def _get_resume_info(self, provider_ciphertext, info_type):
-        '''
-        info_type can be one of
-        (otherexp|skills|tests|certificates|employments|\
-        educations|projects)
-        '''
-        strinfo = str(info_type)
-        if strinfo not in self.resume_info_result_keys:
-            raise ValueError('invalid info_type {0}'.format(strinfo))
-        url = 'providers/{0}/{1}'.format(provider_ciphertext, strinfo)
-        result = self.get(url)
-        result_key = self.resume_info_result_keys[strinfo]
-        return result.get(result_key, result)
-
-    def _add_resume_info_item(self, provider_ciphertext, info_type,
-                              item_data):
-        '''
-        info_type can be one of
-        (otherexp|skills|tests|certificates|employments|\
-        educations|projects
-        '''
-        strinfo = str(info_type)
-        if strinfo not in self.resume_info_result_keys:
-            raise ValueError('invalid info_type {0}'.format(strinfo))
-        url = 'providers/{0}/{1}'.format(provider_ciphertext, strinfo)
-        return self.post(url, item_data)
-
-    def _update_resume_info_item(self, provider_ciphertext,
-                                 resource_id, info_type, item_data):
-        '''
-        info_type can be one of (otherexp|skills|tests|certificates|\
-        employments|educations|projects
-        '''
-        strinfo = str(info_type)
-        if strinfo not in self.resume_info_result_keys:
-            raise ValueError('invalid info_type {0}'.format(strinfo))
-
-        if resource_id is not None:
-            url = 'providers/{0}/{1}/{2}'.format(provider_ciphertext,
-                                                 resource_id, strinfo)
-        else:
-            url = 'providers/{0}/{1}'.format(provider_ciphertext,
-                                             strinfo)
-        return self.post(url, item_data)
-
-    def _delete_resume_info_item(self, provider_ciphertext,
-                                 resource_id, info_type):
-        '''
-        info_type can be one of (otherexp|skills|tests|certificates|\
-        employments|educations|projects
-        '''
-        strinfo = str(info_type)
-        if strinfo not in self.resume_info_result_keys:
-            raise ValueError('invalid info_type {0}'.format(strinfo))
-
-        if resource_id is not None:
-            url = 'providers/{0}/{1}/{2}'.format(provider_ciphertext,
-                                                 resource_id, strinfo)
-        else:
-            url = 'providers/{0}/{1}'.format(provider_ciphertext,
-                                             strinfo)
-
-        return self.delete(url)
-
-    def get_skills(self, provider_ciphertext):
-        """
-        Retrieve provider skills info
-
-        Parameters
-          provider_ciphertext   Provider cipher text (key)
-        """
-        return self._get_resume_info(provider_ciphertext, 'skills')
-
-    def add_skill(self, provider_ciphertext, data):
-        """
-        Add provider skills info
-
-        Parameters
-          provider_ciphertext   Provider cipher text (key)
-          data                  dict containing details of skill to add
-          """
-        return self._add_resume_info_item(provider_ciphertext,
-                                          'skills', data)
-
-    def update_skill(self, provider_ciphertext, skill_id, data):
-        """
-        Update provider skills info
-
-        Parameters
-          provider_ciphertext   Provider cipher text (key)
-          skill_id              Resource id of the referenced skill
-          data                  dict containing details of skill to delete
-          """
-        return self._update_resume_info_item(provider_ciphertext,
-                                             skill_id, 'skills', data)
-
-    def delete_skill(self, provider_ciphertext, skill_id):
-        """
-        Delete provider skills info
-
-        Parameters
-          provider_ciphertext   Provider cipher text (key)
-          skill_id              Resource id of the referenced skill
-          """
-        return self._delete_resume_info_item(provider_ciphertext,
-                                             skill_id, 'skills')
-
-    def get_quickinfo(self, provider_ciphertext):
-        """
-        Retrieve provider 'quick info'
-
-        Parameters
-          provider_ciphertext   Provider cipher text (key)
-        """
-        return self._get_resume_info(provider_ciphertext, 'quickinfo')
-
-    def update_quickinfo(self, provider_ciphertext, data):
-        """
-        Update provider 'quick info'
-
-        Parameters
-          provider_ciphertext   Provider cipher text (key)
-          data                  A dict containing updated 'quick info'
-        """
-        return self._update_resume_info_item(provider_ciphertext, None,
-                                             'quickinfo', data)
-
-    def get_affiliates(self, affiliate_key):
-        """
-        Retrieve provider affiliates
-
-        Parameters
-          affiliate_key
-        """
-        url = 'affiliates/{0}'.format(affiliate_key)
-        result = self.get(url)
-        return result.get('profile', result)
 
     def get_categories_metadata(self):
         """

@@ -117,4 +117,4 @@ class OAuth(Namespace):
         """
         url = 'info'
         result = self.get(url)
-        return self.get('info', result)
+        return result

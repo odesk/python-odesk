@@ -4,6 +4,7 @@ python-odesk version 0.5
 (C) 2010-2013 oDesk
 """
 from odesk.namespaces import Namespace
+from odesk.utils import assert_parameter
 
 
 class Team(Namespace):
@@ -11,23 +12,29 @@ class Team(Namespace):
     api_url = 'team/'
     version = 1
 
+    TZ_CHOICES = ('mine', 'user', 'gmt')
+
     def get_snapshot(self, company_id, user_id, datetime=None):
         """
         Retrieve a company's user snapshots during given time or 'now'
 
         Parameters:
           company_id    The Company ID
+
           user_id       The User ID
-          datetime      (default 'now') Timestamp either a datetime
-                        object
+
+          datetime      (optional)(default: 'now')
+                        Timestamp either a datetime object
                         or a string in ISO 8601 format (in UTC)
                         yyyymmddTHHMMSSZ
                         or a string with UNIX timestamp (number of
                         seconds after epoch)
+
         """
         url = 'snapshots/{0}/{1}'.format(company_id, user_id)
         if datetime:   # date could be a list or a range also
             url = '{0}/{1}'.format(url, datetime.isoformat())
+
         result = self.get(url)
         if 'snapshot' in result:
             snapshot = result['snapshot']
@@ -37,26 +44,38 @@ class Team(Namespace):
             return result
         return snapshot
 
-    def update_snapshot(self, company_id, user_id, datetime=None,
-                        memo=''):
+    def update_snapshot(self, company_id, user_id, memo, datetime=None):
         """
         Update a company's user snapshot memo at given time or 'now'
 
         Parameters:
           company_id    The Company ID
+
           user_id       The User ID
-          datetime      (default 'now') Timestamp either a datetime
-                        object
+
+          memo          The Memo text
+
+          datetime      (optoinal)(default 'now')
+                        Timestamp either a datetime object
                         or a string in ISO 8601 format (in UTC)
                         yyyymmddTHHMMSSZ
                         or a string with UNIX timestamp (number of
                         seconds after epoch)
-          memo          The Memo text
+
+                        More than one timestamps can be specified either
+                        as a range or as a list of values:
+
+                          - range: use the comma character (,) e.g.
+                            20081205T090351Z,20081205T091853Z
+
+                          - list: use the semicolon character (;) e.g.
+                            20081205T090351Z;20081405T090851Z;20081705T091853Z
+
         """
         url = 'snapshots/{0}/{1}'.format(company_id, user_id)
         if datetime:
             url = '{0}/{1}'.format(url, datetime.isoformat())
-        return self.post(url, {'memo': memo})
+        return self.put(url, {'memo': memo})
 
     def delete_snapshot(self, company_id, user_id, datetime=None):
         """
@@ -64,28 +83,51 @@ class Team(Namespace):
 
         Parameters:
           company_id    The Company ID
+
           user_id       The User ID
-          datetime      (default 'now') Timestamp either a datetime
-                        object
+
+          datetime      (optional)(default 'now')
+                        Timestamp either a datetime object
                         or a string in ISO 8601 format (in UTC)
                         yyyymmddTHHMMSSZ
                         or a string with UNIX timestamp (number of
                         seconds after epoch)
+
+                        More than one timestamps can be specified either
+                        as a range or as a list of values:
+
+                          - range: use the comma character (,) e.g.
+                            20081205T090351Z,20081205T091853Z
+
+                          - list: use the semicolon character (;) e.g.
+                            20081205T090351Z;20081405T090851Z;20081705T091853Z
+
         """
         url = 'snapshots/{0}/{1}'.format(company_id, user_id)
         if datetime:
             url = '{0}/{1}'.format(url, datetime.isoformat())
-        return self.delete(url)
+        # TODO: Need to pass parameters or get json error from oDesk
+        # 400: JSON_ERROR_NONE
+        return self.delete(url, {'memo': ''})
 
-    def get_workdiaries(self, team_id, username, date=None):
+    def get_workdiaries(self, team_id, username, date=None, tz=None):
         """
         Retrieve a team member's workdiaries for given date or today
 
         Parameters:
+
           team_id       The Team ID
+
           username      The Team Member's username
-          date          A datetime object or a string in yyyymmdd
-                        format (optional)
+
+          date          (optional) A datetime object or a string in yyyymmdd
+                        format
+
+          tz            (optional) Time zone to use. Possible values:
+                          'mine' (default)
+                          'user'
+                          'gmt'
+
         """
         url = 'workdiaries/{0}/{1}'.format(team_id, username)
         if date:
@@ -94,25 +136,39 @@ class Team(Namespace):
         if 'error' in result:
             return result
 
-        snapshots = result.get('snapshots', {}).get('snapshot', [])
+        data = {}
+
+        if tz:
+            assert_parameter('tz', tz, self.TZ_CHOICES)
+            data['tz'] = tz
+
+        snapshots = result.get('snapshots', data).get('snapshot', [])
         if not isinstance(snapshots, list):
             snapshots = [snapshots]
         #not sure we need to return user
         return result['snapshots']['user'], snapshots
 
-    def get_teamrooms(self, target_version=1):
+
+class Team_V2(Namespace):
+
+    api_url = 'team/'
+    version = 2
+
+    ONLINE_CHOICES = ('now', 'last_24h', 'all')
+    DISABLED_CHOICES = ('yes', 'no')
+
+    def get_teamrooms(self):
         """
         Retrieve all teamrooms accessible to the authenticated user
 
         Parameters:
             target_version      Version of future requested API
+
         """
         url = 'teamrooms'
 
-        current_version = self.version
-        if target_version != current_version:
-            self.version = target_version
         result = self.get(url)
+
         if 'error' in result:
             return result
 
@@ -122,27 +178,42 @@ class Team(Namespace):
             teamrooms = []
         if not isinstance(teamrooms, list):
             teamrooms = [teamrooms]
-        if target_version != current_version:
-            self.version = current_version
+
         return teamrooms
 
-    def get_snapshots(self, team_id, online='now', target_version=1):
+    def get_snapshots(self, company_or_team_id, online=None, disabled=None):
         """
         Retrieve team member snapshots
 
         Parameters:
-          team_id           The Team ID
-          online            'now' / 'last_24h' / 'all' (default 'now')
-                            Filter for logged in users / users active in
-                            last 24 hours / all users
-          target_version    Version of future requested API
-        """
-        url = 'teamrooms/{0}'.format(team_id)
-        current_version = self.version
-        if target_version != current_version:
-            self.version = target_version
+          company_or_team_id   The Company ID or Team ID
 
-        result = self.get(url, {'online': online})
+          online               (optional) Filter user by work hours.
+                               Possible values are (default):
+                                 'now' (default)
+                                 'last_24h'
+                                 'all'
+
+          disabled             (optional) Whether disabled users
+                               need to be returned in response.
+                               Possible values are (default):
+                                 'no' (default)
+                                 'yes'
+
+        """
+        url = 'teamrooms/{0}'.format(company_or_team_id)
+
+        data = {}
+
+        if online:
+            assert_parameter('online', online, self.ONLINE_CHOICES)
+            data['online'] = online
+
+        if disabled:
+            assert_parameter('disabled', disabled, self.ONLINE_CHOICES)
+            data['disabled'] = disabled
+
+        result = self.get(url, data)
         if 'error' in result:
             return result
 
@@ -152,6 +223,5 @@ class Team(Namespace):
             snapshots = []
         if not isinstance(snapshots, list):
             snapshots = [snapshots]
-        if target_version != current_version:
-            self.version = current_version
+
         return snapshots

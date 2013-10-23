@@ -7,7 +7,7 @@ python-odesk version 0.5
 from decimal import Decimal
 
 
-from odesk import Client, get_version
+from odesk import Client
 from odesk import utils
 from odesk.exceptions import (HTTP400BadRequestError,
                               HTTP401UnauthorizedError,
@@ -18,7 +18,7 @@ from odesk.exceptions import (HTTP400BadRequestError,
 
 from odesk.namespaces import Namespace
 from odesk.oauth import OAuth
-from odesk.routers.team import Team
+from odesk.routers.team import Team, Team_V2
 from odesk.http import ODESK_ERROR_CODE, ODESK_ERROR_MESSAGE
 
 from nose.tools import eq_, ok_
@@ -343,18 +343,19 @@ def patched_urlopen_teamrooms(*args, **kwargs):
 @patch('urllib3.PoolManager.urlopen', patched_urlopen_teamrooms)
 def test_team():
     te = Team(get_client())
+    te_v2 = Team_V2(get_client())
 
     #test full_url
     full_url = te.full_url('test')
     assert full_url == 'https://www.odesk.com/api/team/v1/test', full_url
 
     #test get_teamrooms
-    assert te.get_teamrooms() == [teamrooms_dict['teamrooms']['teamroom']], \
-         te.get_teamrooms()
+    assert te_v2.get_teamrooms() == \
+        [teamrooms_dict['teamrooms']['teamroom']], te.get_teamrooms()
 
     #test get_snapshots
-    assert te.get_snapshots(1) == [teamrooms_dict['teamroom']['snapshot']], \
-         te.get_snapshots(1)
+    assert te_v2.get_snapshots(1) == \
+        [teamrooms_dict['teamroom']['snapshot']], te.get_snapshots(1)
 
     #test get_snapshot
     assert te.get_snapshot(1, 1) == teamrooms_dict['snapshot'], \
@@ -386,16 +387,17 @@ def patched_urlopen_teamrooms_none(*args, **kwargs):
 @patch('urllib3.PoolManager.urlopen', patched_urlopen_teamrooms_none)
 def test_teamrooms_none():
     te = Team(get_client())
+    te_v2 = Team_V2(get_client())
 
     #test full_url
     full_url = te.full_url('test')
     assert full_url == 'https://www.odesk.com/api/team/v1/test', full_url
 
     #test get_teamrooms
-    assert te.get_teamrooms() == [], te.get_teamrooms()
+    assert te_v2.get_teamrooms() == [], te_v2.get_teamrooms()
 
     #test get_snapshots
-    assert te.get_snapshots(1) == [], te.get_snapshots(1)
+    assert te_v2.get_snapshots(1) == [], te_v2.get_snapshots(1)
 
     #test get_snapshot
     eq_(te.get_snapshot(1, 1), teamrooms_dict_none['snapshot'])
@@ -608,7 +610,8 @@ def test_get_hrv2_jobs():
     #test get_jobs
     assert hr.get_jobs(1) == hr_dict[u'jobs'], hr.get_jobs()
     assert hr.get_job(1) == hr_dict[u'job'], hr.get_job(1)
-    result = hr.update_job(1, 2, 'title', 'desc', 'public', budget=100)
+    result = hr.update_job(1, 2, 'title', 'desc', 'public', budget=100,
+                           status='open')
     eq_(result, hr_dict)
     assert hr.delete_job(1, 41) == hr_dict, hr.delete_job(1, 41)
 
@@ -786,27 +789,6 @@ def test_provider():
     #test search_jobs
     assert pr.search_jobs(data={'a': 1}) == provider_dict['jobs'], \
         pr.get_jobs(data={'a': 1})
-
-    assert pr.get_skills(1) == provider_dict['skills'], \
-        pr.get_skills(1)
-
-    assert pr.add_skill(1, {'skill': 'skill'}) == provider_dict, \
-        pr.add_skill(1, {'skill': 'skill'})
-
-    assert pr.update_skill(1, 1, {'skill': 'skill'}) == provider_dict, \
-        pr.update_skill(1, 1, {'skill': 'skill'})
-
-    assert pr.delete_skill(1, 1) == provider_dict, \
-        pr.delete_skill(1, 1)
-
-    assert pr.get_quickinfo(1) == provider_dict['quick_info'], \
-        pr.get_quickinfo(1)
-
-    assert pr.update_quickinfo(1, {'quickinfo': 'quickinfo'}) == provider_dict, \
-        pr.update_quickinfo(1, {'quickinfo': 'quickinfo'})
-
-    result = pr.get_affiliates(1)
-    assert result == provider_dict['profile']
 
     result = pr.get_categories_metadata()
     assert result == provider_dict['categories']
