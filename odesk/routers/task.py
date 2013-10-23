@@ -444,7 +444,7 @@ class Task(Namespace):
 
         """
         url = 'tasks/companies/{0}/tasks/all_tasks'.format(company_id)
-        return self.delete(url, {'code': ''})
+        return self.delete(url)
 
     def delete_all_team_tasks(self, company_id, team_id):
         """
@@ -460,7 +460,7 @@ class Task(Namespace):
         """
         url = 'tasks/companies/{0}/teams/{1}/tasks/all_tasks'.format(
             company_id, team_id)
-        return self.delete(url, {'code': ''})
+        return self.delete(url)
 
     def delete_all_user_tasks(self, company_id, team_id, user_id):
         """
@@ -478,7 +478,7 @@ class Task(Namespace):
         """
         url = 'tasks/companies/{0}/teams/{1}/users/{2}/tasks/all_tasks'.format(
             company_id, team_id, user_id)
-        return self.delete(url, {'code': ''})
+        return self.delete(url)
 
     def update_batch_tasks(self, company_id, csv_data):
         """

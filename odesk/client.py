@@ -113,9 +113,6 @@ class Client(object):
     # The method that actually makes HTTP requests
     def urlopen(self, url, data=None, method='GET', headers=None):
 
-        if data is None:
-            data = {}
-
         if headers is None:
             headers = {}
 
@@ -131,6 +128,8 @@ class Client(object):
                 self.oauth_access_token_secret,
                 {}, method)  # don't need parameters in url
         else:
+            if data is None:
+                data = {}
             post_data = self.auth.get_oauth_params(
                 url, self.oauth_access_token,
                 self.oauth_access_token_secret,
@@ -147,7 +146,10 @@ class Client(object):
         elif method in ('PUT', 'DELETE'):
             url = '{0}?{1}'.format(url, post_data)
             headers['Content-Type'] = 'application/json'
-            data_json = json.dumps(data)
+            if data is not None:
+                data_json = json.dumps(data)
+            else:
+                data_json = ''
             return self.http.urlopen(
                 method, url, body=data_json, headers=headers)
 

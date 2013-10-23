@@ -106,9 +106,7 @@ class Team(Namespace):
         url = 'snapshots/{0}/{1}'.format(company_id, user_id)
         if datetime:
             url = '{0}/{1}'.format(url, datetime.isoformat())
-        # TODO: Need to pass parameters or get json error from oDesk
-        # 400: JSON_ERROR_NONE
-        return self.delete(url, {'memo': ''})
+        return self.delete(url)
 
     def get_workdiaries(self, team_id, username, date=None, tz=None):
         """
