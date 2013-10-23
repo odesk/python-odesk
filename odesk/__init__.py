@@ -4,7 +4,7 @@ python-odesk version 0.5
 (C) 2010-2013 oDesk
 """
 # Updated by the script
-VERSION = '0.5 beta 7'
+VERSION = '0.5 rc 1'
 
 
 def get_version():

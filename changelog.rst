@@ -7,8 +7,28 @@ Changelog
 
 .. _0.5:
 
-Version 0.5_alfa
+Version 0.5
 -----------------
+*October 2013*
+
+Backwards incompatibility changes:
+
+* Old key-based authorization is completely removed, now the only way
+  to authorize is oAuth 1.0
+* ``odesk.Client`` class doesn't support ``auth`` keyword argument any more,
+  as now there's only one way of doing authorization
+* ``examples/`` directory of the repository is updated with new examples for
+  web and desktop application
+
+Improvements:
+
+* Clean up API to be consistent with official oDesk API documentation
+* Now we use ``urllib3`` and all Http exceptions returned by API have
+  meaningful messages
+* Real PUT and DELETE json calls
+* Some parts of API are fixed with to work correctly. Please refer to the
+  method's docstring to see comprehensive description
+
 *Nov 2012*
 
 * Add Metadata Api
