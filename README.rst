@@ -38,7 +38,7 @@ SSL Certificates Note
 Unfortunately SSL certificates for oDesk are not included in the ``httplib==0.8``.
 
 Threrefore if you use Debian/Ubuntu/Archlinux,
-we recomend to install a package ``httplib2.ca_certs_locater``:
+we recomend to install a package ``httplib2.ca_certs_locater``::
 
     pip install httplib2.ca_certs_locater
 
@@ -54,7 +54,16 @@ https://github.com/kipanshi/odesk_meter/blob/master/lib/httplib2/cacerts.txt
 
 Quickstart
 ==========
-Look at the ``examples/`` folder to see examples how to
+First, you need to create API key for authorization here:
+https://www.odesk.com/services/api/keys
+
+Installing **Ipython** interactive shell is very useful for playing
+with the API, it has autocomplete, history, displays docstring help if you add '?'
+to the end of variable/function/class/method and many other nice things.
+So we greatly encourage you to install it: ``pip install ipython``
+
+To get started, look at the docs http://odesk.github.io/python-odesk/how_to.html
+and also look at the ``examples/`` folder to see examples how to
 obtain oauth access tokens for web application and desktop application.
 
 Also threre's a list of opensource projects using ``python-odesk``:

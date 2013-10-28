@@ -1,0 +1,12 @@
+# Python bindings to oDesk API
+# python-odesk version 0.5
+# (C) 2010-2013 oDesk
+"""Here we watch the ``PYTHON_ODESK_BASE_URL``
+variable and if it is defined, use it as ``BASE_URL``.
+
+"""
+
+import os
+
+BASE_URL = getattr(os.environ, 'PYTHON_ODESK_BASE_URL',
+                   'https://www.odesk.com')

@@ -1,8 +1,7 @@
-"""
-Python bindings to odesk API
-python-odesk version 0.5
-(C) 2010-2013 oDesk
-"""
+# Python bindings to oDesk API
+# python-odesk version 0.5
+# (C) 2010-2013 oDesk
+
 from odesk.namespaces import GdsNamespace
 
 
@@ -11,17 +10,20 @@ class TimeReport(GdsNamespace):
     version = 1
 
     def get_provider_report(self, provider_id, query, hours=False):
-        '''
-        Get caller's specific time report
-        The caller of this API must be the provider himself
+        """
+        Get caller's specific time report.
 
-        Parameters
-          provider_id   The provider_id of the caller
-          query         The GDS query string
-          hours         Limits the query to hour specific elements and
-                        hides all
-                        financial details (optional: defaults to False)
-        '''
+        The caller of this API must be the provider himself.
+
+        *Parameters:*
+          :provider_id:   The provider_id of the caller
+
+          :query:         The GDS query string
+
+          :hours:         (optional) Limits the query to hour specific elements
+                          and hides all financial details
+                          Default: ``False``
+        """
         url = 'providers/{0}'.format(provider_id)
         if hours:
             url = '{0}/hours'.format(url)
@@ -31,17 +33,21 @@ class TimeReport(GdsNamespace):
 
     def get_company_report(self, company_id, query, hours=False):
         """
-        Generate company wide time reports. All reporting fields available
-        except earnings related fields. In order to access this API the
-        authorized user needs either hiring or finance permissions to all
-        teams within the company
+        Generate company wide time reports.
 
-        Parameters
-          company_id    Company ID
-          query         The GDS query string
-          hours         Limits the query to hour specific
-                        elements and hides all
-                        financial details (optional: defaults to False)
+        All reporting fields available except earnings related fields.
+        In order to access this API the authorized user needs either hiring
+        or finance permissions to all teams within the company.
+
+        *Parameters:*
+          :company_id:    Company ID
+
+          :query:         The GDS query string
+
+          :hours:         (optional) Limits the query to hour specific elements
+                          and hides all financial details
+                          Default: ``False``
+
         """
         url = 'companies/{0}'.format(company_id)
         if hours:
@@ -54,12 +60,17 @@ class TimeReport(GdsNamespace):
         """
         Generate team specific time reports.
 
-        Parameters
-          company_id    The Company ID
-          team_id       The Team ID
-          query         The GDS query string
-          hours         Limits the query to hour specific elements and hides
-                        all financial details (optional: defaults to False)
+        *Parameters:*
+          :company_id:    The Company ID
+
+          :team_id:       The Team ID
+
+          :query:         The GDS query string
+
+          :hours:         (optional) Limits the query to hour specific elements
+                          and hides all financial details
+                          Default: ``False``
+
         """
         url = 'companies/{0}/teams/{1}'.format(company_id, team_id)
         if hours:
@@ -72,12 +83,17 @@ class TimeReport(GdsNamespace):
         """
         Generate agency specific time reports.
 
-        Parameters
-          company_id    The Company ID
-          agency_id     The Agency ID
-          query         The GDS query string
-          hours         Limits the query to hour specific elements and hides
-                        all financial details (optional: defaults to False)
+        *Parameters:*
+          :company_id:    The Company ID
+
+          :agency_id:     The Agency ID
+
+          :query:         The GDS query string
+
+          :hours:         (optional) Limits the query to hour specific elements
+                          and hides all financial details
+                          Default: ``False``
+
         """
         url = 'companies/{0}/agencies/{1}'.format(company_id, agency_id)
         if hours:

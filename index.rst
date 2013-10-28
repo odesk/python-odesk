@@ -5,18 +5,17 @@ Python bindings to oDesk API
 ******************************************
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 5
 
    getting_started.rst
-   full_list.rst
    how_to.rst
+   reference_docs.rst
    changelog.rst
    license.rst
-   roadmap.rst
 
 
 *********************
-Urls
+Useful Links
 *********************
 
 * Git repo: http://github.com/odesk/python-odesk

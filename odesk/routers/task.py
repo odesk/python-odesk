@@ -1,8 +1,7 @@
-"""
-Python bindings to odesk API
-python-odesk version 0.5
-(C) 2010-2013 oDesk
-"""
+# Python bindings to oDesk API
+# python-odesk version 0.5
+# (C) 2010-2013 oDesk
+
 import urllib
 
 
@@ -15,13 +14,14 @@ class Task(Namespace):
 
     def get_company_tasks(self, company_id):
         """
-        Retrieve a list of all tasks assigned within a company
-        The user authenticated must have been granted the appropriate
-        hiring manager permissions
+        Retrieve a list of all tasks assigned within a company.
 
-        Parameters
-          company_id    Company ID. Use the 'parent_team__id' value
-                        from ``hr.get_team()`` API call.
+        The user authenticated must have been granted the appropriate
+        hiring manager permissions.
+
+        *Parameters:*
+          :company_id:    Company ID. Use the ``parent_team__id`` value
+                          from ``hr.get_team()`` API call.
         """
         url = 'tasks/companies/{0}/tasks'.format(company_id)
         result = self.get(url)
@@ -32,16 +32,17 @@ class Task(Namespace):
 
     def get_team_tasks(self, company_id, team_id):
         """
-        Retrieve a list of all tasks assigned to a team
+        Retrieve a list of all tasks assigned to a team.
+
         The user authenticated must have been granted the appropriate
-        hiring manager permissions
+        hiring manager permissions.
 
-        Parameters
-          company_id    Company ID. Use the 'parent_team__id' value
-                        from ``hr.get_team()`` API call.
+        *Parameters:*
+          :company_id:    Company ID. Use the ``parent_team__id`` value
+                          from ``hr.get_team()`` API call.
 
-          team_id       Team ID. Use the 'id' value
-                        from ``hr.get_team()`` API call.
+          :team_id:       Team ID. Use the 'id' value
+                          from ``hr.get_team()`` API call.
 
         """
         url = 'tasks/companies/{0}/teams/{1}/tasks'.format(company_id,
@@ -54,18 +55,19 @@ class Task(Namespace):
 
     def get_user_tasks(self, company_id, team_id, user_id):
         """
-        Retrieve a list of all tasks assigned to a team member
+        Retrieve a list of all tasks assigned to a team member.
+
         The user authenticated must have been granted the appropriate
-        hiring manager permissions
+        hiring manager permissions.
 
-        Parameters
-          company_id    Company ID. Use the 'parent_team__id' value
-                        from ``hr.get_team()`` API call.
+        *Parameters:*
+          :company_id:    Company ID. Use the ``parent_team__id`` value
+                          from ``hr.get_team()`` API call.
 
-          team_id       Team ID. Use the 'id' value
-                        from ``hr.get_team()`` API call.
+          :team_id:       Team ID. Use the 'id' value
+                          from ``hr.get_team()`` API call.
 
-          user_id       User ID
+          :user_id:       User ID
 
         """
         url = 'tasks/companies/{0}/teams/{1}/users/{2}/tasks'.format(
@@ -78,14 +80,15 @@ class Task(Namespace):
 
     def get_company_tasks_full(self, company_id):
         """
-        Retrieve full list of all tasks assigned within a company (with detail
-        of level at which the task is assigned)
-        The user authenticated must have been granted the appropriate
-        hiring manager permissions
+        Retrieve full list of all tasks assigned within a company \
+        (with detail of level at which the task is assigned).
 
-        Parameters
-          company_id    Company ID. Use the 'parent_team__id' value
-                        from ``hr.get_team()`` API call.
+        The user authenticated must have been granted the appropriate
+        hiring manager permissions.
+
+        *Parameters:*
+          :company_id:    Company ID. Use the ``parent_team__id`` value
+                          from ``hr.get_team()`` API call.
 
         """
         url = 'tasks/companies/{0}/tasks/full_list'.format(company_id)
@@ -97,17 +100,18 @@ class Task(Namespace):
 
     def get_team_tasks_full(self, company_id, team_id):
         """
-        Retrieve a list of all tasks assigned to a team (with detail of level
-        at which the task is assigned)
+        Retrieve a list of all tasks assigned to a team \
+        (with detail of level at which the task is assigned).
+
         The user authenticated must have been granted the appropriate
-        hiring manager permissions
+        hiring manager permissions.
 
-        Parameters
-          company_id    Company ID. Use the 'parent_team__id' value
-                        from ``hr.get_team()`` API call.
+        *Parameters:*
+          :company_id:    Company ID. Use the ``parent_team__id`` value
+                          from ``hr.get_team()`` API call.
 
-          team_id       Team ID. Use the 'id' value
-                        from ``hr.get_team()`` API call.
+          :team_id:       Team ID. Use the 'id' value
+                          from ``hr.get_team()`` API call.
 
         """
         url = 'tasks/companies/{0}/teams/{1}/tasks/full_list'.format(
@@ -120,19 +124,20 @@ class Task(Namespace):
 
     def get_user_tasks_full(self, company_id, team_id, user_id):
         """
-        Retrieve a list of all tasks assigned to a team member (with detail of
-        level at which the task is assigned)
+        Retrieve a list of all tasks assigned to a team member \
+        (with detail of level at which the task is assigned).
+
         The user authenticated must have been granted the appropriate
-        hiring manager permissions
+        hiring manager permissions.
 
-        Parameters
-          company_id    Company ID. Use the 'parent_team__id' value
-                        from ``hr.get_team()`` API call.
+        *Parameters:*
+          :company_id:    Company ID. Use the ``parent_team__id`` value
+                          from ``hr.get_team()`` API call.
 
-          team_id       Team ID. Use the 'id' value
-                        from ``hr.get_team()`` API call.
+          :team_id:       Team ID. Use the 'id' value
+                          from ``hr.get_team()`` API call.
 
-          user_id       User ID
+          :user_id:       User ID
 
         """
         url = 'tasks/companies/{0}/teams/{1}/users/{2}/tasks/full_list'.format(
@@ -151,13 +156,13 @@ class Task(Namespace):
 
     def get_company_specific_tasks(self, company_id, task_codes):
         """
-        Return a specific task record within a company
+        Return a specific task record within a company.
 
-        Parameters
-          company_id    Company ID. Use the 'parent_team__id' value
-                        from ``hr.get_team()`` API call.
+        *Parameters:*
+          :company_id:    Company ID. Use the ``parent_team__id`` value
+                          from ``hr.get_team()`` API call.
 
-          task_codes    Task codes (must be a list, even of 1 item)
+          :task_codes:    Task codes (must be a list, even of 1 item)
 
         """
         task_codes = self._encode_task_codes(task_codes)
@@ -168,16 +173,16 @@ class Task(Namespace):
 
     def get_team_specific_tasks(self, company_id, team_id, task_codes):
         """
-        Return a specific task record within a team
+        Return a specific task record within a team.
 
-        Parameters
-          company_id    Company ID. Use the 'parent_team__id' value
-                        from ``hr.get_team()`` API call.
+        *Parameters:*
+          :company_id:    Company ID. Use the ``parent_team__id`` value
+                          from ``hr.get_team()`` API call.
 
-          team_id       Team ID. Use the 'id' value
-                        from ``hr.get_team()`` API call.
+          :team_id:       Team ID. Use the 'id' value
+                          from ``hr.get_team()`` API call.
 
-          task_codes    Task codes (must be a list, even of 1 item)
+          :task_codes:    Task codes (must be a list, even of 1 item)
 
         """
         task_codes = self._encode_task_codes(task_codes)
@@ -192,18 +197,18 @@ class Task(Namespace):
     def get_user_specific_tasks(self, company_id, team_id, user_id,
                                 task_codes):
         """
-        Return a specific task record for a team member
+        Return a specific task record for a team member.
 
-        Parameters
-          company_id    Company ID. Use the 'parent_team__id' value
-                        from ``hr.get_team()`` API call.
+        *Parameters:*
+          :company_id:    Company ID. Use the ``parent_team__id`` value
+                          from ``hr.get_team()`` API call.
 
-          team_id       Team ID. Use the 'id' value
-                        from ``hr.get_team()`` API call.
+          :team_id:       Team ID. Use the 'id' value
+                          from ``hr.get_team()`` API call.
 
-          user_id       User ID
+          :user_id:       User ID
 
-          task_codes    Task codes (must be a list, even of 1 item)
+          :task_codes:    Task codes (must be a list, even of 1 item)
 
         """
         task_codes = self._encode_task_codes(task_codes)
@@ -217,18 +222,19 @@ class Task(Namespace):
 
     def post_company_task(self, company_id, code, description, url):
         """
-        Create a company task
-        The authenticated user needs to have hiring manager privileges
+        Create a company task.
 
-        Parameters
-          company_id    Company ID. Use the 'parent_team__id' value
-                        from ``hr.get_team()`` API call.
+        The authenticated user needs to have hiring manager privileges.
 
-          code          Task code
+        *Parameters:*
+          :company_id:    Company ID. Use the ``parent_team__id`` value
+                          from ``hr.get_team()`` API call.
 
-          description   Task description
+          :code:          Task code
 
-          url           Task URL
+          :description:   Task description
+
+          :url:           Task URL
 
         """
         url = 'tasks/companies/{0}/tasks'.format(company_id)
@@ -240,21 +246,22 @@ class Task(Namespace):
 
     def post_team_task(self, company_id, team_id, code, description, url):
         """
-        Create a team task
+        Create a team task.
+
         The authenticated user needs to have hiring manager privileges
 
-        Parameters
-          company_id    Company ID. Use the 'parent_team__id' value
-                        from ``hr.get_team()`` API call.
+        *Parameters:*
+          :company_id:    Company ID. Use the ``parent_team__id`` value
+                          from ``hr.get_team()`` API call.
 
-          team_id       Team ID. Use the 'id' value
-                        from ``hr.get_team()`` API call.
+          :team_id:       Team ID. Use the 'id' value
+                          from ``hr.get_team()`` API call.
 
-          code          Task code
+          :code:          Task code
 
-          description   Task description
+          :description:   Task description
 
-          url           Task URL
+          :url:           Task URL
 
         """
         post_url = 'tasks/companies/{0}/teams/{1}/tasks'.format(
@@ -268,22 +275,22 @@ class Task(Namespace):
     def post_user_task(self, company_id, team_id, user_id, code, description,
                        url):
         """
-        Create a task assigned to self
+        Create a task assigned to self.
 
-        Parameters
-          company_id    Company ID. Use the 'parent_team__id' value
-                        from ``hr.get_team()`` API call.
+        *Parameters:*
+          :company_id:    Company ID. Use the ``parent_team__id`` value
+                          from ``hr.get_team()`` API call.
 
-          team_id       Team ID. Use the 'id' value
-                        from ``hr.get_team()`` API call.
+          :team_id:       Team ID. Use the 'id' value
+                          from ``hr.get_team()`` API call.
 
-          user_id       User ID
+          :user_id:       User ID
 
-          code          Task code
+          :code:          Task code
 
-          description   Task description
+          :description:   Task description
 
-          url           Task URL
+          :url:           Task URL
 
         """
         post_url = 'tasks/companies/{0}/teams/{1}/users/{2}/tasks'.format(
@@ -296,18 +303,19 @@ class Task(Namespace):
 
     def put_company_task(self, company_id, code, description, url):
         """
-        Update a company task
-        The authenticated user needs to have hiring manager privileges
+        Update a company task.
 
-        Parameters
-          company_id    Company ID. Use the 'parent_team__id' value
-                        from ``hr.get_team()`` API call.
+        The authenticated user needs to have hiring manager privileges.
 
-          code          Task code
+        *Parameters:*
+          :company_id:    Company ID. Use the ``parent_team__id`` value
+                          from ``hr.get_team()`` API call.
 
-          description   Task description
+          :code:          Task code
 
-          url           Task URL
+          :description:   Task description
+
+          :url:           Task URL
 
         """
         put_url = 'tasks/companies/{0}/tasks/{1}'.format(company_id, code)
@@ -319,22 +327,23 @@ class Task(Namespace):
 
     def put_team_task(self, company_id, team_id, code, description, url):
         """
-        Update a team task
-        The authenticated user needs to have hiring manager privileges
+        Update a team task.
 
-        Parameters
-          company_id    Company ID. Use the 'parent_team__id' value
-                        from ``hr.get_team()`` API call.
+        The authenticated user needs to have hiring manager privileges.
 
-          team_id       Team ID. Use the 'id' value
-                        from ``hr.get_team()`` API call.
+        *Parameters:*
+          :company_id:    Company ID. Use the ``parent_team__id`` value
+                          from ``hr.get_team()`` API call.
+
+          :team_id:       Team ID. Use the 'id' value
+                          from ``hr.get_team()`` API call.
 
 
-          code          Task code
+          :code:          Task code
 
-          description   Task description
+          :description:   Task description
 
-          url           Task URL
+          :url:           Task URL
 
         """
         put_url = 'tasks/companies/{0}/teams/{1}/tasks/{2}'.format(
@@ -348,22 +357,22 @@ class Task(Namespace):
     def put_user_task(self, company_id, team_id, user_id, code,
                       description, url):
         """
-        Update a task assigned to self
+        Update a task assigned to self.
 
-        Parameters
-          company_id    Company ID. Use the 'parent_team__id' value
-                        from ``hr.get_team()`` API call.
+        *Parameters:*
+          :company_id:    Company ID. Use the ``parent_team__id`` value
+                          from ``hr.get_team()`` API call.
 
-          team_id       Team ID. Use the 'id' value
-                        from ``hr.get_team()`` API call.
+          :team_id:       Team ID. Use the 'id' value
+                          from ``hr.get_team()`` API call.
 
-          user_id       User ID
+          :user_id:       User ID
 
-          code          Task code
+          :code:          Task code
 
-          description   Task description
+          :description:   Task description
 
-          url           Task URL
+          :url:           Task URL
 
         """
         put_url = 'tasks/companies/{0}/teams/{1}/users/{2}/tasks/{3}'.format(
@@ -376,13 +385,13 @@ class Task(Namespace):
 
     def delete_company_task(self, company_id, task_codes):
         """
-        Delete specific tasks within a company
+        Delete specific tasks within a company.
 
-        Parameters
-          company_id    Company ID. Use the 'parent_team__id' value
-                        from ``hr.get_team()`` API call.
+        *Parameters:*
+          :company_id:    Company ID. Use the ``parent_team__id`` value
+                          from ``hr.get_team()`` API call.
 
-          task_codes    Task codes (must be a list, even of 1 item)
+          :task_codes:    Task codes (must be a list, even of 1 item)
 
         """
         task_codes = self._encode_task_codes(task_codes)
@@ -393,16 +402,16 @@ class Task(Namespace):
 
     def delete_team_task(self, company_id, team_id, task_codes):
         """
-        Delete specific tasks within a team
+        Delete specific tasks within a team.
 
-        Parameters
-          company_id    Company ID. Use the 'parent_team__id' value
-                        from ``hr.get_team()`` API call.
+        *Parameters:*
+          :company_id:    Company ID. Use the ``parent_team__id`` value
+                          from ``hr.get_team()`` API call.
 
-          team_id       Team ID. Use the 'id' value
-                        from ``hr.get_team()`` API call.
+          :team_id:       Team ID. Use the 'id' value
+                          from ``hr.get_team()`` API call.
 
-          task_codes    Task codes (must be a list, even of 1 item)
+          :task_codes:    Task codes (must be a list, even of 1 item)
 
         """
         task_codes = self._encode_task_codes(task_codes)
@@ -413,18 +422,18 @@ class Task(Namespace):
 
     def delete_user_task(self, company_id, team_id, user_id, task_codes):
         """
-        Delete specific tasks assigned to a team member
+        Delete specific tasks assigned to a team member.
 
-        Parameters
-          company_id    Company ID. Use the 'parent_team__id' value
-                        from ``hr.get_team()`` API call.
+        *Parameters:*
+          :company_id:    Company ID. Use the ``parent_team__id`` value
+                          from ``hr.get_team()`` API call.
 
-          team_id       Team ID. Use the 'id' value
-                        from ``hr.get_team()`` API call.
+          :team_id:       Team ID. Use the 'id' value
+                          from ``hr.get_team()`` API call.
 
-          user_id       User ID
+          :user_id:       User ID
 
-          task_codes    Task codes (must be a list, even of 1 item)
+          :task_codes:    Task codes (must be a list, even of 1 item)
 
         """
         task_codes = self._encode_task_codes(task_codes)
@@ -436,11 +445,11 @@ class Task(Namespace):
 
     def delete_all_company_tasks(self, company_id):
         """
-        Delete all tasks within a company
+        Delete all tasks within a company.
 
-        Parameters
-          company_id    Company ID. Use the 'parent_team__id' value
-                        from ``hr.get_team()`` API call.
+        *Parameters:*
+          :company_id:    Company ID. Use the ``parent_team__id`` value
+                          from ``hr.get_team()`` API call.
 
         """
         url = 'tasks/companies/{0}/tasks/all_tasks'.format(company_id)
@@ -448,14 +457,14 @@ class Task(Namespace):
 
     def delete_all_team_tasks(self, company_id, team_id):
         """
-        Delete all tasks within a team
+        Delete all tasks within a team.
 
-        Parameters
-          company_id    Company ID. Use the 'parent_team__id' value
-                        from ``hr.get_team()`` API call.
+        *Parameters:*
+          :company_id:    Company ID. Use the ``parent_team__id`` value
+                          from ``hr.get_team()`` API call.
 
-          team_id       Team ID. Use the 'id' value
-                        from ``hr.get_team()`` API call.
+          :team_id:       Team ID. Use the 'id' value
+                          from ``hr.get_team()`` API call.
 
         """
         url = 'tasks/companies/{0}/teams/{1}/tasks/all_tasks'.format(
@@ -464,16 +473,16 @@ class Task(Namespace):
 
     def delete_all_user_tasks(self, company_id, team_id, user_id):
         """
-        Delete all tasks assigned to a team member
+        Delete all tasks assigned to a team member.
 
-        Parameters
-          company_id    Company ID. Use the 'parent_team__id' value
-                        from ``hr.get_team()`` API call.
+        *Parameters:*
+          :company_id:    Company ID. Use the ``parent_team__id`` value
+                          from ``hr.get_team()`` API call.
 
-          team_id       Team ID. Use the 'id' value
-                        from ``hr.get_team()`` API call.
+          :team_id:       Team ID. Use the 'id' value
+                          from ``hr.get_team()`` API call.
 
-          user_id       User ID
+          :user_id:       User ID
 
         """
         url = 'tasks/companies/{0}/teams/{1}/users/{2}/tasks/all_tasks'.format(
@@ -483,14 +492,15 @@ class Task(Namespace):
     def update_batch_tasks(self, company_id, csv_data):
         """
         Batch update tasks using csv file contents.
+
         This process actually deletes the corresponding tasks and replaces
-        them with the newly specified details
+        them with the newly specified details.
 
-        Parameters
-          company_id Company ID. Use the 'parent_team__id' value
-                     from ``hr.get_team()`` API call.
+        *Parameters:*
+          :company_id:  Company ID. Use the ``parent_team__id`` value
+                        from ``hr.get_team()`` API call.
 
-          csv_data   Task records in csv format but with "<br>"
+          :csv_data: Task records in csv format but with "<br>"
                      as line separator -
                      "companyid","teamid","userid","taskid","description","url"
                      Example:

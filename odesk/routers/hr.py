@@ -1,8 +1,7 @@
-"""
-Python bindings to odesk API
-python-odesk version 0.5
-(C) 2010-2013 oDesk
-"""
+# Python bindings to oDesk API
+# python-odesk version 0.5
+# (C) 2010-2013 oDesk
+
 from odesk.namespaces import Namespace
 from odesk.utils import assert_parameter, ApiValueError
 
@@ -19,16 +18,16 @@ class HR_V1(Namespace):
         """
         Invite to an interview.
 
-        Parameters:
-          job_id               Job reference ID
+        *Parameters:*
+          :job_id:               Job reference ID
 
-          cover                Text of the cover letter
+          :cover:                Text of the cover letter
 
-          profile_key          (optional) Unique contractor's key,
-                               e.g. ~~677961dcd7f65c01
+          :profile_key:          (optional) Unique contractor's key,
+                                 e.g. ~~677961dcd7f65c01
 
-          provider_reference   (optional) Developer's unique reference ID,
-                               e.g. 12345. Use it if no profile_key available
+          :provider_reference:   (optional) Developer's unique reference ID,
+                                 e.g. 12345. Use it if no profile_key available
 
         Either one of the parameters ``profile_key`` or ``provider_reference``
         should be provided, otherwise error will be raised.
@@ -77,7 +76,7 @@ class HR(Namespace):
 
     def get_user_roles(self):
         """
-        Retreive UserRoles object.
+        Retrieve UserRoles object.
 
         This is a **very important and useful API call**,
         it returns a complete list of privileges the currently
@@ -93,10 +92,11 @@ class HR(Namespace):
 
     def get_user(self, user_reference):
         """
-        Retrieve the user object from the user reference
+        Retrieve the user object from the user reference.
 
-        Parameters:
-          user_reference    The user reference
+        *Parameters:*
+          :user_reference:    The user reference
+
         """
         url = 'users/{0}'.format(user_reference)
         result = self.get(url)
@@ -115,8 +115,9 @@ class HR(Namespace):
 
     def get_companies(self):
         """
-        Retrieves the list of companies to which the current authorized user
-        has access
+        Retrieve the list of companies to which the current authorized user \
+        has access.
+
         """
         url = 'companies'
         result = self.get(url)
@@ -124,11 +125,12 @@ class HR(Namespace):
 
     def get_company(self, company_referece):
         """
-        Retrieve the company object from the company reference
+        Retrieve the company object from the company reference.
 
-        Parameters:
-          company_reference     The company reference (can be found using
-            get_companies method)
+        *Parameters:*
+          :company_reference:     The company reference (can be found using
+                                  get_companies method)
+
         """
         url = 'companies/{0}'.format(company_referece)
         result = self.get(url)
@@ -136,12 +138,14 @@ class HR(Namespace):
 
     def get_company_teams(self, company_referece):
         """
-        Retrieve a list of teams within the company being referenced
-        (as long as the user has access to the referenced company)
+        Retrieve a list of teams within the company being referenced.
 
-        Parameters
-          company_reference     The company reference (can be found using
-            get_companies method)
+        User has to have access to the referenced company.
+
+        *Parameters:*
+          :company_reference:     The company reference (can be found using
+                                  get_companies method)
+
         """
         url = 'companies/{0}/teams'.format(company_referece)
         result = self.get(url)
@@ -150,12 +154,15 @@ class HR(Namespace):
     def get_company_users(self, company_referece, active=True):
         """
         Retrieve a list of all users within the referenced company.
-        (only available for users with hiring privileges for the company)
 
-        Parameters
-          company_reference     The company reference (can be found using
-            get_companies method)
-          active                True/False (default True)
+        Only available for users with hiring privileges for the company.
+
+        *Parameters:*
+          :company_reference:     The company reference (can be found using
+                                  get_companies method)
+
+          :active:                ``True``/``False`` (default ``True``)
+
         """
         url = 'companies/{0}/users'.format(company_referece)
         if active:
@@ -171,10 +178,10 @@ class HR(Namespace):
         """
         Get list of bonuses for given engagement.
 
-        Parameters
-          team_reference        The Team reference ID
+        *Parameters:*
+          :team_reference:        The Team reference ID
 
-          engagement_reference  (optional) The Engagement reference ID
+          :engagement_reference:  (optional) The Engagement reference ID
 
         """
         url = 'teams/{0}/adjustments'.format(team_reference)
@@ -190,26 +197,27 @@ class HR(Namespace):
                              comments, amount=None, charge_amount=None,
                              notes=None):
         """
-        Add bonus to an engagement
+        Add bonus to an engagement.
 
-        Parameters
-          team_reference        The Team reference ID
+        *Parameters:*
+          :team_reference:        The Team reference ID
 
-          engagement_reference  The Engagement reference ID
+          :engagement_reference:  The Engagement reference ID
 
-          comments              Comments about this adjustment, e.g.
-                                "Bonus for a good job"
+          :comments:              Comments about this adjustment, e.g.
+                                 "Bonus for a good job"
 
-          amount                (conditionally optional) The amount that
-                                the provider should receive, e.g. 100
+          :amount:                (conditionally optional) The amount that
+                                  the provider should receive, e.g. 100
 
-          charge_amount         (conditionally optional) The amount that
-                                will be charged to the employer, e.g. 110
+          :charge_amount:         (conditionally optional) The amount that
+                                  will be charged to the employer, e.g. 110
 
-          notes                 (optional) Notes
+          :notes:                 (optional) Notes
 
-        NOTE: you should use either "amount" parameter or "charge_amount",
-        but not both. Make sure that at least one of them is present.
+        .. note:: You should use either ``amount`` parameter or \
+        ``charge_amount``, but not both. Make sure that at least \
+        one of them is present.
 
         """
         url = 'teams/{0}/adjustments'.format(team_reference)
@@ -237,9 +245,11 @@ class HR(Namespace):
 
     def get_teams(self):
         """
-        Retrieve a list of all the teams that a user has acccess to.
-        (this will return teams across all companies to which the current
-            user has access)
+        Retrieve a list of all the teams that a user has access to.
+
+        This will return teams across all companies the current
+        user has access to.
+
         """
         url = 'teams'
         result = self.get(url)
@@ -247,12 +257,14 @@ class HR(Namespace):
 
     def get_team(self, team_reference, include_users=False):
         """
-        Retrieve the team information
+        Retrieve the team information.
 
-        Parameters
-          team_reference    The team reference
-          include_users     Whether to include details of users
-                            (default: False)
+        *Parameters:*
+          :team_reference:    The team reference
+
+          :include_users:     Whether to include details of users
+                              (default: False)
+
         """
         url = 'teams/{0}'.format(team_reference)
         result = self.get(url, {'include_users': include_users})
@@ -261,7 +273,15 @@ class HR(Namespace):
 
     def get_team_users(self, team_reference, active=True):
         """
-        get_team_users(team_reference, active=True)
+        Retrieve users of the team.
+
+        *Parameters:*
+          :team_reference:    The team reference
+
+          :active:     Status of the users, If ``True`` - return
+                       active users, if ``False`` - return inactive users.
+                       Default value is ``True``.
+
         """
         url = 'teams/{0}/users'.format(team_reference)
         if active:
@@ -279,28 +299,30 @@ class HR(Namespace):
                  created_time_to=None, page_offset=0, page_size=20,
                  order_by=None):
         """
-        Retrieves all jobs that a user has manage_recruiting accesss to.
-        This API call can be used to find the reference ID of a specific jobi
+        Retrieves all jobs that a user has manage_recruiting access to.
+        This API call can be used to find the reference ID of a specific job.
 
-        Parameters
-          buyer_team_reference  The buyer's team reference ID
+        *Parameters:*
+          :buyer_team_reference:  The buyer's team reference ID
 
-          include_sub_teams     (optional) <1|0> Whether to include sub-teams
+          :include_sub_teams:     (optional) <1|0> Whether to include sub-teams
 
-          status                (optional) Status of a job
+          :status:                (optional) Status of a job
 
-          created_by            (optional) Creator's user_id
+          :created_by:            (optional) Creator's user_id
 
-          created_time_from     (optional) timestamp, e.g. 2009-01-20T00:00:01
+          :created_time_from:     (optional) timestamp, \
+                                  e.g. 2009-01-20T00:00:01
 
-          created_time_to       (optional) timestamp, e.g. 2009-02-20T11:59:59
+          :created_time_to:       (optional) timestamp, \
+                                  e.g. 2009-02-20T11:59:59
 
-          page_offset           (optional) Number of entries to skip
+          :page_offset:           (optional) Number of entries to skip
 
-          page_size             (optional: default 20) Page size in number
-                                of entries
+          :page_size:             (optional: default 20) Page size in number
+                                  of entries
 
-          order_by              (optional)
+          :order_by:              (optional)
 
         """
         url = 'jobs'
@@ -336,11 +358,11 @@ class HR(Namespace):
         """
         Retrieve the complete job object for the referenced job.
         This is only available to users with manage_recruiting
-        permissions
-        within the team that the job is posted in.
+        permissions within the team that the job is posted in.
 
-        Parameters
-          job_reference     Job reference
+        *Parameters:*
+          :job_reference:     Job reference
+
         """
         url = 'jobs/{0}'.format(job_reference)
         result = self.get(url)
@@ -352,18 +374,20 @@ class HR(Namespace):
         """
         Post a job.
 
-        Parameters
-          buyer_team_reference     Reference ID of the buyer team that is
+        *Parameters:*
+          :buyer_team_reference:   Reference ID of the buyer team that is
                                    posting the job, e.g. 34567
 
-          title                    Title of the Job
+          :title:                  Title of the Job
 
-          job_type                 Type of posted job, e.g. "hourly"
-                                   Possible values are: "hourly", "fixed-price"
+          :job_type:               Type of posted job, e.g. "hourly"
+                                   Possible values are:
+                                     * 'hourly'
+                                     * 'fixed-price'
 
-          description              The job's description
+          :description:            The job's description
 
-          visibility               The job's visibility, e.g. 'private'.
+          :visibility:             The job's visibility, e.g. 'private'.
                                    Possible values are:
                                      - 'public' jobs are available to all
                                        users who search jobs
@@ -377,31 +401,31 @@ class HR(Namespace):
                                        where the buyer wants to control
                                        the potential applicants
 
-          category                 The category of job, e.g. 'Web Development'
+          :category:               The category of job, e.g. 'Web Development'
                                    (where to get? - see Metadata API)
 
-          subcategory              The subcategory of job, e.g.
+          :subcategory:            The subcategory of job, e.g.
                                    'Web Programming'
                                    (where to get? - see Metadata API)
 
-          budget                   (conditionally optional) The budget of the
+          :budget:                 (conditionally optional) The budget of the
                                    Job, e.g. 100. Is used for 'fixed-price'
                                    jobs only.
 
-          duration                 (conditionally optional) The duration of the
+          :duration:               (conditionally optional) The duration of the
                                    job in hours, e.g. 90. Used for
                                    'hourly-jobs' only.
 
-          start_date               (optional) The start date of the Job,
+          :start_date:             (optional) The start date of the Job,
                                    e.g. 06-15-2011. If start_date is not
                                    included the job will default to
                                    starting immediately.
 
-          end_date                 (optional) The end date of the Job,
+          :end_date:               (optional) The end date of the Job,
                                    e.g. 06-30-2011. Only needed if
                                    job type is 'fixed-price'
 
-          skills                   (optional) Skills required for the job.
+          :skills:                 (optional) Skills required for the job.
                                    Must be a list or tuple even of one item,
                                    e.g. ``['python']``
 
@@ -445,19 +469,19 @@ class HR(Namespace):
                    visibility, category=None, subcategory=None, budget=None,
                    duration=None, start_date=None, end_date=None, status=None):
         """
-        Update a job
+        Update a job.
 
-        Parameters
-          job_id                   Job reference ID
+        *Parameters:*
+          :job_id:                 Job reference ID
 
-          buyer_team_reference     Reference ID of the buyer team that is
+          :buyer_team_reference:   Reference ID of the buyer team that is
                                    posting the job, e.g. 34567
 
-          title                    Title of the Job
+          :title:                  Title of the Job
 
-          description              The job's description
+          :description:            The job's description
 
-          visibility               The job's visibility, e.g. 'private'.
+          :visibility:             The job's visibility, e.g. 'private'.
                                    Possible values are:
                                      - 'public' jobs are available to all
                                        users who search jobs
@@ -471,32 +495,32 @@ class HR(Namespace):
                                        where the buyer wants to control
                                        the potential applicants
 
-          category                 (optional) The category of job, e.g.
+          :category:               (optional) The category of job, e.g.
                                    'Web Development'
                                    (where to get? - see Metadata API)
 
-          subcategory              (optional) The subcategory of job, e.g.
+          :subcategory:            (optional) The subcategory of job, e.g.
                                    'Web Programming'
                                    (where to get? - see Metadata API)
 
-          budget                   (conditionally optional) The budget of the
+          :budget:                 (conditionally optional) The budget of the
                                    Job, e.g. 100. Is used for 'fixed-price'
                                    jobs only.
 
-          duration                 (conditionally optional) The duration of the
+          :duration:               (conditionally optional) The duration of the
                                    job in hours, e.g. 90. Used for
                                    'hourly-jobs' only.
 
-          start_date               (optional) The start date of the Job,
+          :start_date:             (optional) The start date of the Job,
                                    e.g. 06-15-2011. If start_date is not
                                    included the job will default to
                                    starting immediately.
 
-          end_date                 (optional) The end date of the Job,
+          :end_date:               (optional) The end date of the Job,
                                    e.g. 06-30-2011. Only needed if
                                    job type is 'fixed-price'
 
-          status                   (required) The status of the job,
+          :status:                 (required) The status of the job,
                                    e.g. 'filled'.
                                    Possible values are:
                                    - 'open'
@@ -540,11 +564,13 @@ class HR(Namespace):
 
     def delete_job(self, job_id, reason_code):
         """
-        Delete a job
+        Delete a job.
 
-        Parameters
-          job_id        Job reference ID
-          readon_code   The reason code
+        *Parameters:*
+          :job_id:        Job reference ID
+
+          :reason_code:   The reason code
+
         """
         url = 'jobs/{0}'.format(job_id)
         return self.delete(url, {'reason_code': reason_code})
@@ -557,36 +583,38 @@ class HR(Namespace):
                    created_time_from=None, created_time_to=None,
                    page_offset=0, page_size=20, order_by=None):
         """
-        Retrieve a list of all the offers on a specific job or within
-                a specific team
+        Retrieve a list of all the offers on a specific job or within \
+        a specific team.
 
-        Parameters
-          buyer_team_reference  The buyer's team reference ID
+        *Parameters:*
+          :buyer_team_reference:  The buyer's team reference ID
 
-          include_sub_teams     (optional) <1|0> Whether to include sub teams
+          :include_sub_teams:     (optional) <1|0> Whether to include sub teams
 
-          provider_ref          (optional) The provider's reference ID
+          :provider_ref:          (optional) The provider's reference ID
 
-          profile_key           (optional) Unique profile key, used if
+          :profile_key:           (optional) Unique profile key, used if
                                 ``provider_reference`` is absent
 
-          job_ref               (optional) The Job's reference ID
+          :job_ref:               (optional) The Job's reference ID
 
-          agency_ref            (optional) The Agency's reference ID
+          :agency_ref:            (optional) The Agency's reference ID
 
-          status                (optional) Engagement status,
-                                e.g., status=active;closed
+          :status:                (optional) Engagement status,
+                                  e.g., status=active;closed
 
-          created_time_from     (optional) timestamp e.g.'2008-09-09 00:00:01'
+          :created_time_from:     (optional) timestamp \
+                                  e.g.'2008-09-09 00:00:01'
 
-          created_time_to       (optional) timestamp e.g.'2008-09-09 00:00:01'
+          :created_time_to:       (optional) timestamp \
+                                  e.g.'2008-09-09 00:00:01'
 
-          page_offset           (optional) Number of entries to skip
+          :page_offset:           (optional) Number of entries to skip
 
-          page_size             (optional: default 20) Page size in number
-                                of entries
+          :page_size:             (optional: default 20) Page size in number
+                                  of entries
 
-          order_by              (optional) Sorting
+          :order_by:              (optional) Sorting
 
         """
         url = 'offers'
@@ -627,10 +655,11 @@ class HR(Namespace):
 
     def get_offer(self, offer_reference):
         """
-        Retrieve the referenced offer
+        Retrieve the referenced offer.
 
-        Parameters
-          offer_reference   Offer reference ID
+        *Parameters:*
+          :offer_reference:   Offer reference ID
+
         """
         url = 'offers/{0}'.format(offer_reference)
         result = self.get(url)
@@ -647,54 +676,54 @@ class HR(Namespace):
                    weekly_hours_limit=None, start_date=None, keep_open=None):
         """Make an offer to the provider.
 
-        Parameters
-          job_reference                    The Job's reference ID
+        *Parameters:*
+          :job_reference:                  The Job's reference ID
 
-          provider_team_reference          (optional) The reference ID
+          :provider_team_reference:        (optional) The reference ID
                                            of the provider team. If specified,
                                            the check is performed whether user
                                            you're making offer to belongs
                                            to the team
 
-          provider_reference               (conditionally optional)
+          :provider_reference:             (conditionally optional)
                                            The provider's reference. Has
                                            the override priority over
                                            ``profile_key`` if both specified.
 
-          profile_key                      (conditionally optional)
+          :profile_key:                    (conditionally optional)
                                            Unique profile key,
                                            used if ``provider_reference``
                                            is absent
 
-          message_from_buyer               (optional) Text message
+          :message_from_buyer:             (optional) Text message
 
-          engagement_title                 (optional) The engagement title
+          :engagement_title:               (optional) The engagement title
 
-          attached_doc                     (optional) Attachment
+          :attached_doc:                   (optional) Attachment
 
-          fixed_charge_amount_agreed       (optional) The amount of agreed
+          :fixed_charge_amount_agreed:     (optional) The amount of agreed
                                            charge, required by fixed-price job
 
-          fixed_pay_amount_agreed          (optional) The amount of agreed pay
+          :fixed_pay_amount_agreed:        (optional) The amount of agreed pay
 
-          fixed_price_upfront_payment      (optional) The amount of upfront
+          :fixed_price_upfront_payment:    (optional) The amount of upfront
                                            payment
 
-          hourly_pay_rate                  (optional) Hourly pay rate
+          :hourly_pay_rate:                (optional) Hourly pay rate
 
-          weekly_salary_charge_amount      (optional) Salary charge amount
+          :weekly_salary_charge_amount:    (optional) Salary charge amount
                                            per week
 
-          weekly_salary_pay_amount         (optional) Salary pay amount per
+          :weekly_salary_pay_amount:       (optional) Salary pay amount per
                                            week, required by fixed-price job
 
-          weekly_stipend_hours             (optional) Stipend hours per week
+          :weekly_stipend_hours:           (optional) Stipend hours per week
 
-          weekly_hours_limit               (optional) Limit of hours per week
+          :weekly_hours_limit:             (optional) Limit of hours per week
 
-          start_date                       (optional) The offer start date
+          :start_date:                     (optional) The offer start date
 
-          keep_open                        (optional, default: 'no')
+          :keep_open:                      (optional, default: 'no')
                                            Leave the job opened.
                                            Possible values are: 'yes', 'no'
 
@@ -779,51 +808,53 @@ class HR(Namespace):
                         created_time_from=None, created_time_to=None,
                         page_offset=0, page_size=20, order_by=None):
         """
-        Retrieve engagements
+        Retrieve engagements.
 
-        Parameters
-          buyer_team_reference  (optional) The team reference ID
+        *Parameters:*
+          :buyer_team_reference:  (optional) The team reference ID
 
-          include_sub_teams     (optional) <0|1> - whether to include info
-                                about sub-teams
+          :include_sub_teams:     (optional) <0|1> - whether to include info
+                                  about sub-teams
 
-          provider_reference    (conditionally optional)
-                                The provider's reference ID.
-                                Has the override priority over ``profile_key``
-                                if both specified.
+          :provider_reference:    (conditionally optional)
+                                  The provider's reference ID.
+                                  Has the override priority over the
+                                  ``profile_key`` if both specified.
 
-          profile_key           (conditionally optional) Unique profile key,
-                                used if ``provider_reference`` is absent
+          :profile_key:           (conditionally optional) Unique profile key,
+                                  used if ``provider_reference`` is absent
 
-          job_reference         (optional) The Job's reference ID
+          :job_reference:         (optional) The Job's reference ID
 
-          agency_team_reference (optional) The Agency's reference ID
+          :agency_team_reference: (optional) The Agency's reference ID
 
-          status                (optional) Engagement status, e.g.
-                                status=active;closed
+          :status:                (optional) Engagement status, e.g.
+                                  ``status=active;closed``
 
-          created_time_from     (optional) timestamp e.g.'2008-09-09 00:00:01'
+          :created_time_from:     (optional) timestamp \
+                                  e.g.'2008-09-09 00:00:01'
 
-          created_time_to       (optional) timestamp e.g.'2008-09-09 00:00:01'
+          :created_time_to:       (optional) timestamp \
+                                  e.g.'2008-09-09 00:00:01'
 
-          page_offset           (optional) Number of entries to skip
+          :page_offset:           (optional) Number of entries to skip
 
-          page_size             (optional: default 20) Page size
-                                in number of entries
+          :page_size:             (optional: default 20) Page size
+                                  in number of entries
 
-          order_by              (optional) Sorting, in format
-                                $field_name1;$field_name2;..$field_nameN;AD...A,
-                                where A means asc, D means desc,
-                                available fields are:
-                                    'reference',
-                                    'created_time',
-                                    'offer__reference',
-                                    'job__reference',
-                                    'buyer_team__reference',
-                                    'provider__reference',
-                                    'status',
-                                    'engagement_start_date',
-                                    'engagement_end_date'
+          :order_by:           (optional) Sorting, in format
+                               $field_name1;$field_name2;..$field_nameN;AD...A,
+                               where A means "Ascending", D means "Descending",
+                               available fields are:
+                                    * 'reference',
+                                    * 'created_time',
+                                    * 'offer__reference',
+                                    * 'job__reference',
+                                    * 'buyer_team__reference',
+                                    * 'provider__reference',
+                                    * 'status',
+                                    * 'engagement_start_date',
+                                    * 'engagement_end_date'
         """
         url = 'engagements'
 
@@ -870,8 +901,8 @@ class HR(Namespace):
         """
         Retrieve referenced engagement object.
 
-        Parameters
-          engagement_reference    Engagement reference ID
+        *Parameters:*
+          :engagement_reference:    Engagement reference ID
 
         """
         url = 'engagements/{0}'.format(engagement_reference)
@@ -885,10 +916,10 @@ class HR(Namespace):
         """
         Close the referenced contract.
 
-        Parameters
-          contract_reference    The Contract's reference ID
+        *Parameters:*
+          :contract_reference:  The Contract's reference ID
 
-          reason                The reason key, e.g.
+          :reason:              The reason key, e.g.
                                 'API_REAS_HIRED_DIFFERENT'.
                                 Possible values are:
                                  - 'API_REAS_MISREPRESENTED_SKILLS' -
@@ -904,54 +935,58 @@ class HR(Namespace):
                                  - 'API_REAS_UNPROFESSIONAL_CONDUCT' -
                                     "Unprofessional conduct"
 
-          would_hire_again       Whether you would hire a contractor again.
+          :would_hire_again:     Whether you would hire a contractor again.
                                  Required if total charge on the contract
                                  is $0.
                                  Possible values are: ['yes', 'no']
 
-          fb_scores              (optional) Estimate, could be an array of
+          :fb_scores:            (optional) Estimate, could be an array of
                                  scores, where id is reference to
                                  score description.
                                  The feedback scores are optional, but if
                                  present they must be complete: all scores.
-                                 Possible values are:
-                                   (Feedback on contractor)
-                                     3 - "Skills / competency and skills
+                                 Below are the possible score reference id
+                                 values.
+
+                                 Feedback on contractor:
+
+                                     * ``3`` - "Skills / competency and skills
                                          for the job, understanding of
                                          specifications/instructions"
-                                     4 - "Quality / quality of work
-                                         deliverables"
-                                     5 - "Availability / online presence on a
-                                         consistent schedule"
-                                     6 - "Deadlines / ability to complete tasks
-                                         on time"
-                                     7 - "Communication / communication skills,
-                                         frequent progress updates,
-                                         responsiveness"
-                                     8 - "Cooperation / cooperation and
+                                     * ``4`` - "Quality / quality of work
+                                         deliveries"
+                                     * ``5`` - "Availability / online presence
+                                                on a consistent schedule"
+                                     * ``6`` - "Deadlines / ability to complete
+                                                tasks on time"
+                                     * ``7`` - "Communication / communication
+                                                skills, frequent
+                                                progress updates,
+                                                responsiveness"
+                                     * ``8`` - "Cooperation / cooperation and
                                          flexibility, suggestions for
                                          improvement"
 
-                                   (Feedback on employer)
-                                     9 - "Skills / competency and skills
+                                 Feedback on employer:
+                                    * ``9`` - "Skills / competency and skills
                                          for the job, understanding of task
                                          complexities"
-                                    10 - "Quality / quality of
+                                    * ``10`` - "Quality / quality of
                                          specifications/instructions"
-                                    11 - "Availability / online presence
+                                    * ``11`` - "Availability / online presence
                                          on a consistent schedule"
-                                    12 - "Deadlines / understanding of
+                                    * ``12`` - "Deadlines / understanding of
                                          complexities and trade-offs"
-                                    13 - "Communication / communication skills
-                                         and responsiveness, feedback and
-                                         guidance"
-                                    14 - "Cooperation / cooperation and
+                                    * ``13`` - "Communication / communication
+                                         skills and responsiveness, feedback
+                                         and guidance"
+                                    * ``14`` - "Cooperation / cooperation and
                                          flexibility, open to suggestions
                                          for improvement"
 
-          fb_comment             (optional) Feedback comment, some string
+          :fb_comment:           (optional) Feedback comment, some string
                                  message. It is optional but if present, then
-                                 the scores are required.
+                                 the ``fb_scores`` parameter is also required.
 
         """
         url = 'contracts/{0}'.format(contract_reference)

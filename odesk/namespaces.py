@@ -1,19 +1,21 @@
-"""
-Python bindings to odesk API
-python-odesk version 0.5
-(C) 2010-2013 oDesk
-"""
-
+# Python bindings to oDesk API
+# python-odesk version 0.5
+# (C) 2010-2013 oDesk
+import os
+from .config import BASE_URL
 
 __all__ = ['Namespace', 'GdsNamespace']
 
 
 class Namespace(object):
     """
-    A special 'proxy' class to keep API methods organized
+    A special 'proxy' class to keep API methods organized.
+
+    Use this class for defining new routers.
+
     """
 
-    base_url = 'https://www.odesk.com/api/'
+    base_url = os.path.join(BASE_URL, 'api/')
     api_url = None
     version = 1
 
@@ -42,8 +44,8 @@ class Namespace(object):
 
 
 class GdsNamespace(Namespace):
-    """Gds only allows GET requests."""
-    base_url = 'https://www.odesk.com/gds/'
+    """Gds API only allows GET requests."""
+    base_url = os.path.join(BASE_URL, 'gds/')
 
     def post(self, url, data=None):
         return None

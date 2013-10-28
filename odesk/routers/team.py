@@ -1,8 +1,7 @@
-"""
-Python bindings to odesk API
-python-odesk version 0.5
-(C) 2010-2013 oDesk
-"""
+# Python bindings to oDesk API
+# python-odesk version 0.5
+# (C) 2010-2013 oDesk
+
 from odesk.namespaces import Namespace
 from odesk.utils import assert_parameter
 
@@ -16,17 +15,17 @@ class Team(Namespace):
 
     def get_snapshot(self, company_id, user_id, datetime=None):
         """
-        Retrieve a company's user snapshots during given time or 'now'
+        Retrieve a company's user snapshots during given time or 'now'.
 
-        Parameters:
-          company_id    The Company ID
+        *Parameters:*
+          :company_id:  The Company ID
 
-          user_id       The User ID
+          :user_id:     The User ID
 
-          datetime      (optional)(default: 'now')
+          :datetime:    (optional)(default: 'now')
                         Timestamp either a datetime object
                         or a string in ISO 8601 format (in UTC)
-                        yyyymmddTHHMMSSZ
+                        ``yyyymmddTHHMMSSZ``
                         or a string with UNIX timestamp (number of
                         seconds after epoch)
 
@@ -46,19 +45,19 @@ class Team(Namespace):
 
     def update_snapshot(self, company_id, user_id, memo, datetime=None):
         """
-        Update a company's user snapshot memo at given time or 'now'
+        Update a company's user snapshot memo at given time or 'now'.
 
-        Parameters:
-          company_id    The Company ID
+        *Parameters:*
+          :company_id:  The Company ID
 
-          user_id       The User ID
+          :user_id:     The User ID
 
-          memo          The Memo text
+          :memo:        The Memo text
 
-          datetime      (optoinal)(default 'now')
+          :datetime:    (optoinal)(default 'now')
                         Timestamp either a datetime object
                         or a string in ISO 8601 format (in UTC)
-                        yyyymmddTHHMMSSZ
+                        ``yyyymmddTHHMMSSZ``
                         or a string with UNIX timestamp (number of
                         seconds after epoch)
 
@@ -66,10 +65,10 @@ class Team(Namespace):
                         as a range or as a list of values:
 
                           - range: use the comma character (,) e.g.
-                            20081205T090351Z,20081205T091853Z
+                            ``20081205T090351Z,20081205T091853Z``
 
                           - list: use the semicolon character (;) e.g.
-                            20081205T090351Z;20081405T090851Z;20081705T091853Z
+                            ``20081205T090351Z;20081405T090851Z;20081705T091853Z``
 
         """
         url = 'snapshots/{0}/{1}'.format(company_id, user_id)
@@ -79,17 +78,17 @@ class Team(Namespace):
 
     def delete_snapshot(self, company_id, user_id, datetime=None):
         """
-        Delete a company's user snapshot memo at given time or 'now'
+        Delete a company's user snapshot memo at given time or 'now'.
 
-        Parameters:
-          company_id    The Company ID
+        *Parameters:*
+          :company_id:  The Company ID
 
-          user_id       The User ID
+          :user_id:     The User ID
 
-          datetime      (optional)(default 'now')
+          :datetime:    (optional)(default 'now')
                         Timestamp either a datetime object
                         or a string in ISO 8601 format (in UTC)
-                        yyyymmddTHHMMSSZ
+                        ``yyyymmddTHHMMSSZ``
                         or a string with UNIX timestamp (number of
                         seconds after epoch)
 
@@ -110,21 +109,21 @@ class Team(Namespace):
 
     def get_workdiaries(self, team_id, username, date=None, tz=None):
         """
-        Retrieve a team member's workdiaries for given date or today
+        Retrieve a team member's workdiaries for given date or today.
 
-        Parameters:
+        *Parameters:*
 
-          team_id       The Team ID
+          :team_id:     The Team ID
 
-          username      The Team Member's username
+          :username:    The Team Member's username
 
-          date          (optional) A datetime object or a string in yyyymmdd
+          :date:        (optional) A datetime object or a string in yyyymmdd
                         format
 
-          tz            (optional) Time zone to use. Possible values:
-                          'mine' (default)
-                          'user'
-                          'gmt'
+          :tz:          (optional) Time zone to use. Possible values:
+                          * 'mine' (default)
+                          * 'user'
+                          * 'gmt'
 
         """
         url = 'workdiaries/{0}/{1}'.format(team_id, username)
@@ -157,10 +156,10 @@ class Team_V2(Namespace):
 
     def get_teamrooms(self):
         """
-        Retrieve all teamrooms accessible to the authenticated user
+        Retrieve all teamrooms accessible to the authenticated user.
 
-        Parameters:
-            target_version      Version of future requested API
+        *Parameters:*
+          :target_version:      Version of future requested API
 
         """
         url = 'teamrooms'
@@ -181,22 +180,22 @@ class Team_V2(Namespace):
 
     def get_snapshots(self, company_or_team_id, online=None, disabled=None):
         """
-        Retrieve team member snapshots
+        Retrieve team member snapshots.
 
-        Parameters:
-          company_or_team_id   The Company ID or Team ID
+        *Parameters:*
+          :company_or_team_id: The Company ID or Team ID
 
-          online               (optional) Filter user by work hours.
+          :online:             (optional) Filter user by work hours.
                                Possible values are (default):
-                                 'now' (default)
-                                 'last_24h'
-                                 'all'
+                                 * 'now' (default)
+                                 * 'last_24h'
+                                 * 'all'
 
-          disabled             (optional) Whether disabled users
+          :disabled:           (optional) Whether disabled users
                                need to be returned in response.
                                Possible values are (default):
-                                 'no' (default)
-                                 'yes'
+                                 * 'no' (default)
+                                 * 'yes'
 
         """
         url = 'teamrooms/{0}'.format(company_or_team_id)

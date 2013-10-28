@@ -6,12 +6,12 @@ from setuptools import setup, find_packages
 from distutils.core import Command
 
 
-readme = open(os.path.join(os.path.dirname(__file__), 'README'))
+readme = open(os.path.join(os.path.dirname(__file__), 'README.rst'))
 README = readme.read()
 readme.close()
 
 
-VERSION = (0, 5, 0, 'rc', 1)
+VERSION = (0, 5, 0, 'final', 0)
 
 
 def get_version():

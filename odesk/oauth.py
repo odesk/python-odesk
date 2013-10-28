@@ -1,14 +1,15 @@
-"""
-Python bindings to odesk API
-python-odesk version 0.5
-(C) 2010-2013 oDesk
-"""
+# Python bindings to oDesk API
+# python-odesk version 0.5
+# (C) 2010-2013 oDesk
 
+import os
 import time
 import urlparse
 import urllib
 import oauth2 as oauth
 import logging
+
+from .config import BASE_URL
 
 
 from odesk.namespaces import Namespace
@@ -16,17 +17,40 @@ from odesk.namespaces import Namespace
 
 class OAuth(Namespace):
 
+    """Authorization router.
+
+    Has methods for retrieving access tokens and
+    :py:meth:`~odesk.oauth.OAuth.get_info` method for
+    checking you're authorized successfully and ready to work with API.
+    """
+
     api_url = 'auth/'
     version = 1
 
-    request_token_url = 'https://www.odesk.com/api/auth/v1/oauth/token/request'
-    authorize_url = 'https://www.odesk.com/services/api/auth'
-    access_token_url = 'https://www.odesk.com/api/auth/v1/oauth/token/access'
+    request_token_url = os.path.join(
+        BASE_URL, 'api/auth/v1/oauth/token/request')
+    authorize_url = os.path.join(BASE_URL, 'services/api/auth')
+    access_token_url = os.path.join(BASE_URL, 'api/auth/v1/oauth/token/access')
 
     def get_oauth_params(self, url, key, secret, data=None, method='GET',
                          to_header=False, to_dict=False):
         """
-        Converts a mapping object to signed url query
+        Converts a mapping object to signed url query.
+
+        *Parameters:*
+          :url:        Target url
+
+          :key:        Public API key
+
+          :secret:     Public API key secret
+
+          :data:       Dictionary with data parameters
+
+          :method:     Mehtod to be called, default is ``GET``
+
+          :to_header:  If ``True``, data will be encoded as auth
+                       headers
+
         """
         # Temporary not use incoming data, just generate headers
         if data is None:
@@ -49,19 +73,18 @@ class OAuth(Namespace):
 
         if to_header:
             return request.to_header()
-        if to_dict:
-            return request.copy()
+
         return request.to_postdata()
 
     def get_oauth_consumer(self):
         """
-        Returns OAuth consumer object
+        Returns OAuth consumer object.
         """
         return oauth.Consumer(self.client.public_key, self.client.secret_key)
 
     def get_request_token(self):
         """
-        Returns request token and request token secret
+        Returns request token and request token secret.
         """
         client = oauth.Client(self.get_oauth_consumer())
         response, content = client.request(self.request_token_url, 'POST')
@@ -75,7 +98,7 @@ class OAuth(Namespace):
 
     def get_authorize_url(self, callback_url=None):
         """
-        Returns authentication URL to be used in a browser
+        Returns authentication URL to be used in a browser.
         """
         oauth_token = getattr(self, 'request_token', None) or\
             self.get_request_token()[0]
@@ -88,7 +111,7 @@ class OAuth(Namespace):
 
     def get_access_token(self, verifier):
         """
-        Returns access token and access token secret
+        Returns access token and access token secret.
         """
         try:
             request_token = self.request_token
@@ -111,7 +134,7 @@ class OAuth(Namespace):
 
     def get_info(self):
         """
-        Get a detailed info about current authnticated user
+        Get a detailed info about current authnticated user \
         and some data from his profile.
 
         """

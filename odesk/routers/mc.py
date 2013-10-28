@@ -1,8 +1,6 @@
-"""
-Python bindings to odesk API
-python-odesk version 0.5
-(C) 2010-2013 oDesk
-"""
+# Python bindings to oDesk API
+# python-odesk version 0.5
+# (C) 2010-2013 oDesk
 
 import urllib
 
@@ -15,10 +13,11 @@ class MC(Namespace):
 
     def get_trays(self, username=None, paging_offset=0, paging_count=20):
         """
-        Retrieve a list of all active trays and a message count for each
+        Retrieve a list of all active trays and a message count for each.
 
-        Parameters
-          username          User name
+        *Parameters:*
+          :username:          User name
+
         """
         url = 'trays'
         if paging_offset or not paging_count == 20:
@@ -35,13 +34,17 @@ class MC(Namespace):
     def get_tray_content(self, username, tray, paging_offset=None,
                          paging_count=None):
         """
-        Retrieve tray contents
+        Retrieve message tray contents.
 
-        Parameters
-          username          User name
-          tray              Tray
-          paging_offset     Start of page (number of results to skip)
-          paging_count      Page size (number of results)
+        *Parameters:*
+          :username:          User name
+
+          :tray:              Tray
+
+          :paging_offset:     Start of page (number of results to skip)
+
+          :paging_count:      Page size (number of results)
+
         """
         url = 'trays/{0}/{1}'.format(username, tray)
         if paging_offset is not None and paging_count is not None:
@@ -60,13 +63,17 @@ class MC(Namespace):
     def get_thread_content(self, username, thread_id, paging_offset=0,
                            paging_count=20):
         """
-        List details of a specific thread
+        List details of a specific thread.
 
-        Parameters
-          username          User name
-          thread_id         Thread ID
-          paging_offset     Start of page (number of results to skip)
-          paging_count      Page size (number of results)
+        *Parameters:*
+          :username:          User name
+
+          :thread_id:         Thread ID
+
+          :paging_offset:     Start of page (number of results to skip)
+
+          :paging_count:      Page size (number of results)
+
         """
         url = 'threads/{0}/{1}'.format(username, thread_id)
         if paging_offset or not paging_count == 20:
@@ -83,12 +90,15 @@ class MC(Namespace):
 
     def put_threads_read_unread(self, username, thread_ids, read=True):
         """
-        Marks threads as read/unread
+        Marks threads as read/unread.
 
-        Parameters
-          username          User name
-          thread_ids        must be a list, even of 1 item
-          read              True/False (optional: default True)
+        *Parameters:*
+          :username:          User name
+
+          :thread_ids:        must be a list, even of 1 item
+
+          :read:              True/False (optional: default True)
+
         """
         if isinstance(thread_ids, (list, tuple)):
             thread_ids = ';'.join(map(str, thread_ids))
@@ -103,33 +113,40 @@ class MC(Namespace):
 
     def put_threads_read(self, username, thread_ids):
         """
-        Marks threads as read
+        Marks threads as read.
 
-        Parameters
-          username          User name
-          thread_ids        must be a list, even of 1 item
+        *Parameters:*
+          :username:          User name
+
+          :thread_ids:        must be a list, even of 1 item
+
         """
         return self.put_threads_read_unread(username, thread_ids, read=True)
 
     def put_threads_unread(self, username, thread_ids):
         """
-        Marks threads as unread
+        Marks threads as unread.
 
-        Parameters
-          username          User name
-          thread_ids        must be a list, even of 1 item
+        *Parameters:*
+          :username:          User name
+
+          :thread_ids:        must be a list, even of 1 item
+
         """
         return self.put_threads_read_unread(username, thread_ids, read=False)
 
     def put_threads_starred_or_unstarred(self, username, thread_ids,
                                          starred=True):
         """
-        Marks threads as starred/not starred
+        Marks threads as starred/not starred.
 
-        Parameters
-          username          User name
-          thread_ids        must be a list, even of 1 item
-          starred           True/False (optional: default True)
+        *Parameters:*
+          :username:          User name
+
+          :thread_ids:        must be a list, even of 1 item
+
+          :starred:           True/False (optional: default True)
+
         """
         if isinstance(thread_ids, (list, tuple)):
             thread_ids = ';'.join(map(str, thread_ids))
@@ -144,22 +161,26 @@ class MC(Namespace):
 
     def put_threads_starred(self, username, thread_ids):
         """
-        Marks threads as starred
+        Marks threads as starred.
 
-        Parameters
-          username          User name
-          thread_ids        must be a list, even of 1 item
+        *Parameters:*
+          :username:          User name
+
+          :thread_ids:        must be a list, even of 1 item
+
         """
         return self.put_threads_starred_or_unstarred(username,
                                             thread_ids, starred=True)
 
     def put_threads_unstarred(self, username, thread_ids):
         """
-        Marks threads as unstarred
+        Marks threads as unstarred.
 
-        Parameters
-          username          User name
-          thread_ids        must be a list, even of 1 item
+        *Parameters:*
+          :username:          User name
+
+          :thread_ids:        must be a list, even of 1 item
+
         """
         return self.put_threads_starred_or_unstarred(username,
                                             thread_ids, starred=False)
@@ -167,12 +188,15 @@ class MC(Namespace):
     def put_threads_deleted_or_undeleted(self, username, thread_ids,
                                          deleted=True):
         """
-        Marks threads as deleted/not deleted
+        Marks threads as deleted/not deleted.
 
-        Parameters
-          username          User name
-          thread_ids        must be a list, even of 1 item
-          deleted           True/False (optional: default True)
+        *Parameters:*
+          :username:          User name
+
+          :thread_ids:        must be a list, even of 1 item
+
+          :deleted:           True/False (optional: default True)
+
         """
         if isinstance(thread_ids, (list, tuple)):
             thread_ids = ';'.join(map(str, thread_ids))
@@ -187,11 +211,13 @@ class MC(Namespace):
 
     def put_threads_deleted(self, username, thread_ids):
         """
-        Marks threads as deleted
+        Marks threads as deleted.
 
-        Parameters
-          username          User name
-          thread_ids        must be a list, even of 1 item
+        *Parameters:*
+          :username:          User name
+
+          :thread_ids:        must be a list, even of 1 item
+
         """
         return self.put_threads_deleted_or_undeleted(username, thread_ids,
                                                      deleted=True)
@@ -200,9 +226,11 @@ class MC(Namespace):
         """
         Marks threads as not deleted
 
-        Parameters
-          username          User name
-          thread_ids        must be a list, even of 1 item
+        *Parameters:*
+          :username:          User name
+
+          :thread_ids:        must be a list, even of 1 item
+
         """
         return self.put_threads_deleted_or_undeleted(username, thread_ids,
                                                      deleted=False)
@@ -210,26 +238,26 @@ class MC(Namespace):
     def post_message(self, username, recipients, subject, body,
                      thread_id=None, bcc=None, attachment_key=None):
         """
-        Send a new message (creating a new thread) or reply to an existing
+        Send a new message (creating a new thread) or reply to an existing \
         thread.
 
-        Parameters
-          username         User name (of sender)
+        *Parameters:*
+          :username:        User name (of sender)
 
-          recipients       Recipient(s)  (a single string or a list/tuple)
+          :recipients:      Recipient(s)  (a single string or a list/tuple)
 
-          subject          Message subject
+          :subject:         Message subject
 
-          body             Message text
+          :body:            Message text
 
-          thread_id        (optional) The thread id if replying
-                           to an existing thread
+          :thread_id:       (optional) The thread id if replying
+                            to an existing thread
 
-          bcc              (optional) List of BCC recipients, user comma (",")
-                           to separate ids in list
+          :bcc:             (optional) List of BCC recipients,
+                            use comma (",") to separate ids in list
 
-          attachment_key   (optional) The unique private key of any attachment
-                           associated with the thread
+          :attachment_key:  (optional) The unique private key of any attachment
+                            associated with the thread
 
         """
         url = 'threads/{0}'.format(username)
