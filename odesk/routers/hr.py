@@ -983,6 +983,8 @@ class HR(Namespace):
                                     * ``14`` - "Cooperation / cooperation and
                                          flexibility, open to suggestions
                                          for improvement"
+                                  Example:
+                                  ``&fb_scores[3]=5&fb_scores[4]=4&...&fb_scores[8]=5``
 
           :fb_comment:           (optional) Feedback comment, some string
                                  message. It is optional but if present, then

@@ -117,8 +117,9 @@ class Client(object):
             self.mc = MC(self)
 
         if provider:
-            from odesk.routers.provider import Provider
+            from odesk.routers.provider import Provider, Provider_V2
             self.provider = Provider(self)
+            self.provider_v2 = Provider_V2(self)
 
         if task:
             from odesk.routers.task import Task

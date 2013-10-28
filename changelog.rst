@@ -17,6 +17,11 @@ Backwards incompatibility changes:
   to authorize is oAuth 1.0
 * ``odesk.Client`` class doesn't support ``auth`` keyword argument any more,
   as now there's only one way of doing authorization
+* Introduced V2 API calls for
+  :py:meth:`Search Providers<odesk.routers.provider.Provider_V2.search_providers>` and
+  :py:meth:`Search Jobs<odesk.routers.provider.Provider_V2.search_jobs>`.
+  V1 API calls still work but to the end of 2013 will be switched off.
+  So we greatly encourage you to use V2 API calls.
 * ``examples/`` directory of the repository is updated with new examples for
   web and desktop application
 

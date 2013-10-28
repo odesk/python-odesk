@@ -71,16 +71,18 @@ To get information about provider, use following methods (click the link to see 
 Search Providers
 ----------------
 
+.. currentmodule:: odesk.routers.provider.Provider_V2
+
 To search provider(http://developers.odesk.com/search-providers) by the query string, use:
 
-:py:meth:`client.provider.search_providers<search_providers>`
+:py:meth:`client.provider_v2.search_providers<search_providers>`
 
 Search Jobs
 -----------
 
 To search jobs(http://developers.odesk.com/search-jobs) by the query string, use:
 
-:py:meth:`client.provider.search_jobs<search_jobs>`
+:py:meth:`client.provider_v2.search_jobs<search_jobs>`
 
 
 .. _metadata_information:
