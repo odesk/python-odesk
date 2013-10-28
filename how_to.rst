@@ -89,6 +89,9 @@ To search jobs(http://developers.odesk.com/search-jobs) by the query string, use
 
 Metadata information
 ------------------------
+
+.. currentmodule:: odesk.routers.provider.Provider
+
 To get information about available categories, skills, regions and tests use:
 
 :py:meth:`client.provider.get_categories_metadata<get_categories_metadata>`
@@ -212,7 +215,7 @@ To send message:
 Get timereports
 ----------------------
 
-.. currentmodule:: odesk.routers.timereports.TimeReport
+.. currentmodule:: odesk.routers.timereport.TimeReport
 
 http://developers.odesk.com/Time-Reports-API
 
