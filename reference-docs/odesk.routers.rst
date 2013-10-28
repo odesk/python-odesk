@@ -1,0 +1,78 @@
+odesk.routers package
+=====================
+
+Submodules
+----------
+
+odesk.routers.finreport module
+------------------------------
+
+.. automodule:: odesk.routers.finreport
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+odesk.routers.hr module
+-----------------------
+
+.. automodule:: odesk.routers.hr
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+odesk.routers.job module
+------------------------
+
+.. automodule:: odesk.routers.job
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+odesk.routers.mc module
+-----------------------
+
+.. automodule:: odesk.routers.mc
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+odesk.routers.provider module
+-----------------------------
+
+.. automodule:: odesk.routers.provider
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+odesk.routers.task module
+-------------------------
+
+.. automodule:: odesk.routers.task
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+odesk.routers.team module
+-------------------------
+
+.. automodule:: odesk.routers.team
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+odesk.routers.timereport module
+-------------------------------
+
+.. automodule:: odesk.routers.timereport
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: odesk.routers
+    :members:
+    :undoc-members:
+    :show-inheritance:
