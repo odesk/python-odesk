@@ -5,6 +5,16 @@
 How to
 ***************
 
+.. note:: Every method is fully documented in the docstring, so you can refer to the :ref:`reference_docs` or directly view help in the interactive console.
+
+To get help on the method use::
+
+    help(client.provider.search_jobs)
+
+or if you use ``IPython`` just add ``?`` symbol at the end of an object/class/method::
+
+    client.provider.search_jobs?
+
 ..
 .. _authenticate:
 
@@ -13,85 +23,172 @@ Authenticate
 
 http://developers.odesk.com/Authentication
 
-To authenticate your web application with the python-odesk, use next code::
+To authenticate your web application with the python-odesk, use something similar
+to the code below::
 
-    client = odesk.Client('your public key', 'your secret key')
-    #redirect your user to the client.auth.auth_url()
+    public_key = raw_input('Please enter public key: > ')
+    secret_key = raw_input('Please enter secret key: > ')
 
-    #catch frob from the oDesk response to callback
-    frob = raw_input('Enter frob: ')
+    #Instantiating a client without an auth token
+    client = odesk.Client(public_key, secret_key)
 
-    #you can authenticate now
-    auth_token, user = client.auth.get_token(frob)
+    print "Please to this URL (authorize the app if necessary):"
+    print client.auth.get_authorize_url()
+    print "After that you should be redirected back to your app URL with " + \
+          "additional ?oauth_verifier= parameter"
 
-    #Initiating a new client, now with a token.
-    #Not strictly necessary here (could just set `client.auth_token`), but
-    #typical for web apps, which wouldn't probably keep client instances
-    #between requests
-    client = odesk.Client('your public key', 'your secret key', auth_token)
+    verifier = raw_input('Enter oauth_verifier: ')
+
+    oauth_access_token, oauth_access_token_secret = \
+        client.auth.get_access_token(verifier)
+
+    # Instantiating a new client, now with a token.
+    # Not strictly necessary here (could just set `client.oauth_access_token`
+    # and `client.oauth_access_token_secret`), but typical for web apps,
+    # which wouldn't probably keep client instances between requests
+    client = odesk.Client(public_key, secret_key,
+                          oauth_access_token=oauth_access_token,
+                          oauth_access_token_secret=oauth_access_token_secret)
 
 ..
 .. _provider_information:
 
-Get provider's information
+Provider's information
 --------------------------
 
 http://developers.odesk.com/Provider-Profile
 
-To get information about provider, use::
 
-    client.provider.get_provider(provider_ciphertext)
-    client.provider.get_provider_brief(provider_ciphertext)
+.. currentmodule:: odesk.routers.provider.Provider
 
-To search provider(http://developers.odesk.com/search-providers) by the query string, use::
+To get information about provider, use following methods (click the link to see detailed description of parameters):
 
-    client.provider.get_providers(data={})
+:py:meth:`client.provider.get_provider<get_provider>`
 
-To search jobs(http://developers.odesk.com/search-jobs) by the query string, use::
+:py:meth:`client.provider.get_provider_brief<get_provider_brief>`
 
-    client.provider.get_jobs(data={})
+
+Search Providers
+----------------
+
+To search provider(http://developers.odesk.com/search-providers) by the query string, use:
+
+:py:meth:`client.provider.search_providers<search_providers>`
+
+Search Jobs
+-----------
+
+To search jobs(http://developers.odesk.com/search-jobs) by the query string, use:
+
+:py:meth:`client.provider.search_jobs<search_jobs>`
+
+
+.. _metadata_information:
+
+Metadata information
+------------------------
+To get information about available categories, skills, regions and tests use:
+
+:py:meth:`client.provider.get_categories_metadata<get_categories_metadata>`
+
+:py:meth:`client.provider.get_skills_metadata<get_skills_metadata>`
+
+:py:meth:`client.provider.get_regions_metadata<get_regions_metadata>`
+
+:py:meth:`client.provider.get_tests_metadata<get_tests_metadata>`
+
+
+..
+.. _hiring:
+
+Hiring
+------
+
+.. currentmodule:: odesk.routers.hr.HR
+
+oDesk Hiring API http://developers.odesk.com/w/page/23879811/Hiring allows to do such tasks as:
+
+* Create new job posting :py:meth:`client.hr.post_job<post_job>`
+
+* Update existing job post :py:meth:`client.hr.update_job<update_job>`
+
+* View existing jobs :py:meth:`client.hr.get_jobs<get_jobs>`
+.. currentmodule:: odesk.routers.hr.HR_V1
+* Invite to interview :py:meth:`client.hr_v1.invite_to_interview<invite_to_interview>`
+.. currentmodule:: odesk.routers.hr.HR
+* Make an offer :py:meth:`client.hr.post_offer<post_offer>`
+
+* View active engagements :py:meth:`client.hr.get_engagements<get_engagements>`
+
+* Pay a bonus to the contractor :py:meth:`client.hr.post_team_adjustment<post_team_adjustment>`
+
+* End the contract with provider :py:meth:`client.hr.end_contract<end_contract>`
+
+
+..
+.. _work_with_jobs:
+
+Work with jobs
+----------------------
+
+http://developers.odesk.com/w/page/49065901/Job%20Profile
+
+.. currentmodule:: odesk.routers.job
+
+To work with jobs you should use :py:class:`client.job<Job>` wrapper::
+
+    tasks = client.job.get_job_profile(job key)
+
+Where:
+
+* job_key - The job key or a list of keys, separated by ``";"``, number of keys per request is limited by 20. You can access profile by job reference number, in that case you can't specify a list of jobs, only one profile per request is available.
 
 ..
 .. _team_information:
 
-Get teams` information
+Team's information
 ----------------------
 
 http://developers.odesk.com/Team-API
 
-After authentication, you can get teams' information from client instance you have::
+.. currentmodule:: odesk.routers.team.Team_V2
 
-    client.team.get_teamrooms()
+After authentication, you can get teams' information from client instance you have:
 
-To get snapshots::
+:py:meth:`client.team_v2.get_teamrooms<get_teamrooms>`
 
-    client.team.get_snapshots(team_id, online='now')
+To get snapshots:
 
-To get user's workdiaries inside the team::
+:py:meth:`client.team_v2.get_snapshots<get_snapshots>`
 
-    client.team.get_workdiaries(team_id, username, date=None)
+.. currentmodule:: odesk.routers.team.Team
+
+To get user's workdiaries inside the team:
+
+:py:meth:`client.team.get_workdiaries<get_workdiaries>`
 
 
 ..
 .. _get_messages:
 
-Get trays and messages
+Trays and messages
 -----------------------
 
 http://developers.odesk.com/Message-Center-API
 
-Get user's trays (if user not provided, authenticated user will be taken)::
+.. currentmodule:: odesk.routers.mc.MC
 
-    client.mc.get_trays(username=None, paging_offset=0, paging_count=20)
+Get user's trays (if user not provided, authenticated user will be taken):
 
-Get content of the tray::
+:py:meth:`client.mc.get_trays<get_trays>`
 
-    client.mc.get_tray_content(username, tray, paging_offset=0, paging_count=20)
+Get content of the tray:
 
-Get content of the thread::
+:py:meth:`client.mc.get_tray_content<get_tray_content>`
 
-    client.mc.get_thread_content(username, thread_id, paging_offset=0, paging_count=20)
+Get content of the thread:
 
+:py:meth:`client.mc.get_thread_content<get_thread_content>`
 
 
 ..
@@ -102,17 +199,10 @@ Send message
 
 http://developers.odesk.com/Message-Center-API
 
-To send message::
+To send message:
 
-    client.mc.post_message(username, recipients, subject, body, thread_id=None)
+:py:meth:`client.mc.post_message<post_message>`
 
-Where:
-
-* username = user who is sending message
-* recipients = should be python list or tuple of the usernames of recipients
-* subject = subject of the message
-* body = body of the message
-* thread_id = should be id of the thread if you want your message be a reply inside existing thread
 
 ..
 .. _get_timereports:
@@ -120,19 +210,19 @@ Where:
 Get timereports
 ----------------------
 
+.. currentmodule:: odesk.routers.timereports.TimeReport
+
 http://developers.odesk.com/Time-Reports-API
 
-To get timereports, use, based on the level of the timereports you need::
+To get timereports, use, based on the level of the timereports you need:
 
-    client.timereport.get_provider_report(provider_id, query, hours=False):
-    client.timereport.get_company_report(company_id, query, hours=False):
-    client.timereport.get_agency_report(company_id, agency_id, query, hours=False):
+:py:meth:`client.timereport.get_provider_report<get_provider_report>`
 
-Where:
- * query - is the odesk.Query object
- * hours = Limits the query to hour specific elements and hides all financial details.
+:py:meth:`timereport.get_company_report<get_agency_report>`
 
-For example::
+:py:meth:`timereport.get_agency_report<get_agency_report>`
+
+Below is an example how to construct a GDS query::
 
     client.timereport.get_provider_report('user1',
            odesk.utils.Query(select=odesk.utils.Query.DEFAULT_TIMEREPORT_FIELDS,
@@ -157,7 +247,11 @@ For example::
 Get finreports
 ----------------------
 
-*TODO*
+.. currentmodule:: odesk.routers.finreport
+
+Financial reports are also using GDS queries.
+
+Please see :py:class:`Finreports` wrapper
 
 ..
 .. _work_with_tasks:
@@ -167,45 +261,64 @@ Work with tasks
 
 http://developers.odesk.com/oTasks-API
 
-To work with tasks you should use client.otask wrapper::
+.. currentmodule:: odesk.routers.task
+
+To work with tasks you should use :py:class:`client.otask<Task>` wrapper::
 
     tasks = client.otask.get_company_tasks('company_id')
 
-Methods to get tasks::
+.. currentmodule:: odesk.routers.task.Task
 
-    client.task.get_team_tasks(company_id, team_id)
-    client.task.get_user_tasks(company_id, team_id, user_id)
-    client.task.get_company_tasks_full(company_id)
-    client.task.get_team_tasks_full(company_id, team_id)
-    client.task.get_user_tasks_full(company_id, team_id, user_id)
-    client.task.get_company_specific_tasks(company_id, task_codes)
-    client.task.get_team_specific_tasks(company_id, team_id, task_codes)
-    client.task.get_user_specific_tasks(company_id, team_id, user_id, task_codes)
+Methods to get tasks:
 
-Create and update tasks::
+:py:meth:`client.task.get_team_tasks<get_team_tasks>`
 
-    client.task.post_company_task(company_id, code, description, url)
-    client.task.post_team_task(company_id, team_id, code, description, url)
-    client.task.post_user_task(company_id, team_id, user_id, code, description, url)
-    client.task.put_company_task(company_id, code, description, url)
-    client.task.put_team_task(company_id, team_id, code, description, url)
-    client.task.put_user_task(company_id, team_id, user_id, code, description, url)
+:py:meth:`client.task.get_user_tasks<get_user_tasks>`
 
-Delete tasks::
+:py:meth:`client.task.get_company_tasks_full<get_company_tasks_full>`
 
-    client.task.delete_company_task(company_id, task_codes)
-    client.task.delete_team_task(company_id, team_id, task_codes)
-    client.task.delete_user_task(company_id, team_id, user_id, task_codes)
-    client.task.delete_all_company_tasks(company_id)
-    client.task.delete_all_team_tasks(company_id, team_id)
-    client.task.delete_all_user_tasks(company_id, team_id, user_id)
+:py:meth:`client.task.get_team_tasks_full<get_team_tasks_full>`
 
-Batch update of tasks::
+:py:meth:`client.task.get_user_tasks_full<get_user_tasks_full>`
 
-    client.task.update_batch_tasks(company_id, csv_data)
+:py:meth:`client.task.get_company_specific_tasks<get_company_specific_tasks>`
+
+:py:meth:`client.task.get_team_specific_tasks<get_team_specific_tasks>`
+
+:py:meth:`client.task.get_user_specific_tasks<get_user_specific_tasks>`
+
+Create and update tasks:
+
+:py:meth:`client.task.post_company_task<post_company_task>`
+
+:py:meth:`client.task.post_team_task<post_team_task>`
+
+:py:meth:`client.task.post_user_task<post_user_task>`
+
+:py:meth:`client.task.put_company_task<put_company_task>`
+
+:py:meth:`client.task.put_team_task<put_team_task>`
+
+:py:meth:`client.task.put_user_task<put_user_task>`
+
+Delete tasks:
+
+:py:meth:`client.task.delete_company_task<delete_company_task>`
+
+:py:meth:`client.task.delete_team_task<delete_team_task>`
+
+:py:meth:`client.task.delete_user_task<delete_user_task>`
+
+:py:meth:`client.task.delete_all_company_tasks<delete_all_company_tasks>`
+
+:py:meth:`client.task.delete_all_team_tasks<delete_all_team_tasks>`
+
+:py:meth:`client.task.delete_all_user_tasks<delete_all_user_tasks>`
+
+Batch update of tasks:
+
+:py:meth:`client.task.update_batch_tasks(company_id, csv_data)<update_batch_tasks>`
 
 Where csv_data - is the raw csv data for tasks to be updated. Example::
 
     "acmeinc","","","ABC","Project ABC","https://www.acmeinc.com/project/abc"<br>"acmeinc","acmeinc:dev","b42","123","Task 123","https://www.acmeinc.com/task/123"
-
-

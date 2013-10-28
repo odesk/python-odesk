@@ -10,7 +10,9 @@ Getting started
 
 Requirements
 -----------------
-You need to install oauth2 to run the python-odesk, and mock and nosetests if you plan to develop python-odesk and/or run library's tests.
+You need to install oauth2 and urllib3 to run the python-odesk. These packages are installed automatically, so basicly you don't need to install them manually.
+
+If you want to contribute to python-odesk, you need to istall ``mock`` and ``nosetests``.
 
 Mock::
 
@@ -30,19 +32,19 @@ Install
 -----------------
 On most UNIX-like systems, you’ll probably need to run these commands as root or using sudo.
 
-To install::
+To install via pip::
 
-    python setup.py install
+    pip install python-odesk
 
 Or via easy_install::
 
     easy_install python-odesk
 
-Or via pip::
+Or install from source::
 
-    pip install python-odesk
+    python setup.py install
 
-Also, you can retrieve fresh version of python-odesk from GitHub::
+Also, you can retrieve the most recent version of python-odesk from GitHub::
 
     git clone git://github.com/odesk/python-odesk.git
 
@@ -59,35 +61,58 @@ To get oDesk API keys, please visit the http://www.odesk.com/services/api/keys
 
 .. _simple_example:
 
-Simple example
+Simple Example
 ---------------------
-Some examples of using listed in the odesk/examples folder.
-Here is the simple example.
+This example is very easy to follow in Python interactive console,
+we also recommend to use improved interactive console - IPython.
+
+You can see the full code of examples in ``odesk/examples`` folder.
+
+Here is the simple example if you are using web API keys.
 
 Initializing the client::
 
     client = odesk.Client(public_key, secret_key)
 
-Shows the url to get frob from it after app authorization on odesk and getting redirect to callback::
+Now follow the ``authorize_url``::
 
-    print client.auth.auth_url()
+    print client.auth.get_authorize_url()
 
-Waiting for inputing the frob::
+After you follow this url you'll be redirected to the callback url that you
+entered during API keys creation. The ``oauth_verifier`` parameter is passed to the callback
+and you need to copy it's value. If you selected "Desktop" type of the key instead
+of "Web", the value of oAuth verifier will be just displayed to you.
 
-    print "After that you should be redirected back to your app URL with " + \
-          "additional ?frob= parameter"
-    frob = raw_input('Enter frob: ')
+Now you get the verifier copied into your buffer and you can get you access token::
 
-Authentication::
+    verifier = raw_input('Enter oauth_verifier: ')
+    oauth_access_token, oauth_access_token_secret = client.auth.get_access_token(verifier)
 
-    auth_token, user = client.auth.get_token(frob)
-    print "Authenticated user:"
-    print user
+Great! Now you got all the necessary credentials for accessing the oDesk API.
+Use obtained ``oauth_access_token`` and ``oauth_access_token_secret`` to intialize
+a ready-to-go Client instance::
 
-Installation of new client already with token::
+    client = odesk.Client(public_key, secret_key,
+                          oauth_access_token=oauth_access_token,
+                          oauth_access_token_secret=oauth_access_token_secret)
 
-    client = odesk.Client(public_key, secret_key, auth_token)
+To check it works::
 
-Getting user's teamrooms::
+    print client.auth.get_info()
+
+This call will give you information about the currently authorized user.
+
+.. note:: Make sure you securely store the ``oauth_access_token`` and ``oauth_access_token_secret``.
+
+
+So now just start playing with the API, for example you can get your teamrooms::
 
     print client.team.get_teamrooms()
+
+or get your companies::
+
+    print client.hr.get_companies()
+
+
+See the Reference Documentation for the full list of available API calls
+:ref:`reference_docs`
