@@ -19,5 +19,5 @@ man/*
 examples/odesk
 odesk/__init__.py.back
 python_odesk.egg-info
-_reference-docs
+reference-docs
 _gh-pages
