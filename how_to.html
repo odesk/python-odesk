@@ -154,12 +154,12 @@ to the code below:</p>
 <div class="section" id="search-providers">
 <h2>Search Providers<a class="headerlink" href="#search-providers" title="Permalink to this headline">¶</a></h2>
 <p>To search provider(<a class="reference external" href="http://developers.odesk.com/search-providers">http://developers.odesk.com/search-providers</a>) by the query string, use:</p>
-<p><a class="reference internal" href="reference-docs/odesk.routers.html#odesk.routers.provider.Provider.search_providers" title="odesk.routers.provider.Provider.search_providers"><tt class="xref py py-meth docutils literal"><span class="pre">client.provider.search_providers</span></tt></a></p>
+<p><a class="reference internal" href="reference-docs/odesk.routers.html#odesk.routers.provider.Provider_V2.search_providers" title="odesk.routers.provider.Provider_V2.search_providers"><tt class="xref py py-meth docutils literal"><span class="pre">client.provider_v2.search_providers</span></tt></a></p>
 </div>
 <div class="section" id="search-jobs">
 <h2>Search Jobs<a class="headerlink" href="#search-jobs" title="Permalink to this headline">¶</a></h2>
 <p>To search jobs(<a class="reference external" href="http://developers.odesk.com/search-jobs">http://developers.odesk.com/search-jobs</a>) by the query string, use:</p>
-<p><a class="reference internal" href="reference-docs/odesk.routers.html#odesk.routers.provider.Provider.search_jobs" title="odesk.routers.provider.Provider.search_jobs"><tt class="xref py py-meth docutils literal"><span class="pre">client.provider.search_jobs</span></tt></a></p>
+<p><a class="reference internal" href="reference-docs/odesk.routers.html#odesk.routers.provider.Provider_V2.search_jobs" title="odesk.routers.provider.Provider_V2.search_jobs"><tt class="xref py py-meth docutils literal"><span class="pre">client.provider_v2.search_jobs</span></tt></a></p>
 </div>
 <div class="section" id="metadata-information">
 <span id="id3"></span><h2>Metadata information<a class="headerlink" href="#metadata-information" title="Permalink to this headline">¶</a></h2>
@@ -228,9 +228,9 @@ to the code below:</p>
 <span id="id7"></span><h2>Get timereports<a class="headerlink" href="#get-timereports" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference external" href="http://developers.odesk.com/Time-Reports-API">http://developers.odesk.com/Time-Reports-API</a></p>
 <p>To get timereports, use, based on the level of the timereports you need:</p>
-<p><tt class="xref py py-meth docutils literal"><span class="pre">client.timereport.get_provider_report</span></tt></p>
-<p><tt class="xref py py-meth docutils literal"><span class="pre">timereport.get_company_report</span></tt></p>
-<p><tt class="xref py py-meth docutils literal"><span class="pre">timereport.get_agency_report</span></tt></p>
+<p><a class="reference internal" href="reference-docs/odesk.routers.html#odesk.routers.timereport.TimeReport.get_provider_report" title="odesk.routers.timereport.TimeReport.get_provider_report"><tt class="xref py py-meth docutils literal"><span class="pre">client.timereport.get_provider_report</span></tt></a></p>
+<p><a class="reference internal" href="reference-docs/odesk.routers.html#odesk.routers.timereport.TimeReport.get_agency_report" title="odesk.routers.timereport.TimeReport.get_agency_report"><tt class="xref py py-meth docutils literal"><span class="pre">timereport.get_company_report</span></tt></a></p>
+<p><a class="reference internal" href="reference-docs/odesk.routers.html#odesk.routers.timereport.TimeReport.get_agency_report" title="odesk.routers.timereport.TimeReport.get_agency_report"><tt class="xref py py-meth docutils literal"><span class="pre">timereport.get_agency_report</span></tt></a></p>
 <p>Below is an example how to construct a GDS query:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">client</span><span class="o">.</span><span class="n">timereport</span><span class="o">.</span><span class="n">get_provider_report</span><span class="p">(</span><span class="s">&#39;user1&#39;</span><span class="p">,</span>
        <span class="n">odesk</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">Query</span><span class="p">(</span><span class="n">select</span><span class="o">=</span><span class="n">odesk</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">Query</span><span class="o">.</span><span class="n">DEFAULT_TIMEREPORT_FIELDS</span><span class="p">,</span>

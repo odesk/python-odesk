@@ -55,6 +55,7 @@
   <ul>
 <li><a class="reference internal" href="#">odesk.routers package</a><ul>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-odesk.routers">Module contents</a></li>
 <li><a class="reference internal" href="#module-odesk.routers.finreport">odesk.routers.finreport module</a></li>
 <li><a class="reference internal" href="#module-odesk.routers.hr">odesk.routers.hr module</a></li>
 <li><a class="reference internal" href="#module-odesk.routers.job">odesk.routers.job module</a></li>
@@ -63,7 +64,6 @@
 <li><a class="reference internal" href="#module-odesk.routers.task">odesk.routers.task module</a></li>
 <li><a class="reference internal" href="#module-odesk.routers.team">odesk.routers.team module</a></li>
 <li><a class="reference internal" href="#module-odesk.routers.timereport">odesk.routers.timereport module</a></li>
-<li><a class="reference internal" href="#module-odesk.routers">Module contents</a></li>
 </ul>
 </li>
 </ul>
@@ -104,6 +104,13 @@
 <h1>odesk.routers package<a class="headerlink" href="#odesk-routers-package" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-odesk.routers">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-odesk.routers" title="Permalink to this headline">¶</a></h2>
+<p>Routers package.</p>
+<p>All communication with oDesk API is handled by the routers.</p>
+<p>When you import <tt class="docutils literal"><span class="pre">odesk</span></tt> package and instantiate <tt class="docutils literal"><span class="pre">odesk.Client</span></tt> class,
+routers are dynamically attatched to your <tt class="docutils literal"><span class="pre">client</span></tt> object.</p>
 </div>
 <div class="section" id="module-odesk.routers.finreport">
 <span id="odesk-routers-finreport-module"></span><h2>odesk.routers.finreport module<a class="headerlink" href="#module-odesk.routers.finreport" title="Permalink to this headline">¶</a></h2>
@@ -429,9 +436,21 @@ a staffing manager of the team.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">job_id:</th><td class="field-body">Job reference ID</td>
+<tr class="field-odd field"><th class="field-name">job_id:</th><td class="field-body"><p class="first">Job reference ID</p>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">reason_code:</th><td class="field-body">The reason code</td>
+<tr class="field-even field"><th class="field-name">reason_code:</th><td class="field-body"><p class="first">The reason code to cancel the job, e.g. <tt class="docutils literal"><span class="pre">41</span></tt>.
+Possible values are:</p>
+<blockquote class="last">
+<div><ul class="simple">
+<li><tt class="docutils literal"><span class="pre">67</span></tt> - Accidental opening creation</li>
+<li><tt class="docutils literal"><span class="pre">51</span></tt> - All positions filled</li>
+<li><tt class="docutils literal"><span class="pre">49</span></tt> - Filled by alternate source</li>
+<li><tt class="docutils literal"><span class="pre">41</span></tt> - Project was cancelled</li>
+<li><tt class="docutils literal"><span class="pre">34</span></tt> - No developer for requested skills</li>
+</ul>
+</div></blockquote>
+</td>
 </tr>
 </tbody>
 </table>
@@ -505,9 +524,9 @@ is $0.
 Possible values are: [&#8216;yes&#8217;, &#8216;no&#8217;]</p>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">fb_scores:</th><td class="field-body"><p class="first">(optional) Estimate, could be an array of
+<tr class="field-even field"><th class="field-name">fb_scores:</th><td class="field-body"><p class="first">(optional) Estimate, a dictionary of
 scores, where id is reference to
-score description.
+score description (see example below).
 The feedback scores are optional, but if
 present they must be complete: all scores.
 Below are the possible score reference id
@@ -559,7 +578,8 @@ improvement&#8221;</p>
 </div></blockquote>
 <dl class="docutils">
 <dt>Feedback on employer:</dt>
-<dd><ul class="first last">
+<dd><blockquote class="first">
+<div><ul>
 <li><dl class="first docutils">
 <dt><tt class="docutils literal"><span class="pre">9</span></tt> - &#8220;Skills / competency and skills</dt>
 <dd><p class="first last">for the job, understanding of task
@@ -600,6 +620,12 @@ for improvement&#8221;</p>
 </dl>
 </li>
 </ul>
+</div></blockquote>
+<p>Example:
+{&#8216;fb_scores[3]&#8217;: 5, &#8216;fb_scores[4]&#8217;: 4, ... ,</p>
+<blockquote class="last">
+<div><p>&#8216;fb_scores[8]&#8217;: 5}</p>
+</div></blockquote>
 </dd>
 </dl>
 </td>
@@ -1796,7 +1822,9 @@ associated with the thread</td>
 <dl class="method">
 <dt id="odesk.routers.provider.Provider.search_jobs">
 <tt class="descname">search_jobs</tt><big>(</big><em>data=None</em>, <em>page_offset=0</em>, <em>page_size=20</em>, <em>order_by=None</em><big>)</big><a class="headerlink" href="#odesk.routers.provider.Provider.search_jobs" title="Permalink to this definition">¶</a></dt>
-<dd><p>Search oDesk jobs.</p>
+<dd><p>Search oDesk jobs.
+NOTE: This call will be deprecated in favor to API V2
+<a class="reference internal" href="#odesk.routers.provider.Provider_V2.search_jobs" title="odesk.routers.provider.Provider_V2.search_jobs"><tt class="xref py py-meth docutils literal"><span class="pre">search_jobs()</span></tt></a></p>
 <dl class="docutils">
 <dt><em>Parameters:</em></dt>
 <dd><table class="first last docutils field-list" frame="void" rules="none">
@@ -1954,7 +1982,9 @@ e.g. <tt class="docutils literal"><span class="pre">date_posted;A</span></tt></p
 <dl class="method">
 <dt id="odesk.routers.provider.Provider.search_providers">
 <tt class="descname">search_providers</tt><big>(</big><em>data=None</em>, <em>page_offset=0</em>, <em>page_size=20</em>, <em>order_by=None</em><big>)</big><a class="headerlink" href="#odesk.routers.provider.Provider.search_providers" title="Permalink to this definition">¶</a></dt>
-<dd><p>Search oDesk providers.</p>
+<dd><p>Search oDesk providers.
+NOTE: This call will be deprecated in favor to API V2
+<a class="reference internal" href="#odesk.routers.provider.Provider_V2.search_providers" title="odesk.routers.provider.Provider_V2.search_providers"><tt class="xref py py-meth docutils literal"><span class="pre">search_providers()</span></tt></a></p>
 <dl class="docutils">
 <dt><em>Parameters:</em></dt>
 <dd><table class="first last docutils field-list" frame="void" rules="none">
@@ -1974,12 +2004,17 @@ e.g. <tt class="docutils literal"><span class="pre">date_posted;A</span></tt></p
 Any text that appears in a provider&#8217;s profile</p>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">c1:</th><td class="field-body"><p class="first">Category name. Use Metadata API to get the list
-of currently valid categories</p>
+<tr class="field-even field"><th class="field-name">c1:</th><td class="field-body"><p class="first">Category name.
+Use
+<a class="reference internal" href="#odesk.routers.provider.Provider.get_categories_metadata" title="odesk.routers.provider.Provider.get_categories_metadata"><tt class="xref py py-meth docutils literal"><span class="pre">get_categories_metadata()</span></tt></a>
+to get the list of currently valid categories</p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">c2:</th><td class="field-body"><p class="first">Subcategory, which is related to category (c1),
-please use c2[] to specify a couple subcategories</p>
+please use c2[] to specify a couple subcategories.
+Use
+<a class="reference internal" href="#odesk.routers.provider.Provider.get_categories_metadata" title="odesk.routers.provider.Provider.get_categories_metadata"><tt class="xref py py-meth docutils literal"><span class="pre">get_categories_metadata()</span></tt></a>
+to get available subcategories.</p>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">fb:</th><td class="field-body"><p class="first">Feedback (adjusted score),
@@ -2101,6 +2136,368 @@ the only available sort field as of now is &#8220;Date Created&#8221;</p>
 <dl class="attribute">
 <dt id="odesk.routers.provider.Provider.version">
 <tt class="descname">version</tt><em class="property"> = 1</em><a class="headerlink" href="#odesk.routers.provider.Provider.version" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="odesk.routers.provider.Provider_V2">
+<em class="property">class </em><tt class="descclassname">odesk.routers.provider.</tt><tt class="descname">Provider_V2</tt><big>(</big><em>client</em><big>)</big><a class="headerlink" href="#odesk.routers.provider.Provider_V2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="odesk.html#odesk.namespaces.Namespace" title="odesk.namespaces.Namespace"><tt class="xref py py-class docutils literal"><span class="pre">odesk.namespaces.Namespace</span></tt></a></p>
+<dl class="attribute">
+<dt id="odesk.routers.provider.Provider_V2.api_url">
+<tt class="descname">api_url</tt><em class="property"> = 'profiles/'</em><a class="headerlink" href="#odesk.routers.provider.Provider_V2.api_url" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="odesk.routers.provider.Provider_V2.search_jobs">
+<tt class="descname">search_jobs</tt><big>(</big><em>data=None</em>, <em>page_offset=0</em>, <em>page_size=20</em><big>)</big><a class="headerlink" href="#odesk.routers.provider.Provider_V2.search_jobs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Search jobs.</p>
+<p>The Job search API allows to third party applications to search
+for any public job on oDesk. The search parameters mirror the options
+available on the site plus options to configure the format
+of your results.</p>
+<p><em>Parameters:</em></p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">data:</th><td class="field-body"><dl class="first docutils">
+<dt>(optional) A dict of the following parameters</dt>
+<dd><p class="first last">(all parameters are optional):</p>
+</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">q:</th><td class="field-body"><p class="first">The search query.
+With API v2 we support a subset of the
+<tt class="docutils literal"><span class="pre">lucene</span> <span class="pre">query</span> <span class="pre">syntax</span></tt>. In particular we support
+<tt class="docutils literal"><span class="pre">AND</span></tt>, <tt class="docutils literal"><span class="pre">OR</span></tt>, <tt class="docutils literal"><span class="pre">NOT</span></tt> and additionally fields
+exposed are the ones indicated below,
+e.g <tt class="docutils literal"><span class="pre">q=title:php</span> <span class="pre">AND</span> <span class="pre">category:web_development</span></tt></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">title:</th><td class="field-body"><p class="first">Search in title of job profile</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">skills:</th><td class="field-body"><p class="first">Search in skills of job profile</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">groups:</th><td class="field-body"><p class="first">Search in groups of job profile</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">tests:</th><td class="field-body"><p class="first">Search in tests of job profile
+Use
+<a class="reference internal" href="#odesk.routers.provider.Provider.get_tests_metadata" title="odesk.routers.provider.Provider.get_tests_metadata"><tt class="xref py py-meth docutils literal"><span class="pre">get_tests_metadata()</span></tt></a>
+to get available tests</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">tests_top_10:</th><td class="field-body"><p class="first">Search for jobs that require provider to be
+in top 10 for test</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">tests_top_30:</th><td class="field-body"><p class="first">Search for jobs that require provider to be
+in top 30 for test</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">category:</th><td class="field-body"><p class="first">Search for category of job profile
+See full list here:
+<a class="reference external" href="http://developers.odesk.com/w/page/12364012/search%20jobs">http://developers.odesk.com/w/page/12364012/search%20jobs</a>
+in the table &#8220;Changes&#8221;</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">subcategory:</th><td class="field-body"><p class="first">Search for subcategory of job profile
+See full list here:
+<a class="reference external" href="http://developers.odesk.com/w/page/12364012/search%20jobs">http://developers.odesk.com/w/page/12364012/search%20jobs</a>
+in the table &#8220;Changes&#8221;</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">job_type:</th><td class="field-body"><p class="first">Type of job.
+Acceptable values are:</p>
+<blockquote>
+<div><ul class="simple">
+<li><tt class="docutils literal"><span class="pre">hourly</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">fixed</span></tt></li>
+</ul>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">duration:</th><td class="field-body"><p class="first">Indicates job duration.
+Acceptable values are:</p>
+<blockquote>
+<div><ul class="simple">
+<li><tt class="docutils literal"><span class="pre">week</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">month</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">quarter</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">semester</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">ongoing</span></tt></li>
+</ul>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">workload:</th><td class="field-body"><p class="first">Indicates workload for the job.
+Acceptable values are:</p>
+<blockquote>
+<div><ul class="simple">
+<li><tt class="docutils literal"><span class="pre">as_needed</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">part_time</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">full_time</span></tt></li>
+</ul>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name" colspan="2">client_feedback:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><p class="first">Constrains the search to jobs posted by clients
+with rating within a range:</p>
+<blockquote>
+<div><ul class="simple">
+<li>If the value is <tt class="docutils literal"><span class="pre">None</span></tt>, then jobs from
+clients without rating are returned.</li>
+<li>single params like <tt class="docutils literal"><span class="pre">1</span></tt> or <tt class="docutils literal"><span class="pre">2,3</span></tt>
+are acceptable
+(comma separated values result to OR queries)</li>
+<li>ranges like <tt class="docutils literal"><span class="pre">[2</span> <span class="pre">TO</span> <span class="pre">4]</span></tt> are acceptable</li>
+</ul>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">client_hires:</th><td class="field-body"><p class="first">Constrains the search to jobs from clients
+with range within the given number of past hires:</p>
+<blockquote>
+<div><ul class="simple">
+<li>single params like <tt class="docutils literal"><span class="pre">1</span></tt> or <tt class="docutils literal"><span class="pre">2,3</span></tt>
+are acceptable
+(comma separated values result to OR queries)</li>
+<li>ranges like <tt class="docutils literal"><span class="pre">[10</span> <span class="pre">TO</span> <span class="pre">20]</span></tt> are acceptable</li>
+</ul>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">budget:</th><td class="field-body"><p class="first">Constrains the search to jobs having the budget
+within the range given</p>
+<blockquote>
+<div><ul class="simple">
+<li>ranges like <tt class="docutils literal"><span class="pre">[100</span> <span class="pre">TO</span> <span class="pre">1000]</span></tt> are acceptable</li>
+</ul>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">job_status:</th><td class="field-body"><p class="first">The status that the job is currently in
+Acceptable values are:</p>
+<blockquote>
+<div><ul class="simple">
+<li><tt class="docutils literal"><span class="pre">open</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">completed</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">cancelled</span></tt></li>
+</ul>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">posted_since:</th><td class="field-body"><p class="first">Number of days since the job was posted.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">sort:</th><td class="field-body"><p class="first">Field and direction sorting search results.
+<tt class="docutils literal"><span class="pre">create_time</span></tt> descending  is used by default.
+Allowed sorting fields are:</p>
+<blockquote>
+<div><ul class="simple">
+<li><tt class="docutils literal"><span class="pre">create_time</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">client_rating</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">client_total_charge</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">client_total_hours</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">score</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">workload</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">duration</span></tt></li>
+</ul>
+</div></blockquote>
+<p class="last">Example: <tt class="docutils literal"><span class="pre">sort=create_time%20desc</span></tt></p>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">page_offset:</th><td class="field-body"><p class="first">(optional) Start of page (number of results to skip)</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">page_size:</th><td class="field-body"><p class="first last">(optional: default <tt class="docutils literal"><span class="pre">20</span></tt>) Page size (number of results)</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="odesk.routers.provider.Provider_V2.search_providers">
+<tt class="descname">search_providers</tt><big>(</big><em>data=None</em>, <em>page_offset=0</em>, <em>page_size=20</em><big>)</big><a class="headerlink" href="#odesk.routers.provider.Provider_V2.search_providers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Search providers.</p>
+<p>The contractor search API allows to third party applications to search
+for any public contractor on oDesk. The search parameters mirror
+the options available on the site plus options to configure
+the format of your results.</p>
+<p><em>Parameters:</em></p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">data:</th><td class="field-body"><dl class="first docutils">
+<dt>(optional) A dict of the following parameters</dt>
+<dd><p class="first last">(all parameters are optional):</p>
+</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">q:</th><td class="field-body"><p class="first">The search query.
+With v2 API we support a subset of the
+<tt class="docutils literal"><span class="pre">lucene</span> <span class="pre">query</span> <span class="pre">syntax</span></tt>. In particular we support
+<tt class="docutils literal"><span class="pre">AND</span></tt>, <tt class="docutils literal"><span class="pre">OR</span></tt>, <tt class="docutils literal"><span class="pre">NOT</span></tt> and additionally fields
+exposed are the ones indicated below,
+e.g <tt class="docutils literal"><span class="pre">q=title:php</span> <span class="pre">AND</span> <span class="pre">category:&quot;Web</span> <span class="pre">Development&quot;</span></tt></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">title:</th><td class="field-body"><p class="first">Search in title of contractor profile</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">skills:</th><td class="field-body"><p class="first">Search in skills of contractor profile</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">groups:</th><td class="field-body"><p class="first">Search in groups of contractor profile</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">tests:</th><td class="field-body"><p class="first">Search in tests of contractor profile
+Use
+<a class="reference internal" href="#odesk.routers.provider.Provider.get_tests_metadata" title="odesk.routers.provider.Provider.get_tests_metadata"><tt class="xref py py-meth docutils literal"><span class="pre">get_tests_metadata()</span></tt></a>
+to get available tests</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">tests_top_10:</th><td class="field-body"><p class="first">Search for contractors that are
+in top 10 for test</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">tests_top_30:</th><td class="field-body"><p class="first">Search for contractors that are
+in top 30 for test</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">category:</th><td class="field-body"><p class="first">Search for category of contractor profile.
+Use
+<a class="reference internal" href="#odesk.routers.provider.Provider.get_categories_metadata" title="odesk.routers.provider.Provider.get_categories_metadata"><tt class="xref py py-meth docutils literal"><span class="pre">get_categories_metadata()</span></tt></a>
+to get available categories</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">subcategory:</th><td class="field-body"><p class="first">Search for subcategory of contractor profile.
+Use
+<a class="reference internal" href="#odesk.routers.provider.Provider.get_categories_metadata" title="odesk.routers.provider.Provider.get_categories_metadata"><tt class="xref py py-meth docutils literal"><span class="pre">get_categories_metadata()</span></tt></a>
+to get available categories</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">region:</th><td class="field-body"><p class="first">Search for contractor profile in a region
+Acceptable values are titles from Metadata Regions API
+<tt class="xref py py-meth docutils literal"><span class="pre">get_regions()</span></tt>,
+e.g. <tt class="docutils literal"><span class="pre">Latin</span> <span class="pre">America</span></tt></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">feedback:</th><td class="field-body"><p class="first">Search for contractor with feedback score:
+- single params like <tt class="docutils literal"><span class="pre">3</span></tt> or <tt class="docutils literal"><span class="pre">3,4</span></tt> are acceptable</p>
+<blockquote>
+<div><p>(comma - separated values result to OR queries)</p>
+</div></blockquote>
+<ul class="simple">
+<li>also ranges like <tt class="docutils literal"><span class="pre">[3</span> <span class="pre">TO</span> <span class="pre">4]</span></tt> are acceptable</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">rate:</th><td class="field-body"><p class="first">Search for contractor profile with rate:
+- single params like <tt class="docutils literal"><span class="pre">20</span></tt> or <tt class="docutils literal"><span class="pre">20,30</span></tt></p>
+<blockquote>
+<div><p>are acceptable
+(comma - separated values result to OR queries)</p>
+</div></blockquote>
+<ul class="simple">
+<li>ranges like <tt class="docutils literal"><span class="pre">[20</span> <span class="pre">TO</span> <span class="pre">40]</span></tt> are acceptable</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">hours:</th><td class="field-body"><p class="first">Search for contractor profile that has worked
+this many hours</p>
+<blockquote>
+<div><ul class="simple">
+<li>single params like <tt class="docutils literal"><span class="pre">20</span></tt> or <tt class="docutils literal"><span class="pre">20,30</span></tt>
+are acceptable
+(comma separated values result to OR queries)</li>
+<li>ranges like <tt class="docutils literal"><span class="pre">[20</span> <span class="pre">TO</span> <span class="pre">40]</span></tt> are acceptable</li>
+</ul>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">recent_hours:</th><td class="field-body"><p class="first">Search for contractor profile that has worked
+this many hours recently:</p>
+<blockquote>
+<div><ul class="simple">
+<li>single params like <tt class="docutils literal"><span class="pre">20</span></tt> or <tt class="docutils literal"><span class="pre">20,30</span></tt>
+are acceptable
+(comma separated values result to OR queries)</li>
+<li>ranges like <tt class="docutils literal"><span class="pre">[20</span> <span class="pre">TO</span> <span class="pre">40]</span></tt> are acceptable</li>
+</ul>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">last_activity:</th><td class="field-body"><p class="first">Date of last time contractor worked
+- last_activity is searched with ISO 8601</p>
+<blockquote>
+<div><p>Date syntax with hours always set at
+00:00:00.000 (i.e. <tt class="docutils literal"><span class="pre">2013-01-04T00:00:00.000Z</span></tt>)</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">english_skill:</th><td class="field-body"><p class="first">Assessment of contractor on his/her english skills.
+Value can be set to one of <tt class="docutils literal"><span class="pre">0</span> <span class="pre">|</span> <span class="pre">1</span> <span class="pre">|</span> <span class="pre">2</span> <span class="pre">|</span> <span class="pre">3</span> <span class="pre">|</span> <span class="pre">4</span> <span class="pre">|</span> <span class="pre">5</span></tt></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">is_odesk_ready:</th><td class="field-body"><p class="first">Whether contractor is odesk ready.
+Value can be set to <tt class="docutils literal"><span class="pre">1</span></tt> or <tt class="docutils literal"><span class="pre">0</span></tt></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">profile_type:</th><td class="field-body"><p class="first">Whether contractor is an AC or an IC.
+Possible values:</p>
+<blockquote>
+<div><ul class="simple">
+<li><tt class="docutils literal"><span class="pre">Independent</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">Agency</span></tt></li>
+</ul>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name" colspan="2">include_entities:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><p class="first last">Parameter can be set to <tt class="docutils literal"><span class="pre">0</span></tt> or <tt class="docutils literal"><span class="pre">1</span></tt>
+If <tt class="docutils literal"><span class="pre">1</span></tt>: <tt class="docutils literal"><span class="pre">data</span></tt> in response will contain
+only profile ids array.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">page_offset:</th><td class="field-body"><p class="first">(optional) Start of page (number of results to skip)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">page_size:</th><td class="field-body"><p class="first last">(optional: default <tt class="docutils literal"><span class="pre">20</span></tt>) Page size (number of results)</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="odesk.routers.provider.Provider_V2.version">
+<tt class="descname">version</tt><em class="property"> = 2</em><a class="headerlink" href="#odesk.routers.provider.Provider_V2.version" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -3041,13 +3438,6 @@ Default: <tt class="docutils literal"><span class="pre">False</span></tt></td>
 
 </dd></dl>
 
-</div>
-<div class="section" id="module-odesk.routers">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-odesk.routers" title="Permalink to this headline">¶</a></h2>
-<p>Routers package.</p>
-<p>All communication with oDesk API is handled by the routers.</p>
-<p>When you import <tt class="docutils literal"><span class="pre">odesk</span></tt> package and instantiate <tt class="docutils literal"><span class="pre">odesk.Client</span></tt> class,
-routers are dynamically attatched to your <tt class="docutils literal"><span class="pre">client</span></tt> object.</p>
 </div>
 </div>
 

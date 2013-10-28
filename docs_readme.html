@@ -83,6 +83,11 @@
 </ul>
 </div></blockquote>
 </li>
+<li><p class="first">Edit the <tt class="docutils literal"><span class="pre">reference-docs/odesk.routers.rst</span></tt>:</p>
+<ul class="simple">
+<li>Move <tt class="docutils literal"><span class="pre">Module</span> <span class="pre">contents</span></tt> section to the top</li>
+</ul>
+</li>
 <li><p class="first">Generate documentation in html format:</p>
 <div class="highlight-python"><pre>sphinx-build -b html . _gh-pages</pre>
 </div>
@@ -90,13 +95,7 @@
 <li><p class="first">Check the documentation html that everything is okay.</p>
 </li>
 <li><p class="first">Upload contents of <tt class="docutils literal"><span class="pre">_gh-pages</span></tt> folder to the Github Pages (see <tt class="docutils literal"><span class="pre">gh-pages</span></tt> branch):</p>
-<div class="highlight-python"><pre>cp -r _gh-pages /tmp/.
-mv /tmp/_gh-pages/static /tmp/_gh-pages/static
-mv /tmp/_gh-pages/sources /tmp/_gh-pages/sources
-perl -pi -e "s/static/static/g;" /tmp/_gh-pages/*.html
-perl -pi -e "s/sources/sources/g;" /tmp/_gh-pages/*.html
-git checkout gh-pages
-cp -rf /tmp/_gh-pages/* .</pre>
+<div class="highlight-python"><pre>sh update_docs.sh</pre>
 </div>
 </li>
 </ol>
