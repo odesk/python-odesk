@@ -21,3 +21,5 @@ odesk/__init__.py.back
 python_odesk.egg-info
 _reference-docs
 _gh-pages
+_static
+_sources
