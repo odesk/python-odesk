@@ -1,0 +1,173 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Python bindings to oDesk API &mdash; python-odesk 0.5 documentation</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.5',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="python-odesk 0.5 documentation" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">python-odesk 0.5 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Python bindings to oDesk API</a><ul>
+<li><a class="reference internal" href="#requirements">Requirements</a></li>
+<li><a class="reference internal" href="#installation">Installation</a></li>
+<li><a class="reference internal" href="#ssl-certificates-note">SSL Certificates Note</a></li>
+<li><a class="reference internal" href="#quickstart">Quickstart</a></li>
+<li><a class="reference internal" href="#useful-links">Useful Links</a></li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/README.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <p>Copyright (c) 2010-2013, oDesk <a class="reference external" href="http://www.odesk.com">http://www.odesk.com</a>
+All rights reserved.</p>
+<div class="section" id="python-bindings-to-odesk-api">
+<h1>Python bindings to oDesk API<a class="headerlink" href="#python-bindings-to-odesk-api" title="Permalink to this headline">¶</a></h1>
+<p>This is a Python bindings for Public oDesk API <a class="reference external" href="http://developers.odesk.com/">http://developers.odesk.com/</a>
+Using the API you can build apps that will help you:</p>
+<ul class="simple">
+<li>Mangage your distributed team</li>
+<li>Search for contractors and jobs</li>
+<li>Send bulk invitations to interview and make offers</li>
+<li>Send bulk messages to your team</li>
+<li>Retrieve Time &amp; Financial information for your company, team and contractors</li>
+</ul>
+<p>API is the best way to comunicate between apps.</p>
+<div class="section" id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
+<p>httplib2&gt;=0.8
+oauth2&gt;=1.5.211
+urllib3&gt;=1.7</p>
+</div>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>pip install python-odesk</div></blockquote>
+<p>All the dependencies will be automatically installed as well.</p>
+</div>
+<div class="section" id="ssl-certificates-note">
+<h2>SSL Certificates Note<a class="headerlink" href="#ssl-certificates-note" title="Permalink to this headline">¶</a></h2>
+<p>Unfortunately SSL certificates for oDesk are not included in the <tt class="docutils literal"><span class="pre">httplib==0.8</span></tt>.</p>
+<p>Threrefore if you use Debian/Ubuntu/Archlinux,
+we recomend to install a package <tt class="docutils literal"><span class="pre">httplib2.ca_certs_locater</span></tt>:</p>
+<div class="highlight-python"><pre>pip install httplib2.ca_certs_locater</pre>
+</div>
+<p>It will force <tt class="docutils literal"><span class="pre">httplib2</span></tt> to use the OS&#8217;s certificates file.</p>
+<p>Another option is to create a <tt class="docutils literal"><span class="pre">ca_certs_locater.py</span></tt> in your projects directory
+and following the example from <a class="reference external" href="https://github.com/dreamhost/httplib2-ca_certs_locater">https://github.com/dreamhost/httplib2-ca_certs_locater</a>
+load patched <tt class="docutils literal"><span class="pre">ca_certs.txt</span></tt> file.</p>
+<p>You can find patched <tt class="docutils literal"><span class="pre">ca_certs.txt</span></tt> here:
+<a class="reference external" href="https://github.com/kipanshi/odesk_meter/blob/master/lib/httplib2/cacerts.txt">https://github.com/kipanshi/odesk_meter/blob/master/lib/httplib2/cacerts.txt</a></p>
+</div>
+<div class="section" id="quickstart">
+<h2>Quickstart<a class="headerlink" href="#quickstart" title="Permalink to this headline">¶</a></h2>
+<p>First, you need to create API key for authorization here:
+<a class="reference external" href="https://www.odesk.com/services/api/keys">https://www.odesk.com/services/api/keys</a></p>
+<p>Installing <strong>Ipython</strong> interactive shell is very useful for playing
+with the API, it has autocomplete, history, displays docstring help if you add &#8216;?&#8217;
+to the end of variable/function/class/method and many other nice things.
+So we greatly encourage you to install it: <tt class="docutils literal"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">ipython</span></tt></p>
+<p>To get started, look at the docs <a class="reference external" href="http://odesk.github.io/python-odesk/how_to.html">http://odesk.github.io/python-odesk/how_to.html</a>
+and also look at the <tt class="docutils literal"><span class="pre">examples/</span></tt> folder to see examples how to
+obtain oauth access tokens for web application and desktop application.</p>
+<p>Also threre&#8217;s a list of opensource projects using <tt class="docutils literal"><span class="pre">python-odesk</span></tt>:</p>
+<ul class="simple">
+<li>oDesk Meter <a class="reference external" href="https://github.com/kipanshi/odesk_meter">https://github.com/kipanshi/odesk_meter</a></li>
+<li>oDesk Graphs <a class="reference external" href="https://github.com/demalexx/odesk-graphs">https://github.com/demalexx/odesk-graphs</a></li>
+</ul>
+</div>
+<div class="section" id="useful-links">
+<h2>Useful Links<a class="headerlink" href="#useful-links" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>[Git repo](<a class="reference external" href="http://github.com/odesk/python-odesk">http://github.com/odesk/python-odesk</a>)</li>
+<li>[Issues](<a class="reference external" href="http://github.com/odesk/python-odesk/issues">http://github.com/odesk/python-odesk/issues</a>)</li>
+<li>[Documentation](<a class="reference external" href="http://odesk.github.com/python-odesk/">http://odesk.github.com/python-odesk/</a>)</li>
+<li>[Mailing list](<a class="reference external" href="http://groups.google.com/group/python-odesk">http://groups.google.com/group/python-odesk</a>)</li>
+<li>[Facebook group](<a class="reference external" href="http://www.facebook.com/group.php?gid=136364403050710">http://www.facebook.com/group.php?gid=136364403050710</a>)</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">python-odesk 0.5 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2010-2013, odesk.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b3.
+    </div>
+  </body>
+</html>

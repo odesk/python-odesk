@@ -1,28 +1,29 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Python bindings to oDesk API &mdash; python-odesk v0.4.1 documentation</title>
-    <link rel="stylesheet" href="static/sphinxdoc.css" type="text/css" />
-    <link rel="stylesheet" href="static/pygments.css" type="text/css" />
+    <title>Python bindings to oDesk API &mdash; python-odesk 0.5 documentation</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
-        VERSION:     '0.4.1',
+        URL_ROOT:    './',
+        VERSION:     '0.5',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="static/jquery.js"></script>
-    <script type="text/javascript" src="static/underscore.js"></script>
-    <script type="text/javascript" src="static/doctools.js"></script>
-    <link rel="top" title="python-odesk v0.4.1 documentation" href="#" />
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="python-odesk 0.5 documentation" href="#" />
     <link rel="next" title="Getting started" href="getting_started.html" /> 
   </head>
   <body>
@@ -33,9 +34,12 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
           <a href="getting_started.html" title="Getting started"
              accesskey="N">next</a> |</li>
-        <li><a href="#">python-odesk v0.4.1 documentation</a> &raquo;</li> 
+        <li><a href="#">python-odesk 0.5 documentation</a> &raquo;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar">
@@ -45,7 +49,7 @@
 <li><a class="reference internal" href="#">Python bindings to oDesk API</a><ul>
 </ul>
 </li>
-<li><a class="reference internal" href="#urls">Urls</a></li>
+<li><a class="reference internal" href="#useful-links">Useful Links</a></li>
 </ul>
 
   <h4>Next topic</h4>
@@ -53,13 +57,13 @@
                         title="next chapter">Getting started</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
-    <li><a href="sources/index.txt"
+    <li><a href="_sources/index.txt"
            rel="nofollow">Show Source</a></li>
   </ul>
 <div id="searchbox" style="display: none">
   <h3>Quick search</h3>
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" size="18" />
+      <input type="text" name="q" />
       <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
@@ -85,34 +89,58 @@
 <li class="toctree-l2"><a class="reference internal" href="getting_started.html#requirements">Requirements</a></li>
 <li class="toctree-l2"><a class="reference internal" href="getting_started.html#install">Install</a></li>
 <li class="toctree-l2"><a class="reference internal" href="getting_started.html#settings">Settings</a></li>
-<li class="toctree-l2"><a class="reference internal" href="getting_started.html#simple-example">Simple example</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="full_list.html">Full list of classes and methods</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="full_list.html#package-structure">Package structure</a></li>
-<li class="toctree-l2"><a class="reference internal" href="full_list.html#init-py">__init__.py</a></li>
-<li class="toctree-l2"><a class="reference internal" href="full_list.html#auth-py">auth.py</a></li>
-<li class="toctree-l2"><a class="reference internal" href="full_list.html#exceptions-py">exceptions.py</a></li>
-<li class="toctree-l2"><a class="reference internal" href="full_list.html#http-py">http.py</a></li>
-<li class="toctree-l2"><a class="reference internal" href="full_list.html#namespaces-py">namespaces.py</a></li>
-<li class="toctree-l2"><a class="reference internal" href="full_list.html#oauth-py">oauth.py</a></li>
-<li class="toctree-l2"><a class="reference internal" href="full_list.html#routers">routers/</a></li>
-<li class="toctree-l2"><a class="reference internal" href="full_list.html#utils-py">utils.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#simple-example">Simple Example</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="how_to.html">How to</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="how_to.html#authenticate">Authenticate</a></li>
-<li class="toctree-l2"><a class="reference internal" href="how_to.html#get-provider-s-information">Get provider&#8217;s information</a></li>
-<li class="toctree-l2"><a class="reference internal" href="how_to.html#get-teams-information">Get teams` information</a></li>
-<li class="toctree-l2"><a class="reference internal" href="how_to.html#get-trays-and-messages">Get trays and messages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="how_to.html#provider-s-information">Provider&#8217;s information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="how_to.html#search-providers">Search Providers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="how_to.html#search-jobs">Search Jobs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="how_to.html#metadata-information">Metadata information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="how_to.html#hiring">Hiring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="how_to.html#work-with-jobs">Work with jobs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="how_to.html#team-s-information">Team&#8217;s information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="how_to.html#trays-and-messages">Trays and messages</a></li>
 <li class="toctree-l2"><a class="reference internal" href="how_to.html#send-message">Send message</a></li>
 <li class="toctree-l2"><a class="reference internal" href="how_to.html#get-timereports">Get timereports</a></li>
 <li class="toctree-l2"><a class="reference internal" href="how_to.html#get-finreports">Get finreports</a></li>
 <li class="toctree-l2"><a class="reference internal" href="how_to.html#work-with-tasks">Work with tasks</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="reference_docs.html">Reference Documentation: Classes and Methods</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="_reference-docs/odesk.html">odesk package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_reference-docs/odesk.html#module-odesk">Module contents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_reference-docs/odesk.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_reference-docs/odesk.routers.html">odesk.routers package</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="_reference-docs/odesk.routers.html#submodules">Submodules</a></li>
+<li class="toctree-l5"><a class="reference internal" href="_reference-docs/odesk.routers.html#module-odesk.routers.finreport">odesk.routers.finreport module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="_reference-docs/odesk.routers.html#module-odesk.routers.hr">odesk.routers.hr module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="_reference-docs/odesk.routers.html#module-odesk.routers.job">odesk.routers.job module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="_reference-docs/odesk.routers.html#module-odesk.routers.mc">odesk.routers.mc module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="_reference-docs/odesk.routers.html#module-odesk.routers.provider">odesk.routers.provider module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="_reference-docs/odesk.routers.html#module-odesk.routers.task">odesk.routers.task module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="_reference-docs/odesk.routers.html#module-odesk.routers.team">odesk.routers.team module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="_reference-docs/odesk.routers.html#module-odesk.routers.timereport">odesk.routers.timereport module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="_reference-docs/odesk.routers.html#module-odesk.routers">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="_reference-docs/odesk.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_reference-docs/odesk.html#module-odesk.client">odesk.client module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_reference-docs/odesk.html#module-odesk.config">odesk.config module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_reference-docs/odesk.html#module-odesk.exceptions">odesk.exceptions module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_reference-docs/odesk.html#module-odesk.http">odesk.http module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_reference-docs/odesk.html#module-odesk.namespaces">odesk.namespaces module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_reference-docs/odesk.html#module-odesk.oauth">odesk.oauth module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_reference-docs/odesk.html#module-odesk.utils">odesk.utils module</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#version-0-4-1">Version 0.4.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#version-0-5">Version 0.5</a></li>
 <li class="toctree-l2"><a class="reference internal" href="changelog.html#version-0-4">Version 0.4</a></li>
 <li class="toctree-l2"><a class="reference internal" href="changelog.html#version-0-2">Version 0.2</a></li>
 <li class="toctree-l2"><a class="reference internal" href="changelog.html#version-0-1-2">Version 0.1.2</a></li>
@@ -121,15 +149,11 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="license.html">BSD license</a></li>
-<li class="toctree-l1"><a class="reference internal" href="roadmap.html">Roadmap</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="roadmap.html#version-0-5">Version 0.5</a></li>
-</ul>
-</li>
 </ul>
 </div>
 </div>
-<div class="section" id="urls">
-<h1>Urls<a class="headerlink" href="#urls" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="useful-links">
+<h1>Useful Links<a class="headerlink" href="#useful-links" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
 <li>Git repo: <a class="reference external" href="http://github.com/odesk/python-odesk">http://github.com/odesk/python-odesk</a></li>
 <li>Issues: <a class="reference external" href="http://github.com/odesk/python-odesk/issues">http://github.com/odesk/python-odesk/issues</a></li>
@@ -152,14 +176,17 @@
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
           <a href="getting_started.html" title="Getting started"
              >next</a> |</li>
-        <li><a href="#">python-odesk v0.4.1 documentation</a> &raquo;</li> 
+        <li><a href="#">python-odesk 0.5 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright 2010-2011, odesk.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+        &copy; Copyright 2010-2013, odesk.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b3.
     </div>
   </body>
 </html>

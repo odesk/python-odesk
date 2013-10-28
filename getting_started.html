@@ -1,29 +1,30 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Getting started &mdash; python-odesk v0.4.1 documentation</title>
-    <link rel="stylesheet" href="static/sphinxdoc.css" type="text/css" />
-    <link rel="stylesheet" href="static/pygments.css" type="text/css" />
+    <title>Getting started &mdash; python-odesk 0.5 documentation</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
-        VERSION:     '0.4.1',
+        URL_ROOT:    './',
+        VERSION:     '0.5',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="static/jquery.js"></script>
-    <script type="text/javascript" src="static/underscore.js"></script>
-    <script type="text/javascript" src="static/doctools.js"></script>
-    <link rel="top" title="python-odesk v0.4.1 documentation" href="index.html" />
-    <link rel="next" title="Full list of classes and methods" href="full_list.html" />
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="python-odesk 0.5 documentation" href="index.html" />
+    <link rel="next" title="How to" href="how_to.html" />
     <link rel="prev" title="Python bindings to oDesk API" href="index.html" /> 
   </head>
   <body>
@@ -34,12 +35,15 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="full_list.html" title="Full list of classes and methods"
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="how_to.html" title="How to"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="index.html" title="Python bindings to oDesk API"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">python-odesk v0.4.1 documentation</a> &raquo;</li> 
+        <li><a href="index.html">python-odesk 0.5 documentation</a> &raquo;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar">
@@ -50,7 +54,7 @@
 <li><a class="reference internal" href="#requirements">Requirements</a></li>
 <li><a class="reference internal" href="#install">Install</a></li>
 <li><a class="reference internal" href="#settings">Settings</a></li>
-<li><a class="reference internal" href="#simple-example">Simple example</a></li>
+<li><a class="reference internal" href="#simple-example">Simple Example</a></li>
 </ul>
 </li>
 </ul>
@@ -59,17 +63,17 @@
   <p class="topless"><a href="index.html"
                         title="previous chapter">Python bindings to oDesk API</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="full_list.html"
-                        title="next chapter">Full list of classes and methods</a></p>
+  <p class="topless"><a href="how_to.html"
+                        title="next chapter">How to</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
-    <li><a href="sources/getting_started.txt"
+    <li><a href="_sources/getting_started.txt"
            rel="nofollow">Show Source</a></li>
   </ul>
 <div id="searchbox" style="display: none">
   <h3>Quick search</h3>
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" size="18" />
+      <input type="text" name="q" />
       <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
@@ -91,7 +95,8 @@
 <span id="id1"></span><h1>Getting started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="requirements">
 <span id="id2"></span><h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
-<p>You need to install oauth2 to run the python-odesk, and mock and nosetests if you plan to develop python-odesk and/or run library&#8217;s tests.</p>
+<p>You need to install oauth2 and urllib3 to run the python-odesk. These packages are installed automatically, so basicly you don&#8217;t need to install them manually.</p>
+<p>If you want to contribute to python-odesk, you need to istall <tt class="docutils literal"><span class="pre">mock</span></tt> and <tt class="docutils literal"><span class="pre">nosetests</span></tt>.</p>
 <p>Mock:</p>
 <div class="highlight-python"><pre>pip install mock
 #or
@@ -106,16 +111,16 @@ easy_install nose</pre>
 <div class="section" id="install">
 <span id="id3"></span><h2>Install<a class="headerlink" href="#install" title="Permalink to this headline">¶</a></h2>
 <p>On most UNIX-like systems, you’ll probably need to run these commands as root or using sudo.</p>
-<p>To install:</p>
-<div class="highlight-python"><pre>python setup.py install</pre>
+<p>To install via pip:</p>
+<div class="highlight-python"><pre>pip install python-odesk</pre>
 </div>
 <p>Or via easy_install:</p>
 <div class="highlight-python"><pre>easy_install python-odesk</pre>
 </div>
-<p>Or via pip:</p>
-<div class="highlight-python"><pre>pip install python-odesk</pre>
+<p>Or install from source:</p>
+<div class="highlight-python"><pre>python setup.py install</pre>
 </div>
-<p>Also, you can retrieve fresh version of python-odesk from GitHub:</p>
+<p>Also, you can retrieve the most recent version of python-odesk from GitHub:</p>
 <div class="highlight-python"><pre>git clone git://github.com/odesk/python-odesk.git</pre>
 </div>
 </div>
@@ -128,37 +133,55 @@ easy_install nose</pre>
 <p>To get oDesk API keys, please visit the <a class="reference external" href="http://www.odesk.com/services/api/keys">http://www.odesk.com/services/api/keys</a></p>
 </div>
 <div class="section" id="simple-example">
-<span id="id5"></span><h2>Simple example<a class="headerlink" href="#simple-example" title="Permalink to this headline">¶</a></h2>
-<p>Some examples of using listed in the odesk/examples folder.
-Here is the simple example.</p>
+<span id="id5"></span><h2>Simple Example<a class="headerlink" href="#simple-example" title="Permalink to this headline">¶</a></h2>
+<p>This example is very easy to follow in Python interactive console,
+we also recommend to use improved interactive console - IPython.</p>
+<p>You can see the full code of examples in <tt class="docutils literal"><span class="pre">odesk/examples</span></tt> folder.</p>
+<p>Here is the simple example if you are using web API keys.</p>
 <p>Initializing the client:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">client</span> <span class="o">=</span> <span class="n">odesk</span><span class="o">.</span><span class="n">Client</span><span class="p">(</span><span class="n">public_key</span><span class="p">,</span> <span class="n">secret_key</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Shows the url to get frob from it after app authorization on odesk and getting redirect to callback:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">print</span> <span class="n">client</span><span class="o">.</span><span class="n">auth</span><span class="o">.</span><span class="n">auth_url</span><span class="p">()</span>
+<p>Now follow the <tt class="docutils literal"><span class="pre">authorize_url</span></tt>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">print</span> <span class="n">client</span><span class="o">.</span><span class="n">auth</span><span class="o">.</span><span class="n">get_authorize_url</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>Waiting for inputing the frob:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">print</span> <span class="s">&quot;After that you should be redirected back to your app URL with &quot;</span> <span class="o">+</span> \
-      <span class="s">&quot;additional ?frob= parameter&quot;</span>
-<span class="n">frob</span> <span class="o">=</span> <span class="nb">raw_input</span><span class="p">(</span><span class="s">&#39;Enter frob: &#39;</span><span class="p">)</span>
+<p>After you follow this url you&#8217;ll be redirected to the callback url that you
+entered during API keys creation. The <tt class="docutils literal"><span class="pre">oauth_verifier</span></tt> parameter is passed to the callback
+and you need to copy it&#8217;s value. If you selected &#8220;Desktop&#8221; type of the key instead
+of &#8220;Web&#8221;, the value of oAuth verifier will be just displayed to you.</p>
+<p>Now you get the verifier copied into your buffer and you can get you access token:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">verifier</span> <span class="o">=</span> <span class="nb">raw_input</span><span class="p">(</span><span class="s">&#39;Enter oauth_verifier: &#39;</span><span class="p">)</span>
+<span class="n">oauth_access_token</span><span class="p">,</span> <span class="n">oauth_access_token_secret</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">auth</span><span class="o">.</span><span class="n">get_access_token</span><span class="p">(</span><span class="n">verifier</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Authentication:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">auth_token</span><span class="p">,</span> <span class="n">user</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">auth</span><span class="o">.</span><span class="n">get_token</span><span class="p">(</span><span class="n">frob</span><span class="p">)</span>
-<span class="k">print</span> <span class="s">&quot;Authenticated user:&quot;</span>
-<span class="k">print</span> <span class="n">user</span>
+<p>Great! Now you got all the necessary credentials for accessing the oDesk API.
+Use obtained <tt class="docutils literal"><span class="pre">oauth_access_token</span></tt> and <tt class="docutils literal"><span class="pre">oauth_access_token_secret</span></tt> to intialize
+a ready-to-go Client instance:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">client</span> <span class="o">=</span> <span class="n">odesk</span><span class="o">.</span><span class="n">Client</span><span class="p">(</span><span class="n">public_key</span><span class="p">,</span> <span class="n">secret_key</span><span class="p">,</span>
+                      <span class="n">oauth_access_token</span><span class="o">=</span><span class="n">oauth_access_token</span><span class="p">,</span>
+                      <span class="n">oauth_access_token_secret</span><span class="o">=</span><span class="n">oauth_access_token_secret</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Installation of new client already with token:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">client</span> <span class="o">=</span> <span class="n">odesk</span><span class="o">.</span><span class="n">Client</span><span class="p">(</span><span class="n">public_key</span><span class="p">,</span> <span class="n">secret_key</span><span class="p">,</span> <span class="n">auth_token</span><span class="p">)</span>
+<p>To check it works:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">print</span> <span class="n">client</span><span class="o">.</span><span class="n">auth</span><span class="o">.</span><span class="n">get_info</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>Getting user&#8217;s teamrooms:</p>
+<p>This call will give you information about the currently authorized user.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Make sure you securely store the <tt class="docutils literal"><span class="pre">oauth_access_token</span></tt> and <tt class="docutils literal"><span class="pre">oauth_access_token_secret</span></tt>.</p>
+</div>
+<p>So now just start playing with the API, for example you can get your teamrooms:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">print</span> <span class="n">client</span><span class="o">.</span><span class="n">team</span><span class="o">.</span><span class="n">get_teamrooms</span><span class="p">()</span>
 </pre></div>
 </div>
+<p>or get your companies:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">print</span> <span class="n">client</span><span class="o">.</span><span class="n">hr</span><span class="o">.</span><span class="n">get_companies</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>See the Reference Documentation for the full list of available API calls
+<a class="reference internal" href="reference_docs.html#reference-docs"><em>Reference Documentation: Classes and Methods</em></a></p>
 </div>
 </div>
 
@@ -175,17 +198,20 @@ Here is the simple example.</p>
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="full_list.html" title="Full list of classes and methods"
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="how_to.html" title="How to"
              >next</a> |</li>
         <li class="right" >
           <a href="index.html" title="Python bindings to oDesk API"
              >previous</a> |</li>
-        <li><a href="index.html">python-odesk v0.4.1 documentation</a> &raquo;</li> 
+        <li><a href="index.html">python-odesk 0.5 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright 2010-2011, odesk.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+        &copy; Copyright 2010-2013, odesk.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b3.
     </div>
   </body>
 </html>
