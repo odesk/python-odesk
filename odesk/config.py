@@ -8,5 +8,5 @@ variable and if it is defined, use it as ``BASE_URL``.
 
 import os
 
-BASE_URL = getattr(os.environ, 'PYTHON_ODESK_BASE_URL',
-                   'https://www.odesk.com')
+BASE_URL = os.environ.get('PYTHON_ODESK_BASE_URL',
+                          'https://www.odesk.com')

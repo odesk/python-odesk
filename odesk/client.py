@@ -19,8 +19,8 @@ __all__ = ["Client"]
 
 logger = logging.getLogger('python-odesk')
 
-if getattr(os.environ, "PYTHON_ODESK_DEBUG", False):
-    if getattr(os.environ, "PYTHON_ODESK_DEBUG_FILE", False):
+if os.environ.get("PYTHON_ODESK_DEBUG", False):
+    if os.environ.get("PYTHON_ODESK_DEBUG_FILE", False):
         fh = logging.FileHandler(filename=os.environ["PYTHON_ODESK_DEBUG_FILE"]
             )
         fh.setLevel(logging.DEBUG)

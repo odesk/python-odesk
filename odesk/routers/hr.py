@@ -569,7 +569,13 @@ class HR(Namespace):
         *Parameters:*
           :job_id:        Job reference ID
 
-          :reason_code:   The reason code
+          :reason_code:   The reason code to cancel the job, e.g. ``41``.
+                          Possible values are:
+                            * ``67`` - Accidental opening creation
+                            * ``51`` - All positions filled
+                            * ``49`` - Filled by alternate source
+                            * ``41`` - Project was cancelled
+                            * ``34`` - No developer for requested skills
 
         """
         url = 'jobs/{0}'.format(job_id)
@@ -940,9 +946,9 @@ class HR(Namespace):
                                  is $0.
                                  Possible values are: ['yes', 'no']
 
-          :fb_scores:            (optional) Estimate, could be an array of
+          :fb_scores:            (optional) Estimate, a dictionary of
                                  scores, where id is reference to
-                                 score description.
+                                 score description (see example below).
                                  The feedback scores are optional, but if
                                  present they must be complete: all scores.
                                  Below are the possible score reference id
@@ -984,7 +990,8 @@ class HR(Namespace):
                                          flexibility, open to suggestions
                                          for improvement"
                                   Example:
-                                  ``&fb_scores[3]=5&fb_scores[4]=4&...&fb_scores[8]=5``
+                                  {'fb_scores[3]': 5, 'fb_scores[4]': 4, ... ,
+                                   'fb_scores[8]': 5}
 
           :fb_comment:           (optional) Feedback comment, some string
                                  message. It is optional but if present, then
@@ -1002,7 +1009,8 @@ class HR(Namespace):
         data['would_hire_again'] = would_hire_again
 
         if fb_scores:
-            data['fb_scores'] = fb_scores
+            for key, value in fb_scores.items():
+                data[key] = value
 
         if fb_comment:
             data['fb_comment'] = fb_comment
