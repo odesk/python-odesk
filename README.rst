@@ -38,9 +38,9 @@ SSL Certificates Note
 Unfortunately SSL certificates for oDesk are not included in the ``httplib==0.8``.
 
 Threrefore if you use Debian/Ubuntu/Archlinux,
-we recomend to install a package ``httplib2.ca_certs_locater``::
+we recomend to install a package ``httplib2.system_ca_certs_locater``::
 
-    pip install httplib2.ca_certs_locater
+    pip install pbr httplib2.system_ca_certs_locater
 
 It will force ``httplib2`` to use the OS's certificates file.
 
@@ -75,8 +75,8 @@ Also threre's a list of opensource projects using ``python-odesk``:
 Useful Links
 ============
 
-* [Git repo](http://github.com/odesk/python-odesk)
-* [Issues](http://github.com/odesk/python-odesk/issues)
-* [Documentation](http://odesk.github.com/python-odesk/)
-* [Mailing list](http://groups.google.com/group/python-odesk)
-* [Facebook group](http://www.facebook.com/group.php?gid=136364403050710)
+* `Git repo <http://github.com/odesk/python-odesk>`_
+* `Issues <http://github.com/odesk/python-odesk/issues>`_
+* `Documentation <http://odesk.github.com/python-odesk/>`_
+* `Mailing list <http://groups.google.com/group/python-odesk>`_
+* `Facebook group <http://www.facebook.com/group.php?gid=136364403050710>`_

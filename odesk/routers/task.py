@@ -318,7 +318,8 @@ class Task(Namespace):
           :url:           Task URL
 
         """
-        put_url = 'tasks/companies/{0}/tasks/{1}'.format(company_id, code)
+        put_url = 'tasks/companies/{0}/tasks/{1}'.format(
+            company_id, urllib.quote(str(code)))
         data = {'code': code,
                 'description': description,
                 'url': url}
@@ -347,7 +348,7 @@ class Task(Namespace):
 
         """
         put_url = 'tasks/companies/{0}/teams/{1}/tasks/{2}'.format(
-            company_id, team_id, code)
+            company_id, team_id, urllib.quote(str(code)))
         data = {'code': code,
                 'description': description,
                 'url': url}
@@ -376,7 +377,7 @@ class Task(Namespace):
 
         """
         put_url = 'tasks/companies/{0}/teams/{1}/users/{2}/tasks/{3}'.format(
-            company_id, team_id, user_id, code)
+            company_id, team_id, user_id, urllib.quote(str(code)))
         data = {'code': code,
                 'description': description,
                 'url': url}

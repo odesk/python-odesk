@@ -1,7 +1,7 @@
 .. sampledoc documentation master file
 
 ******************************************
-Python bindings to oDesk API
+Python bindings to oDesk API - |release|
 ******************************************
 
 .. toctree::
