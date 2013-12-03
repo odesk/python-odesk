@@ -4,14 +4,6 @@ odesk.routers package
 Submodules
 ----------
 
-Module contents
----------------
-
-.. automodule:: odesk.routers
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
 odesk.routers.finreport module
 ------------------------------
 
@@ -72,6 +64,15 @@ odesk.routers.timereport module
 -------------------------------
 
 .. automodule:: odesk.routers.timereport
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: odesk.routers
     :members:
     :undoc-members:
     :show-inheritance:

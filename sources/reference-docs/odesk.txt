@@ -8,15 +8,6 @@ Subpackages
 
     odesk.routers
 
-
-Module contents
----------------
-
-.. automodule:: odesk
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
 Submodules
 ----------
 
@@ -68,10 +59,27 @@ odesk.oauth module
     :undoc-members:
     :show-inheritance:
 
+odesk.tests module
+------------------
+
+.. automodule:: odesk.tests
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 odesk.utils module
 ------------------
 
 .. automodule:: odesk.utils
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: odesk
     :members:
     :undoc-members:
     :show-inheritance:

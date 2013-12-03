@@ -5,6 +5,13 @@
 Changelog
 ***************
 
+.. _0.5.1:
+
+Version 0.5.1
+-------------
+* Fixed bug preventing update (``PUT`` method) for oTask codes that
+  contained non-urlsafe characters, e.g. "space", "colon", etc.
+
 .. _0.5:
 
 Version 0.5
