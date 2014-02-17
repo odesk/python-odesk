@@ -822,12 +822,12 @@ class HR(Namespace):
           :include_sub_teams:     (optional) <0|1> - whether to include info
                                   about sub-teams
 
-          :provider_reference:    (conditionally optional)
+          :provider_reference:    (optional)
                                   The provider's reference ID.
                                   Has the override priority over the
                                   ``profile_key`` if both specified.
 
-          :profile_key:           (conditionally optional) Unique profile key,
+          :profile_key:           (optional) Unique profile key,
                                   used if ``provider_reference`` is absent
 
           :job_reference:         (optional) The Job's reference ID
@@ -871,9 +871,11 @@ class HR(Namespace):
         if include_sub_teams:
             data['include_sub_teams'] = include_sub_teams
 
-        if profile_key is None and provider_reference is None:
-            raise ApiValueError('Either one of the parameters ``profile_key`` '
-                                'or ``provider_reference`` should be provided')
+        if profile_key:
+            data['profile_key'] = profile_key
+
+        if provider_reference:
+            data['provider_reference'] = provider_reference
 
         if provider_reference:
             data['provider__reference'] = provider_reference

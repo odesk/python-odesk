@@ -261,69 +261,52 @@ Please see :py:class:`Finreports` wrapper
 ..
 .. _work_with_tasks:
 
-Work with tasks
-----------------------
+Work with Activities
+--------------------
 
 http://developers.odesk.com/oTasks-API
 
 .. currentmodule:: odesk.routers.task
 
-To work with tasks you should use :py:class:`client.otask<Task>` wrapper::
+To work with Activities you should use :py:class:`client.task<Task>` wrapper::
 
-    tasks = client.otask.get_company_tasks('company_id')
+    tasks = client.task.get_team_tasks('your_company_id', 'your_team_id')
+
+Note, that ``company_id`` here is basically a ``parent_team__id`` value
+from the ``hr.get_team()`` API call.
 
 .. currentmodule:: odesk.routers.task.Task
 
-Methods to get tasks:
+Methods to get activities:
 
 :py:meth:`client.task.get_team_tasks<get_team_tasks>`
 
-:py:meth:`client.task.get_user_tasks<get_user_tasks>`
-
-:py:meth:`client.task.get_company_tasks_full<get_company_tasks_full>`
-
-:py:meth:`client.task.get_team_tasks_full<get_team_tasks_full>`
-
-:py:meth:`client.task.get_user_tasks_full<get_user_tasks_full>`
-
-:py:meth:`client.task.get_company_specific_tasks<get_company_specific_tasks>`
+:py:meth:`client.task.get_company_tasks<get_company_tasks>`
 
 :py:meth:`client.task.get_team_specific_tasks<get_team_specific_tasks>`
 
-:py:meth:`client.task.get_user_specific_tasks<get_user_specific_tasks>`
+:py:meth:`client.task.get_company_specific_tasks<get_company_specific_tasks>`
 
-Create and update tasks:
-
-:py:meth:`client.task.post_company_task<post_company_task>`
+Create and update activities:
 
 :py:meth:`client.task.post_team_task<post_team_task>`
 
-:py:meth:`client.task.post_user_task<post_user_task>`
-
-:py:meth:`client.task.put_company_task<put_company_task>`
+:py:meth:`client.task.post_company_task<post_company_task>`
 
 :py:meth:`client.task.put_team_task<put_team_task>`
 
-:py:meth:`client.task.put_user_task<put_user_task>`
+:py:meth:`client.task.put_company_task<put_company_task>`
 
-Delete tasks:
+Archive/unarchive activities:
 
-:py:meth:`client.task.delete_company_task<delete_company_task>`
+:py:meth:`client.task.archive_team_task<archive_team_task>`
 
-:py:meth:`client.task.delete_team_task<delete_team_task>`
+:py:meth:`client.task.archive_company_task<archive_company_task>`
 
-:py:meth:`client.task.delete_user_task<delete_user_task>`
+:py:meth:`client.task.unarchive_team_task<unarchive_team_task>`
 
-:py:meth:`client.task.delete_all_company_tasks<delete_all_company_tasks>`
+:py:meth:`client.task.unarchive_company_task<unarchive_company_task>`
 
-:py:meth:`client.task.delete_all_team_tasks<delete_all_team_tasks>`
+Assign activities to the contractor's engagement:
 
-:py:meth:`client.task.delete_all_user_tasks<delete_all_user_tasks>`
-
-Batch update of tasks:
-
-:py:meth:`client.task.update_batch_tasks(company_id, csv_data)<update_batch_tasks>`
-
-Where csv_data - is the raw csv data for tasks to be updated. Example::
-
-    "acmeinc","","","ABC","Project ABC","https://www.acmeinc.com/project/abc"<br>"acmeinc","acmeinc:dev","b42","123","Task 123","https://www.acmeinc.com/task/123"
+:py:meth:`client.task.assign_engagement<assign_engagement>`

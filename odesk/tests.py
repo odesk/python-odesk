@@ -628,13 +628,8 @@ def test_get_hrv2_offers():
 def test_get_hrv2_engagements():
     hr = get_client().hr
 
-    # test conditional ``provider_reference`` and ``profile_key``
-    try:
-        hr.get_engagements()
-        raise Exception('Neither of ``provider_reference`` and ``profile_key``'
-                        'was specified')
-    except ApiValueError:
-        pass
+    eq_(hr.get_engagements(), hr_dict[u'engagements'])
+
     eq_(hr.get_engagements(provider_reference=1), hr_dict[u'engagements'])
     eq_(hr.get_engagements(profile_key=1), hr_dict[u'engagements'])
     eq_(hr.get_engagement(1), hr_dict[u'engagement'])
@@ -1132,59 +1127,19 @@ def patched_urlopen_task(*args, **kwargs):
 
 
 @patch('urllib3.PoolManager.urlopen', patched_urlopen_task)
-def test_get_company_tasks():
-    task = get_client().task
-
-    assert task.get_company_tasks(1) == task_dict['tasks'], \
-     task.get_company_tasks(1)
-
-
-@patch('urllib3.PoolManager.urlopen', patched_urlopen_task)
 def test_get_team_tasks():
     task = get_client().task
 
     assert task.get_team_tasks(1, 1) == task_dict['tasks'], \
-     task.get_team_tasks(1, 1)
+        task.get_team_tasks(1, 1)
 
 
 @patch('urllib3.PoolManager.urlopen', patched_urlopen_task)
-def test_get_user_tasks():
+def test_get_company_tasks():
     task = get_client().task
 
-    assert task.get_user_tasks(1, 1, 1) == task_dict['tasks'], \
-     task.get_user_tasks(1, 1, 1)
-
-
-@patch('urllib3.PoolManager.urlopen', patched_urlopen_task)
-def test_company_tasks_full():
-    task = get_client().task
-
-    assert task.get_company_tasks_full(1) == task_dict['tasks'], \
-     task.get_company_tasks_full(1)
-
-
-@patch('urllib3.PoolManager.urlopen', patched_urlopen_task)
-def test_get_team_tasks_full():
-    task = get_client().task
-
-    assert task.get_team_tasks_full(1, 1) == task_dict['tasks'], \
-     task.get_team_tasks_full(1, 1)
-
-
-@patch('urllib3.PoolManager.urlopen', patched_urlopen_task)
-def test_get_user_tasks_full():
-    task = get_client().task
-
-    assert task.get_user_tasks_full(1, 1, 1) == task_dict['tasks'], \
-     task.get_user_tasks_full(1, 1, 1)
-
-
-@patch('urllib3.PoolManager.urlopen', patched_urlopen_task)
-def test_get_company_specific_tasks():
-    task = get_client().task
-
-    assert task.get_company_specific_tasks(1, [1, 1]) == task_dict['tasks'], \
-     task.get_company_specific_tasks(1, [1, 1])
+    assert task.get_company_tasks(1) == task_dict['tasks'], \
+        task.get_company_tasks(1)
 
 
 @patch('urllib3.PoolManager.urlopen', patched_urlopen_task)
@@ -1192,111 +1147,89 @@ def test_get_team_specific_tasks():
     task = get_client().task
 
     assert task.get_team_specific_tasks(1, 1, [1, 1]) == task_dict['tasks'], \
-     task.get_team_specific_tasks(1, 1, [1, 1])
+        task.get_team_specific_tasks(1, 1, [1, 1])
 
 
 @patch('urllib3.PoolManager.urlopen', patched_urlopen_task)
-def test_get_user_specific_tasks():
+def test_get_company_specific_tasks():
     task = get_client().task
 
-    assert task.get_user_specific_tasks(1, 1, 1, [1, 1]) == task_dict['tasks'], \
-     task.get_user_specific_tasks(1, 1, 1, [1, 1])
-
-
-@patch('urllib3.PoolManager.urlopen', patched_urlopen_task)
-def test_post_company_task():
-    task = get_client().task
-
-    assert task.post_company_task(1, 1, '1', 'ttt') == task_dict, \
-     task.post_company_task(1, 1, '1', 'ttt')
+    assert task.get_company_specific_tasks(1, [1, 1]) == task_dict['tasks'], \
+        task.get_company_specific_tasks(1, [1, 1])
 
 
 @patch('urllib3.PoolManager.urlopen', patched_urlopen_task)
 def test_post_team_task():
     task = get_client().task
 
-    assert task.post_team_task(1, 1, 1, '1', 'ttt') == task_dict, \
-     task.post_team_task(1, 1, 1, '1', 'ttt')
+    assert task.post_team_task(1, 1, 1, '1', 'ttt',
+                               engagements=[1, 2],
+                               all_in_company=True) == task_dict, \
+        task.post_team_task(1, 1, 1, '1', 'ttt', engagements=[1, 2],
+                            all_in_company=True)
 
 
 @patch('urllib3.PoolManager.urlopen', patched_urlopen_task)
-def test_post_user_task():
+def test_post_company_task():
     task = get_client().task
 
-    assert task.post_user_task(1, 1, 1, 1, '1', 'ttt') == task_dict, \
-     task.post_user_task(1, 1, 1, 1, '1', 'ttt')
-
-
-@patch('urllib3.PoolManager.urlopen', patched_urlopen_task)
-def test_put_company_task():
-    task = get_client().task
-
-    assert task.put_company_task(1, 1, '1', 'ttt') == task_dict, \
-     task.put_company_task(1, 1, '1', 'ttt')
+    assert task.post_company_task(1, 1, '1', 'ttt',
+                                  engagements=[1, 2],
+                                  all_in_company=True) == task_dict, \
+        task.post_company_task(1, 1, '1', 'ttt')
 
 
 @patch('urllib3.PoolManager.urlopen', patched_urlopen_task)
 def test_put_team_task():
     task = get_client().task
 
-    assert task.put_team_task(1, 1, 1, '1', 'ttt') == task_dict, \
-     task.put_team_task(1, 1, 1, '1', 'ttt')
+    assert task.put_team_task(1, 1, 1, '1', 'ttt',
+                              engagements=[1, 2],
+                              all_in_company=True) == task_dict, \
+        task.put_team_task(1, 1, 1, '1', 'ttt', engagements=[1, 2],
+                           all_in_company=True)
 
 
 @patch('urllib3.PoolManager.urlopen', patched_urlopen_task)
-def test_put_user_task():
+def test_put_company_task():
     task = get_client().task
 
-    assert task.put_user_task(1, 1, 1, 1, '1', 'ttt') == task_dict, \
-     task.put_user_task(1, 1, 1, 1, '1', 'ttt')
+    assert task.put_company_task(1, 1, '1', 'ttt', engagements=[1, 2],
+                                 all_in_company=True) == task_dict, \
+        task.put_company_task(1, 1, '1', 'ttt', engagements=[1, 2],
+                              all_in_company=True)
 
 
 @patch('urllib3.PoolManager.urlopen', patched_urlopen_task)
-def test_delete_company_task():
+def test_archive_team_task():
     task = get_client().task
 
-    assert task.delete_company_task(1, [1, 1]) == task_dict, \
-     task.delete_company_task(1, [1, 1])
+    assert task.archive_team_task(1, 1, 1) == task_dict, \
+        task.archive_team_task(1, 1, 1)
 
 
 @patch('urllib3.PoolManager.urlopen', patched_urlopen_task)
-def test_delete_team_task():
+def test_archive_company_task():
     task = get_client().task
 
-    assert task.delete_team_task(1, 1, [1, 1]) == task_dict, \
-     task.delete_team_task(1, 1, [1, 1])
+    assert task.archive_company_task(1, 1) == task_dict, \
+        task.archive_company_task(1, 1)
 
 
 @patch('urllib3.PoolManager.urlopen', patched_urlopen_task)
-def test_delete_user_task():
+def test_unarchive_team_task():
     task = get_client().task
 
-    assert task.delete_user_task(1, 1, 1, [1, 1]) == task_dict, \
-     task.delete_user_task(1, 1, 1, [1, 1])
+    assert task.unarchive_team_task(1, 1, 1) == task_dict, \
+        task.unarchive_team_task(1, 1, 1)
 
 
 @patch('urllib3.PoolManager.urlopen', patched_urlopen_task)
-def test_delete_all_company_tasks():
+def test_unarchive_company_task():
     task = get_client().task
 
-    assert task.delete_all_company_tasks(1) == task_dict, \
-     task.delete_all_company_tasks(1)
-
-
-@patch('urllib3.PoolManager.urlopen', patched_urlopen_task)
-def test_delete_all_team_tasks():
-    task = get_client().task
-
-    assert task.delete_all_team_tasks(1, 1) == task_dict, \
-     task.delete_all_team_tasks(1, 1)
-
-
-@patch('urllib3.PoolManager.urlopen', patched_urlopen_task)
-def test_delete_all_user_tasks():
-    task = get_client().task
-
-    assert task.delete_all_user_tasks(1, 1, 1) == task_dict, \
-     task.delete_all_user_tasks(1, 1, 1)
+    assert task.unarchive_company_task(1, 1) == task_dict, \
+        task.unarchive_company_task(1, 1)
 
 
 @patch('urllib3.PoolManager.urlopen', patched_urlopen_task)
@@ -1304,7 +1237,7 @@ def test_update_batch_tasks():
     task = get_client().task
 
     assert task.update_batch_tasks(1, "1;2;3") == task_dict, \
-     task.update_batch_tasks(1, "1;2;3")
+        task.update_batch_tasks(1, "1;2;3")
 
 
 def test_gds_namespace():

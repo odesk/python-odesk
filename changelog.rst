@@ -4,6 +4,36 @@
 ***************
 Changelog
 ***************
+.. _0.5.2:
+
+Version 0.5.2
+-------------
+* Fixed engagements API call, so that you can call
+  ``client.hr.get_engagements()`` without any parameter
+  to get all engagements for authorized user.
+* oTask API strongly reworked, from now Task Codes are
+  renamed to Activities and it's behavior is changed:
+    1. Activity now is assigned to the engagement ID.
+       It will appear it user's oDesk Team Client only if
+       it was assigned to the user's engagement.
+    2. You cannot delete activity. You can archive it
+       and unarchive if necessary.
+    3. Activities are created on the team level,
+       you can create a company level activities by
+       passing ``team_id`` that is equal to ``company_id``
+       (which is ``parent__team_id``). There's a methods
+       for this already, please see the reference documentation.
+       Note that archived activity has empty engagements list,
+       so if you decide to unarchive an activity, you need to
+       do an extra update call to assign the activity to someone.
+    4. When creating/updating activities you can pass optional
+       ``engagements`` parameter, that should be a list of engagements
+       that will be assigned to the Activity. Otherwise the activity
+       won't be assigned to anyone. If you want to assign created/updated
+       activity to all engagements in the company, you can set
+       the ``all_in_company`` parameter.
+    5. ``update_batch_tasks`` call is marked as experimental,
+       use it on your own risk. It will be reworked in future.
 
 .. _0.5.1:
 
