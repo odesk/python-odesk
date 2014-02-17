@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Python bindings to oDesk API &mdash; python-odesk 0.5.1 documentation</title>
+    <title>Python bindings to oDesk API &mdash; python-odesk 0.5.2 documentation</title>
     
     <link rel="stylesheet" href="static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.5.1',
+        VERSION:     '0.5.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="static/jquery.js"></script>
     <script type="text/javascript" src="static/underscore.js"></script>
     <script type="text/javascript" src="static/doctools.js"></script>
-    <link rel="top" title="python-odesk 0.5.1 documentation" href="index.html" /> 
+    <link rel="top" title="python-odesk 0.5.2 documentation" href="index.html" /> 
   </head>
   <body>
     <div class="related">
@@ -35,7 +35,7 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="index.html">python-odesk 0.5.1 documentation</a> &raquo;</li> 
+        <li><a href="index.html">python-odesk 0.5.2 documentation</a> &raquo;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar">
@@ -78,7 +78,7 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <p>Copyright (c) 2010-2013, oDesk <a class="reference external" href="http://www.odesk.com">http://www.odesk.com</a>
+  <p>Copyright (c) 2010-2014, oDesk <a class="reference external" href="http://www.odesk.com">http://www.odesk.com</a>
 All rights reserved.</p>
 <div class="section" id="python-bindings-to-odesk-api">
 <h1>Python bindings to oDesk API<a class="headerlink" href="#python-bindings-to-odesk-api" title="Permalink to this headline">¶</a></h1>
@@ -108,8 +108,8 @@ urllib3&gt;=1.7</p>
 <h2>SSL Certificates Note<a class="headerlink" href="#ssl-certificates-note" title="Permalink to this headline">¶</a></h2>
 <p>Unfortunately SSL certificates for oDesk are not included in the <tt class="docutils literal"><span class="pre">httplib==0.8</span></tt>.</p>
 <p>Threrefore if you use Debian/Ubuntu/Archlinux,
-we recomend to install a package <tt class="docutils literal"><span class="pre">httplib2.ca_certs_locater</span></tt>:</p>
-<div class="highlight-python"><pre>pip install httplib2.ca_certs_locater</pre>
+we recomend to install a package <tt class="docutils literal"><span class="pre">httplib2.system_ca_certs_locater</span></tt>:</p>
+<div class="highlight-python"><pre>pip install pbr httplib2.system_ca_certs_locater</pre>
 </div>
 <p>It will force <tt class="docutils literal"><span class="pre">httplib2</span></tt> to use the OS&#8217;s certificates file.</p>
 <p>Another option is to create a <tt class="docutils literal"><span class="pre">ca_certs_locater.py</span></tt> in your projects directory
@@ -138,11 +138,11 @@ obtain oauth access tokens for web application and desktop application.</p>
 <div class="section" id="useful-links">
 <h2>Useful Links<a class="headerlink" href="#useful-links" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>[Git repo](<a class="reference external" href="http://github.com/odesk/python-odesk">http://github.com/odesk/python-odesk</a>)</li>
-<li>[Issues](<a class="reference external" href="http://github.com/odesk/python-odesk/issues">http://github.com/odesk/python-odesk/issues</a>)</li>
-<li>[Documentation](<a class="reference external" href="http://odesk.github.com/python-odesk/">http://odesk.github.com/python-odesk/</a>)</li>
-<li>[Mailing list](<a class="reference external" href="http://groups.google.com/group/python-odesk">http://groups.google.com/group/python-odesk</a>)</li>
-<li>[Facebook group](<a class="reference external" href="http://www.facebook.com/group.php?gid=136364403050710">http://www.facebook.com/group.php?gid=136364403050710</a>)</li>
+<li><a class="reference external" href="http://github.com/odesk/python-odesk">Git repo</a></li>
+<li><a class="reference external" href="http://github.com/odesk/python-odesk/issues">Issues</a></li>
+<li><a class="reference external" href="http://odesk.github.com/python-odesk/">Documentation</a></li>
+<li><a class="reference external" href="http://groups.google.com/group/python-odesk">Mailing list</a></li>
+<li><a class="reference external" href="http://www.facebook.com/group.php?gid=136364403050710">Facebook group</a></li>
 </ul>
 </div>
 </div>
@@ -162,7 +162,7 @@ obtain oauth access tokens for web application and desktop application.</p>
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="index.html">python-odesk 0.5.1 documentation</a> &raquo;</li> 
+        <li><a href="index.html">python-odesk 0.5.2 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

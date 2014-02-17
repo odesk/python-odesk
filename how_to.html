@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>How to &mdash; python-odesk 0.5.1 documentation</title>
+    <title>How to &mdash; python-odesk 0.5.2 documentation</title>
     
     <link rel="stylesheet" href="static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.5.1',
+        VERSION:     '0.5.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="static/jquery.js"></script>
     <script type="text/javascript" src="static/underscore.js"></script>
     <script type="text/javascript" src="static/doctools.js"></script>
-    <link rel="top" title="python-odesk 0.5.1 documentation" href="index.html" />
+    <link rel="top" title="python-odesk 0.5.2 documentation" href="index.html" />
     <link rel="next" title="Reference Documentation: Classes and Methods" href="reference_docs.html" />
     <link rel="prev" title="Getting started" href="getting_started.html" /> 
   </head>
@@ -43,7 +43,7 @@
         <li class="right" >
           <a href="getting_started.html" title="Getting started"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">python-odesk 0.5.1 documentation</a> &raquo;</li> 
+        <li><a href="index.html">python-odesk 0.5.2 documentation</a> &raquo;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar">
@@ -63,7 +63,7 @@
 <li><a class="reference internal" href="#send-message">Send message</a></li>
 <li><a class="reference internal" href="#get-timereports">Get timereports</a></li>
 <li><a class="reference internal" href="#get-finreports">Get finreports</a></li>
-<li><a class="reference internal" href="#work-with-tasks">Work with tasks</a></li>
+<li><a class="reference internal" href="#work-with-activities">Work with Activities</a></li>
 </ul>
 </li>
 </ul>
@@ -255,42 +255,32 @@ to the code below:</p>
 <p>Financial reports are also using GDS queries.</p>
 <p>Please see <a class="reference internal" href="reference-docs/odesk.routers.html#odesk.routers.finreport.Finreports" title="odesk.routers.finreport.Finreports"><tt class="xref py py-class docutils literal"><span class="pre">Finreports</span></tt></a> wrapper</p>
 </div>
-<div class="section" id="work-with-tasks">
-<span id="id9"></span><h2>Work with tasks<a class="headerlink" href="#work-with-tasks" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="work-with-activities">
+<span id="work-with-tasks"></span><h2>Work with Activities<a class="headerlink" href="#work-with-activities" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference external" href="http://developers.odesk.com/oTasks-API">http://developers.odesk.com/oTasks-API</a></p>
-<p>To work with tasks you should use <a class="reference internal" href="reference-docs/odesk.routers.html#odesk.routers.task.Task" title="odesk.routers.task.Task"><tt class="xref py py-class docutils literal"><span class="pre">client.otask</span></tt></a> wrapper:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">tasks</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">otask</span><span class="o">.</span><span class="n">get_company_tasks</span><span class="p">(</span><span class="s">&#39;company_id&#39;</span><span class="p">)</span>
+<p>To work with Activities you should use <a class="reference internal" href="reference-docs/odesk.routers.html#odesk.routers.task.Task" title="odesk.routers.task.Task"><tt class="xref py py-class docutils literal"><span class="pre">client.task</span></tt></a> wrapper:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">tasks</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">task</span><span class="o">.</span><span class="n">get_team_tasks</span><span class="p">(</span><span class="s">&#39;your_company_id&#39;</span><span class="p">,</span> <span class="s">&#39;your_team_id&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Methods to get tasks:</p>
+<p>Note, that <tt class="docutils literal"><span class="pre">company_id</span></tt> here is basically a <tt class="docutils literal"><span class="pre">parent_team__id</span></tt> value
+from the <tt class="docutils literal"><span class="pre">hr.get_team()</span></tt> API call.</p>
+<p>Methods to get activities:</p>
 <p><a class="reference internal" href="reference-docs/odesk.routers.html#odesk.routers.task.Task.get_team_tasks" title="odesk.routers.task.Task.get_team_tasks"><tt class="xref py py-meth docutils literal"><span class="pre">client.task.get_team_tasks</span></tt></a></p>
-<p><a class="reference internal" href="reference-docs/odesk.routers.html#odesk.routers.task.Task.get_user_tasks" title="odesk.routers.task.Task.get_user_tasks"><tt class="xref py py-meth docutils literal"><span class="pre">client.task.get_user_tasks</span></tt></a></p>
-<p><a class="reference internal" href="reference-docs/odesk.routers.html#odesk.routers.task.Task.get_company_tasks_full" title="odesk.routers.task.Task.get_company_tasks_full"><tt class="xref py py-meth docutils literal"><span class="pre">client.task.get_company_tasks_full</span></tt></a></p>
-<p><a class="reference internal" href="reference-docs/odesk.routers.html#odesk.routers.task.Task.get_team_tasks_full" title="odesk.routers.task.Task.get_team_tasks_full"><tt class="xref py py-meth docutils literal"><span class="pre">client.task.get_team_tasks_full</span></tt></a></p>
-<p><a class="reference internal" href="reference-docs/odesk.routers.html#odesk.routers.task.Task.get_user_tasks_full" title="odesk.routers.task.Task.get_user_tasks_full"><tt class="xref py py-meth docutils literal"><span class="pre">client.task.get_user_tasks_full</span></tt></a></p>
-<p><a class="reference internal" href="reference-docs/odesk.routers.html#odesk.routers.task.Task.get_company_specific_tasks" title="odesk.routers.task.Task.get_company_specific_tasks"><tt class="xref py py-meth docutils literal"><span class="pre">client.task.get_company_specific_tasks</span></tt></a></p>
+<p><a class="reference internal" href="reference-docs/odesk.routers.html#odesk.routers.task.Task.get_company_tasks" title="odesk.routers.task.Task.get_company_tasks"><tt class="xref py py-meth docutils literal"><span class="pre">client.task.get_company_tasks</span></tt></a></p>
 <p><a class="reference internal" href="reference-docs/odesk.routers.html#odesk.routers.task.Task.get_team_specific_tasks" title="odesk.routers.task.Task.get_team_specific_tasks"><tt class="xref py py-meth docutils literal"><span class="pre">client.task.get_team_specific_tasks</span></tt></a></p>
-<p><a class="reference internal" href="reference-docs/odesk.routers.html#odesk.routers.task.Task.get_user_specific_tasks" title="odesk.routers.task.Task.get_user_specific_tasks"><tt class="xref py py-meth docutils literal"><span class="pre">client.task.get_user_specific_tasks</span></tt></a></p>
-<p>Create and update tasks:</p>
-<p><a class="reference internal" href="reference-docs/odesk.routers.html#odesk.routers.task.Task.post_company_task" title="odesk.routers.task.Task.post_company_task"><tt class="xref py py-meth docutils literal"><span class="pre">client.task.post_company_task</span></tt></a></p>
+<p><a class="reference internal" href="reference-docs/odesk.routers.html#odesk.routers.task.Task.get_company_specific_tasks" title="odesk.routers.task.Task.get_company_specific_tasks"><tt class="xref py py-meth docutils literal"><span class="pre">client.task.get_company_specific_tasks</span></tt></a></p>
+<p>Create and update activities:</p>
 <p><a class="reference internal" href="reference-docs/odesk.routers.html#odesk.routers.task.Task.post_team_task" title="odesk.routers.task.Task.post_team_task"><tt class="xref py py-meth docutils literal"><span class="pre">client.task.post_team_task</span></tt></a></p>
-<p><a class="reference internal" href="reference-docs/odesk.routers.html#odesk.routers.task.Task.post_user_task" title="odesk.routers.task.Task.post_user_task"><tt class="xref py py-meth docutils literal"><span class="pre">client.task.post_user_task</span></tt></a></p>
-<p><a class="reference internal" href="reference-docs/odesk.routers.html#odesk.routers.task.Task.put_company_task" title="odesk.routers.task.Task.put_company_task"><tt class="xref py py-meth docutils literal"><span class="pre">client.task.put_company_task</span></tt></a></p>
+<p><a class="reference internal" href="reference-docs/odesk.routers.html#odesk.routers.task.Task.post_company_task" title="odesk.routers.task.Task.post_company_task"><tt class="xref py py-meth docutils literal"><span class="pre">client.task.post_company_task</span></tt></a></p>
 <p><a class="reference internal" href="reference-docs/odesk.routers.html#odesk.routers.task.Task.put_team_task" title="odesk.routers.task.Task.put_team_task"><tt class="xref py py-meth docutils literal"><span class="pre">client.task.put_team_task</span></tt></a></p>
-<p><a class="reference internal" href="reference-docs/odesk.routers.html#odesk.routers.task.Task.put_user_task" title="odesk.routers.task.Task.put_user_task"><tt class="xref py py-meth docutils literal"><span class="pre">client.task.put_user_task</span></tt></a></p>
-<p>Delete tasks:</p>
-<p><a class="reference internal" href="reference-docs/odesk.routers.html#odesk.routers.task.Task.delete_company_task" title="odesk.routers.task.Task.delete_company_task"><tt class="xref py py-meth docutils literal"><span class="pre">client.task.delete_company_task</span></tt></a></p>
-<p><a class="reference internal" href="reference-docs/odesk.routers.html#odesk.routers.task.Task.delete_team_task" title="odesk.routers.task.Task.delete_team_task"><tt class="xref py py-meth docutils literal"><span class="pre">client.task.delete_team_task</span></tt></a></p>
-<p><a class="reference internal" href="reference-docs/odesk.routers.html#odesk.routers.task.Task.delete_user_task" title="odesk.routers.task.Task.delete_user_task"><tt class="xref py py-meth docutils literal"><span class="pre">client.task.delete_user_task</span></tt></a></p>
-<p><a class="reference internal" href="reference-docs/odesk.routers.html#odesk.routers.task.Task.delete_all_company_tasks" title="odesk.routers.task.Task.delete_all_company_tasks"><tt class="xref py py-meth docutils literal"><span class="pre">client.task.delete_all_company_tasks</span></tt></a></p>
-<p><a class="reference internal" href="reference-docs/odesk.routers.html#odesk.routers.task.Task.delete_all_team_tasks" title="odesk.routers.task.Task.delete_all_team_tasks"><tt class="xref py py-meth docutils literal"><span class="pre">client.task.delete_all_team_tasks</span></tt></a></p>
-<p><a class="reference internal" href="reference-docs/odesk.routers.html#odesk.routers.task.Task.delete_all_user_tasks" title="odesk.routers.task.Task.delete_all_user_tasks"><tt class="xref py py-meth docutils literal"><span class="pre">client.task.delete_all_user_tasks</span></tt></a></p>
-<p>Batch update of tasks:</p>
-<p><a class="reference internal" href="reference-docs/odesk.routers.html#odesk.routers.task.Task.update_batch_tasks" title="odesk.routers.task.Task.update_batch_tasks"><tt class="xref py py-meth docutils literal"><span class="pre">client.task.update_batch_tasks(company_id,</span> <span class="pre">csv_data)</span></tt></a></p>
-<p>Where csv_data - is the raw csv data for tasks to be updated. Example:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="s">&quot;acmeinc&quot;</span><span class="p">,</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="s">&quot;ABC&quot;</span><span class="p">,</span><span class="s">&quot;Project ABC&quot;</span><span class="p">,</span><span class="s">&quot;https://www.acmeinc.com/project/abc&quot;</span><span class="o">&lt;</span><span class="n">br</span><span class="o">&gt;</span><span class="s">&quot;acmeinc&quot;</span><span class="p">,</span><span class="s">&quot;acmeinc:dev&quot;</span><span class="p">,</span><span class="s">&quot;b42&quot;</span><span class="p">,</span><span class="s">&quot;123&quot;</span><span class="p">,</span><span class="s">&quot;Task 123&quot;</span><span class="p">,</span><span class="s">&quot;https://www.acmeinc.com/task/123&quot;</span>
-</pre></div>
-</div>
+<p><a class="reference internal" href="reference-docs/odesk.routers.html#odesk.routers.task.Task.put_company_task" title="odesk.routers.task.Task.put_company_task"><tt class="xref py py-meth docutils literal"><span class="pre">client.task.put_company_task</span></tt></a></p>
+<p>Archive/unarchive activities:</p>
+<p><a class="reference internal" href="reference-docs/odesk.routers.html#odesk.routers.task.Task.archive_team_task" title="odesk.routers.task.Task.archive_team_task"><tt class="xref py py-meth docutils literal"><span class="pre">client.task.archive_team_task</span></tt></a></p>
+<p><a class="reference internal" href="reference-docs/odesk.routers.html#odesk.routers.task.Task.archive_company_task" title="odesk.routers.task.Task.archive_company_task"><tt class="xref py py-meth docutils literal"><span class="pre">client.task.archive_company_task</span></tt></a></p>
+<p><a class="reference internal" href="reference-docs/odesk.routers.html#odesk.routers.task.Task.unarchive_team_task" title="odesk.routers.task.Task.unarchive_team_task"><tt class="xref py py-meth docutils literal"><span class="pre">client.task.unarchive_team_task</span></tt></a></p>
+<p><a class="reference internal" href="reference-docs/odesk.routers.html#odesk.routers.task.Task.unarchive_company_task" title="odesk.routers.task.Task.unarchive_company_task"><tt class="xref py py-meth docutils literal"><span class="pre">client.task.unarchive_company_task</span></tt></a></p>
+<p>Assign activities to the contractor&#8217;s engagement:</p>
+<p><a class="reference internal" href="reference-docs/odesk.routers.html#odesk.routers.task.Task.assign_engagement" title="odesk.routers.task.Task.assign_engagement"><tt class="xref py py-meth docutils literal"><span class="pre">client.task.assign_engagement</span></tt></a></p>
 </div>
 </div>
 
@@ -315,7 +305,7 @@ to the code below:</p>
         <li class="right" >
           <a href="getting_started.html" title="Getting started"
              >previous</a> |</li>
-        <li><a href="index.html">python-odesk 0.5.1 documentation</a> &raquo;</li> 
+        <li><a href="index.html">python-odesk 0.5.2 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
