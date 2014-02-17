@@ -1,6 +1,6 @@
 # Python bindings to oDesk API
 # python-odesk version 0.5
-# (C) 2010-2013 oDesk
+# (C) 2010-2014 oDesk
 
 # Updated by the script
 """Main package of the python bindings for oDesk API.
@@ -13,7 +13,7 @@ so you can use::
 
 """
 
-VERSION = '0.5.1'
+VERSION = '0.5.2'
 
 
 def get_version():

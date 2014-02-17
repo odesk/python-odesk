@@ -1,4 +1,4 @@
-# Copyright (c) 2010-2013, oDesk http://www.odesk.com
+# Copyright (c) 2010-2014, oDesk http://www.odesk.com
 # All rights reserved.
 import re
 import os
@@ -11,7 +11,7 @@ README = readme.read()
 readme.close()
 
 
-VERSION = (0, 5, 1, 'final', 0)
+VERSION = (0, 5, 2, 'final', 0)
 
 
 def get_version():

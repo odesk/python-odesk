@@ -1,6 +1,6 @@
 # Python bindings to oDesk API
 # python-odesk version 0.5
-# (C) 2010-2013 oDesk
+# (C) 2010-2014 oDesk
 
 from datetime import date
 from odesk.exceptions import ApiValueError
