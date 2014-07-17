@@ -158,9 +158,6 @@ class Team_V2(Namespace):
         """
         Retrieve all teamrooms accessible to the authenticated user.
 
-        *Parameters:*
-          :target_version:      Version of future requested API
-
         """
         url = 'teamrooms'
 

@@ -64,6 +64,10 @@ class Client(object):
                                   Whether to attach
                                   :py:mod:`odesk.routers.mc` router
 
+      :offers:                    (optional, default ``True``)
+                                  Whether to attach
+                                  :py:mod:`odesk.routers.offers` router
+
       :provider:                  (optional, default ``True``)
                                   Whether to attach
                                   :py:mod:`odesk.routers.provider` router
@@ -89,7 +93,7 @@ class Client(object):
     def __init__(self, public_key, secret_key,
                  oauth_access_token=None, oauth_access_token_secret=None,
                  fmt='json', finreport=True, hr=True, mc=True,
-                 provider=True, task=True, team=True,
+                 offers=True, provider=True, task=True, team=True,
                  timereport=True, job=True):
 
         self.public_key = public_key
@@ -108,13 +112,18 @@ class Client(object):
             self.finreport = Finreports(self)
 
         if hr:
-            from odesk.routers.hr import HR_V1, HR
+            from odesk.routers.hr import HR_V1, HR, HR_V3
             self.hr_v1 = HR_V1(self)
             self.hr = HR(self)
+            self.hr_v3 = HR_V3(self)
 
         if mc:
             from odesk.routers.mc import MC
             self.mc = MC(self)
+
+        if offers:
+            from odesk.routers.offers import Offers
+            self.offers = Offers(self)
 
         if provider:
             from odesk.routers.provider import Provider, Provider_V2
