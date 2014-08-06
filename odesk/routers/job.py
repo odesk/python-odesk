@@ -13,7 +13,7 @@ class Job(Namespace):
         """Returns detailed profile information about job(s).
 
         Documented at
-        http://developers.odesk.com/w/page/49065901/Job%20Profile
+        https://developers.odesk.com/?lang=python#jobs_get-job-profile
 
         *Parameters:*
           :job_key:   The job key or a list of keys, separated by ";",

@@ -85,6 +85,40 @@ class MC(Namespace):
         result = self.get(url, data=data)
         return result.get("thread", result)
 
+    def get_thread_by_context(self, username, job_key, application_id,
+                              context='Interviews', last_posts=False):
+        """
+        List details on a thread given a specific context,
+        job key and application ID.
+
+        *Parameters:*
+          :username:        User name
+
+          :job_key:         The context job key
+
+          :application_id:  The context application ID.
+
+          :context:         Name of the context. Valid values: Interviews.
+                            Default: Interviews
+
+          :last_posts:      If set to True, return the list of the threads
+                            for the given context with the content of the last
+                            message for each of the threads listed.
+
+        """
+        url = 'contexts/{username}/' \
+            '{context}:{job_key}:{application_id}'.format(
+                username=username, context=context, job_key=job_key,
+                application_id=application_id)
+
+        if last_posts:
+            url += '/last_posts'
+
+        data = {}
+
+        result = self.get(url, data=data)
+        return result.get("thread", result)
+
     def _generate_many_threads_url(self, url, threads_ids):
         return ';'.join(urllib.quote(str(i)) for i in threads_ids)
 

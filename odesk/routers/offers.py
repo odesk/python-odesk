@@ -75,7 +75,7 @@ class Offers(Namespace):
         Send client offer to the freelancer.
 
         *Parameters:*
-          :title:                    The title of the offer/contract.     
+          :title:                    The title of the offer/contract.
 
           :job_type:                 The type of the job. Valid values: ``hourly``, ``fixed-price``.
 

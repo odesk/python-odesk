@@ -402,3 +402,24 @@ class Task(Namespace):
         url = 'tasks/companies/{0}/tasks/batch'.format(company_id)
 
         return self.put(url, data)
+
+
+class Task_V2(Namespace):
+    api_url = 'tasks/'
+    version = 2
+
+    def list_engagement_activities(self, engagement_ref):
+        """
+        Retrieve list of all activities assigned to the specific engagement.
+
+        The user authenticated must have been granted the appropriate
+        hiring manager permissions.
+
+        *Parameters:*
+          :engagement_ref:    Engagement reference ID. You can get it using
+                              'List engagemnets' API call. Example: `1234`.
+
+        """
+        url = 'tasks/contracts/{0}'.format(engagement_ref)
+        result = self.get(url)
+        return result

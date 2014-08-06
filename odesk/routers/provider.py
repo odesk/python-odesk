@@ -303,6 +303,23 @@ class Provider(Namespace):
         result = self.get(url)
         return result.get('tests', result)
 
+    def get_reasons_metadata(self, reason_type):
+        """
+        Returns a list of reasons by specified type.
+
+        *Parameters:*
+          :type:    Requested type of the reason. Valid values:
+                    ``EmployerEndsNoStartContract``, ``CloseOpening``,
+                    ``RejectCandidate``, ``RejectInterviewInvite``,
+                    ``CancelCandidacy``, ``EndProviderContract``,
+                    ``EndCustomerContract``, ``EndAssignment``
+
+        """
+        url = 'metadata/reasons'
+        data = {'type': reason_type}
+        result = self.get(url, data)
+        return result.get('reasons', result)
+
 
 class Provider_V2(Namespace):
     api_url = 'profiles/'
@@ -461,12 +478,11 @@ class Provider_V2(Namespace):
 
            :category:    Search for category of job profile
                          See full list here:
-                         http://developers.odesk.com/w/page/12364012/search%20jobs
-                         in the table "Changes"
+                         https://developers.odesk.com/?lang=python#metadata_list-categories
 
            :subcategory: Search for subcategory of job profile
                          See full list here:
-                         http://developers.odesk.com/w/page/12364012/search%20jobs
+                         https://developers.odesk.com/?lang=python#metadata_list-categories
                          in the table "Changes"
 
            :job_type:     Type of job.

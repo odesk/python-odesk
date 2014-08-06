@@ -131,8 +131,9 @@ class Client(object):
             self.provider_v2 = Provider_V2(self)
 
         if task:
-            from odesk.routers.task import Task
+            from odesk.routers.task import Task, Task_V2
             self.task = Task(self)
+            self.task_v2 = Task_V2(self)
 
         if team:
             from odesk.routers.team import Team, Team_V2

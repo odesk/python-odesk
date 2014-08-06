@@ -11,7 +11,7 @@ README = readme.read()
 readme.close()
 
 
-VERSION = (0, 5, 2, 'final', 0)
+VERSION = (0, 5, 3, 'final', 0)
 
 
 def get_version():
