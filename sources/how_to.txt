@@ -21,7 +21,7 @@ or if you use ``IPython`` just add ``?`` symbol at the end of an object/class/me
 Authenticate
 -----------------
 
-http://developers.odesk.com/Authentication
+https://developers.odesk.com/?lang=python#authentication
 
 To authenticate your web application with the python-odesk, use something similar
 to the code below::
@@ -53,34 +53,35 @@ to the code below::
 ..
 .. _provider_information:
 
-Provider's information
+Freelancer's information
 --------------------------
 
-http://developers.odesk.com/Provider-Profile
+https://developers.odesk.com/?lang=python#public-profiles_get-brief-profile-summary
+https://developers.odesk.com/?lang=python#public-profiles_get-profile-details
 
 
 .. currentmodule:: odesk.routers.provider.Provider
 
-To get information about provider, use following methods (click the link to see detailed description of parameters):
+To get information about freelancer, use following methods (click the link to see detailed description of parameters):
 
 :py:meth:`client.provider.get_provider<get_provider>`
 
 :py:meth:`client.provider.get_provider_brief<get_provider_brief>`
 
 
-Search Providers
-----------------
+Search Freelancers
+------------------
 
 .. currentmodule:: odesk.routers.provider.Provider_V2
 
-To search provider(http://developers.odesk.com/search-providers) by the query string, use:
+To search for a freelancer (https://developers.odesk.com/?lang=python#public-profiles_search-for-freelancers) by the query string, use:
 
 :py:meth:`client.provider_v2.search_providers<search_providers>`
 
 Search Jobs
 -----------
 
-To search jobs(http://developers.odesk.com/search-jobs) by the query string, use:
+To search jobs(https://developers.odesk.com/?lang=python#jobs_search-for-jobs) by the query string, use:
 
 :py:meth:`client.provider_v2.search_jobs<search_jobs>`
 
@@ -111,7 +112,7 @@ Hiring
 
 .. currentmodule:: odesk.routers.hr.HR
 
-oDesk Hiring API http://developers.odesk.com/w/page/23879811/Hiring allows to do such tasks as:
+oDesk Hiring API https://developers.odesk.com/?lang=python#contracts-and-offers allows to do such tasks as:
 
 * Create new job posting :py:meth:`client.hr.post_job<post_job>`
 
@@ -127,7 +128,7 @@ oDesk Hiring API http://developers.odesk.com/w/page/23879811/Hiring allows to do
 
 * Pay a bonus to the contractor :py:meth:`client.hr.post_team_adjustment<post_team_adjustment>`
 
-* End the contract with provider :py:meth:`client.hr.end_contract<end_contract>`
+* End the contract with freelancer :py:meth:`client.hr.end_contract<end_contract>`
 
 
 ..
@@ -136,7 +137,7 @@ oDesk Hiring API http://developers.odesk.com/w/page/23879811/Hiring allows to do
 Work with jobs
 ----------------------
 
-http://developers.odesk.com/w/page/49065901/Job%20Profile
+https://developers.odesk.com/?lang=python#jobs_get-job-profile
 
 .. currentmodule:: odesk.routers.job
 
@@ -154,7 +155,7 @@ Where:
 Team's information
 ----------------------
 
-http://developers.odesk.com/Team-API
+https://developers.odesk.com/?lang=python#companies-and-teams
 
 .. currentmodule:: odesk.routers.team.Team_V2
 
@@ -179,7 +180,7 @@ To get user's workdiaries inside the team:
 Trays and messages
 -----------------------
 
-http://developers.odesk.com/Message-Center-API
+https://developers.odesk.com/?lang=python#messages
 
 .. currentmodule:: odesk.routers.mc.MC
 
@@ -202,7 +203,7 @@ Get content of the thread:
 Send message
 ----------------------
 
-http://developers.odesk.com/Message-Center-API
+https://developers.odesk.com/?lang=python#messages_send-message
 
 To send message:
 
@@ -217,7 +218,7 @@ Get timereports
 
 .. currentmodule:: odesk.routers.timereport.TimeReport
 
-http://developers.odesk.com/Time-Reports-API
+https://developers.odesk.com/?lang=python#reports_time-reports-fields
 
 To get timereports, use, based on the level of the timereports you need:
 
@@ -254,6 +255,8 @@ Get finreports
 
 .. currentmodule:: odesk.routers.finreport
 
+https://developers.odesk.com/?lang=python#reports_financial-reports-fields
+
 Financial reports are also using GDS queries.
 
 Please see :py:class:`Finreports` wrapper
@@ -264,7 +267,7 @@ Please see :py:class:`Finreports` wrapper
 Work with Activities
 --------------------
 
-http://developers.odesk.com/oTasks-API
+https://developers.odesk.com/?lang=python#activities
 
 .. currentmodule:: odesk.routers.task
 

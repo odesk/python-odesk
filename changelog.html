@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Changelog &mdash; python-odesk 0.5.2 documentation</title>
+    <title>Changelog &mdash; python-odesk 0.5.3 documentation</title>
     
     <link rel="stylesheet" href="static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.5.2',
+        VERSION:     '0.5.3',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="static/jquery.js"></script>
     <script type="text/javascript" src="static/underscore.js"></script>
     <script type="text/javascript" src="static/doctools.js"></script>
-    <link rel="top" title="python-odesk 0.5.2 documentation" href="index.html" />
+    <link rel="top" title="python-odesk 0.5.3 documentation" href="index.html" />
     <link rel="next" title="BSD license" href="license.html" />
     <link rel="prev" title="odesk.routers package" href="reference-docs/odesk.routers.html" /> 
   </head>
@@ -43,7 +43,7 @@
         <li class="right" >
           <a href="reference-docs/odesk.routers.html" title="odesk.routers package"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">python-odesk 0.5.2 documentation</a> &raquo;</li> 
+        <li><a href="index.html">python-odesk 0.5.3 documentation</a> &raquo;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar">
@@ -51,6 +51,7 @@
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Changelog</a><ul>
+<li><a class="reference internal" href="#version-0-5-3">Version 0.5.3</a></li>
 <li><a class="reference internal" href="#version-0-5-2">Version 0.5.2</a></li>
 <li><a class="reference internal" href="#version-0-5-1">Version 0.5.1</a></li>
 <li><a class="reference internal" href="#version-0-5">Version 0.5</a></li>
@@ -97,8 +98,27 @@
             
   <div class="section" id="changelog">
 <span id="id1"></span><h1>Changelog<a class="headerlink" href="#changelog" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="version-0-5-3">
+<span id="id2"></span><h2>Version 0.5.3<a class="headerlink" href="#version-0-5-3" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><dl class="first docutils">
+<dt>New API calls added:</dt>
+<dd><ol class="first last arabic simple">
+<li>Added <a class="reference internal" href="reference-docs/odesk.routers.html#odesk.routers.task.Task_V2.list_engagement_activities" title="odesk.routers.task.Task_V2.list_engagement_activities"><tt class="xref py py-meth docutils literal"><span class="pre">List</span> <span class="pre">activities</span> <span class="pre">for</span> <span class="pre">specific</span> <span class="pre">engagement</span></tt></a> via <tt class="docutils literal"><span class="pre">task_v2</span></tt> router.</li>
+<li>Added <a class="reference internal" href="reference-docs/odesk.routers.html#odesk.routers.provider.Provider.get_reasons_metadata" title="odesk.routers.provider.Provider.get_reasons_metadata"><tt class="xref py py-meth docutils literal"><span class="pre">Reasons</span> <span class="pre">metadata</span></tt></a> call.</li>
+<li>Added <a class="reference internal" href="reference-docs/odesk.routers.html#odesk.routers.offers.Offers" title="odesk.routers.offers.Offers"><tt class="xref py py-class docutils literal"><span class="pre">Offers</span> <span class="pre">router</span></tt></a> with handy number of calls for managing offers as a client and as a freelancer.</li>
+<li>Added <a class="reference internal" href="reference-docs/odesk.routers.html#odesk.routers.hr.HR_V3" title="odesk.routers.hr.HR_V3"><tt class="xref py py-class docutils literal"><span class="pre">HR_V3</span> <span class="pre">router</span></tt></a> with a number of calls for getting job applications  as a client and as a freelancer.</li>
+<li>Added <a class="reference internal" href="reference-docs/odesk.routers.html#odesk.routers.mc.MC.get_thread_by_context" title="odesk.routers.mc.MC.get_thread_by_context"><tt class="xref py py-meth docutils literal"><span class="pre">List</span> <span class="pre">threads</span> <span class="pre">by</span> <span class="pre">context</span></tt></a> call.</li>
+</ol>
+</dd>
+</dl>
+</li>
+<li><p class="first">Removed mistakenly documented by oDesk but not working API call for getting team adjustments.</p>
+</li>
+</ul>
+</div>
 <div class="section" id="version-0-5-2">
-<span id="id2"></span><h2>Version 0.5.2<a class="headerlink" href="#version-0-5-2" title="Permalink to this headline">¶</a></h2>
+<span id="id3"></span><h2>Version 0.5.2<a class="headerlink" href="#version-0-5-2" title="Permalink to this headline">¶</a></h2>
 <ul>
 <li><p class="first">Fixed engagements API call, so that you can call
 <tt class="docutils literal"><span class="pre">client.hr.get_engagements()</span></tt> without any parameter
@@ -135,14 +155,14 @@ use it on your own risk. It will be reworked in future.</li>
 </ul>
 </div>
 <div class="section" id="version-0-5-1">
-<span id="id3"></span><h2>Version 0.5.1<a class="headerlink" href="#version-0-5-1" title="Permalink to this headline">¶</a></h2>
+<span id="id4"></span><h2>Version 0.5.1<a class="headerlink" href="#version-0-5-1" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>Fixed bug preventing update (<tt class="docutils literal"><span class="pre">PUT</span></tt> method) for oTask codes that
 contained non-urlsafe characters, e.g. &#8220;space&#8221;, &#8220;colon&#8221;, etc.</li>
 </ul>
 </div>
 <div class="section" id="version-0-5">
-<span id="id4"></span><h2>Version 0.5<a class="headerlink" href="#version-0-5" title="Permalink to this headline">¶</a></h2>
+<span id="id5"></span><h2>Version 0.5<a class="headerlink" href="#version-0-5" title="Permalink to this headline">¶</a></h2>
 <p><em>October 2013</em></p>
 <p>Backwards incompatibility changes:</p>
 <ul class="simple">
@@ -175,14 +195,14 @@ method&#8217;s docstring to see comprehensive description</li>
 </ul>
 </div>
 <div class="section" id="version-0-4">
-<span id="id5"></span><h2>Version 0.4<a class="headerlink" href="#version-0-4" title="Permalink to this headline">¶</a></h2>
+<span id="id6"></span><h2>Version 0.4<a class="headerlink" href="#version-0-4" title="Permalink to this headline">¶</a></h2>
 <p><em>May 2011</em></p>
 <ul class="simple">
 <li><em>Incompatibility with previous release</em> Changed name of the otask router to the task</li>
 <li><em>Incompatibility with previous release</em> Chaged name of the oticket router to the ticket ??</li>
 <li><em>Incompatibility with previous release</em> Changed name of the time_report router to the timereport</li>
 <li><em>Incompatibility with previous release</em> Changed name of the finreports router to the finreport</li>
-<li><em>Incompatibility with previous release</em> &#8220;from odesk import <a href="#id6"><span class="problematic" id="id7">*</span></a>&#8221; now import only: &#8220;get_version&#8221;, &#8220;Client&#8221;, &#8220;utils&#8221;</li>
+<li><em>Incompatibility with previous release</em> &#8220;from odesk import *&#8221; now import only: &#8220;get_version&#8221;, &#8220;Client&#8221;, &#8220;utils&#8221;</li>
 <li>All routers moved from the __init__.py to the own files in the routers dir.</li>
 <li>All helper classes moved to own modules</li>
 <li>Added logging inside exceptions</li>
@@ -192,7 +212,7 @@ method&#8217;s docstring to see comprehensive description</li>
 </ul>
 </div>
 <div class="section" id="version-0-2">
-<span id="id8"></span><h2>Version 0.2<a class="headerlink" href="#version-0-2" title="Permalink to this headline">¶</a></h2>
+<span id="id7"></span><h2>Version 0.2<a class="headerlink" href="#version-0-2" title="Permalink to this headline">¶</a></h2>
 <p><em>October 2010</em></p>
 <ul class="simple">
 <li>All helpers classes moved to the utils.py, added Table helper class</li>
@@ -200,7 +220,7 @@ method&#8217;s docstring to see comprehensive description</li>
 </ul>
 </div>
 <div class="section" id="version-0-1-2">
-<span id="id9"></span><h2>Version 0.1.2<a class="headerlink" href="#version-0-1-2" title="Permalink to this headline">¶</a></h2>
+<span id="id8"></span><h2>Version 0.1.2<a class="headerlink" href="#version-0-1-2" title="Permalink to this headline">¶</a></h2>
 <p><em>29 September 2010</em></p>
 <p>Bug fix release</p>
 <ul class="simple">
@@ -209,7 +229,7 @@ method&#8217;s docstring to see comprehensive description</li>
 </ul>
 </div>
 <div class="section" id="version-0-1-1">
-<span id="id10"></span><h2>Version 0.1.1<a class="headerlink" href="#version-0-1-1" title="Permalink to this headline">¶</a></h2>
+<span id="id9"></span><h2>Version 0.1.1<a class="headerlink" href="#version-0-1-1" title="Permalink to this headline">¶</a></h2>
 <p><em>15 July 2010</em></p>
 <p>Bug fix release</p>
 <ul class="simple">
@@ -218,7 +238,7 @@ method&#8217;s docstring to see comprehensive description</li>
 </ul>
 </div>
 <div class="section" id="version-0-1">
-<span id="id11"></span><h2>Version 0.1<a class="headerlink" href="#version-0-1" title="Permalink to this headline">¶</a></h2>
+<span id="id10"></span><h2>Version 0.1<a class="headerlink" href="#version-0-1" title="Permalink to this headline">¶</a></h2>
 <p><em>08 July 2010</em></p>
 <p>First public release</p>
 </div>
@@ -245,12 +265,12 @@ method&#8217;s docstring to see comprehensive description</li>
         <li class="right" >
           <a href="reference-docs/odesk.routers.html" title="odesk.routers package"
              >previous</a> |</li>
-        <li><a href="index.html">python-odesk 0.5.2 documentation</a> &raquo;</li> 
+        <li><a href="index.html">python-odesk 0.5.3 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
         &copy; Copyright 2010-2013, odesk.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
     </div>
   </body>
 </html>

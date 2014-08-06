@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>How to &mdash; python-odesk 0.5.2 documentation</title>
+    <title>How to &mdash; python-odesk 0.5.3 documentation</title>
     
     <link rel="stylesheet" href="static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.5.2',
+        VERSION:     '0.5.3',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="static/jquery.js"></script>
     <script type="text/javascript" src="static/underscore.js"></script>
     <script type="text/javascript" src="static/doctools.js"></script>
-    <link rel="top" title="python-odesk 0.5.2 documentation" href="index.html" />
+    <link rel="top" title="python-odesk 0.5.3 documentation" href="index.html" />
     <link rel="next" title="Reference Documentation: Classes and Methods" href="reference_docs.html" />
     <link rel="prev" title="Getting started" href="getting_started.html" /> 
   </head>
@@ -43,7 +43,7 @@
         <li class="right" >
           <a href="getting_started.html" title="Getting started"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">python-odesk 0.5.2 documentation</a> &raquo;</li> 
+        <li><a href="index.html">python-odesk 0.5.3 documentation</a> &raquo;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar">
@@ -52,8 +52,8 @@
   <ul>
 <li><a class="reference internal" href="#">How to</a><ul>
 <li><a class="reference internal" href="#authenticate">Authenticate</a></li>
-<li><a class="reference internal" href="#provider-s-information">Provider&#8217;s information</a></li>
-<li><a class="reference internal" href="#search-providers">Search Providers</a></li>
+<li><a class="reference internal" href="#freelancer-s-information">Freelancer&#8217;s information</a></li>
+<li><a class="reference internal" href="#search-freelancers">Search Freelancers</a></li>
 <li><a class="reference internal" href="#search-jobs">Search Jobs</a></li>
 <li><a class="reference internal" href="#metadata-information">Metadata information</a></li>
 <li><a class="reference internal" href="#hiring">Hiring</a></li>
@@ -111,11 +111,12 @@
 </pre></div>
 </div>
 <p>or if you use <tt class="docutils literal"><span class="pre">IPython</span></tt> just add <tt class="docutils literal"><span class="pre">?</span></tt> symbol at the end of an object/class/method:</p>
-<div class="highlight-python"><pre>client.provider.search_jobs?</pre>
+<div class="highlight-python"><div class="highlight"><pre>client.provider.search_jobs?
+</pre></div>
 </div>
 <div class="section" id="authenticate">
 <span id="id2"></span><h2>Authenticate<a class="headerlink" href="#authenticate" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference external" href="http://developers.odesk.com/Authentication">http://developers.odesk.com/Authentication</a></p>
+<p><a class="reference external" href="https://developers.odesk.com/?lang=python#authentication">https://developers.odesk.com/?lang=python#authentication</a></p>
 <p>To authenticate your web application with the python-odesk, use something similar
 to the code below:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">public_key</span> <span class="o">=</span> <span class="nb">raw_input</span><span class="p">(</span><span class="s">&#39;Please enter public key: &gt; &#39;</span><span class="p">)</span>
@@ -144,21 +145,22 @@ to the code below:</p>
 </pre></div>
 </div>
 </div>
-<div class="section" id="provider-s-information">
-<span id="provider-information"></span><h2>Provider&#8217;s information<a class="headerlink" href="#provider-s-information" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference external" href="http://developers.odesk.com/Provider-Profile">http://developers.odesk.com/Provider-Profile</a></p>
-<p>To get information about provider, use following methods (click the link to see detailed description of parameters):</p>
+<div class="section" id="freelancer-s-information">
+<span id="provider-information"></span><h2>Freelancer&#8217;s information<a class="headerlink" href="#freelancer-s-information" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://developers.odesk.com/?lang=python#public-profiles_get-brief-profile-summary">https://developers.odesk.com/?lang=python#public-profiles_get-brief-profile-summary</a>
+<a class="reference external" href="https://developers.odesk.com/?lang=python#public-profiles_get-profile-details">https://developers.odesk.com/?lang=python#public-profiles_get-profile-details</a></p>
+<p>To get information about freelancer, use following methods (click the link to see detailed description of parameters):</p>
 <p><a class="reference internal" href="reference-docs/odesk.routers.html#odesk.routers.provider.Provider.get_provider" title="odesk.routers.provider.Provider.get_provider"><tt class="xref py py-meth docutils literal"><span class="pre">client.provider.get_provider</span></tt></a></p>
 <p><a class="reference internal" href="reference-docs/odesk.routers.html#odesk.routers.provider.Provider.get_provider_brief" title="odesk.routers.provider.Provider.get_provider_brief"><tt class="xref py py-meth docutils literal"><span class="pre">client.provider.get_provider_brief</span></tt></a></p>
 </div>
-<div class="section" id="search-providers">
-<h2>Search Providers<a class="headerlink" href="#search-providers" title="Permalink to this headline">¶</a></h2>
-<p>To search provider(<a class="reference external" href="http://developers.odesk.com/search-providers">http://developers.odesk.com/search-providers</a>) by the query string, use:</p>
+<div class="section" id="search-freelancers">
+<h2>Search Freelancers<a class="headerlink" href="#search-freelancers" title="Permalink to this headline">¶</a></h2>
+<p>To search for a freelancer (<a class="reference external" href="https://developers.odesk.com/?lang=python#public-profiles_search-for-freelancers">https://developers.odesk.com/?lang=python#public-profiles_search-for-freelancers</a>) by the query string, use:</p>
 <p><a class="reference internal" href="reference-docs/odesk.routers.html#odesk.routers.provider.Provider_V2.search_providers" title="odesk.routers.provider.Provider_V2.search_providers"><tt class="xref py py-meth docutils literal"><span class="pre">client.provider_v2.search_providers</span></tt></a></p>
 </div>
 <div class="section" id="search-jobs">
 <h2>Search Jobs<a class="headerlink" href="#search-jobs" title="Permalink to this headline">¶</a></h2>
-<p>To search jobs(<a class="reference external" href="http://developers.odesk.com/search-jobs">http://developers.odesk.com/search-jobs</a>) by the query string, use:</p>
+<p>To search jobs(<a class="reference external" href="https://developers.odesk.com/?lang=python#jobs_search-for-jobs">https://developers.odesk.com/?lang=python#jobs_search-for-jobs</a>) by the query string, use:</p>
 <p><a class="reference internal" href="reference-docs/odesk.routers.html#odesk.routers.provider.Provider_V2.search_jobs" title="odesk.routers.provider.Provider_V2.search_jobs"><tt class="xref py py-meth docutils literal"><span class="pre">client.provider_v2.search_jobs</span></tt></a></p>
 </div>
 <div class="section" id="metadata-information">
@@ -171,7 +173,7 @@ to the code below:</p>
 </div>
 <div class="section" id="hiring">
 <span id="id4"></span><h2>Hiring<a class="headerlink" href="#hiring" title="Permalink to this headline">¶</a></h2>
-<p>oDesk Hiring API <a class="reference external" href="http://developers.odesk.com/w/page/23879811/Hiring">http://developers.odesk.com/w/page/23879811/Hiring</a> allows to do such tasks as:</p>
+<p>oDesk Hiring API <a class="reference external" href="https://developers.odesk.com/?lang=python#contracts-and-offers">https://developers.odesk.com/?lang=python#contracts-and-offers</a> allows to do such tasks as:</p>
 <ul class="simple">
 <li>Create new job posting <a class="reference internal" href="reference-docs/odesk.routers.html#odesk.routers.hr.HR.post_job" title="odesk.routers.hr.HR.post_job"><tt class="xref py py-meth docutils literal"><span class="pre">client.hr.post_job</span></tt></a></li>
 <li>Update existing job post <a class="reference internal" href="reference-docs/odesk.routers.html#odesk.routers.hr.HR.update_job" title="odesk.routers.hr.HR.update_job"><tt class="xref py py-meth docutils literal"><span class="pre">client.hr.update_job</span></tt></a></li>
@@ -184,14 +186,15 @@ to the code below:</p>
 <li>Make an offer <a class="reference internal" href="reference-docs/odesk.routers.html#odesk.routers.hr.HR.post_offer" title="odesk.routers.hr.HR.post_offer"><tt class="xref py py-meth docutils literal"><span class="pre">client.hr.post_offer</span></tt></a></li>
 <li>View active engagements <a class="reference internal" href="reference-docs/odesk.routers.html#odesk.routers.hr.HR.get_engagements" title="odesk.routers.hr.HR.get_engagements"><tt class="xref py py-meth docutils literal"><span class="pre">client.hr.get_engagements</span></tt></a></li>
 <li>Pay a bonus to the contractor <a class="reference internal" href="reference-docs/odesk.routers.html#odesk.routers.hr.HR.post_team_adjustment" title="odesk.routers.hr.HR.post_team_adjustment"><tt class="xref py py-meth docutils literal"><span class="pre">client.hr.post_team_adjustment</span></tt></a></li>
-<li>End the contract with provider <a class="reference internal" href="reference-docs/odesk.routers.html#odesk.routers.hr.HR.end_contract" title="odesk.routers.hr.HR.end_contract"><tt class="xref py py-meth docutils literal"><span class="pre">client.hr.end_contract</span></tt></a></li>
+<li>End the contract with freelancer <a class="reference internal" href="reference-docs/odesk.routers.html#odesk.routers.hr.HR.end_contract" title="odesk.routers.hr.HR.end_contract"><tt class="xref py py-meth docutils literal"><span class="pre">client.hr.end_contract</span></tt></a></li>
 </ul>
 </div>
 <div class="section" id="work-with-jobs">
 <span id="id5"></span><h2>Work with jobs<a class="headerlink" href="#work-with-jobs" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference external" href="http://developers.odesk.com/w/page/49065901/Job%20Profile">http://developers.odesk.com/w/page/49065901/Job%20Profile</a></p>
+<p><a class="reference external" href="https://developers.odesk.com/?lang=python#jobs_get-job-profile">https://developers.odesk.com/?lang=python#jobs_get-job-profile</a></p>
 <p>To work with jobs you should use <a class="reference internal" href="reference-docs/odesk.routers.html#odesk.routers.job.Job" title="odesk.routers.job.Job"><tt class="xref py py-class docutils literal"><span class="pre">client.job</span></tt></a> wrapper:</p>
-<div class="highlight-python"><pre>tasks = client.job.get_job_profile(job key)</pre>
+<div class="highlight-python"><div class="highlight"><pre>tasks = client.job.get_job_profile(job key)
+</pre></div>
 </div>
 <p>Where:</p>
 <ul class="simple">
@@ -200,7 +203,7 @@ to the code below:</p>
 </div>
 <div class="section" id="team-s-information">
 <span id="team-information"></span><h2>Team&#8217;s information<a class="headerlink" href="#team-s-information" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference external" href="http://developers.odesk.com/Team-API">http://developers.odesk.com/Team-API</a></p>
+<p><a class="reference external" href="https://developers.odesk.com/?lang=python#companies-and-teams">https://developers.odesk.com/?lang=python#companies-and-teams</a></p>
 <p>After authentication, you can get teams&#8217; information from client instance you have:</p>
 <p><a class="reference internal" href="reference-docs/odesk.routers.html#odesk.routers.team.Team_V2.get_teamrooms" title="odesk.routers.team.Team_V2.get_teamrooms"><tt class="xref py py-meth docutils literal"><span class="pre">client.team_v2.get_teamrooms</span></tt></a></p>
 <p>To get snapshots:</p>
@@ -210,7 +213,7 @@ to the code below:</p>
 </div>
 <div class="section" id="trays-and-messages">
 <span id="get-messages"></span><h2>Trays and messages<a class="headerlink" href="#trays-and-messages" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference external" href="http://developers.odesk.com/Message-Center-API">http://developers.odesk.com/Message-Center-API</a></p>
+<p><a class="reference external" href="https://developers.odesk.com/?lang=python#messages">https://developers.odesk.com/?lang=python#messages</a></p>
 <p>Get user&#8217;s trays (if user not provided, authenticated user will be taken):</p>
 <p><a class="reference internal" href="reference-docs/odesk.routers.html#odesk.routers.mc.MC.get_trays" title="odesk.routers.mc.MC.get_trays"><tt class="xref py py-meth docutils literal"><span class="pre">client.mc.get_trays</span></tt></a></p>
 <p>Get content of the tray:</p>
@@ -220,13 +223,13 @@ to the code below:</p>
 </div>
 <div class="section" id="send-message">
 <span id="id6"></span><h2>Send message<a class="headerlink" href="#send-message" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference external" href="http://developers.odesk.com/Message-Center-API">http://developers.odesk.com/Message-Center-API</a></p>
+<p><a class="reference external" href="https://developers.odesk.com/?lang=python#messages_send-message">https://developers.odesk.com/?lang=python#messages_send-message</a></p>
 <p>To send message:</p>
 <p><a class="reference internal" href="reference-docs/odesk.routers.html#odesk.routers.mc.MC.post_message" title="odesk.routers.mc.MC.post_message"><tt class="xref py py-meth docutils literal"><span class="pre">client.mc.post_message</span></tt></a></p>
 </div>
 <div class="section" id="get-timereports">
 <span id="id7"></span><h2>Get timereports<a class="headerlink" href="#get-timereports" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference external" href="http://developers.odesk.com/Time-Reports-API">http://developers.odesk.com/Time-Reports-API</a></p>
+<p><a class="reference external" href="https://developers.odesk.com/?lang=python#reports_time-reports-fields">https://developers.odesk.com/?lang=python#reports_time-reports-fields</a></p>
 <p>To get timereports, use, based on the level of the timereports you need:</p>
 <p><a class="reference internal" href="reference-docs/odesk.routers.html#odesk.routers.timereport.TimeReport.get_provider_report" title="odesk.routers.timereport.TimeReport.get_provider_report"><tt class="xref py py-meth docutils literal"><span class="pre">client.timereport.get_provider_report</span></tt></a></p>
 <p><a class="reference internal" href="reference-docs/odesk.routers.html#odesk.routers.timereport.TimeReport.get_agency_report" title="odesk.routers.timereport.TimeReport.get_agency_report"><tt class="xref py py-meth docutils literal"><span class="pre">timereport.get_company_report</span></tt></a></p>
@@ -252,12 +255,13 @@ to the code below:</p>
 </div>
 <div class="section" id="get-finreports">
 <span id="id8"></span><h2>Get finreports<a class="headerlink" href="#get-finreports" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://developers.odesk.com/?lang=python#reports_financial-reports-fields">https://developers.odesk.com/?lang=python#reports_financial-reports-fields</a></p>
 <p>Financial reports are also using GDS queries.</p>
 <p>Please see <a class="reference internal" href="reference-docs/odesk.routers.html#odesk.routers.finreport.Finreports" title="odesk.routers.finreport.Finreports"><tt class="xref py py-class docutils literal"><span class="pre">Finreports</span></tt></a> wrapper</p>
 </div>
 <div class="section" id="work-with-activities">
 <span id="work-with-tasks"></span><h2>Work with Activities<a class="headerlink" href="#work-with-activities" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference external" href="http://developers.odesk.com/oTasks-API">http://developers.odesk.com/oTasks-API</a></p>
+<p><a class="reference external" href="https://developers.odesk.com/?lang=python#activities">https://developers.odesk.com/?lang=python#activities</a></p>
 <p>To work with Activities you should use <a class="reference internal" href="reference-docs/odesk.routers.html#odesk.routers.task.Task" title="odesk.routers.task.Task"><tt class="xref py py-class docutils literal"><span class="pre">client.task</span></tt></a> wrapper:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">tasks</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">task</span><span class="o">.</span><span class="n">get_team_tasks</span><span class="p">(</span><span class="s">&#39;your_company_id&#39;</span><span class="p">,</span> <span class="s">&#39;your_team_id&#39;</span><span class="p">)</span>
 </pre></div>
@@ -305,12 +309,12 @@ from the <tt class="docutils literal"><span class="pre">hr.get_team()</span></tt
         <li class="right" >
           <a href="getting_started.html" title="Getting started"
              >previous</a> |</li>
-        <li><a href="index.html">python-odesk 0.5.2 documentation</a> &raquo;</li> 
+        <li><a href="index.html">python-odesk 0.5.3 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
         &copy; Copyright 2010-2013, odesk.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
     </div>
   </body>
 </html>

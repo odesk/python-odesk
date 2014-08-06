@@ -1,6 +1,14 @@
 odesk package
 =============
 
+Module contents
+---------------
+
+.. automodule:: odesk
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 Subpackages
 -----------
 
@@ -59,14 +67,6 @@ odesk.oauth module
     :undoc-members:
     :show-inheritance:
 
-odesk.tests module
-------------------
-
-.. automodule:: odesk.tests
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
 odesk.utils module
 ------------------
 
@@ -75,11 +75,3 @@ odesk.utils module
     :undoc-members:
     :show-inheritance:
 
-
-Module contents
----------------
-
-.. automodule:: odesk
-    :members:
-    :undoc-members:
-    :show-inheritance:

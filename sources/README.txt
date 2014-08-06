@@ -1,3 +1,11 @@
+.. image:: http://img.shields.io/packagist/l/odesk/php-odesk.svg
+   :target: http://www.apache.org/licenses/LICENSE-2.0.html
+   :alt: License
+
+.. image:: https://badge.fury.io/py/python-odesk.svg
+   :target: http://badge.fury.io/py/python-odesk
+   :alt: PyPI version
+
 Copyright (c) 2010-2014, oDesk http://www.odesk.com
 All rights reserved.
 
@@ -6,7 +14,7 @@ All rights reserved.
 Python bindings to oDesk API
 ============================
 
-This is a Python bindings for Public oDesk API http://developers.odesk.com/
+This is a Python bindings for Public oDesk API https://developers.odesk.com/
 Using the API you can build apps that will help you:
 
 * Mangage your distributed team

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>odesk package &mdash; python-odesk 0.5.2 documentation</title>
+    <title>odesk package &mdash; python-odesk 0.5.3 documentation</title>
     
     <link rel="stylesheet" href="../static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.5.2',
+        VERSION:     '0.5.3',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="../static/jquery.js"></script>
     <script type="text/javascript" src="../static/underscore.js"></script>
     <script type="text/javascript" src="../static/doctools.js"></script>
-    <link rel="top" title="python-odesk 0.5.2 documentation" href="../index.html" />
+    <link rel="top" title="python-odesk 0.5.3 documentation" href="../index.html" />
     <link rel="up" title="Reference Documentation: Classes and Methods" href="../reference_docs.html" />
     <link rel="next" title="odesk.routers package" href="odesk.routers.html" />
     <link rel="prev" title="Reference Documentation: Classes and Methods" href="../reference_docs.html" /> 
@@ -44,7 +44,7 @@
         <li class="right" >
           <a href="../reference_docs.html" title="Reference Documentation: Classes and Methods"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">python-odesk 0.5.2 documentation</a> &raquo;</li>
+        <li><a href="../index.html">python-odesk 0.5.3 documentation</a> &raquo;</li>
           <li><a href="../reference_docs.html" accesskey="U">Reference Documentation: Classes and Methods</a> &raquo;</li> 
       </ul>
     </div>
@@ -53,9 +53,8 @@
   <h3><a href="../index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">odesk package</a><ul>
-<li><a class="reference internal" href="#subpackages">Subpackages</a><ul>
-</ul>
-</li>
+<li><a class="reference internal" href="#module-odesk">Module contents</a></li>
+<li><a class="reference internal" href="#subpackages">Subpackages</a></li>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
 <li><a class="reference internal" href="#module-odesk.client">odesk.client module</a></li>
 <li><a class="reference internal" href="#module-odesk.config">odesk.config module</a></li>
@@ -63,9 +62,7 @@
 <li><a class="reference internal" href="#module-odesk.http">odesk.http module</a></li>
 <li><a class="reference internal" href="#module-odesk.namespaces">odesk.namespaces module</a></li>
 <li><a class="reference internal" href="#module-odesk.oauth">odesk.oauth module</a></li>
-<li><a class="reference internal" href="#module-odesk.tests">odesk.tests module</a></li>
 <li><a class="reference internal" href="#module-odesk.utils">odesk.utils module</a></li>
-<li><a class="reference internal" href="#module-odesk">Module contents</a></li>
 </ul>
 </li>
 </ul>
@@ -104,34 +101,23 @@
             
   <div class="section" id="odesk-package">
 <h1>odesk package<a class="headerlink" href="#odesk-package" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="subpackages">
-<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="odesk.routers.html">odesk.routers package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="odesk.routers.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="odesk.routers.html#module-odesk.routers.finreport">odesk.routers.finreport module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="odesk.routers.html#module-odesk.routers.hr">odesk.routers.hr module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="odesk.routers.html#module-odesk.routers.job">odesk.routers.job module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="odesk.routers.html#module-odesk.routers.mc">odesk.routers.mc module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="odesk.routers.html#module-odesk.routers.provider">odesk.routers.provider module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="odesk.routers.html#module-odesk.routers.task">odesk.routers.task module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="odesk.routers.html#module-odesk.routers.team">odesk.routers.team module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="odesk.routers.html#module-odesk.routers.timereport">odesk.routers.timereport module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="odesk.routers.html#module-odesk.routers">Module contents</a></li>
-</ul>
-</li>
-</ul>
+<div class="section" id="module-odesk">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-odesk" title="Permalink to this headline">¶</a></h2>
+<p>Main package of the python bindings for oDesk API.</p>
+<p>For convenience some most commonly used functionalities are imported here,
+so you can use:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">odesk</span> <span class="kn">import</span> <span class="n">Client</span>
+<span class="kn">from</span> <span class="nn">odesk</span> <span class="kn">import</span> <span class="n">raise_http_error</span>
+</pre></div>
 </div>
-</div>
-<div class="section" id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="module-odesk.client">
-<span id="odesk-client-module"></span><h2>odesk.client module<a class="headerlink" href="#module-odesk.client" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="odesk.get_version">
+<tt class="descclassname">odesk.</tt><tt class="descname">get_version</tt><big>(</big><big>)</big><a class="headerlink" href="#odesk.get_version" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="class">
-<dt id="odesk.client.Client">
-<em class="property">class </em><tt class="descclassname">odesk.client.</tt><tt class="descname">Client</tt><big>(</big><em>public_key</em>, <em>secret_key</em>, <em>oauth_access_token=None</em>, <em>oauth_access_token_secret=None</em>, <em>fmt='json'</em>, <em>finreport=True</em>, <em>hr=True</em>, <em>mc=True</em>, <em>provider=True</em>, <em>task=True</em>, <em>team=True</em>, <em>timereport=True</em>, <em>job=True</em><big>)</big><a class="headerlink" href="#odesk.client.Client" title="Permalink to this definition">¶</a></dt>
+<dt id="odesk.Client">
+<em class="property">class </em><tt class="descclassname">odesk.</tt><tt class="descname">Client</tt><big>(</big><em>public_key</em>, <em>secret_key</em>, <em>oauth_access_token=None</em>, <em>oauth_access_token_secret=None</em>, <em>fmt='json'</em>, <em>finreport=True</em>, <em>hr=True</em>, <em>mc=True</em>, <em>offers=True</em>, <em>provider=True</em>, <em>task=True</em>, <em>team=True</em>, <em>timereport=True</em>, <em>job=True</em><big>)</big><a class="headerlink" href="#odesk.Client" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
 <p>Main API client with oAuth v1 authorization.</p>
 <dl class="docutils">
@@ -166,23 +152,238 @@ Whether to attach
 Whether to attach
 <a class="reference internal" href="odesk.routers.html#module-odesk.routers.mc" title="odesk.routers.mc"><tt class="xref py py-mod docutils literal"><span class="pre">odesk.routers.mc</span></tt></a> router</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">provider:</th><td class="field-body">(optional, default <tt class="docutils literal"><span class="pre">True</span></tt>)
+<tr class="field-odd field"><th class="field-name">offers:</th><td class="field-body">(optional, default <tt class="docutils literal"><span class="pre">True</span></tt>)
+Whether to attach
+<a class="reference internal" href="odesk.routers.html#module-odesk.routers.offers" title="odesk.routers.offers"><tt class="xref py py-mod docutils literal"><span class="pre">odesk.routers.offers</span></tt></a> router</td>
+</tr>
+<tr class="field-even field"><th class="field-name">provider:</th><td class="field-body">(optional, default <tt class="docutils literal"><span class="pre">True</span></tt>)
 Whether to attach
 <a class="reference internal" href="odesk.routers.html#module-odesk.routers.provider" title="odesk.routers.provider"><tt class="xref py py-mod docutils literal"><span class="pre">odesk.routers.provider</span></tt></a> router</td>
 </tr>
-<tr class="field-even field"><th class="field-name">task:</th><td class="field-body">(optional, default <tt class="docutils literal"><span class="pre">True</span></tt>)
+<tr class="field-odd field"><th class="field-name">task:</th><td class="field-body">(optional, default <tt class="docutils literal"><span class="pre">True</span></tt>)
 Whether to attach
 <a class="reference internal" href="odesk.routers.html#module-odesk.routers.task" title="odesk.routers.task"><tt class="xref py py-mod docutils literal"><span class="pre">odesk.routers.task</span></tt></a> router</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">team:</th><td class="field-body">(optional, default <tt class="docutils literal"><span class="pre">True</span></tt>)
+<tr class="field-even field"><th class="field-name">team:</th><td class="field-body">(optional, default <tt class="docutils literal"><span class="pre">True</span></tt>)
 Whether to attach
 <a class="reference internal" href="odesk.routers.html#module-odesk.routers.team" title="odesk.routers.team"><tt class="xref py py-mod docutils literal"><span class="pre">odesk.routers.team</span></tt></a> router</td>
 </tr>
-<tr class="field-even field"><th class="field-name">timereport:</th><td class="field-body">(optional, default <tt class="docutils literal"><span class="pre">True</span></tt>)
+<tr class="field-odd field"><th class="field-name">timereport:</th><td class="field-body">(optional, default <tt class="docutils literal"><span class="pre">True</span></tt>)
 Whether to attach
 <a class="reference internal" href="odesk.routers.html#module-odesk.routers.timereport" title="odesk.routers.timereport"><tt class="xref py py-mod docutils literal"><span class="pre">odesk.routers.timereport</span></tt></a> router</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">job:</th><td class="field-body">(optional, default <tt class="docutils literal"><span class="pre">True</span></tt>)
+<tr class="field-even field"><th class="field-name">job:</th><td class="field-body">(optional, default <tt class="docutils literal"><span class="pre">True</span></tt>)
+Whether to attach
+<a class="reference internal" href="odesk.routers.html#module-odesk.routers.job" title="odesk.routers.job"><tt class="xref py py-mod docutils literal"><span class="pre">odesk.routers.job</span></tt></a> router</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+<dl class="method">
+<dt id="odesk.Client.delete">
+<tt class="descname">delete</tt><big>(</big><em>url</em>, <em>data=None</em><big>)</big><a class="headerlink" href="#odesk.Client.delete" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="odesk.Client.get">
+<tt class="descname">get</tt><big>(</big><em>url</em>, <em>data=None</em><big>)</big><a class="headerlink" href="#odesk.Client.get" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="odesk.Client.post">
+<tt class="descname">post</tt><big>(</big><em>url</em>, <em>data=None</em><big>)</big><a class="headerlink" href="#odesk.Client.post" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="odesk.Client.put">
+<tt class="descname">put</tt><big>(</big><em>url</em>, <em>data=None</em><big>)</big><a class="headerlink" href="#odesk.Client.put" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="odesk.Client.read">
+<tt class="descname">read</tt><big>(</big><em>url</em>, <em>data=None</em>, <em>method='GET'</em>, <em>fmt='json'</em><big>)</big><a class="headerlink" href="#odesk.Client.read" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns parsed Python object or raises an error.</p>
+<dl class="docutils">
+<dt><em>Parameters:</em></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">url:</th><td class="field-body"><p class="first">Target url</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">data:</th><td class="field-body"><p class="first">Dictionary with parameters</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">method:</th><td class="field-body"><p class="first">(optional, default <tt class="docutils literal"><span class="pre">GET</span></tt>)
+HTTP method, possible values:</p>
+<blockquote>
+<div><ul class="simple">
+<li><tt class="docutils literal"><span class="pre">GET</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">POST</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">PUT</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">DELETE</span></tt></li>
+</ul>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">fmt:</th><td class="field-body"><p class="first last">(optional, default <tt class="docutils literal"><span class="pre">json</span></tt>)
+API response format.
+Currently only <tt class="docutils literal"><span class="pre">'json'</span></tt> is supported</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="odesk.Client.urlopen">
+<tt class="descname">urlopen</tt><big>(</big><em>url</em>, <em>data=None</em>, <em>method='GET'</em>, <em>headers=None</em><big>)</big><a class="headerlink" href="#odesk.Client.urlopen" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform oAuth v1 signed HTTP request.</p>
+<dl class="docutils">
+<dt><em>Parameters:</em></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">url:</th><td class="field-body"><p class="first">Target url</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">data:</th><td class="field-body"><p class="first">Dictionary with parameters</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">method:</th><td class="field-body"><p class="first">(optional, default <tt class="docutils literal"><span class="pre">GET</span></tt>)
+HTTP method, possible values:</p>
+<blockquote>
+<div><ul class="simple">
+<li><tt class="docutils literal"><span class="pre">GET</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">POST</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">PUT</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">DELETE</span></tt></li>
+</ul>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">headers:</th><td class="field-body"><p class="first last">(optional, default <tt class="docutils literal"><span class="pre">{}</span></tt>)
+Dictionary with header values</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="odesk.raise_http_error">
+<tt class="descclassname">odesk.</tt><tt class="descname">raise_http_error</tt><big>(</big><em>url</em>, <em>response</em><big>)</big><a class="headerlink" href="#odesk.raise_http_error" title="Permalink to this definition">¶</a></dt>
+<dd><p>Raise custom <tt class="docutils literal"><span class="pre">urllib2.HTTPError</span></tt> exception.</p>
+<dl class="docutils">
+<dt><em>Parameters:</em></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">url:</th><td class="field-body">Url that caused an error</td>
+</tr>
+<tr class="field-even field"><th class="field-name">response:</th><td class="field-body"><tt class="docutils literal"><span class="pre">urllib3</span></tt> response object</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="odesk.routers.html">odesk.routers package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="odesk.routers.html#module-odesk.routers">Module contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="odesk.routers.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="odesk.routers.html#module-odesk.routers.finreport">odesk.routers.finreport module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="odesk.routers.html#module-odesk.routers.hr">odesk.routers.hr module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="odesk.routers.html#module-odesk.routers.job">odesk.routers.job module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="odesk.routers.html#module-odesk.routers.mc">odesk.routers.mc module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="odesk.routers.html#module-odesk.routers.offers">odesk.routers.offers module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="odesk.routers.html#module-odesk.routers.provider">odesk.routers.provider module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="odesk.routers.html#module-odesk.routers.task">odesk.routers.task module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="odesk.routers.html#module-odesk.routers.team">odesk.routers.team module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="odesk.routers.html#module-odesk.routers.timereport">odesk.routers.timereport module</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-odesk.client">
+<span id="odesk-client-module"></span><h2>odesk.client module<a class="headerlink" href="#module-odesk.client" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="odesk.client.Client">
+<em class="property">class </em><tt class="descclassname">odesk.client.</tt><tt class="descname">Client</tt><big>(</big><em>public_key</em>, <em>secret_key</em>, <em>oauth_access_token=None</em>, <em>oauth_access_token_secret=None</em>, <em>fmt='json'</em>, <em>finreport=True</em>, <em>hr=True</em>, <em>mc=True</em>, <em>offers=True</em>, <em>provider=True</em>, <em>task=True</em>, <em>team=True</em>, <em>timereport=True</em>, <em>job=True</em><big>)</big><a class="headerlink" href="#odesk.client.Client" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>Main API client with oAuth v1 authorization.</p>
+<dl class="docutils">
+<dt><em>Parameters:</em></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">public_key:</th><td class="field-body">Public API key</td>
+</tr>
+<tr class="field-even field"><th class="field-name">secret_key:</th><td class="field-body">API key secret</td>
+</tr>
+<tr class="field-odd field"><th class="field-name" colspan="2">oauth_access_token:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body">oAuth access token public key</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">oauth_access_token_secret:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body">oAuth access token secret key</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">fmt:</th><td class="field-body">(optional, default <tt class="docutils literal"><span class="pre">json</span></tt>)
+API response format.
+Currently only <tt class="docutils literal"><span class="pre">'json'</span></tt> is supported</td>
+</tr>
+<tr class="field-even field"><th class="field-name">finreport:</th><td class="field-body">(optional, default <tt class="docutils literal"><span class="pre">True</span></tt>)
+Whether to attach
+<a class="reference internal" href="odesk.routers.html#module-odesk.routers.finreport" title="odesk.routers.finreport"><tt class="xref py py-mod docutils literal"><span class="pre">odesk.routers.finreport</span></tt></a> router</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">hr:</th><td class="field-body">(optional, default <tt class="docutils literal"><span class="pre">True</span></tt>)
+Whether to attach
+<a class="reference internal" href="odesk.routers.html#module-odesk.routers.hr" title="odesk.routers.hr"><tt class="xref py py-mod docutils literal"><span class="pre">odesk.routers.hr</span></tt></a> router</td>
+</tr>
+<tr class="field-even field"><th class="field-name">mc:</th><td class="field-body">(optional, default <tt class="docutils literal"><span class="pre">True</span></tt>)
+Whether to attach
+<a class="reference internal" href="odesk.routers.html#module-odesk.routers.mc" title="odesk.routers.mc"><tt class="xref py py-mod docutils literal"><span class="pre">odesk.routers.mc</span></tt></a> router</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">offers:</th><td class="field-body">(optional, default <tt class="docutils literal"><span class="pre">True</span></tt>)
+Whether to attach
+<a class="reference internal" href="odesk.routers.html#module-odesk.routers.offers" title="odesk.routers.offers"><tt class="xref py py-mod docutils literal"><span class="pre">odesk.routers.offers</span></tt></a> router</td>
+</tr>
+<tr class="field-even field"><th class="field-name">provider:</th><td class="field-body">(optional, default <tt class="docutils literal"><span class="pre">True</span></tt>)
+Whether to attach
+<a class="reference internal" href="odesk.routers.html#module-odesk.routers.provider" title="odesk.routers.provider"><tt class="xref py py-mod docutils literal"><span class="pre">odesk.routers.provider</span></tt></a> router</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">task:</th><td class="field-body">(optional, default <tt class="docutils literal"><span class="pre">True</span></tt>)
+Whether to attach
+<a class="reference internal" href="odesk.routers.html#module-odesk.routers.task" title="odesk.routers.task"><tt class="xref py py-mod docutils literal"><span class="pre">odesk.routers.task</span></tt></a> router</td>
+</tr>
+<tr class="field-even field"><th class="field-name">team:</th><td class="field-body">(optional, default <tt class="docutils literal"><span class="pre">True</span></tt>)
+Whether to attach
+<a class="reference internal" href="odesk.routers.html#module-odesk.routers.team" title="odesk.routers.team"><tt class="xref py py-mod docutils literal"><span class="pre">odesk.routers.team</span></tt></a> router</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">timereport:</th><td class="field-body">(optional, default <tt class="docutils literal"><span class="pre">True</span></tt>)
+Whether to attach
+<a class="reference internal" href="odesk.routers.html#module-odesk.routers.timereport" title="odesk.routers.timereport"><tt class="xref py py-mod docutils literal"><span class="pre">odesk.routers.timereport</span></tt></a> router</td>
+</tr>
+<tr class="field-even field"><th class="field-name">job:</th><td class="field-body">(optional, default <tt class="docutils literal"><span class="pre">True</span></tt>)
 Whether to attach
 <a class="reference internal" href="odesk.routers.html#module-odesk.routers.job" title="odesk.routers.job"><tt class="xref py py-mod docutils literal"><span class="pre">odesk.routers.job</span></tt></a> router</td>
 </tr>
@@ -576,503 +777,6 @@ headers</td>
 </dd></dl>
 
 </div>
-<div class="section" id="module-odesk.tests">
-<span id="odesk-tests-module"></span><h2>odesk.tests module<a class="headerlink" href="#module-odesk.tests" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="odesk.tests.MicroMock">
-<em class="property">class </em><tt class="descclassname">odesk.tests.</tt><tt class="descname">MicroMock</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#odesk.tests.MicroMock" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
-</dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.client_read_400">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">client_read_400</tt><big>(</big><em>*args</em>, <em>**keywargs</em><big>)</big><a class="headerlink" href="#odesk.tests.client_read_400" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.client_read_401">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">client_read_401</tt><big>(</big><em>*args</em>, <em>**keywargs</em><big>)</big><a class="headerlink" href="#odesk.tests.client_read_401" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.client_read_403">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">client_read_403</tt><big>(</big><em>*args</em>, <em>**keywargs</em><big>)</big><a class="headerlink" href="#odesk.tests.client_read_403" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.client_read_404">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">client_read_404</tt><big>(</big><em>*args</em>, <em>**keywargs</em><big>)</big><a class="headerlink" href="#odesk.tests.client_read_404" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.client_read_500">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">client_read_500</tt><big>(</big><em>*args</em>, <em>**keywargs</em><big>)</big><a class="headerlink" href="#odesk.tests.client_read_500" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.client_read_incorrect_json">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">client_read_incorrect_json</tt><big>(</big><em>*args</em>, <em>**keywargs</em><big>)</big><a class="headerlink" href="#odesk.tests.client_read_incorrect_json" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.get_client">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">get_client</tt><big>(</big><big>)</big><a class="headerlink" href="#odesk.tests.get_client" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.patched_httplib2_access">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">patched_httplib2_access</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#odesk.tests.patched_httplib2_access" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.patched_httplib2_request">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">patched_httplib2_request</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#odesk.tests.patched_httplib2_request" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.patched_urlopen">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">patched_urlopen</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#odesk.tests.patched_urlopen" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.patched_urlopen_400">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">patched_urlopen_400</tt><big>(</big><em>self</em>, <em>method</em>, <em>url</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#odesk.tests.patched_urlopen_400" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.patched_urlopen_401">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">patched_urlopen_401</tt><big>(</big><em>self</em>, <em>method</em>, <em>url</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#odesk.tests.patched_urlopen_401" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.patched_urlopen_403">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">patched_urlopen_403</tt><big>(</big><em>self</em>, <em>method</em>, <em>url</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#odesk.tests.patched_urlopen_403" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.patched_urlopen_404">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">patched_urlopen_404</tt><big>(</big><em>self</em>, <em>method</em>, <em>url</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#odesk.tests.patched_urlopen_404" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.patched_urlopen_500">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">patched_urlopen_500</tt><big>(</big><em>self</em>, <em>method</em>, <em>url</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#odesk.tests.patched_urlopen_500" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.patched_urlopen_error">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">patched_urlopen_error</tt><big>(</big><em>method</em>, <em>url</em>, <em>code=400</em>, <em>message=None</em>, <em>data=None</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#odesk.tests.patched_urlopen_error" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.patched_urlopen_fin_report_content">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">patched_urlopen_fin_report_content</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#odesk.tests.patched_urlopen_fin_report_content" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.patched_urlopen_hr">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">patched_urlopen_hr</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#odesk.tests.patched_urlopen_hr" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.patched_urlopen_hradjustment">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">patched_urlopen_hradjustment</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#odesk.tests.patched_urlopen_hradjustment" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.patched_urlopen_incorrect_json">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">patched_urlopen_incorrect_json</tt><big>(</big><em>self</em>, <em>method</em>, <em>url</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#odesk.tests.patched_urlopen_incorrect_json" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.patched_urlopen_job_data_parameters">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">patched_urlopen_job_data_parameters</tt><big>(</big><em>self</em>, <em>method</em>, <em>url</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#odesk.tests.patched_urlopen_job_data_parameters" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.patched_urlopen_multiple_jobs">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">patched_urlopen_multiple_jobs</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#odesk.tests.patched_urlopen_multiple_jobs" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.patched_urlopen_provider">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">patched_urlopen_provider</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#odesk.tests.patched_urlopen_provider" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.patched_urlopen_read_thread_content">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">patched_urlopen_read_thread_content</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#odesk.tests.patched_urlopen_read_thread_content" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.patched_urlopen_single_job">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">patched_urlopen_single_job</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#odesk.tests.patched_urlopen_single_job" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.patched_urlopen_task">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">patched_urlopen_task</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#odesk.tests.patched_urlopen_task" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.patched_urlopen_teamrooms">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">patched_urlopen_teamrooms</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#odesk.tests.patched_urlopen_teamrooms" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.patched_urlopen_teamrooms_none">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">patched_urlopen_teamrooms_none</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#odesk.tests.patched_urlopen_teamrooms_none" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.patched_urlopen_thread_content">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">patched_urlopen_thread_content</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#odesk.tests.patched_urlopen_thread_content" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.patched_urlopen_timereport_content">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">patched_urlopen_timereport_content</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#odesk.tests.patched_urlopen_timereport_content" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.patched_urlopen_tray_content">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">patched_urlopen_tray_content</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#odesk.tests.patched_urlopen_tray_content" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.patched_urlopen_trays">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">patched_urlopen_trays</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#odesk.tests.patched_urlopen_trays" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.setup_oauth">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">setup_oauth</tt><big>(</big><big>)</big><a class="headerlink" href="#odesk.tests.setup_oauth" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.test_archive_company_task">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">test_archive_company_task</tt><big>(</big><em>*args</em>, <em>**keywargs</em><big>)</big><a class="headerlink" href="#odesk.tests.test_archive_company_task" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.test_archive_team_task">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">test_archive_team_task</tt><big>(</big><em>*args</em>, <em>**keywargs</em><big>)</big><a class="headerlink" href="#odesk.tests.test_archive_team_task" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.test_client">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">test_client</tt><big>(</big><em>*args</em>, <em>**keywargs</em><big>)</big><a class="headerlink" href="#odesk.tests.test_client" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.test_client_read">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">test_client_read</tt><big>(</big><em>*args</em>, <em>**keywargs</em><big>)</big><a class="headerlink" href="#odesk.tests.test_client_read" title="Permalink to this definition">¶</a></dt>
-<dd><p>Test client read() method.</p>
-<dl class="docutils">
-<dt>Test cases:</dt>
-<dd><p class="first">method default (get) - other we already tested</p>
-<p>format json|yaml ( should produce error)</p>
-<p class="last">codes 200|400|401|403|404|500</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.test_client_urlopen">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">test_client_urlopen</tt><big>(</big><em>*args</em>, <em>**keywargs</em><big>)</big><a class="headerlink" href="#odesk.tests.test_client_urlopen" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.test_decimal_default">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">test_decimal_default</tt><big>(</big><big>)</big><a class="headerlink" href="#odesk.tests.test_decimal_default" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.test_gds_namespace">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">test_gds_namespace</tt><big>(</big><big>)</big><a class="headerlink" href="#odesk.tests.test_gds_namespace" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.test_gds_namespace_get">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">test_gds_namespace_get</tt><big>(</big><em>*args</em>, <em>**keywargs</em><big>)</big><a class="headerlink" href="#odesk.tests.test_gds_namespace_get" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.test_get_agency_timereport">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">test_get_agency_timereport</tt><big>(</big><em>*args</em>, <em>**keywargs</em><big>)</big><a class="headerlink" href="#odesk.tests.test_get_agency_timereport" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.test_get_buyer_companies_billings">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">test_get_buyer_companies_billings</tt><big>(</big><em>*args</em>, <em>**keywargs</em><big>)</big><a class="headerlink" href="#odesk.tests.test_get_buyer_companies_billings" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.test_get_buyer_companies_earnings">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">test_get_buyer_companies_earnings</tt><big>(</big><em>*args</em>, <em>**keywargs</em><big>)</big><a class="headerlink" href="#odesk.tests.test_get_buyer_companies_earnings" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.test_get_buyer_teams_billings">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">test_get_buyer_teams_billings</tt><big>(</big><em>*args</em>, <em>**keywargs</em><big>)</big><a class="headerlink" href="#odesk.tests.test_get_buyer_teams_billings" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.test_get_buyer_teams_earnings">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">test_get_buyer_teams_earnings</tt><big>(</big><em>*args</em>, <em>**keywargs</em><big>)</big><a class="headerlink" href="#odesk.tests.test_get_buyer_teams_earnings" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.test_get_company_specific_tasks">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">test_get_company_specific_tasks</tt><big>(</big><em>*args</em>, <em>**keywargs</em><big>)</big><a class="headerlink" href="#odesk.tests.test_get_company_specific_tasks" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.test_get_company_tasks">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">test_get_company_tasks</tt><big>(</big><em>*args</em>, <em>**keywargs</em><big>)</big><a class="headerlink" href="#odesk.tests.test_get_company_tasks" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.test_get_company_timereport">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">test_get_company_timereport</tt><big>(</big><em>*args</em>, <em>**keywargs</em><big>)</big><a class="headerlink" href="#odesk.tests.test_get_company_timereport" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.test_get_financial_entities">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">test_get_financial_entities</tt><big>(</big><em>*args</em>, <em>**keywargs</em><big>)</big><a class="headerlink" href="#odesk.tests.test_get_financial_entities" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.test_get_financial_entities_provider">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">test_get_financial_entities_provider</tt><big>(</big><em>*args</em>, <em>**keywargs</em><big>)</big><a class="headerlink" href="#odesk.tests.test_get_financial_entities_provider" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.test_get_hrv2_companies">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">test_get_hrv2_companies</tt><big>(</big><em>*args</em>, <em>**keywargs</em><big>)</big><a class="headerlink" href="#odesk.tests.test_get_hrv2_companies" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.test_get_hrv2_company_teams">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">test_get_hrv2_company_teams</tt><big>(</big><em>*args</em>, <em>**keywargs</em><big>)</big><a class="headerlink" href="#odesk.tests.test_get_hrv2_company_teams" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.test_get_hrv2_company_users">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">test_get_hrv2_company_users</tt><big>(</big><em>*args</em>, <em>**keywargs</em><big>)</big><a class="headerlink" href="#odesk.tests.test_get_hrv2_company_users" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.test_get_hrv2_engagements">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">test_get_hrv2_engagements</tt><big>(</big><em>*args</em>, <em>**keywargs</em><big>)</big><a class="headerlink" href="#odesk.tests.test_get_hrv2_engagements" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.test_get_hrv2_jobs">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">test_get_hrv2_jobs</tt><big>(</big><em>*args</em>, <em>**keywargs</em><big>)</big><a class="headerlink" href="#odesk.tests.test_get_hrv2_jobs" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.test_get_hrv2_offers">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">test_get_hrv2_offers</tt><big>(</big><em>*args</em>, <em>**keywargs</em><big>)</big><a class="headerlink" href="#odesk.tests.test_get_hrv2_offers" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.test_get_hrv2_team_users">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">test_get_hrv2_team_users</tt><big>(</big><em>*args</em>, <em>**keywargs</em><big>)</big><a class="headerlink" href="#odesk.tests.test_get_hrv2_team_users" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.test_get_hrv2_teams">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">test_get_hrv2_teams</tt><big>(</big><em>*args</em>, <em>**keywargs</em><big>)</big><a class="headerlink" href="#odesk.tests.test_get_hrv2_teams" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.test_get_hrv2_user">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">test_get_hrv2_user</tt><big>(</big><em>*args</em>, <em>**keywargs</em><big>)</big><a class="headerlink" href="#odesk.tests.test_get_hrv2_user" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.test_get_hrv2_userroles">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">test_get_hrv2_userroles</tt><big>(</big><em>*args</em>, <em>**keywargs</em><big>)</big><a class="headerlink" href="#odesk.tests.test_get_hrv2_userroles" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.test_get_provider_billings">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">test_get_provider_billings</tt><big>(</big><em>*args</em>, <em>**keywargs</em><big>)</big><a class="headerlink" href="#odesk.tests.test_get_provider_billings" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.test_get_provider_companies_billings">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">test_get_provider_companies_billings</tt><big>(</big><em>*args</em>, <em>**keywargs</em><big>)</big><a class="headerlink" href="#odesk.tests.test_get_provider_companies_billings" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.test_get_provider_companies_earnings">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">test_get_provider_companies_earnings</tt><big>(</big><em>*args</em>, <em>**keywargs</em><big>)</big><a class="headerlink" href="#odesk.tests.test_get_provider_companies_earnings" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.test_get_provider_earnings">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">test_get_provider_earnings</tt><big>(</big><em>*args</em>, <em>**keywargs</em><big>)</big><a class="headerlink" href="#odesk.tests.test_get_provider_earnings" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.test_get_provider_teams_billings">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">test_get_provider_teams_billings</tt><big>(</big><em>*args</em>, <em>**keywargs</em><big>)</big><a class="headerlink" href="#odesk.tests.test_get_provider_teams_billings" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.test_get_provider_teams_earnings">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">test_get_provider_teams_earnings</tt><big>(</big><em>*args</em>, <em>**keywargs</em><big>)</big><a class="headerlink" href="#odesk.tests.test_get_provider_teams_earnings" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.test_get_provider_timereport">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">test_get_provider_timereport</tt><big>(</big><em>*args</em>, <em>**keywargs</em><big>)</big><a class="headerlink" href="#odesk.tests.test_get_provider_timereport" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.test_get_team_specific_tasks">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">test_get_team_specific_tasks</tt><big>(</big><em>*args</em>, <em>**keywargs</em><big>)</big><a class="headerlink" href="#odesk.tests.test_get_team_specific_tasks" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.test_get_team_tasks">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">test_get_team_tasks</tt><big>(</big><em>*args</em>, <em>**keywargs</em><big>)</big><a class="headerlink" href="#odesk.tests.test_get_team_tasks" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.test_get_thread_content">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">test_get_thread_content</tt><big>(</big><em>*args</em>, <em>**keywargs</em><big>)</big><a class="headerlink" href="#odesk.tests.test_get_thread_content" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.test_get_tray_content">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">test_get_tray_content</tt><big>(</big><em>*args</em>, <em>**keywargs</em><big>)</big><a class="headerlink" href="#odesk.tests.test_get_tray_content" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.test_get_trays">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">test_get_trays</tt><big>(</big><em>*args</em>, <em>**keywargs</em><big>)</big><a class="headerlink" href="#odesk.tests.test_get_trays" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.test_hrv2_post_adjustment">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">test_hrv2_post_adjustment</tt><big>(</big><em>*args</em>, <em>**keywargs</em><big>)</big><a class="headerlink" href="#odesk.tests.test_hrv2_post_adjustment" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.test_job_data_parameters">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">test_job_data_parameters</tt><big>(</big><em>*args</em>, <em>**keywargs</em><big>)</big><a class="headerlink" href="#odesk.tests.test_job_data_parameters" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.test_multiple_job_profiles">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">test_multiple_job_profiles</tt><big>(</big><em>*args</em>, <em>**keywargs</em><big>)</big><a class="headerlink" href="#odesk.tests.test_multiple_job_profiles" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.test_namespace">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">test_namespace</tt><big>(</big><em>*args</em>, <em>**keywargs</em><big>)</big><a class="headerlink" href="#odesk.tests.test_namespace" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.test_oauth_full_url">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">test_oauth_full_url</tt><big>(</big><big>)</big><a class="headerlink" href="#odesk.tests.test_oauth_full_url" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.test_oauth_get_access_token">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">test_oauth_get_access_token</tt><big>(</big><em>*args</em>, <em>**keywargs</em><big>)</big><a class="headerlink" href="#odesk.tests.test_oauth_get_access_token" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.test_oauth_get_authorize_url">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">test_oauth_get_authorize_url</tt><big>(</big><em>*args</em>, <em>**keywargs</em><big>)</big><a class="headerlink" href="#odesk.tests.test_oauth_get_authorize_url" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.test_oauth_get_request_token">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">test_oauth_get_request_token</tt><big>(</big><em>*args</em>, <em>**keywargs</em><big>)</big><a class="headerlink" href="#odesk.tests.test_oauth_get_request_token" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.test_post_company_task">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">test_post_company_task</tt><big>(</big><em>*args</em>, <em>**keywargs</em><big>)</big><a class="headerlink" href="#odesk.tests.test_post_company_task" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.test_post_message">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">test_post_message</tt><big>(</big><em>*args</em>, <em>**keywargs</em><big>)</big><a class="headerlink" href="#odesk.tests.test_post_message" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.test_post_team_task">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">test_post_team_task</tt><big>(</big><em>*args</em>, <em>**keywargs</em><big>)</big><a class="headerlink" href="#odesk.tests.test_post_team_task" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.test_provider">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">test_provider</tt><big>(</big><em>*args</em>, <em>**keywargs</em><big>)</big><a class="headerlink" href="#odesk.tests.test_provider" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.test_put_company_task">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">test_put_company_task</tt><big>(</big><em>*args</em>, <em>**keywargs</em><big>)</big><a class="headerlink" href="#odesk.tests.test_put_company_task" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.test_put_team_task">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">test_put_team_task</tt><big>(</big><em>*args</em>, <em>**keywargs</em><big>)</big><a class="headerlink" href="#odesk.tests.test_put_team_task" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.test_put_threads_deleted_undeleted">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">test_put_threads_deleted_undeleted</tt><big>(</big><em>*args</em>, <em>**keywargs</em><big>)</big><a class="headerlink" href="#odesk.tests.test_put_threads_deleted_undeleted" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.test_put_threads_read_unread">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">test_put_threads_read_unread</tt><big>(</big><em>*args</em>, <em>**keywargs</em><big>)</big><a class="headerlink" href="#odesk.tests.test_put_threads_read_unread" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.test_put_threads_starred_unstarred">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">test_put_threads_starred_unstarred</tt><big>(</big><em>*args</em>, <em>**keywargs</em><big>)</big><a class="headerlink" href="#odesk.tests.test_put_threads_starred_unstarred" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.test_single_job_profile">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">test_single_job_profile</tt><big>(</big><em>*args</em>, <em>**keywargs</em><big>)</big><a class="headerlink" href="#odesk.tests.test_single_job_profile" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.test_team">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">test_team</tt><big>(</big><em>*args</em>, <em>**keywargs</em><big>)</big><a class="headerlink" href="#odesk.tests.test_team" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.test_teamrooms_none">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">test_teamrooms_none</tt><big>(</big><em>*args</em>, <em>**keywargs</em><big>)</big><a class="headerlink" href="#odesk.tests.test_teamrooms_none" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.test_unarchive_company_task">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">test_unarchive_company_task</tt><big>(</big><em>*args</em>, <em>**keywargs</em><big>)</big><a class="headerlink" href="#odesk.tests.test_unarchive_company_task" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.test_unarchive_team_task">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">test_unarchive_team_task</tt><big>(</big><em>*args</em>, <em>**keywargs</em><big>)</big><a class="headerlink" href="#odesk.tests.test_unarchive_team_task" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="odesk.tests.test_update_batch_tasks">
-<tt class="descclassname">odesk.tests.</tt><tt class="descname">test_update_batch_tasks</tt><big>(</big><em>*args</em>, <em>**keywargs</em><big>)</big><a class="headerlink" href="#odesk.tests.test_update_batch_tasks" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</div>
 <div class="section" id="module-odesk.utils">
 <span id="odesk-utils-module"></span><h2>odesk.utils module<a class="headerlink" href="#module-odesk.utils" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
@@ -1137,201 +841,6 @@ headers</td>
 </dd></dl>
 
 </div>
-<div class="section" id="module-odesk">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-odesk" title="Permalink to this headline">¶</a></h2>
-<p>Main package of the python bindings for oDesk API.</p>
-<p>For convenience some most commonly used functionalities are imported here,
-so you can use:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">odesk</span> <span class="kn">import</span> <span class="n">Client</span>
-<span class="kn">from</span> <span class="nn">odesk</span> <span class="kn">import</span> <span class="n">raise_http_error</span>
-</pre></div>
-</div>
-<dl class="function">
-<dt id="odesk.get_version">
-<tt class="descclassname">odesk.</tt><tt class="descname">get_version</tt><big>(</big><big>)</big><a class="headerlink" href="#odesk.get_version" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="class">
-<dt id="odesk.Client">
-<em class="property">class </em><tt class="descclassname">odesk.</tt><tt class="descname">Client</tt><big>(</big><em>public_key</em>, <em>secret_key</em>, <em>oauth_access_token=None</em>, <em>oauth_access_token_secret=None</em>, <em>fmt='json'</em>, <em>finreport=True</em>, <em>hr=True</em>, <em>mc=True</em>, <em>provider=True</em>, <em>task=True</em>, <em>team=True</em>, <em>timereport=True</em>, <em>job=True</em><big>)</big><a class="headerlink" href="#odesk.Client" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
-<p>Main API client with oAuth v1 authorization.</p>
-<dl class="docutils">
-<dt><em>Parameters:</em></dt>
-<dd><table class="first last docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">public_key:</th><td class="field-body">Public API key</td>
-</tr>
-<tr class="field-even field"><th class="field-name">secret_key:</th><td class="field-body">API key secret</td>
-</tr>
-<tr class="field-odd field"><th class="field-name" colspan="2">oauth_access_token:</th></tr>
-<tr class="field-odd field"><td>&nbsp;</td><td class="field-body">oAuth access token public key</td>
-</tr>
-<tr class="field-even field"><th class="field-name" colspan="2">oauth_access_token_secret:</th></tr>
-<tr class="field-even field"><td>&nbsp;</td><td class="field-body">oAuth access token secret key</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">fmt:</th><td class="field-body">(optional, default <tt class="docutils literal"><span class="pre">json</span></tt>)
-API response format.
-Currently only <tt class="docutils literal"><span class="pre">'json'</span></tt> is supported</td>
-</tr>
-<tr class="field-even field"><th class="field-name">finreport:</th><td class="field-body">(optional, default <tt class="docutils literal"><span class="pre">True</span></tt>)
-Whether to attach
-<a class="reference internal" href="odesk.routers.html#module-odesk.routers.finreport" title="odesk.routers.finreport"><tt class="xref py py-mod docutils literal"><span class="pre">odesk.routers.finreport</span></tt></a> router</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">hr:</th><td class="field-body">(optional, default <tt class="docutils literal"><span class="pre">True</span></tt>)
-Whether to attach
-<a class="reference internal" href="odesk.routers.html#module-odesk.routers.hr" title="odesk.routers.hr"><tt class="xref py py-mod docutils literal"><span class="pre">odesk.routers.hr</span></tt></a> router</td>
-</tr>
-<tr class="field-even field"><th class="field-name">mc:</th><td class="field-body">(optional, default <tt class="docutils literal"><span class="pre">True</span></tt>)
-Whether to attach
-<a class="reference internal" href="odesk.routers.html#module-odesk.routers.mc" title="odesk.routers.mc"><tt class="xref py py-mod docutils literal"><span class="pre">odesk.routers.mc</span></tt></a> router</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">provider:</th><td class="field-body">(optional, default <tt class="docutils literal"><span class="pre">True</span></tt>)
-Whether to attach
-<a class="reference internal" href="odesk.routers.html#module-odesk.routers.provider" title="odesk.routers.provider"><tt class="xref py py-mod docutils literal"><span class="pre">odesk.routers.provider</span></tt></a> router</td>
-</tr>
-<tr class="field-even field"><th class="field-name">task:</th><td class="field-body">(optional, default <tt class="docutils literal"><span class="pre">True</span></tt>)
-Whether to attach
-<a class="reference internal" href="odesk.routers.html#module-odesk.routers.task" title="odesk.routers.task"><tt class="xref py py-mod docutils literal"><span class="pre">odesk.routers.task</span></tt></a> router</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">team:</th><td class="field-body">(optional, default <tt class="docutils literal"><span class="pre">True</span></tt>)
-Whether to attach
-<a class="reference internal" href="odesk.routers.html#module-odesk.routers.team" title="odesk.routers.team"><tt class="xref py py-mod docutils literal"><span class="pre">odesk.routers.team</span></tt></a> router</td>
-</tr>
-<tr class="field-even field"><th class="field-name">timereport:</th><td class="field-body">(optional, default <tt class="docutils literal"><span class="pre">True</span></tt>)
-Whether to attach
-<a class="reference internal" href="odesk.routers.html#module-odesk.routers.timereport" title="odesk.routers.timereport"><tt class="xref py py-mod docutils literal"><span class="pre">odesk.routers.timereport</span></tt></a> router</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">job:</th><td class="field-body">(optional, default <tt class="docutils literal"><span class="pre">True</span></tt>)
-Whether to attach
-<a class="reference internal" href="odesk.routers.html#module-odesk.routers.job" title="odesk.routers.job"><tt class="xref py py-mod docutils literal"><span class="pre">odesk.routers.job</span></tt></a> router</td>
-</tr>
-</tbody>
-</table>
-</dd>
-</dl>
-<dl class="method">
-<dt id="odesk.Client.delete">
-<tt class="descname">delete</tt><big>(</big><em>url</em>, <em>data=None</em><big>)</big><a class="headerlink" href="#odesk.Client.delete" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="odesk.Client.get">
-<tt class="descname">get</tt><big>(</big><em>url</em>, <em>data=None</em><big>)</big><a class="headerlink" href="#odesk.Client.get" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="odesk.Client.post">
-<tt class="descname">post</tt><big>(</big><em>url</em>, <em>data=None</em><big>)</big><a class="headerlink" href="#odesk.Client.post" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="odesk.Client.put">
-<tt class="descname">put</tt><big>(</big><em>url</em>, <em>data=None</em><big>)</big><a class="headerlink" href="#odesk.Client.put" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="odesk.Client.read">
-<tt class="descname">read</tt><big>(</big><em>url</em>, <em>data=None</em>, <em>method='GET'</em>, <em>fmt='json'</em><big>)</big><a class="headerlink" href="#odesk.Client.read" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns parsed Python object or raises an error.</p>
-<dl class="docutils">
-<dt><em>Parameters:</em></dt>
-<dd><table class="first last docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">url:</th><td class="field-body"><p class="first">Target url</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">data:</th><td class="field-body"><p class="first">Dictionary with parameters</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">method:</th><td class="field-body"><p class="first">(optional, default <tt class="docutils literal"><span class="pre">GET</span></tt>)
-HTTP method, possible values:</p>
-<blockquote>
-<div><ul class="simple">
-<li><tt class="docutils literal"><span class="pre">GET</span></tt></li>
-<li><tt class="docutils literal"><span class="pre">POST</span></tt></li>
-<li><tt class="docutils literal"><span class="pre">PUT</span></tt></li>
-<li><tt class="docutils literal"><span class="pre">DELETE</span></tt></li>
-</ul>
-</div></blockquote>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">fmt:</th><td class="field-body"><p class="first last">(optional, default <tt class="docutils literal"><span class="pre">json</span></tt>)
-API response format.
-Currently only <tt class="docutils literal"><span class="pre">'json'</span></tt> is supported</p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="odesk.Client.urlopen">
-<tt class="descname">urlopen</tt><big>(</big><em>url</em>, <em>data=None</em>, <em>method='GET'</em>, <em>headers=None</em><big>)</big><a class="headerlink" href="#odesk.Client.urlopen" title="Permalink to this definition">¶</a></dt>
-<dd><p>Perform oAuth v1 signed HTTP request.</p>
-<dl class="docutils">
-<dt><em>Parameters:</em></dt>
-<dd><table class="first last docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">url:</th><td class="field-body"><p class="first">Target url</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">data:</th><td class="field-body"><p class="first">Dictionary with parameters</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">method:</th><td class="field-body"><p class="first">(optional, default <tt class="docutils literal"><span class="pre">GET</span></tt>)
-HTTP method, possible values:</p>
-<blockquote>
-<div><ul class="simple">
-<li><tt class="docutils literal"><span class="pre">GET</span></tt></li>
-<li><tt class="docutils literal"><span class="pre">POST</span></tt></li>
-<li><tt class="docutils literal"><span class="pre">PUT</span></tt></li>
-<li><tt class="docutils literal"><span class="pre">DELETE</span></tt></li>
-</ul>
-</div></blockquote>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">headers:</th><td class="field-body"><p class="first last">(optional, default <tt class="docutils literal"><span class="pre">{}</span></tt>)
-Dictionary with header values</p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="function">
-<dt id="odesk.raise_http_error">
-<tt class="descclassname">odesk.</tt><tt class="descname">raise_http_error</tt><big>(</big><em>url</em>, <em>response</em><big>)</big><a class="headerlink" href="#odesk.raise_http_error" title="Permalink to this definition">¶</a></dt>
-<dd><p>Raise custom <tt class="docutils literal"><span class="pre">urllib2.HTTPError</span></tt> exception.</p>
-<dl class="docutils">
-<dt><em>Parameters:</em></dt>
-<dd><table class="first last docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">url:</th><td class="field-body">Url that caused an error</td>
-</tr>
-<tr class="field-even field"><th class="field-name">response:</th><td class="field-body"><tt class="docutils literal"><span class="pre">urllib3</span></tt> response object</td>
-</tr>
-</tbody>
-</table>
-</dd>
-</dl>
-</dd></dl>
-
-</div>
 </div>
 
 
@@ -1355,13 +864,13 @@ Dictionary with header values</p>
         <li class="right" >
           <a href="../reference_docs.html" title="Reference Documentation: Classes and Methods"
              >previous</a> |</li>
-        <li><a href="../index.html">python-odesk 0.5.2 documentation</a> &raquo;</li>
+        <li><a href="../index.html">python-odesk 0.5.3 documentation</a> &raquo;</li>
           <li><a href="../reference_docs.html" >Reference Documentation: Classes and Methods</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
         &copy; Copyright 2010-2013, odesk.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
     </div>
   </body>
 </html>

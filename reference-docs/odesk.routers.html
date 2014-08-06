@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>odesk.routers package &mdash; python-odesk 0.5.2 documentation</title>
+    <title>odesk.routers package &mdash; python-odesk 0.5.3 documentation</title>
     
     <link rel="stylesheet" href="../static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.5.2',
+        VERSION:     '0.5.3',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="../static/jquery.js"></script>
     <script type="text/javascript" src="../static/underscore.js"></script>
     <script type="text/javascript" src="../static/doctools.js"></script>
-    <link rel="top" title="python-odesk 0.5.2 documentation" href="../index.html" />
+    <link rel="top" title="python-odesk 0.5.3 documentation" href="../index.html" />
     <link rel="up" title="odesk package" href="odesk.html" />
     <link rel="next" title="Changelog" href="../changelog.html" />
     <link rel="prev" title="odesk package" href="odesk.html" /> 
@@ -44,7 +44,7 @@
         <li class="right" >
           <a href="odesk.html" title="odesk package"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">python-odesk 0.5.2 documentation</a> &raquo;</li>
+        <li><a href="../index.html">python-odesk 0.5.3 documentation</a> &raquo;</li>
           <li><a href="../reference_docs.html" >Reference Documentation: Classes and Methods</a> &raquo;</li>
           <li><a href="odesk.html" accesskey="U">odesk package</a> &raquo;</li> 
       </ul>
@@ -54,16 +54,17 @@
   <h3><a href="../index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">odesk.routers package</a><ul>
+<li><a class="reference internal" href="#module-odesk.routers">Module contents</a></li>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
 <li><a class="reference internal" href="#module-odesk.routers.finreport">odesk.routers.finreport module</a></li>
 <li><a class="reference internal" href="#module-odesk.routers.hr">odesk.routers.hr module</a></li>
 <li><a class="reference internal" href="#module-odesk.routers.job">odesk.routers.job module</a></li>
 <li><a class="reference internal" href="#module-odesk.routers.mc">odesk.routers.mc module</a></li>
+<li><a class="reference internal" href="#module-odesk.routers.offers">odesk.routers.offers module</a></li>
 <li><a class="reference internal" href="#module-odesk.routers.provider">odesk.routers.provider module</a></li>
 <li><a class="reference internal" href="#module-odesk.routers.task">odesk.routers.task module</a></li>
 <li><a class="reference internal" href="#module-odesk.routers.team">odesk.routers.team module</a></li>
 <li><a class="reference internal" href="#module-odesk.routers.timereport">odesk.routers.timereport module</a></li>
-<li><a class="reference internal" href="#module-odesk.routers">Module contents</a></li>
 </ul>
 </li>
 </ul>
@@ -102,6 +103,13 @@
             
   <div class="section" id="odesk-routers-package">
 <h1>odesk.routers package<a class="headerlink" href="#odesk-routers-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-odesk.routers">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-odesk.routers" title="Permalink to this headline">¶</a></h2>
+<p>Routers package.</p>
+<p>All communication with oDesk API is handled by the routers.</p>
+<p>When you import <tt class="docutils literal"><span class="pre">odesk</span></tt> package and instantiate <tt class="docutils literal"><span class="pre">odesk.Client</span></tt> class,
+routers are dynamically attatched to your <tt class="docutils literal"><span class="pre">client</span></tt> object.</p>
+</div>
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 </div>
@@ -952,27 +960,6 @@ of entries</td>
 </dd></dl>
 
 <dl class="method">
-<dt id="odesk.routers.hr.HR.get_team_adjustments">
-<tt class="descname">get_team_adjustments</tt><big>(</big><em>team_reference</em>, <em>engagement_reference=None</em><big>)</big><a class="headerlink" href="#odesk.routers.hr.HR.get_team_adjustments" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get list of bonuses for given engagement.</p>
-<dl class="docutils">
-<dt><em>Parameters:</em></dt>
-<dd><table class="first last docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">team_reference:</th><td class="field-body">The Team reference ID</td>
-</tr>
-<tr class="field-even field"><th class="field-name" colspan="2">engagement_reference:</th></tr>
-<tr class="field-even field"><td>&nbsp;</td><td class="field-body">(optional) The Engagement reference ID</td>
-</tr>
-</tbody>
-</table>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
 <dt id="odesk.routers.hr.HR.get_team_users">
 <tt class="descname">get_team_users</tt><big>(</big><em>team_reference</em>, <em>active=True</em><big>)</big><a class="headerlink" href="#odesk.routers.hr.HR.get_team_users" title="Permalink to this definition">¶</a></dt>
 <dd><p>Retrieve users of the team.</p>
@@ -1391,6 +1378,126 @@ should be provided, otherwise error will be raised.</p>
 
 </dd></dl>
 
+<dl class="class">
+<dt id="odesk.routers.hr.HR_V3">
+<em class="property">class </em><tt class="descclassname">odesk.routers.hr.</tt><tt class="descname">HR_V3</tt><big>(</big><em>client</em><big>)</big><a class="headerlink" href="#odesk.routers.hr.HR_V3" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="odesk.html#odesk.namespaces.Namespace" title="odesk.namespaces.Namespace"><tt class="xref py py-class docutils literal"><span class="pre">odesk.namespaces.Namespace</span></tt></a></p>
+<p>HR API version 3.</p>
+<dl class="attribute">
+<dt id="odesk.routers.hr.HR_V3.api_url">
+<tt class="descname">api_url</tt><em class="property"> = 'hr/'</em><a class="headerlink" href="#odesk.routers.hr.HR_V3.api_url" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="odesk.routers.hr.HR_V3.get_client_application">
+<tt class="descname">get_client_application</tt><big>(</big><em>application_id</em>, <em>buyer_team__reference</em><big>)</big><a class="headerlink" href="#odesk.routers.hr.HR_V3.get_client_application" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get specific job application as a client.</p>
+<dl class="docutils">
+<dt><em>Parameters:</em></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">application_id:</th><td class="field-body">Job application reference ID.</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">buyer_team__reference:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body">The reference ID of the client&#8217;s team.
+It allows getting applications for a
+specific team. Example: <tt class="docutils literal"><span class="pre">34567</span></tt>.
+Use &#8216;List Teams&#8217; API call to get it.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="odesk.routers.hr.HR_V3.get_freelancer_application">
+<tt class="descname">get_freelancer_application</tt><big>(</big><em>application_id</em><big>)</big><a class="headerlink" href="#odesk.routers.hr.HR_V3.get_freelancer_application" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get specific job application as a freelancer.</p>
+<dl class="docutils">
+<dt><em>Parameters:</em></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">application_id:</th><td class="field-body">Job application reference ID.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="odesk.routers.hr.HR_V3.list_client_applications">
+<tt class="descname">list_client_applications</tt><big>(</big><em>buyer_team__reference</em>, <em>job_key</em>, <em>status=None</em>, <em>profile_key=None</em>, <em>agency_team__reference=None</em>, <em>order_by=None</em>, <em>page_offset=None</em>, <em>page_size=None</em><big>)</big><a class="headerlink" href="#odesk.routers.hr.HR_V3.list_client_applications" title="Permalink to this definition">¶</a></dt>
+<dd><p>List job applications as a client.</p>
+<dl class="docutils">
+<dt><em>Parameters:</em></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">buyer_team__reference:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body">The reference ID of the client&#8217;s team.
+It allows getting applications for a
+specific team. Example: <tt class="docutils literal"><span class="pre">34567</span></tt>.
+Use &#8216;List Teams&#8217; API call to get it.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">job_key:</th><td class="field-body">The job key. It allows getting applications
+for a specific job. Example: <tt class="docutils literal"><span class="pre">~01d54a7xxxxx125731</span></tt>.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">status:</th><td class="field-body">(optional) The current status of the job application.
+Valid values: <tt class="docutils literal"><span class="pre">shortlisted</span></tt>, <tt class="docutils literal"><span class="pre">messaged</span></tt>,
+<tt class="docutils literal"><span class="pre">hired</span></tt>, <tt class="docutils literal"><span class="pre">offered</span></tt>, <tt class="docutils literal"><span class="pre">declined</span></tt>, <tt class="docutils literal"><span class="pre">hidden</span></tt>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">profile_key:</th><td class="field-body">(optional) Filters by a specific freelancer&#8217;s profile key.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name" colspan="2">agency_team__reference:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body">(optional) The reference ID of the agency.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">order_by:</th><td class="field-body">(optional) Sorts results in format <tt class="docutils literal"><span class="pre">$field_name1;$field_name2;..$field_nameN;AD...A</span></tt>.
+Here <tt class="docutils literal"><span class="pre">A</span></tt> resebles ascending order, <tt class="docutils literal"><span class="pre">D</span></tt> - descending order. Example: <tt class="docutils literal"><span class="pre">order_by=created_time;D</span></tt>.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">page_offset:</th><td class="field-body">(optional) Number of entries to skip</td>
+</tr>
+<tr class="field-even field"><th class="field-name">page_size:</th><td class="field-body">(optional: default 20) Page size
+in number of entries</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="odesk.routers.hr.HR_V3.list_freelancer_applications">
+<tt class="descname">list_freelancer_applications</tt><big>(</big><em>status=None</em><big>)</big><a class="headerlink" href="#odesk.routers.hr.HR_V3.list_freelancer_applications" title="Permalink to this definition">¶</a></dt>
+<dd><p>List job applications as a freelancer.</p>
+<dl class="docutils">
+<dt><em>Parameters:</em></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">status:</th><td class="field-body">(optional) The current status of the job application.
+Valid values: <tt class="docutils literal"><span class="pre">interviews</span></tt>, <tt class="docutils literal"><span class="pre">invites</span></tt>, <tt class="docutils literal"><span class="pre">active</span></tt>.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="odesk.routers.hr.HR_V3.version">
+<tt class="descname">version</tt><em class="property"> = 3</em><a class="headerlink" href="#odesk.routers.hr.HR_V3.version" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="module-odesk.routers.job">
 <span id="odesk-routers-job-module"></span><h2>odesk.routers.job module<a class="headerlink" href="#module-odesk.routers.job" title="Permalink to this headline">¶</a></h2>
@@ -1408,7 +1515,7 @@ should be provided, otherwise error will be raised.</p>
 <tt class="descname">get_job_profile</tt><big>(</big><em>job_key</em><big>)</big><a class="headerlink" href="#odesk.routers.job.Job.get_job_profile" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns detailed profile information about job(s).</p>
 <p>Documented at
-<a class="reference external" href="http://developers.odesk.com/w/page/49065901/Job%20Profile">http://developers.odesk.com/w/page/49065901/Job%20Profile</a></p>
+<a class="reference external" href="https://developers.odesk.com/?lang=python#jobs_get-job-profile">https://developers.odesk.com/?lang=python#jobs_get-job-profile</a></p>
 <dl class="docutils">
 <dt><em>Parameters:</em></dt>
 <dd><table class="first last docutils field-list" frame="void" rules="none">
@@ -1445,6 +1552,36 @@ only one profile per request is available.</td>
 <dt id="odesk.routers.mc.MC.api_url">
 <tt class="descname">api_url</tt><em class="property"> = 'mc/'</em><a class="headerlink" href="#odesk.routers.mc.MC.api_url" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="method">
+<dt id="odesk.routers.mc.MC.get_thread_by_context">
+<tt class="descname">get_thread_by_context</tt><big>(</big><em>username</em>, <em>job_key</em>, <em>application_id</em>, <em>context='Interviews'</em>, <em>last_posts=False</em><big>)</big><a class="headerlink" href="#odesk.routers.mc.MC.get_thread_by_context" title="Permalink to this definition">¶</a></dt>
+<dd><p>List details on a thread given a specific context,
+job key and application ID.</p>
+<dl class="docutils">
+<dt><em>Parameters:</em></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">username:</th><td class="field-body">User name</td>
+</tr>
+<tr class="field-even field"><th class="field-name">job_key:</th><td class="field-body">The context job key</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">application_id:</th><td class="field-body">The context application ID.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">context:</th><td class="field-body">Name of the context. Valid values: Interviews.
+Default: Interviews</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">last_posts:</th><td class="field-body">If set to True, return the list of the threads
+for the given context with the content of the last
+message for each of the threads listed.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="method">
 <dt id="odesk.routers.mc.MC.get_thread_content">
@@ -1739,6 +1876,197 @@ associated with the thread</td>
 </dd></dl>
 
 </div>
+<div class="section" id="module-odesk.routers.offers">
+<span id="odesk-routers-offers-module"></span><h2>odesk.routers.offers module<a class="headerlink" href="#module-odesk.routers.offers" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="odesk.routers.offers.Offers">
+<em class="property">class </em><tt class="descclassname">odesk.routers.offers.</tt><tt class="descname">Offers</tt><big>(</big><em>client</em><big>)</big><a class="headerlink" href="#odesk.routers.offers.Offers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="odesk.html#odesk.namespaces.Namespace" title="odesk.namespaces.Namespace"><tt class="xref py py-class docutils literal"><span class="pre">odesk.namespaces.Namespace</span></tt></a></p>
+<p>Offers API version 1</p>
+<dl class="attribute">
+<dt id="odesk.routers.offers.Offers.api_url">
+<tt class="descname">api_url</tt><em class="property"> = 'offers/'</em><a class="headerlink" href="#odesk.routers.offers.Offers.api_url" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="odesk.routers.offers.Offers.get_client_offer">
+<tt class="descname">get_client_offer</tt><big>(</big><em>offer_id</em>, <em>company_id=None</em>, <em>job__reference=None</em><big>)</big><a class="headerlink" href="#odesk.routers.offers.Offers.get_client_offer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get offer as client.</p>
+<dl class="docutils">
+<dt><em>Parameters:</em></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">offer_id:</th><td class="field-body">Offer reference ID.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">company_id:</th><td class="field-body">(optional) The client&#8217;s company reference ID.
+Example: <tt class="docutils literal"><span class="pre">34567</span></tt>. Get it using &#8216;List companies&#8217;
+API call. If <tt class="docutils literal"><span class="pre">company_id</span></tt> is not specified,
+the API will infer it from job&#8217;s data relying on
+the provided <tt class="docutils literal"><span class="pre">job__reference</span></tt> parameter. Either
+<tt class="docutils literal"><span class="pre">company_id</span></tt> or <tt class="docutils literal"><span class="pre">job__reference</span></tt> parameter must be specified.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">job__reference:</th><td class="field-body">(optional) The job reference ID. Get it using &#8216;List jobs&#8217; API call.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="odesk.routers.offers.Offers.get_freelancer_offer">
+<tt class="descname">get_freelancer_offer</tt><big>(</big><em>offer_id</em><big>)</big><a class="headerlink" href="#odesk.routers.offers.Offers.get_freelancer_offer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get specific offer as freelancer.</p>
+<dl class="docutils">
+<dt><em>Parameters:</em></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">offer_id:</th><td class="field-body">Offer reference ID.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="odesk.routers.offers.Offers.list_client_offers">
+<tt class="descname">list_client_offers</tt><big>(</big><em>company_id=None</em>, <em>team__reference=None</em>, <em>job__reference=None</em>, <em>status=None</em>, <em>page_offset=None</em>, <em>page_size=None</em><big>)</big><a class="headerlink" href="#odesk.routers.offers.Offers.list_client_offers" title="Permalink to this definition">¶</a></dt>
+<dd><p>List client offers.</p>
+<dl class="docutils">
+<dt><em>Parameters:</em></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">company_id:</th><td class="field-body">(optional) The client&#8217;s company reference ID.
+Example: <tt class="docutils literal"><span class="pre">34567</span></tt>. Get it using &#8216;List companies&#8217;
+API call. If <tt class="docutils literal"><span class="pre">company_id</span></tt> is not specified,
+the API will infer it from job&#8217;s data relying on
+the provided <tt class="docutils literal"><span class="pre">job__reference</span></tt> parameter. Either
+<tt class="docutils literal"><span class="pre">company_id</span></tt> or <tt class="docutils literal"><span class="pre">job__reference</span></tt> parameter must be specified.</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">team__reference:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body">(optional) The client&#8217;s team reference ID. Example: <tt class="docutils literal"><span class="pre">34567</span></tt>. Get it using
+&#8216;List teams&#8217; API call. Please note, that if <tt class="docutils literal"><span class="pre">team__reference</span></tt>
+is not specified, the API will infer it from job&#8217;s data relying on the provided.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">job__reference:</th><td class="field-body">(optional) The job reference ID. Get it using &#8216;List jobs&#8217; API call.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">status:</th><td class="field-body">(optional) The current status of the Offer. By default only offers in status <cite>new</cite> are returned.
+Valid values: <tt class="docutils literal"><span class="pre">accepted</span></tt>, <tt class="docutils literal"><span class="pre">new</span></tt>, <tt class="docutils literal"><span class="pre">declined</span></tt>,
+<tt class="docutils literal"><span class="pre">expired</span></tt>, <tt class="docutils literal"><span class="pre">withdrawn</span></tt>, <tt class="docutils literal"><span class="pre">cancelled</span></tt>, <tt class="docutils literal"><span class="pre">changed</span></tt>.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">page_offset:</th><td class="field-body">(optional) Number of entries to skip</td>
+</tr>
+<tr class="field-even field"><th class="field-name">page_size:</th><td class="field-body">(optional: default 20) Page size in number
+of entries</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="odesk.routers.offers.Offers.list_freelancer_offers">
+<tt class="descname">list_freelancer_offers</tt><big>(</big><em>status=None</em>, <em>page_offset=None</em>, <em>page_size=None</em><big>)</big><a class="headerlink" href="#odesk.routers.offers.Offers.list_freelancer_offers" title="Permalink to this definition">¶</a></dt>
+<dd><p>List freelancer&#8217;s offers.</p>
+<dl class="docutils">
+<dt><em>Parameters:</em></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">status:</th><td class="field-body">(optional) The current status of the Offer. By default only offers in status <cite>new</cite> are returned.
+Valid values: <tt class="docutils literal"><span class="pre">accepted</span></tt>, <tt class="docutils literal"><span class="pre">new</span></tt>, <tt class="docutils literal"><span class="pre">declined</span></tt>,
+<tt class="docutils literal"><span class="pre">expired</span></tt>, <tt class="docutils literal"><span class="pre">withdrawn</span></tt>, <tt class="docutils literal"><span class="pre">cancelled</span></tt>, <tt class="docutils literal"><span class="pre">changed</span></tt>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">page_offset:</th><td class="field-body">(optional) Number of entries to skip</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">page_size:</th><td class="field-body">(optional: default 20) Page size in number
+of entries</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="odesk.routers.offers.Offers.send_client_offer">
+<tt class="descname">send_client_offer</tt><big>(</big><em>title</em>, <em>job_type</em>, <em>charge_rate</em>, <em>message_to_contractor</em>, <em>team__reference=None</em>, <em>client_team_ref=None</em>, <em>contractor_username=None</em>, <em>contractor_reference=None</em>, <em>contractor_key=None</em>, <em>contractor_org=None</em>, <em>context=None</em>, <em>charge_upfront_percent=None</em>, <em>weekly_limit=None</em>, <em>weekly_stipend=None</em>, <em>expires_on=None</em>, <em>close_on_accept=None</em><big>)</big><a class="headerlink" href="#odesk.routers.offers.Offers.send_client_offer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Send client offer to the freelancer.</p>
+<dl class="docutils">
+<dt><em>Parameters:</em></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">title:</th><td class="field-body">The title of the offer/contract.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">job_type:</th><td class="field-body">The type of the job. Valid values: <tt class="docutils literal"><span class="pre">hourly</span></tt>, <tt class="docutils literal"><span class="pre">fixed-price</span></tt>.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">charge_rate:</th><td class="field-body">The budget amount for fixed-price jobs or the hourly charge rate for hourly jobs.</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">message_to_contractor:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body">Instructions and other job details for the freelancer.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name" colspan="2">team__reference:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body">The client&#8217;s team reference ID. Example: <tt class="docutils literal"><span class="pre">34567</span></tt>. Use &#8216;List teams&#8217; API call to get it.</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">client_team_ref:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body">The client&#8217;s team reference. Example: <tt class="docutils literal"><span class="pre">mytestcompany:myteam</span></tt>. Use &#8216;List teams&#8217; API call to get it.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name" colspan="2">contractor_username:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body">The freelancer&#8217;s username. Example: <tt class="docutils literal"><span class="pre">contractoruid</span></tt>.
+It can be ignored if <tt class="docutils literal"><span class="pre">contractor_reference</span></tt> or <tt class="docutils literal"><span class="pre">contractor_key</span></tt> parameter is set.</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">contractor_reference:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body">The freelancer&#8217;s reference ID. It will be ignored if <tt class="docutils literal"><span class="pre">contractor_username</span></tt> or <tt class="docutils literal"><span class="pre">contractor_key</span></tt>
+is specified. Example: <tt class="docutils literal"><span class="pre">1234</span></tt>. You can use &#8216;Search freelancers&#8217; API call to get the freelancer&#8217;s reference ID.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">contractor_key:</th><td class="field-body">The unique profile key, used if <tt class="docutils literal"><span class="pre">contractor_username</span></tt> is absent. Example: <tt class="docutils literal"><span class="pre">~~677961dcd7f65c01</span></tt>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">contractor_org:</th><td class="field-body">The freelancer&#8217;s team reference, required for sending offers to agency freelancers.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">context:</th><td class="field-body">Additional data about the offer. Valid array keys are: <tt class="docutils literal"><span class="pre">previous_offer_ref</span></tt>,
+<tt class="docutils literal"><span class="pre">job_posting_ref</span></tt>, <tt class="docutils literal"><span class="pre">job_application_ref</span></tt>, <tt class="docutils literal"><span class="pre">contract_ref</span></tt>.
+Example: <tt class="docutils literal"><span class="pre">context[job_posting_ref]</span> <span class="pre">=</span> <span class="pre">{{</span> <span class="pre">opening_id</span> <span class="pre">}}</span> <span class="pre">&amp;</span> <span class="pre">context[job_application_ref]</span> <span class="pre">=</span> <span class="pre">{{</span> <span class="pre">application_id</span> <span class="pre">}}</span></tt>
+where <tt class="docutils literal"><span class="pre">job_posting_ref</span></tt> is a job key, for example <tt class="docutils literal"><span class="pre">~01c8e0xxxxxxxx05255</span></tt>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">charge_upfront_percent:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body">The percentage of the budget amount that the freelancer is paid on acceptance of the offer
+(for fixed price jobs only).</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">weekly_limit:</th><td class="field-body">The maximum number of hours per week the freelancer can bill for.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">weekly_stipend:</th><td class="field-body">An additional payment to be issued to the freelancer each week.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">expires_on:</th><td class="field-body">Time when the offer expires. This should be a UNIX UTC timestamp. For example: <tt class="docutils literal"><span class="pre">1400785324</span></tt>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">close_on_accept:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body">If the value is <tt class="docutils literal"><span class="pre">1</span></tt>, it automatically closes the related job post if this offer is accepted.
+The default value is <tt class="docutils literal"><span class="pre">1</span></tt>. Valid values: <tt class="docutils literal"><span class="pre">0</span></tt>, <tt class="docutils literal"><span class="pre">1</span></tt>.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="odesk.routers.offers.Offers.version">
+<tt class="descname">version</tt><em class="property"> = 1</em><a class="headerlink" href="#odesk.routers.offers.Offers.version" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
 <div class="section" id="module-odesk.routers.provider">
 <span id="odesk-routers-provider-module"></span><h2>odesk.routers.provider module<a class="headerlink" href="#module-odesk.routers.provider" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
@@ -1787,6 +2115,28 @@ associated with the thread</td>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name" colspan="2">provider_ciphertext:</th></tr>
 <tr class="field-odd field"><td>&nbsp;</td><td class="field-body">The provider&#8217;s cipher text (key)</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="odesk.routers.provider.Provider.get_reasons_metadata">
+<tt class="descname">get_reasons_metadata</tt><big>(</big><em>reason_type</em><big>)</big><a class="headerlink" href="#odesk.routers.provider.Provider.get_reasons_metadata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of reasons by specified type.</p>
+<dl class="docutils">
+<dt><em>Parameters:</em></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">type:</th><td class="field-body">Requested type of the reason. Valid values:
+<tt class="docutils literal"><span class="pre">EmployerEndsNoStartContract</span></tt>, <tt class="docutils literal"><span class="pre">CloseOpening</span></tt>,
+<tt class="docutils literal"><span class="pre">RejectCandidate</span></tt>, <tt class="docutils literal"><span class="pre">RejectInterviewInvite</span></tt>,
+<tt class="docutils literal"><span class="pre">CancelCandidacy</span></tt>, <tt class="docutils literal"><span class="pre">EndProviderContract</span></tt>,
+<tt class="docutils literal"><span class="pre">EndCustomerContract</span></tt>, <tt class="docutils literal"><span class="pre">EndAssignment</span></tt></td>
 </tr>
 </tbody>
 </table>
@@ -2198,13 +2548,12 @@ in top 30 for test</p>
 </tr>
 <tr class="field-even field"><th class="field-name">category:</th><td class="field-body"><p class="first">Search for category of job profile
 See full list here:
-<a class="reference external" href="http://developers.odesk.com/w/page/12364012/search%20jobs">http://developers.odesk.com/w/page/12364012/search%20jobs</a>
-in the table &#8220;Changes&#8221;</p>
+<a class="reference external" href="https://developers.odesk.com/?lang=python#metadata_list-categories">https://developers.odesk.com/?lang=python#metadata_list-categories</a></p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">subcategory:</th><td class="field-body"><p class="first">Search for subcategory of job profile
 See full list here:
-<a class="reference external" href="http://developers.odesk.com/w/page/12364012/search%20jobs">http://developers.odesk.com/w/page/12364012/search%20jobs</a>
+<a class="reference external" href="https://developers.odesk.com/?lang=python#metadata_list-categories">https://developers.odesk.com/?lang=python#metadata_list-categories</a>
 in the table &#8220;Changes&#8221;</p>
 </td>
 </tr>
@@ -2929,6 +3278,43 @@ Example:
 
 </dd></dl>
 
+<dl class="class">
+<dt id="odesk.routers.task.Task_V2">
+<em class="property">class </em><tt class="descclassname">odesk.routers.task.</tt><tt class="descname">Task_V2</tt><big>(</big><em>client</em><big>)</big><a class="headerlink" href="#odesk.routers.task.Task_V2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="odesk.html#odesk.namespaces.Namespace" title="odesk.namespaces.Namespace"><tt class="xref py py-class docutils literal"><span class="pre">odesk.namespaces.Namespace</span></tt></a></p>
+<dl class="attribute">
+<dt id="odesk.routers.task.Task_V2.api_url">
+<tt class="descname">api_url</tt><em class="property"> = 'tasks/'</em><a class="headerlink" href="#odesk.routers.task.Task_V2.api_url" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="odesk.routers.task.Task_V2.list_engagement_activities">
+<tt class="descname">list_engagement_activities</tt><big>(</big><em>engagement_ref</em><big>)</big><a class="headerlink" href="#odesk.routers.task.Task_V2.list_engagement_activities" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve list of all activities assigned to the specific engagement.</p>
+<p>The user authenticated must have been granted the appropriate
+hiring manager permissions.</p>
+<dl class="docutils">
+<dt><em>Parameters:</em></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">engagement_ref:</th><td class="field-body">Engagement reference ID. You can get it using
+&#8216;List engagemnets&#8217; API call. Example: <cite>1234</cite>.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="odesk.routers.task.Task_V2.version">
+<tt class="descname">version</tt><em class="property"> = 2</em><a class="headerlink" href="#odesk.routers.task.Task_V2.version" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="module-odesk.routers.team">
 <span id="odesk-routers-team-module"></span><h2>odesk.routers.team module<a class="headerlink" href="#module-odesk.routers.team" title="Permalink to this headline">¶</a></h2>
@@ -3155,18 +3541,6 @@ Possible values are (default):</p>
 <dt id="odesk.routers.team.Team_V2.get_teamrooms">
 <tt class="descname">get_teamrooms</tt><big>(</big><big>)</big><a class="headerlink" href="#odesk.routers.team.Team_V2.get_teamrooms" title="Permalink to this definition">¶</a></dt>
 <dd><p>Retrieve all teamrooms accessible to the authenticated user.</p>
-<dl class="docutils">
-<dt><em>Parameters:</em></dt>
-<dd><table class="first last docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">target_version:</th><td class="field-body">Version of future requested API</td>
-</tr>
-</tbody>
-</table>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="attribute">
@@ -3300,13 +3674,6 @@ Default: <tt class="docutils literal"><span class="pre">False</span></tt></td>
 </dd></dl>
 
 </div>
-<div class="section" id="module-odesk.routers">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-odesk.routers" title="Permalink to this headline">¶</a></h2>
-<p>Routers package.</p>
-<p>All communication with oDesk API is handled by the routers.</p>
-<p>When you import <tt class="docutils literal"><span class="pre">odesk</span></tt> package and instantiate <tt class="docutils literal"><span class="pre">odesk.Client</span></tt> class,
-routers are dynamically attatched to your <tt class="docutils literal"><span class="pre">client</span></tt> object.</p>
-</div>
 </div>
 
 
@@ -3330,14 +3697,14 @@ routers are dynamically attatched to your <tt class="docutils literal"><span cla
         <li class="right" >
           <a href="odesk.html" title="odesk package"
              >previous</a> |</li>
-        <li><a href="../index.html">python-odesk 0.5.2 documentation</a> &raquo;</li>
+        <li><a href="../index.html">python-odesk 0.5.3 documentation</a> &raquo;</li>
           <li><a href="../reference_docs.html" >Reference Documentation: Classes and Methods</a> &raquo;</li>
           <li><a href="odesk.html" >odesk package</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
         &copy; Copyright 2010-2013, odesk.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
     </div>
   </body>
 </html>

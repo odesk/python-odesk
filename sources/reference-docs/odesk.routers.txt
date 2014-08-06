@@ -1,6 +1,14 @@
 odesk.routers package
 =====================
 
+Module contents
+---------------
+
+.. automodule:: odesk.routers
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 Submodules
 ----------
 
@@ -32,6 +40,14 @@ odesk.routers.mc module
 -----------------------
 
 .. automodule:: odesk.routers.mc
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+odesk.routers.offers module
+---------------------------
+
+.. automodule:: odesk.routers.offers
     :members:
     :undoc-members:
     :show-inheritance:
@@ -68,11 +84,3 @@ odesk.routers.timereport module
     :undoc-members:
     :show-inheritance:
 
-
-Module contents
----------------
-
-.. automodule:: odesk.routers
-    :members:
-    :undoc-members:
-    :show-inheritance:

@@ -4,6 +4,18 @@
 ***************
 Changelog
 ***************
+.. _0.5.3:
+
+Version 0.5.3
+-------------
+* New API calls added:
+    1. Added :py:meth:`List activities for specific engagement<odesk.routers.task.Task_V2.list_engagement_activities>` via ``task_v2`` router.
+    2. Added :py:meth:`Reasons metadata<odesk.routers.provider.Provider.get_reasons_metadata>` call.
+    3. Added :py:class:`Offers router<odesk.routers.offers.Offers>` with handy number of calls for managing offers as a client and as a freelancer.
+    4. Added :py:class:`HR_V3 router<odesk.routers.hr.HR_V3>` with a number of calls for getting job applications  as a client and as a freelancer.
+    5. Added :py:meth:`List threads by context <odesk.routers.mc.MC.get_thread_by_context>` call.
+* Removed mistakenly documented by oDesk but not working API call for getting team adjustments.
+
 .. _0.5.2:
 
 Version 0.5.2
@@ -13,6 +25,7 @@ Version 0.5.2
   to get all engagements for authorized user.
 * oTask API strongly reworked, from now Task Codes are
   renamed to Activities and it's behavior is changed:
+
     1. Activity now is assigned to the engagement ID.
        It will appear it user's oDesk Team Client only if
        it was assigned to the user's engagement.
@@ -88,7 +101,7 @@ Version 0.4
 * *Incompatibility with previous release* Chaged name of the oticket router to the ticket ??
 * *Incompatibility with previous release* Changed name of the time_report router to the timereport
 * *Incompatibility with previous release* Changed name of the finreports router to the finreport
-* *Incompatibility with previous release* "from odesk import *" now import only: "get_version", "Client", "utils"
+* *Incompatibility with previous release* "from odesk import \*" now import only: "get_version", "Client", "utils"
 * All routers moved from the __init__.py to the own files in the routers dir.
 * All helper classes moved to own modules
 * Added logging inside exceptions
@@ -134,4 +147,3 @@ Version 0.1
 *08 July 2010*
 
 First public release
-
