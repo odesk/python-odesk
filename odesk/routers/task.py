@@ -291,7 +291,7 @@ class Task(Namespace):
           :team_id:       Team ID. Use the 'id' value
                           from ``hr.get_team()`` API call.
 
-          :task_code:     A single Activity ID
+          :task_code:     A single Activity ID. It can be the list of codes, separated by ';' (semicolon).
 
         """
         url = 'tasks/companies/{0}/teams/{1}/archive/{2}'.format(
@@ -308,7 +308,7 @@ class Task(Namespace):
           :company_id:    Company ID. Use the ``parent_team__id`` value
                           from ``hr.get_team()`` API call.
 
-          :task_code:     A single Activity ID
+          :task_code:     A single Activity ID. It can be the list of codes, separated by ';' (semicolon).
 
         """
         team_id = company_id
@@ -324,7 +324,7 @@ class Task(Namespace):
           :team_id:       Team ID. Use the 'id' value
                           from ``hr.get_team()`` API call.
 
-          :task_code:     A single Activity ID
+          :task_code:     A single Activity ID. It can be the list of codes, separated by ';' (semicolon).
 
         """
         url = 'tasks/companies/{0}/teams/{1}/unarchive/{2}'.format(
@@ -341,7 +341,7 @@ class Task(Namespace):
           :company_id:    Company ID. Use the ``parent_team__id`` value
                           from ``hr.get_team()`` API call.
 
-          :task_code:     A single Activity ID
+          :task_code:     A single Activity ID. It can be the list of codes, separated by ';' (semicolon).
 
         """
         team_id = company_id
