@@ -674,6 +674,38 @@ def test_hrv2_post_adjustment():
     except ApiValueError:
         pass
 
+
+@patch('urllib3.PoolManager.urlopen', patched_urlopen_hr)
+def test_hr_end_contract():
+    hr = get_client().hr
+
+    result = hr.end_contract(1, 'API_REAS_JOB_COMPLETED_SUCCESSFULLY', 'yes')
+    assert result == hr_dict, result
+
+    # Test options validation
+    try:
+        result = hr.end_contract(1, 'reason', 'yes')
+        assert result == hr_dict, result
+    except ApiValueError:
+        pass
+
+
+@patch('urllib3.PoolManager.urlopen', patched_urlopen_hr)
+def test_hr_suspend_contract():
+    hr = get_client().hr
+
+    result = hr.suspend_contract(1, 'message')
+    assert result == hr_dict, result
+
+
+@patch('urllib3.PoolManager.urlopen', patched_urlopen_hr)
+def test_hr_restart_contract():
+    hr = get_client().hr
+
+    result = hr.restart_contract(1, 'message')
+    assert result == hr_dict, result
+
+
 job_data = {
     'buyer_team_reference': 111,
     'title': 'Test job from API',
@@ -1207,6 +1239,10 @@ def test_archive_team_task():
     assert task.archive_team_task(1, 1, 1) == task_dict, \
         task.archive_team_task(1, 1, 1)
 
+    # Test multiple task codes
+    assert task.archive_team_task(1, 1, [1, 2]) == task_dict, \
+        task.archive_team_task(1, 1, [1, 2])
+
 
 @patch('urllib3.PoolManager.urlopen', patched_urlopen_task)
 def test_archive_company_task():
@@ -1214,6 +1250,10 @@ def test_archive_company_task():
 
     assert task.archive_company_task(1, 1) == task_dict, \
         task.archive_company_task(1, 1)
+
+    # Test multiple task codes
+    assert task.archive_company_task(1, [1, 2]) == task_dict, \
+        task.archive_company_task(1, [1, 2])
 
 
 @patch('urllib3.PoolManager.urlopen', patched_urlopen_task)
@@ -1223,6 +1263,10 @@ def test_unarchive_team_task():
     assert task.unarchive_team_task(1, 1, 1) == task_dict, \
         task.unarchive_team_task(1, 1, 1)
 
+    # Test multiple task codes
+    assert task.unarchive_team_task(1, 1, [1, 2]) == task_dict, \
+        task.unarchive_team_task(1, 1, [1, 2])
+
 
 @patch('urllib3.PoolManager.urlopen', patched_urlopen_task)
 def test_unarchive_company_task():
@@ -1230,6 +1274,10 @@ def test_unarchive_company_task():
 
     assert task.unarchive_company_task(1, 1) == task_dict, \
         task.unarchive_company_task(1, 1)
+
+    # Test multiple task codes
+    assert task.unarchive_company_task(1, [1, 2]) == task_dict, \
+        task.unarchive_company_task(1, [1, 2])
 
 
 @patch('urllib3.PoolManager.urlopen', patched_urlopen_task)

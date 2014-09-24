@@ -60,7 +60,7 @@ class Task(Namespace):
         if isinstance(task_codes, (list, tuple)):
             return ';'.join(str(c) for c in task_codes)
         else:
-            return task_codes
+            return str(task_codes)
 
     def get_team_specific_tasks(self, company_id, team_id, task_codes):
         """
@@ -291,11 +291,14 @@ class Task(Namespace):
           :team_id:       Team ID. Use the 'id' value
                           from ``hr.get_team()`` API call.
 
-          :task_code:     A single Activity ID. It can be the list of codes, separated by ';' (semicolon).
+          :task_code:     A single Activity ID as a string
+                          or a list or tuple of IDs.
 
         """
+        task_code = self._encode_task_codes(task_code)
+
         url = 'tasks/companies/{0}/teams/{1}/archive/{2}'.format(
-            company_id, team_id, urllib.quote(str(task_code)))
+            company_id, team_id, urllib.quote(task_code))
         return self.put(url, data={})
 
     def archive_company_task(self, company_id, task_code):
@@ -308,7 +311,8 @@ class Task(Namespace):
           :company_id:    Company ID. Use the ``parent_team__id`` value
                           from ``hr.get_team()`` API call.
 
-          :task_code:     A single Activity ID. It can be the list of codes, separated by ';' (semicolon).
+          :task_code:     A single Activity ID as a string
+                          or a list or tuple of IDs.
 
         """
         team_id = company_id
@@ -324,11 +328,14 @@ class Task(Namespace):
           :team_id:       Team ID. Use the 'id' value
                           from ``hr.get_team()`` API call.
 
-          :task_code:     A single Activity ID. It can be the list of codes, separated by ';' (semicolon).
+          :task_code:     A single Activity ID as a string
+                          or a list or tuple of IDs.
 
         """
+        task_code = self._encode_task_codes(task_code)
+
         url = 'tasks/companies/{0}/teams/{1}/unarchive/{2}'.format(
-            company_id, team_id, urllib.quote(str(task_code)))
+            company_id, team_id, urllib.quote(task_code))
         return self.put(url, data={})
 
     def unarchive_company_task(self, company_id, task_code):
@@ -341,7 +348,8 @@ class Task(Namespace):
           :company_id:    Company ID. Use the ``parent_team__id`` value
                           from ``hr.get_team()`` API call.
 
-          :task_code:     A single Activity ID. It can be the list of codes, separated by ';' (semicolon).
+          :task_code:     A single Activity ID as a string
+                          or a list or tuple of IDs.
 
         """
         team_id = company_id

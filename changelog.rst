@@ -4,13 +4,14 @@
 ***************
 Changelog
 ***************
+
 .. _0.5.4:
 
 Version 0.5.4
 -------------
-* Added new API - Suspend Contract
-* Added new API - Resume Contract
-* Un/archive Activities start supporting a list of codes
+* Added new API call - :py:meth:`Suspend Contract <odesk.routers.hr.HR.suspend_contract>`.
+* Added new API call - :py:meth:`Restart Contract <odesk.routers.hr.HR.restart_contract>`.
+* :py:meth:`Archive <odesk.routers.task.Task.archive_team_task>`/:py:meth:`unarchive <odesk.routers.task.Task.unarchive_team_task>` activities calls now support a list of codes.
 
 .. _0.5.3:
 
