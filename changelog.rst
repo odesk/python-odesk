@@ -4,6 +4,14 @@
 ***************
 Changelog
 ***************
+.. _0.5.4:
+
+Version 0.5.4
+-------------
+* Added new API - Suspend Contract
+* Added new API - Resume Contract
+* Un/archive Activities start supporting a list of codes
+
 .. _0.5.3:
 
 Version 0.5.3

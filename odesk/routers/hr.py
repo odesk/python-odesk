@@ -900,6 +900,40 @@ class HR(Namespace):
 
     """contracts api"""
 
+    def suspend_contract(self, contract_reference, message):
+        """
+        Suspend the Contract.
+
+        *Parameters:*
+          :contract_reference:  The Contract's reference ID
+
+          :message:             A message/reason for contractor
+
+        """
+        url = 'contracts/{0}/suspend'.format(contract_reference)
+        data = {}
+
+        data['message'] = message
+
+        return self.put(url, data)
+
+    def restart_contract(self, contract_reference, message):
+        """
+        Restart the Contract.
+
+        *Parameters:*
+          :contract_reference:  The Contract's reference ID
+
+          :message:             A message/reason for contractor
+
+        """
+        url = 'contracts/{0}/restart'.format(contract_reference)
+        data = {}
+
+        data['message'] = message
+
+        return self.put(url, data)
+
     def end_contract(self, contract_reference, reason, would_hire_again,
                      fb_scores=None, fb_comment=None):
         """
