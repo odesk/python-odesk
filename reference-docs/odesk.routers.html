@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>odesk.routers package &mdash; python-odesk 0.5.3 documentation</title>
+    <title>odesk.routers package &mdash; python-odesk 0.5.4 documentation</title>
     
     <link rel="stylesheet" href="../static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.5.3',
+        VERSION:     '0.5.4',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="../static/jquery.js"></script>
     <script type="text/javascript" src="../static/underscore.js"></script>
     <script type="text/javascript" src="../static/doctools.js"></script>
-    <link rel="top" title="python-odesk 0.5.3 documentation" href="../index.html" />
+    <link rel="top" title="python-odesk 0.5.4 documentation" href="../index.html" />
     <link rel="up" title="odesk package" href="odesk.html" />
     <link rel="next" title="Changelog" href="../changelog.html" />
     <link rel="prev" title="odesk package" href="odesk.html" /> 
@@ -44,7 +44,7 @@
         <li class="right" >
           <a href="odesk.html" title="odesk package"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">python-odesk 0.5.3 documentation</a> &raquo;</li>
+        <li><a href="../index.html">python-odesk 0.5.4 documentation</a> &raquo;</li>
           <li><a href="../reference_docs.html" >Reference Documentation: Classes and Methods</a> &raquo;</li>
           <li><a href="odesk.html" accesskey="U">odesk package</a> &raquo;</li> 
       </ul>
@@ -1235,6 +1235,48 @@ will be charged to the employer, e.g. 110</td>
 <p class="first admonition-title">Note</p>
 <p class="last">You should use either <tt class="docutils literal"><span class="pre">amount</span></tt> parameter or         <tt class="docutils literal"><span class="pre">charge_amount</span></tt>, but not both. Make sure that at least         one of them is present.</p>
 </div>
+</dd></dl>
+
+<dl class="method">
+<dt id="odesk.routers.hr.HR.restart_contract">
+<tt class="descname">restart_contract</tt><big>(</big><em>contract_reference</em>, <em>message</em><big>)</big><a class="headerlink" href="#odesk.routers.hr.HR.restart_contract" title="Permalink to this definition">¶</a></dt>
+<dd><p>Restart the Contract.</p>
+<dl class="docutils">
+<dt><em>Parameters:</em></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">contract_reference:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body">The Contract&#8217;s reference ID</td>
+</tr>
+<tr class="field-even field"><th class="field-name">message:</th><td class="field-body">A message/reason for contractor</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="odesk.routers.hr.HR.suspend_contract">
+<tt class="descname">suspend_contract</tt><big>(</big><em>contract_reference</em>, <em>message</em><big>)</big><a class="headerlink" href="#odesk.routers.hr.HR.suspend_contract" title="Permalink to this definition">¶</a></dt>
+<dd><p>Suspend the Contract.</p>
+<dl class="docutils">
+<dt><em>Parameters:</em></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">contract_reference:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body">The Contract&#8217;s reference ID</td>
+</tr>
+<tr class="field-even field"><th class="field-name">message:</th><td class="field-body">A message/reason for contractor</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
@@ -2871,7 +2913,8 @@ only profile ids array.</p>
 <tr class="field-odd field"><th class="field-name">company_id:</th><td class="field-body">Company ID. Use the <tt class="docutils literal"><span class="pre">parent_team__id</span></tt> value
 from <tt class="docutils literal"><span class="pre">hr.get_team()</span></tt> API call.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">task_code:</th><td class="field-body">A single Activity ID</td>
+<tr class="field-even field"><th class="field-name">task_code:</th><td class="field-body">A single Activity ID as a string
+or a list or tuple of IDs.</td>
 </tr>
 </tbody>
 </table>
@@ -2895,7 +2938,8 @@ from <tt class="docutils literal"><span class="pre">hr.get_team()</span></tt> AP
 <tr class="field-even field"><th class="field-name">team_id:</th><td class="field-body">Team ID. Use the &#8216;id&#8217; value
 from <tt class="docutils literal"><span class="pre">hr.get_team()</span></tt> API call.</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">task_code:</th><td class="field-body">A single Activity ID</td>
+<tr class="field-odd field"><th class="field-name">task_code:</th><td class="field-body">A single Activity ID as a string
+or a list or tuple of IDs.</td>
 </tr>
 </tbody>
 </table>
@@ -3212,7 +3256,8 @@ the moment.</td>
 <tr class="field-odd field"><th class="field-name">company_id:</th><td class="field-body">Company ID. Use the <tt class="docutils literal"><span class="pre">parent_team__id</span></tt> value
 from <tt class="docutils literal"><span class="pre">hr.get_team()</span></tt> API call.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">task_code:</th><td class="field-body">A single Activity ID</td>
+<tr class="field-even field"><th class="field-name">task_code:</th><td class="field-body">A single Activity ID as a string
+or a list or tuple of IDs.</td>
 </tr>
 </tbody>
 </table>
@@ -3236,7 +3281,8 @@ from <tt class="docutils literal"><span class="pre">hr.get_team()</span></tt> AP
 <tr class="field-even field"><th class="field-name">team_id:</th><td class="field-body">Team ID. Use the &#8216;id&#8217; value
 from <tt class="docutils literal"><span class="pre">hr.get_team()</span></tt> API call.</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">task_code:</th><td class="field-body">A single Activity ID</td>
+<tr class="field-odd field"><th class="field-name">task_code:</th><td class="field-body">A single Activity ID as a string
+or a list or tuple of IDs.</td>
 </tr>
 </tbody>
 </table>
@@ -3697,7 +3743,7 @@ Default: <tt class="docutils literal"><span class="pre">False</span></tt></td>
         <li class="right" >
           <a href="odesk.html" title="odesk package"
              >previous</a> |</li>
-        <li><a href="../index.html">python-odesk 0.5.3 documentation</a> &raquo;</li>
+        <li><a href="../index.html">python-odesk 0.5.4 documentation</a> &raquo;</li>
           <li><a href="../reference_docs.html" >Reference Documentation: Classes and Methods</a> &raquo;</li>
           <li><a href="odesk.html" >odesk package</a> &raquo;</li> 
       </ul>
