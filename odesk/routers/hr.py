@@ -1148,3 +1148,188 @@ class HR_V3(Namespace):
 
         url = 'contractors/applications/{0}'.format(application_id)
         return self.get(url, data)
+
+    def create_milestone(self, contract_reference, milestone_description, deposit_amount, due_date=None):
+        """
+        Create a milestone.
+
+        *Parameters:*
+          :contract_reference:      Contract reference. Contracts info are available in the Engagements API.
+          :milestone_description:   Name of the milestone.
+          :deposit_amount:          Amount to deposit for this milestone.
+          :due_date:                (optional) Expected date of finalization. Format mm-dd-yyyy.
+
+        """
+        data = {}
+        data['contract_reference'] = contract_reference
+        data['milestone_description'] = milestone_description
+        data['deposit_amount'] = deposit_amount
+
+        if due_date:
+            data['due_date'] = due_date
+
+        url = 'fp/milestones'
+        return self.post(url, data)
+
+    def edit_milestone(self, milestone_id, milestone_description=None, deposit_amount=None, due_date=None, message=None):
+        """
+        Edit an existing milestone.
+
+        *Parameters:*
+          :milestone_id:            Milestone reference.
+          :milestone_description:   (optional) Name of the milestone.
+          :deposit_amount:          (optional) Amount to deposit for this milestone.
+          :due_date:                (optional) Expected date of finalization. Format mm-dd-yyyy.
+          :message:                 (optional) Message from the client to the freelancer.
+
+        """
+        data = {}
+        data['milestone_id'] = milestone_id
+
+        if milestone_description:
+            data['milestone_description'] = milestone_description
+
+        if deposit_amount:
+            data['deposit_amount'] = deposit_amount
+
+        if due_date:
+            data['due_date'] = due_date
+
+        if message:
+            data['message'] = message
+
+        url = 'fp/milestones/{0}'.format(milestone_id)
+        return self.put(url, data)
+
+    def activate_milestone(self, milestone_id, message=None):
+        """
+        Activates a milestone that has not been funded.
+
+        *Parameters:*
+          :milestone_id:            Milestone reference.
+          :message:                 (optional) Message from the client to the freelancer.
+
+        """
+        data = {}
+        data['milestone_id'] = milestone_id
+
+        if message:
+            data['message'] = message
+
+        url = 'fp/milestones/{0}/activate'.format(milestone_id)
+        return self.put(url, data)
+
+    def approve_milestone(self, milestone_id, amount=None, bonus=None, pay_comments=None, underpayment_reason=None, note2contractor=None):
+        """
+        Approve the milestone.
+
+        *Parameters:*
+          :milestone_id:            Milestone reference.
+          :amount:                  (optional) Amount of money to be paid. If none provided, the full deposit_amount is paid.
+          :bonus:                   (optional) Amount of money paid as bonus.
+          :pay_comments:            (optional) Comments on the payment.
+          :underpayment_reason:     (optional) Reason for a smaller payment than the one agreed.
+                                    Valid values: `329`, `330`, `331`, `332`
+          :note2contractor:         (optional) Notes from the client to the freelancer.
+
+        """
+        data = {}
+        data['milestone_id'] = milestone_id
+
+        if amount:
+            data['amount'] = amount
+
+        if bonus:
+            data['bonus'] = bonus
+
+        if pay_comments:
+            data['pay_comments'] = pay_comments
+
+        if underpayment_reason:
+            data['underpayment_reason'] = underpayment_reason
+
+        if note2contractor:
+            data['note2contractor'] = note2contractor
+
+        url = 'fp/milestones/{0}/approve'.format(milestone_id)
+        return self.put(url, data)
+
+    def delete_milestone(self, milestone_id):
+        """
+        Delete the milestone.
+
+        *Parameters:*
+          :milestone_id:            Milestone reference.
+
+        """
+        data = {}
+
+        url = 'fp/milestones/{0}'.format(milestone_id)
+        return self.delete(url, data)
+
+    def request_submission_approval(self, milestone_id, note2client, amount):
+        """
+        Freelancer submits work for the client to approve.
+
+        *Parameters:*
+          :milestone_id:    Milestone reference.
+          :note2client:     Notes from freelancer to client about work that was done.
+          :amount:          Amount requested by the freelancer.
+
+        """
+        data = {}
+        data['milestone_id'] = milestone_id
+        data['note2client'] = note2client
+        data['amount'] = amount
+
+        url = 'fp/submissions'
+        return self.post(url, data)
+
+    def approve_submission(self, submission_id, amount, bonus=None, pay_comments=None, underpayment_reason=None, note2contractor=None):
+        """
+        Approve the submission.
+
+        *Parameters:*
+          :submission_id:           Submission reference.
+          :amount:                  Amount of money to be paid. If none provided, the full deposit_amount is paid.
+          :bonus:                   (optional) Amount of money paid as bonus.
+          :pay_comments:            (optional) Comments on the payment.
+          :underpayment_reason:     (optional) Reason for a smaller payment than the one agreed.
+                                    Valid values: `329`, `330`, `331`, `332`
+          :note2contractor:         (optional) Notes from the client to the freelancer.
+
+        """
+        data = {}
+        data['submission_id'] = submission_id
+        data['amount'] = amount
+
+        if bonus:
+            data['bonus'] = bonus
+
+        if pay_comments:
+            data['pay_comments'] = pay_comments
+
+        if underpayment_reason:
+            data['underpayment_reason'] = underpayment_reason
+
+        if note2contractor:
+            data['note2contractor'] = note2contractor
+
+        url = 'fp/submissions/{0}/approve'.format(submission_id)
+        return self.put(url, data)
+
+    def reject_submission(self, submission_id, note2contractor):
+        """
+        Reject the submission.
+
+        *Parameters:*
+          :submission_id:           Submission reference.
+          :note2contractor:         Notes from the client to the freelancer.
+
+        """
+        data = {}
+        data['submission_id'] = submission_id
+        data['note2contractor'] = note2contractor
+
+        url = 'fp/submissions/{0}/reject'.format(submission_id)
+        return self.put(url, data)

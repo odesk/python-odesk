@@ -5,6 +5,19 @@
 Changelog
 ***************
 
+.. _0.5.5:
+
+Version 0.5.5
+-------------
+* Added new API call - :py:meth:`Create a new Milestone <odesk.routers.hr.HR.create_milestone>`.
+* Added new API call - :py:meth:`Edit the Milestone <odesk.routers.hr.HR.edit_milestone>`.
+* Added new API call - :py:meth:`Approve the Milestone <odesk.routers.hr.HR._approve_milestone>`.
+* Added new API call - :py:meth:`Activate the Milestone <odesk.routers.hr.HR.activate_milestone>`.
+* Added new API call - :py:meth:`Delete the Milestone <odesk.routers.hr.HR.delete_milestone>`.
+* Added new API call - :py:meth:`Submit for Approval <odesk.routers.hr.HR.request_submission_approval>`.
+* Added new API call - :py:meth:`Approve the Submission <odesk.routers.hr.HR.approve_submission>`.
+* Added new API call - :py:meth:`Reject the Submission <odesk.routers.hr.HR.reject_submission>`.
+
 .. _0.5.4:
 
 Version 0.5.4
