@@ -402,9 +402,9 @@ class HR(Namespace):
                                    included the job will default to
                                    starting immediately.
 
-          :end_date:               (optional) The end date of the Job,
-                                   e.g. 06-30-2011. Only needed if
-                                   job type is 'fixed-price'
+          :end_date:               (deprecated) This parameter remains
+                                   for compatibility reasons and
+                                   will be removed in future.
 
           :skills:                 (optional) Skills required for the job.
                                    Must be a list or tuple even of one item,
@@ -438,8 +438,6 @@ class HR(Namespace):
             data['duration'] = duration
         if start_date:
             data['start_date'] = start_date
-        if end_date:
-            data['end_date'] = end_date
         if skills:
             data['skills'] = ';'.join(skills)
 
@@ -497,9 +495,9 @@ class HR(Namespace):
                                    included the job will default to
                                    starting immediately.
 
-          :end_date:               (optional) The end date of the Job,
-                                   e.g. 06-30-2011. Only needed if
-                                   job type is 'fixed-price'
+          :end_date:               (deprecated) This parameter remains
+                                   for compatibility reasons and
+                                   will be removed in future.
 
           :status:                 (required) The status of the job,
                                    e.g. 'filled'.
@@ -532,8 +530,6 @@ class HR(Namespace):
             data['duration'] = duration
         if start_date:
             data['start_date'] = start_date
-        if end_date:
-            data['end_date'] = end_date
 
         if status:
             assert_parameter('status', status, self.JOB_STATUSES)
@@ -1333,3 +1329,16 @@ class HR_V3(Namespace):
 
         url = 'fp/submissions/{0}/reject'.format(submission_id)
         return self.put(url, data)
+
+    def get_milestone_submissions(self, milestone_id):
+        """
+        Get all submissions for specific milestone.
+
+        *Parameters:*
+          :milestone_id:           Milestone reference ID.
+
+        """
+        data = {}
+
+        url = 'fp/milestones/{0}/submissions'.format(milestone_id)
+        return self.get(url, data)

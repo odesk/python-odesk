@@ -17,6 +17,10 @@ Version 0.5.5
 * Added new API call - :py:meth:`Submit for Approval <odesk.routers.hr.HR.request_submission_approval>`.
 * Added new API call - :py:meth:`Approve the Submission <odesk.routers.hr.HR.approve_submission>`.
 * Added new API call - :py:meth:`Reject the Submission <odesk.routers.hr.HR.reject_submission>`.
+* Added new API call - :py:meth:`Get all Submissions for the Milestone <odesk.routers.hr.HR.get_milestone_submissions>`.
+
+* ``end_date`` parameter in Post Job ad Edit job is deprecated, keyword argument still remains for backwards compatibility
+  and will be removed in future releases.
 
 .. _0.5.4:
 
