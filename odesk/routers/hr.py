@@ -1342,3 +1342,16 @@ class HR_V3(Namespace):
 
         url = 'fp/milestones/{0}/submissions'.format(milestone_id)
         return self.get(url, data)
+
+    def get_active_milestone(self, contract_reference):
+        """
+        Get active milestone for specific contract.
+
+        *Parameters:*
+          :contract_reference:           Contract reference. Contracts info are available in the Engagements API.
+
+        """
+        data = {}
+
+        url = 'fp/milestones/statuses/active/contracts/{0}'.format(contract_reference)
+        return self.get(url, data)
