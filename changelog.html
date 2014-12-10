@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Changelog &mdash; python-odesk 0.5.4 documentation</title>
+    <title>Changelog &mdash; python-odesk 0.5.5 documentation</title>
     
     <link rel="stylesheet" href="static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.5.4',
+        VERSION:     '0.5.5',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="static/jquery.js"></script>
     <script type="text/javascript" src="static/underscore.js"></script>
     <script type="text/javascript" src="static/doctools.js"></script>
-    <link rel="top" title="python-odesk 0.5.4 documentation" href="index.html" />
+    <link rel="top" title="python-odesk 0.5.5 documentation" href="index.html" />
     <link rel="next" title="BSD license" href="license.html" />
     <link rel="prev" title="odesk.routers package" href="reference-docs/odesk.routers.html" /> 
   </head>
@@ -43,7 +43,7 @@
         <li class="right" >
           <a href="reference-docs/odesk.routers.html" title="odesk.routers package"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">python-odesk 0.5.4 documentation</a> &raquo;</li> 
+        <li><a href="index.html">python-odesk 0.5.5 documentation</a> &raquo;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar">
@@ -51,6 +51,7 @@
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Changelog</a><ul>
+<li><a class="reference internal" href="#version-0-5-5">Version 0.5.5</a></li>
 <li><a class="reference internal" href="#version-0-5-4">Version 0.5.4</a></li>
 <li><a class="reference internal" href="#version-0-5-3">Version 0.5.3</a></li>
 <li><a class="reference internal" href="#version-0-5-2">Version 0.5.2</a></li>
@@ -99,8 +100,25 @@
             
   <div class="section" id="changelog">
 <span id="id1"></span><h1>Changelog<a class="headerlink" href="#changelog" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="version-0-5-5">
+<span id="id2"></span><h2>Version 0.5.5<a class="headerlink" href="#version-0-5-5" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Added new API call - <a class="reference internal" href="reference-docs/odesk.routers.html#odesk.routers.hr.HR_V3.create_milestone" title="odesk.routers.hr.HR_V3.create_milestone"><tt class="xref py py-meth docutils literal"><span class="pre">Create</span> <span class="pre">a</span> <span class="pre">new</span> <span class="pre">Milestone</span></tt></a>.</li>
+<li>Added new API call - <a class="reference internal" href="reference-docs/odesk.routers.html#odesk.routers.hr.HR_V3.edit_milestone" title="odesk.routers.hr.HR_V3.edit_milestone"><tt class="xref py py-meth docutils literal"><span class="pre">Edit</span> <span class="pre">the</span> <span class="pre">Milestone</span></tt></a>.</li>
+<li>Added new API call - <a class="reference internal" href="reference-docs/odesk.routers.html#odesk.routers.hr.HR_V3.approve_milestone" title="odesk.routers.hr.HR_V3.approve_milestone"><tt class="xref py py-meth docutils literal"><span class="pre">Approve</span> <span class="pre">the</span> <span class="pre">Milestone</span></tt></a>.</li>
+<li>Added new API call - <a class="reference internal" href="reference-docs/odesk.routers.html#odesk.routers.hr.HR_V3.activate_milestone" title="odesk.routers.hr.HR_V3.activate_milestone"><tt class="xref py py-meth docutils literal"><span class="pre">Activate</span> <span class="pre">the</span> <span class="pre">Milestone</span></tt></a>.</li>
+<li>Added new API call - <a class="reference internal" href="reference-docs/odesk.routers.html#odesk.routers.hr.HR_V3.delete_milestone" title="odesk.routers.hr.HR_V3.delete_milestone"><tt class="xref py py-meth docutils literal"><span class="pre">Delete</span> <span class="pre">the</span> <span class="pre">Milestone</span></tt></a>.</li>
+<li>Added new API call - <a class="reference internal" href="reference-docs/odesk.routers.html#odesk.routers.hr.HR_V3.request_submission_approval" title="odesk.routers.hr.HR_V3.request_submission_approval"><tt class="xref py py-meth docutils literal"><span class="pre">Submit</span> <span class="pre">for</span> <span class="pre">Approval</span></tt></a>.</li>
+<li>Added new API call - <a class="reference internal" href="reference-docs/odesk.routers.html#odesk.routers.hr.HR_V3.approve_submission" title="odesk.routers.hr.HR_V3.approve_submission"><tt class="xref py py-meth docutils literal"><span class="pre">Approve</span> <span class="pre">the</span> <span class="pre">Submission</span></tt></a>.</li>
+<li>Added new API call - <a class="reference internal" href="reference-docs/odesk.routers.html#odesk.routers.hr.HR_V3.reject_submission" title="odesk.routers.hr.HR_V3.reject_submission"><tt class="xref py py-meth docutils literal"><span class="pre">Reject</span> <span class="pre">the</span> <span class="pre">Submission</span></tt></a>.</li>
+<li>Added new API call - <a class="reference internal" href="reference-docs/odesk.routers.html#odesk.routers.hr.HR_V3.get_milestone_submissions" title="odesk.routers.hr.HR_V3.get_milestone_submissions"><tt class="xref py py-meth docutils literal"><span class="pre">Get</span> <span class="pre">all</span> <span class="pre">Submissions</span> <span class="pre">for</span> <span class="pre">the</span> <span class="pre">Milestone</span></tt></a>.</li>
+<li>Added new API call - <a class="reference internal" href="reference-docs/odesk.routers.html#odesk.routers.hr.HR_V3.get_active_milestone" title="odesk.routers.hr.HR_V3.get_active_milestone"><tt class="xref py py-meth docutils literal"><span class="pre">Get</span> <span class="pre">Active</span> <span class="pre">Milestone</span> <span class="pre">for</span> <span class="pre">the</span> <span class="pre">Contract</span></tt></a>.</li>
+<li><tt class="docutils literal"><span class="pre">end_date</span></tt> parameter in <a class="reference internal" href="reference-docs/odesk.routers.html#odesk.routers.hr.HR.post_job" title="odesk.routers.hr.HR.post_job"><tt class="xref py py-meth docutils literal"><span class="pre">Post</span> <span class="pre">Job</span></tt></a> ad <a class="reference internal" href="reference-docs/odesk.routers.html#odesk.routers.hr.HR.update_job" title="odesk.routers.hr.HR.update_job"><tt class="xref py py-meth docutils literal"><span class="pre">Update</span> <span class="pre">Job</span></tt></a> is deprecated, keyword argument still remains for backwards compatibility
+and will be removed in future releases.</li>
+</ul>
+</div>
 <div class="section" id="version-0-5-4">
-<span id="id2"></span><h2>Version 0.5.4<a class="headerlink" href="#version-0-5-4" title="Permalink to this headline">¶</a></h2>
+<span id="id3"></span><h2>Version 0.5.4<a class="headerlink" href="#version-0-5-4" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>Added new API call - <a class="reference internal" href="reference-docs/odesk.routers.html#odesk.routers.hr.HR.suspend_contract" title="odesk.routers.hr.HR.suspend_contract"><tt class="xref py py-meth docutils literal"><span class="pre">Suspend</span> <span class="pre">Contract</span></tt></a>.</li>
 <li>Added new API call - <a class="reference internal" href="reference-docs/odesk.routers.html#odesk.routers.hr.HR.restart_contract" title="odesk.routers.hr.HR.restart_contract"><tt class="xref py py-meth docutils literal"><span class="pre">Restart</span> <span class="pre">Contract</span></tt></a>.</li>
@@ -108,7 +126,7 @@
 </ul>
 </div>
 <div class="section" id="version-0-5-3">
-<span id="id3"></span><h2>Version 0.5.3<a class="headerlink" href="#version-0-5-3" title="Permalink to this headline">¶</a></h2>
+<span id="id4"></span><h2>Version 0.5.3<a class="headerlink" href="#version-0-5-3" title="Permalink to this headline">¶</a></h2>
 <ul>
 <li><dl class="first docutils">
 <dt>New API calls added:</dt>
@@ -127,7 +145,7 @@
 </ul>
 </div>
 <div class="section" id="version-0-5-2">
-<span id="id4"></span><h2>Version 0.5.2<a class="headerlink" href="#version-0-5-2" title="Permalink to this headline">¶</a></h2>
+<span id="id5"></span><h2>Version 0.5.2<a class="headerlink" href="#version-0-5-2" title="Permalink to this headline">¶</a></h2>
 <ul>
 <li><p class="first">Fixed engagements API call, so that you can call
 <tt class="docutils literal"><span class="pre">client.hr.get_engagements()</span></tt> without any parameter
@@ -164,14 +182,14 @@ use it on your own risk. It will be reworked in future.</li>
 </ul>
 </div>
 <div class="section" id="version-0-5-1">
-<span id="id5"></span><h2>Version 0.5.1<a class="headerlink" href="#version-0-5-1" title="Permalink to this headline">¶</a></h2>
+<span id="id6"></span><h2>Version 0.5.1<a class="headerlink" href="#version-0-5-1" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>Fixed bug preventing update (<tt class="docutils literal"><span class="pre">PUT</span></tt> method) for oTask codes that
 contained non-urlsafe characters, e.g. &#8220;space&#8221;, &#8220;colon&#8221;, etc.</li>
 </ul>
 </div>
 <div class="section" id="version-0-5">
-<span id="id6"></span><h2>Version 0.5<a class="headerlink" href="#version-0-5" title="Permalink to this headline">¶</a></h2>
+<span id="id7"></span><h2>Version 0.5<a class="headerlink" href="#version-0-5" title="Permalink to this headline">¶</a></h2>
 <p><em>October 2013</em></p>
 <p>Backwards incompatibility changes:</p>
 <ul class="simple">
@@ -204,7 +222,7 @@ method&#8217;s docstring to see comprehensive description</li>
 </ul>
 </div>
 <div class="section" id="version-0-4">
-<span id="id7"></span><h2>Version 0.4<a class="headerlink" href="#version-0-4" title="Permalink to this headline">¶</a></h2>
+<span id="id8"></span><h2>Version 0.4<a class="headerlink" href="#version-0-4" title="Permalink to this headline">¶</a></h2>
 <p><em>May 2011</em></p>
 <ul class="simple">
 <li><em>Incompatibility with previous release</em> Changed name of the otask router to the task</li>
@@ -221,7 +239,7 @@ method&#8217;s docstring to see comprehensive description</li>
 </ul>
 </div>
 <div class="section" id="version-0-2">
-<span id="id8"></span><h2>Version 0.2<a class="headerlink" href="#version-0-2" title="Permalink to this headline">¶</a></h2>
+<span id="id9"></span><h2>Version 0.2<a class="headerlink" href="#version-0-2" title="Permalink to this headline">¶</a></h2>
 <p><em>October 2010</em></p>
 <ul class="simple">
 <li>All helpers classes moved to the utils.py, added Table helper class</li>
@@ -229,7 +247,7 @@ method&#8217;s docstring to see comprehensive description</li>
 </ul>
 </div>
 <div class="section" id="version-0-1-2">
-<span id="id9"></span><h2>Version 0.1.2<a class="headerlink" href="#version-0-1-2" title="Permalink to this headline">¶</a></h2>
+<span id="id10"></span><h2>Version 0.1.2<a class="headerlink" href="#version-0-1-2" title="Permalink to this headline">¶</a></h2>
 <p><em>29 September 2010</em></p>
 <p>Bug fix release</p>
 <ul class="simple">
@@ -238,7 +256,7 @@ method&#8217;s docstring to see comprehensive description</li>
 </ul>
 </div>
 <div class="section" id="version-0-1-1">
-<span id="id10"></span><h2>Version 0.1.1<a class="headerlink" href="#version-0-1-1" title="Permalink to this headline">¶</a></h2>
+<span id="id11"></span><h2>Version 0.1.1<a class="headerlink" href="#version-0-1-1" title="Permalink to this headline">¶</a></h2>
 <p><em>15 July 2010</em></p>
 <p>Bug fix release</p>
 <ul class="simple">
@@ -247,7 +265,7 @@ method&#8217;s docstring to see comprehensive description</li>
 </ul>
 </div>
 <div class="section" id="version-0-1">
-<span id="id11"></span><h2>Version 0.1<a class="headerlink" href="#version-0-1" title="Permalink to this headline">¶</a></h2>
+<span id="id12"></span><h2>Version 0.1<a class="headerlink" href="#version-0-1" title="Permalink to this headline">¶</a></h2>
 <p><em>08 July 2010</em></p>
 <p>First public release</p>
 </div>
@@ -274,7 +292,7 @@ method&#8217;s docstring to see comprehensive description</li>
         <li class="right" >
           <a href="reference-docs/odesk.routers.html" title="odesk.routers package"
              >previous</a> |</li>
-        <li><a href="index.html">python-odesk 0.5.4 documentation</a> &raquo;</li> 
+        <li><a href="index.html">python-odesk 0.5.5 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

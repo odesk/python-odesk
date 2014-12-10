@@ -5,6 +5,24 @@
 Changelog
 ***************
 
+.. _0.5.5:
+
+Version 0.5.5
+-------------
+* Added new API call - :py:meth:`Create a new Milestone <odesk.routers.hr.HR_V3.create_milestone>`.
+* Added new API call - :py:meth:`Edit the Milestone <odesk.routers.hr.HR_V3.edit_milestone>`.
+* Added new API call - :py:meth:`Approve the Milestone <odesk.routers.hr.HR_V3.approve_milestone>`.
+* Added new API call - :py:meth:`Activate the Milestone <odesk.routers.hr.HR_V3.activate_milestone>`.
+* Added new API call - :py:meth:`Delete the Milestone <odesk.routers.hr.HR_V3.delete_milestone>`.
+* Added new API call - :py:meth:`Submit for Approval <odesk.routers.hr.HR_V3.request_submission_approval>`.
+* Added new API call - :py:meth:`Approve the Submission <odesk.routers.hr.HR_V3.approve_submission>`.
+* Added new API call - :py:meth:`Reject the Submission <odesk.routers.hr.HR_V3.reject_submission>`.
+* Added new API call - :py:meth:`Get all Submissions for the Milestone <odesk.routers.hr.HR_V3.get_milestone_submissions>`.
+* Added new API call - :py:meth:`Get Active Milestone for the Contract <odesk.routers.hr.HR_V3.get_active_milestone>`.
+
+* ``end_date`` parameter in :py:meth:`Post Job <odesk.routers.hr.HR.post_job>` ad :py:meth:`Update Job <odesk.routers.hr.HR.update_job>` is deprecated, keyword argument still remains for backwards compatibility
+  and will be removed in future releases.
+
 .. _0.5.4:
 
 Version 0.5.4

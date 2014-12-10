@@ -118,6 +118,8 @@ oDesk Hiring API https://developers.odesk.com/?lang=python#contracts-and-offers 
 
 * Update existing job post :py:meth:`client.hr.update_job<update_job>`
 
+* Work with milestones for fixed priced jobs: see https://developers.odesk.com/?lang=python#contracts-and-offers_milestones
+
 * View existing jobs :py:meth:`client.hr.get_jobs<get_jobs>`
 .. currentmodule:: odesk.routers.hr.HR_V1
 * Invite to interview :py:meth:`client.hr_v1.invite_to_interview<invite_to_interview>`

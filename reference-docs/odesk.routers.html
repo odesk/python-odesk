@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>odesk.routers package &mdash; python-odesk 0.5.4 documentation</title>
+    <title>odesk.routers package &mdash; python-odesk 0.5.5 documentation</title>
     
     <link rel="stylesheet" href="../static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.5.4',
+        VERSION:     '0.5.5',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="../static/jquery.js"></script>
     <script type="text/javascript" src="../static/underscore.js"></script>
     <script type="text/javascript" src="../static/doctools.js"></script>
-    <link rel="top" title="python-odesk 0.5.4 documentation" href="../index.html" />
+    <link rel="top" title="python-odesk 0.5.5 documentation" href="../index.html" />
     <link rel="up" title="odesk package" href="odesk.html" />
     <link rel="next" title="Changelog" href="../changelog.html" />
     <link rel="prev" title="odesk package" href="odesk.html" /> 
@@ -44,7 +44,7 @@
         <li class="right" >
           <a href="odesk.html" title="odesk package"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">python-odesk 0.5.4 documentation</a> &raquo;</li>
+        <li><a href="../index.html">python-odesk 0.5.5 documentation</a> &raquo;</li>
           <li><a href="../reference_docs.html" >Reference Documentation: Classes and Methods</a> &raquo;</li>
           <li><a href="odesk.html" accesskey="U">odesk package</a> &raquo;</li> 
       </ul>
@@ -1098,9 +1098,9 @@ included the job will default to
 starting immediately.</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">end_date:</th><td class="field-body"><p class="first">(optional) The end date of the Job,
-e.g. 06-30-2011. Only needed if
-job type is &#8216;fixed-price&#8217;</p>
+<tr class="field-odd field"><th class="field-name">end_date:</th><td class="field-body"><p class="first">(deprecated) This parameter remains
+for compatibility reasons and
+will be removed in future.</p>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">skills:</th><td class="field-body"><p class="first last">(optional) Skills required for the job.
@@ -1348,9 +1348,9 @@ included the job will default to
 starting immediately.</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">end_date:</th><td class="field-body"><p class="first">(optional) The end date of the Job,
-e.g. 06-30-2011. Only needed if
-job type is &#8216;fixed-price&#8217;</p>
+<tr class="field-odd field"><th class="field-name">end_date:</th><td class="field-body"><p class="first">(deprecated) This parameter remains
+for compatibility reasons and
+will be removed in future.</p>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">status:</th><td class="field-body"><p class="first last">(required) The status of the job,
@@ -1425,10 +1425,182 @@ should be provided, otherwise error will be raised.</p>
 <em class="property">class </em><tt class="descclassname">odesk.routers.hr.</tt><tt class="descname">HR_V3</tt><big>(</big><em>client</em><big>)</big><a class="headerlink" href="#odesk.routers.hr.HR_V3" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="odesk.html#odesk.namespaces.Namespace" title="odesk.namespaces.Namespace"><tt class="xref py py-class docutils literal"><span class="pre">odesk.namespaces.Namespace</span></tt></a></p>
 <p>HR API version 3.</p>
+<dl class="method">
+<dt id="odesk.routers.hr.HR_V3.activate_milestone">
+<tt class="descname">activate_milestone</tt><big>(</big><em>milestone_id</em>, <em>message=None</em><big>)</big><a class="headerlink" href="#odesk.routers.hr.HR_V3.activate_milestone" title="Permalink to this definition">¶</a></dt>
+<dd><p>Activates a milestone that has not been funded.</p>
+<dl class="docutils">
+<dt><em>Parameters:</em></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">milestone_id:</th><td class="field-body">Milestone reference.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">message:</th><td class="field-body">(optional) Message from the client to the freelancer.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="attribute">
 <dt id="odesk.routers.hr.HR_V3.api_url">
 <tt class="descname">api_url</tt><em class="property"> = 'hr/'</em><a class="headerlink" href="#odesk.routers.hr.HR_V3.api_url" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="method">
+<dt id="odesk.routers.hr.HR_V3.approve_milestone">
+<tt class="descname">approve_milestone</tt><big>(</big><em>milestone_id</em>, <em>amount=None</em>, <em>bonus=None</em>, <em>pay_comments=None</em>, <em>underpayment_reason=None</em>, <em>note2contractor=None</em><big>)</big><a class="headerlink" href="#odesk.routers.hr.HR_V3.approve_milestone" title="Permalink to this definition">¶</a></dt>
+<dd><p>Approve the milestone.</p>
+<dl class="docutils">
+<dt><em>Parameters:</em></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">milestone_id:</th><td class="field-body">Milestone reference.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">amount:</th><td class="field-body">(optional) Amount of money to be paid. If none provided, the full deposit_amount is paid.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">bonus:</th><td class="field-body">(optional) Amount of money paid as bonus.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">pay_comments:</th><td class="field-body">(optional) Comments on the payment.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name" colspan="2">underpayment_reason:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body">(optional) Reason for a smaller payment than the one agreed.
+Valid values: <cite>329</cite>, <cite>330</cite>, <cite>331</cite>, <cite>332</cite></td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">note2contractor:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body">(optional) Notes from the client to the freelancer.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="odesk.routers.hr.HR_V3.approve_submission">
+<tt class="descname">approve_submission</tt><big>(</big><em>submission_id</em>, <em>amount</em>, <em>bonus=None</em>, <em>pay_comments=None</em>, <em>underpayment_reason=None</em>, <em>note2contractor=None</em><big>)</big><a class="headerlink" href="#odesk.routers.hr.HR_V3.approve_submission" title="Permalink to this definition">¶</a></dt>
+<dd><p>Approve the submission.</p>
+<dl class="docutils">
+<dt><em>Parameters:</em></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">submission_id:</th><td class="field-body">Submission reference.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">amount:</th><td class="field-body">Amount of money to be paid. If none provided, the full deposit_amount is paid.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">bonus:</th><td class="field-body">(optional) Amount of money paid as bonus.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">pay_comments:</th><td class="field-body">(optional) Comments on the payment.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name" colspan="2">underpayment_reason:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body">(optional) Reason for a smaller payment than the one agreed.
+Valid values: <cite>329</cite>, <cite>330</cite>, <cite>331</cite>, <cite>332</cite></td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">note2contractor:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body">(optional) Notes from the client to the freelancer.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="odesk.routers.hr.HR_V3.create_milestone">
+<tt class="descname">create_milestone</tt><big>(</big><em>contract_reference</em>, <em>milestone_description</em>, <em>deposit_amount</em>, <em>due_date=None</em><big>)</big><a class="headerlink" href="#odesk.routers.hr.HR_V3.create_milestone" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a milestone.</p>
+<dl class="docutils">
+<dt><em>Parameters:</em></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">contract_reference:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body">Contract reference. Contracts info are available in the Engagements API.</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">milestone_description:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body">Name of the milestone.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">deposit_amount:</th><td class="field-body">Amount to deposit for this milestone.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">due_date:</th><td class="field-body">(optional) Expected date of finalization. Format mm-dd-yyyy.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="odesk.routers.hr.HR_V3.delete_milestone">
+<tt class="descname">delete_milestone</tt><big>(</big><em>milestone_id</em><big>)</big><a class="headerlink" href="#odesk.routers.hr.HR_V3.delete_milestone" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete the milestone.</p>
+<dl class="docutils">
+<dt><em>Parameters:</em></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">milestone_id:</th><td class="field-body">Milestone reference.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="odesk.routers.hr.HR_V3.edit_milestone">
+<tt class="descname">edit_milestone</tt><big>(</big><em>milestone_id</em>, <em>milestone_description=None</em>, <em>deposit_amount=None</em>, <em>due_date=None</em>, <em>message=None</em><big>)</big><a class="headerlink" href="#odesk.routers.hr.HR_V3.edit_milestone" title="Permalink to this definition">¶</a></dt>
+<dd><p>Edit an existing milestone.</p>
+<dl class="docutils">
+<dt><em>Parameters:</em></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">milestone_id:</th><td class="field-body">Milestone reference.</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">milestone_description:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body">(optional) Name of the milestone.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">deposit_amount:</th><td class="field-body">(optional) Amount to deposit for this milestone.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">due_date:</th><td class="field-body">(optional) Expected date of finalization. Format mm-dd-yyyy.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">message:</th><td class="field-body">(optional) Message from the client to the freelancer.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="odesk.routers.hr.HR_V3.get_active_milestone">
+<tt class="descname">get_active_milestone</tt><big>(</big><em>contract_reference</em><big>)</big><a class="headerlink" href="#odesk.routers.hr.HR_V3.get_active_milestone" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get active milestone for specific contract.</p>
+<dl class="docutils">
+<dt><em>Parameters:</em></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">contract_reference:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body">Contract reference. Contracts info are available in the Engagements API.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="method">
 <dt id="odesk.routers.hr.HR_V3.get_client_application">
@@ -1465,6 +1637,24 @@ Use &#8216;List Teams&#8217; API call to get it.</td>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">application_id:</th><td class="field-body">Job application reference ID.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="odesk.routers.hr.HR_V3.get_milestone_submissions">
+<tt class="descname">get_milestone_submissions</tt><big>(</big><em>milestone_id</em><big>)</big><a class="headerlink" href="#odesk.routers.hr.HR_V3.get_milestone_submissions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get all submissions for specific milestone.</p>
+<dl class="docutils">
+<dt><em>Parameters:</em></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">milestone_id:</th><td class="field-body">Milestone reference ID.</td>
 </tr>
 </tbody>
 </table>
@@ -1526,6 +1716,49 @@ in number of entries</td>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">status:</th><td class="field-body">(optional) The current status of the job application.
 Valid values: <tt class="docutils literal"><span class="pre">interviews</span></tt>, <tt class="docutils literal"><span class="pre">invites</span></tt>, <tt class="docutils literal"><span class="pre">active</span></tt>.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="odesk.routers.hr.HR_V3.reject_submission">
+<tt class="descname">reject_submission</tt><big>(</big><em>submission_id</em>, <em>note2contractor</em><big>)</big><a class="headerlink" href="#odesk.routers.hr.HR_V3.reject_submission" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reject the submission.</p>
+<dl class="docutils">
+<dt><em>Parameters:</em></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">submission_id:</th><td class="field-body">Submission reference.</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">note2contractor:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body">Notes from the client to the freelancer.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="odesk.routers.hr.HR_V3.request_submission_approval">
+<tt class="descname">request_submission_approval</tt><big>(</big><em>milestone_id</em>, <em>note2client</em>, <em>amount</em><big>)</big><a class="headerlink" href="#odesk.routers.hr.HR_V3.request_submission_approval" title="Permalink to this definition">¶</a></dt>
+<dd><p>Freelancer submits work for the client to approve.</p>
+<dl class="docutils">
+<dt><em>Parameters:</em></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">milestone_id:</th><td class="field-body">Milestone reference.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">note2client:</th><td class="field-body">Notes from freelancer to client about work that was done.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">amount:</th><td class="field-body">Amount requested by the freelancer.</td>
 </tr>
 </tbody>
 </table>
@@ -3743,7 +3976,7 @@ Default: <tt class="docutils literal"><span class="pre">False</span></tt></td>
         <li class="right" >
           <a href="odesk.html" title="odesk package"
              >previous</a> |</li>
-        <li><a href="../index.html">python-odesk 0.5.4 documentation</a> &raquo;</li>
+        <li><a href="../index.html">python-odesk 0.5.5 documentation</a> &raquo;</li>
           <li><a href="../reference_docs.html" >Reference Documentation: Classes and Methods</a> &raquo;</li>
           <li><a href="odesk.html" >odesk package</a> &raquo;</li> 
       </ul>
