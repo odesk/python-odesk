@@ -201,6 +201,10 @@ class HR(Namespace):
 
         data['engagement__reference'] = engagement_reference
         data['comments'] = comments
+        
+        if charge_amount is None or charge_amount == 0:
+            raise ApiValueError('Missed obligatory parameter ``charge_amount``')
+
         data['charge_amount'] = charge_amount
 
         if notes:

@@ -646,31 +646,16 @@ def patched_urlopen_hradjustment(*args, **kwargs):
 def test_hrv2_post_adjustment():
     hr = get_client().hr
 
-    # Using ``amount``
-    result = hr.post_team_adjustment(
-        1, 2, 'a test', amount=100, notes='test note')
-    assert result == adjustments[u'adjustment'], result
-
     # Using ``charge_amount``
     result = hr.post_team_adjustment(
         1, 2, 'a test', charge_amount=100, notes='test note')
     assert result == adjustments[u'adjustment'], result
 
     try:
-        # Using ``amount`` and ``charge_amount`` will raise error
-        hr.post_team_adjustment(
-            1, 2, 'a test', amount=100, charge_amount=110, notes='test note')
-        raise Exception('No error ApiValueError was raised when using'
-                        'both ``amount`` and ``charge_amount``')
-    except ApiValueError:
-        pass
-
-    try:
-        # If both ``amount`` and ``charge_amount`` are absent,
+        # If ``charge_amount`` is absent,
         # error should be raised
-        hr.post_team_adjustment(1, 2, 'a test', notes='test note')
-        raise Exception('No error ApiValueError was raised when both'
-                        'both ``amount`` and ``charge_amount`` are absent')
+        hr.post_team_adjustment(1, 2, 'a test', notes='test note', charge_amount=0)
+        raise Exception('No error ApiValueError was raised when ``charge_amount`` is absent')
     except ApiValueError:
         pass
 
@@ -717,7 +702,6 @@ job_data = {
     'budget': 100,
     'duration': 10,
     'start_date': 'some start date',
-    'end_date': 'some end date',
     'skills': ['Python', 'JS']
 }
 
@@ -731,7 +715,7 @@ def patched_urlopen_job_data_parameters(self, method, url, **kwargs):
         dict(post_dict.items()),
         {'category': ['Web Development'], 'buyer_team__reference': ['111'],
          'subcategory': ['Other - Web Development'],
-         'end_date': ['some end date'], 'title': ['Test job from API'],
+         'title': ['Test job from API'],
          'skills': ['Python;JS'], 'job_type': ['hourly'],
          'oauth_consumer_key': ['public'],
          'oauth_signature_method': ['HMAC-SHA1'], 'budget': ['100'],
