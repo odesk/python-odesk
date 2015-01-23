@@ -5,6 +5,16 @@
 Changelog
 ***************
 
+.. _0.5.6:
+
+Version 0.5.6
+-------------
+* Added new API call - :py:meth:`List categories (v2) <odesk.routers.provider.Provider_V2.get_categories_metadata>`.
+* Recent changes from API Changelog - Wednesday, 2015-01-12
+* Recent changes from API Changelog - Wednesday, 2014-12-03
+* Recent changes from API Changelog - Friday, 2014-11-21
+* Recent changes from API Changelog - Friday, 2014-10-31
+
 .. _0.5.5:
 
 Version 0.5.5
