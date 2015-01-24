@@ -339,8 +339,8 @@ class HR(Namespace):
         return result.get('job', result)
 
     def post_job(self, buyer_team_reference, title, job_type, description,
-                 visibility, category, subcategory, budget=None, duration=None,
-                 start_date=None, skills=None):
+                 visibility, category=None, subcategory=None, budget=None, duration=None,
+                 start_date=None, skills=None, subcategory2=None):
         """
         Post a job.
 
@@ -371,10 +371,10 @@ class HR(Namespace):
                                        where the buyer wants to control
                                        the potential applicants
 
-          :category:               The category of job, e.g. 'Web Development'
+          :category:               (conditionally optional) The category of job, e.g. 'Web Development'
                                    (where to get? - see Metadata API)
 
-          :subcategory:            The subcategory of job, e.g.
+          :subcategory:            (conditionally optional) The subcategory of job, e.g.
                                    'Web Programming'
                                    (where to get? - see Metadata API)
 
@@ -395,6 +395,10 @@ class HR(Namespace):
                                    Must be a list or tuple even of one item,
                                    e.g. ``['python']``
 
+          :subcategory2:           (conditionally optional) The subcategory (V2) of job, e.g.
+                                   'Web & Mobile Programming'
+                                   (where to get? - see Metadata API, List Categories (V2))
+
         """
         url = 'jobs'
         data = {}
@@ -410,8 +414,17 @@ class HR(Namespace):
         assert_parameter('visibility', visibility, self.JOB_VISIBILITY_OPTIONS)
         data['visibility'] = visibility
 
-        data['category'] = category
-        data['subcategory'] = subcategory
+        if (category is None or subcategory is None) and subcategory2 is None:
+            raise ApiValueError('Either one of the sub/category V1 or V2 parameters'
+                                'must be specified')
+        if category:
+            data['category'] = category
+
+        if subcategory:
+            data['subcategory'] = subcategory
+
+        if subcategory2:
+            data['subcategory2'] = subcategory2
 
         if budget is None and duration is None:
             raise ApiValueError('Either one of the ``budget``or ``duration`` '

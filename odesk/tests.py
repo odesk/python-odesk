@@ -706,6 +706,42 @@ job_data = {
 }
 
 
+job_data2 = {
+    'buyer_team_reference': 111,
+    'title': 'Test job from API',
+    'job_type': 'hourly',
+    'description': 'this is test job, please do not apply to it',
+    'visibility': 'odesk',
+    'subcategory2': 'Web & Mobile Development',
+    'budget': 100,
+    'duration': 10,
+    'start_date': 'some start date',
+    'skills': ['Python', 'JS']
+}
+
+
+def patched_urlopen_job_data_parameters2(self, method, url, **kwargs):
+    post_dict = urlparse.parse_qs(kwargs.get('body'))
+    post_dict.pop('oauth_timestamp')
+    post_dict.pop('oauth_signature')
+    post_dict.pop('oauth_nonce')
+    eq_(
+        dict(post_dict.items()),
+        {'buyer_team__reference': ['111'],
+         'subcategory2': ['Web & Mobile Development'],
+         'title': ['Test job from API'],
+         'skills': ['Python;JS'], 'job_type': ['hourly'],
+         'oauth_consumer_key': ['public'],
+         'oauth_signature_method': ['HMAC-SHA1'], 'budget': ['100'],
+         'visibility': ['odesk'],
+         'oauth_version': ['1.0'], 'oauth_token': ['some token'],
+         'oauth_body_hash': ['2jmj7l5rSw0yVb/vlWAYkK/YBwk='],
+         'duration': ['10'],
+         'start_date': ['some start date'],
+         'description': ['this is test job, please do not apply to it']})
+    return MicroMock(data='{"some":"data"}', status=200)
+
+
 def patched_urlopen_job_data_parameters(self, method, url, **kwargs):
     post_dict = urlparse.parse_qs(kwargs.get('body'))
     post_dict.pop('oauth_timestamp')
@@ -732,6 +768,12 @@ def patched_urlopen_job_data_parameters(self, method, url, **kwargs):
 def test_job_data_parameters():
     hr = get_client().hr
     hr.post_job(**job_data)
+
+
+@patch('urllib3.PoolManager.urlopen', patched_urlopen_job_data_parameters2)
+def test_job_data_parameters_subcategory2():
+    hr = get_client().hr
+    hr.post_job(**job_data2)
 
 
 provider_dict = {'profile':
