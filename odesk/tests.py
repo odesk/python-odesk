@@ -776,6 +776,16 @@ def test_job_data_parameters_subcategory2():
     hr.post_job(**job_data2)
 
 
+@patch('urllib3.PoolManager.urlopen', patched_urlopen_job_data_parameters)
+def test_job_data_no_category():
+    hr = get_client().hr
+
+    try:
+        hr.post_job('111', 'test', 'hourly', 'descr', 'odesk')
+        raise Exception('Request should raise ApiValueError exception.')
+    except ApiValueError:
+        pass
+
 provider_dict = {'profile':
                  {u'response_time': u'31.0000000000000000',
                   u'dev_agency_ref': u'',

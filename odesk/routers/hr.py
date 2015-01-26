@@ -415,7 +415,7 @@ class HR(Namespace):
         data['visibility'] = visibility
 
         if (category is None or subcategory is None) and subcategory2 is None:
-            raise ApiValueError('Either one of the sub/category V1 or V2 parameters'
+            raise ApiValueError('Either one of the sub/category V1 or V2 parameters '
                                 'must be specified')
         if category:
             data['category'] = category
