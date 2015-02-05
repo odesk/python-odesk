@@ -5,7 +5,6 @@
 import os
 import json
 import logging
-import warnings
 import urllib3
 import ca_certs_locater
 
