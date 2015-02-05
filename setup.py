@@ -11,7 +11,7 @@ README = readme.read()
 readme.close()
 
 
-VERSION = (0, 5, 5, 'final', 0)
+VERSION = (0, 5, 5, 1, 0)
 
 
 def get_version():
@@ -21,8 +21,8 @@ def get_version():
     if VERSION[3:] == ('alpha', 0):
         version = '{0} pre-alpha'.format(version)
     else:
-        if VERSION[3] != 'final':
-            version = "{0} {1}".format(version, VERSION[3])
+        if VERSION[3] != 0:
+            version = "{0}.{1}".format(version, VERSION[3])
             if VERSION[4] != 0:
                 version = '{0} {1}'.format(version, VERSION[4])
     return version
@@ -76,7 +76,7 @@ setup(cmdclass={'update_version': UpdateVersion},
       author_email='python@odesk.com',
       maintainer='Kirill Panshin',
       maintainer_email='kamelok@odesk.com',
-      install_requires=['oauth2', 'urllib3'],
+      install_requires=['oauth2==1.5.211', 'urllib3==1.10', 'httplib2.system-ca-certs-locater==0.1.2'],
       packages=find_packages(),
       license='BSD',
       download_url='http://github.com/odesk/python-odesk',

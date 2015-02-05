@@ -7,6 +7,16 @@ Changelog
 
 .. _0.5.5:
 
+Version 0.5.5.1
+---------------
+Minor maintenance release:
+
+* Updated urllib3 requirements to ``urllib3==1.10`
+* Use fixed requirements in the ``setup.py``
+* Add ``httplib.system-ca-certs-locater`` and update Readme
+
+.. _0.5.5:
+
 Version 0.5.5
 -------------
 * Added new API call - :py:meth:`Create a new Milestone <odesk.routers.hr.HR_V3.create_milestone>`.

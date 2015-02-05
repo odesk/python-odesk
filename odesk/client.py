@@ -5,7 +5,9 @@
 import os
 import json
 import logging
+import warnings
 import urllib3
+import ca_certs_locater
 
 
 from odesk.oauth import OAuth
@@ -99,7 +101,20 @@ class Client(object):
         self.public_key = public_key
         self.secret_key = secret_key
         self.fmt = fmt
-        self.http = urllib3.PoolManager()
+
+        # Catch the warning about
+        # """
+        # SecurityWarning: Certificate has no `subjectAltName`,
+        # falling back to check for a `commonName` for now.
+        # This feature is being removed by major browsers
+        # and deprecated by RFC 2818.
+        # (See https://github.com/shazow/urllib3/issues/497 for details.)
+        # """
+        # The warning will appear only in logs
+        logging.captureWarnings(True)
+        self.http = urllib3.PoolManager(
+            cert_reqs='CERT_REQUIRED',
+            ca_certs=ca_certs_locater.get())
 
         self.oauth_access_token = oauth_access_token
         self.oauth_access_token_secret = oauth_access_token_secret
