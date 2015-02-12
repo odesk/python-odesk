@@ -10,6 +10,7 @@ Changelog
 Version 0.5.6
 -------------
 * Added new API call - :py:meth:`List categories (v2) <odesk.routers.provider.Provider_V2.get_categories_metadata>`.
+* Added new API call - :py:meth:`Get Work Diary by Contract <odesk.routers.team.Team_V2.get_workdiaries_by_contract>`.
 * Recent changes from API Changelog - Wednesday, 2015-01-12
 * Recent changes from API Changelog - Wednesday, 2014-12-03
 * Recent changes from API Changelog - Friday, 2014-11-21

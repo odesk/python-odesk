@@ -372,6 +372,10 @@ def test_team():
     eq_(te.get_workdiaries(1, 1, 1), (teamrooms_dict['snapshots']['user'],
         [teamrooms_dict['snapshots']['snapshot']]))
 
+    #test get_workdiaries_by_contract
+    eq_(te_v2.get_workdiaries_by_contract(1, 1), (teamrooms_dict['snapshots']['user'],
+        [teamrooms_dict['snapshots']['snapshot']]))
+
 
 teamrooms_dict_none = {'teamrooms': '',
                        'teamroom': '',
