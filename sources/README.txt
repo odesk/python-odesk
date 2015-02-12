@@ -28,10 +28,10 @@ API is the best way to comunicate between apps.
 
 Requirements
 ============
-httplib2>=0.8
-oauth2>=1.5.211
-urllib3>=1.7
-
+httplib2==0.9
+oauth2==1.5.211
+urllib3==1.10
+httplib2.system-ca-certs-locater==0.1.1
 
 Installation
 ============
@@ -43,21 +43,16 @@ All the dependencies will be automatically installed as well.
 
 SSL Certificates Note
 =====================
-Unfortunately SSL certificates for oDesk are not included in the ``httplib==0.8``.
-
-Threrefore if you use Debian/Ubuntu/Archlinux,
-we recomend to install a package ``httplib2.system_ca_certs_locater``::
+We recomend to install a package ``httplib2.system_ca_certs_locater`` (it is installed by default during ``python_odesk`` installation)::
 
     pip install pbr httplib2.system_ca_certs_locater
 
 It will force ``httplib2`` to use the OS's certificates file.
 
-Another option is to create a ``ca_certs_locater.py`` in your projects directory
-and following the example from https://github.com/dreamhost/httplib2-ca_certs_locater
-load patched ``ca_certs.txt`` file.
+If you want to use your own certificates, put the following code during initialization::
 
-You can find patched ``ca_certs.txt`` here:
-https://github.com/kipanshi/odesk_meter/blob/master/lib/httplib2/cacerts.txt
+    os.environ['HTTPLIB_CA_CERTS_PATH'] = '/path/to/my/ca_certs.txt'
+
 
 
 Quickstart

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Python bindings to oDesk API &mdash; python-odesk 0.5.5 documentation</title>
+    <title>Python bindings to oDesk API &mdash; python-odesk 0.5.6 documentation</title>
     
     <link rel="stylesheet" href="static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.5.5',
+        VERSION:     '0.5.6',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="static/jquery.js"></script>
     <script type="text/javascript" src="static/underscore.js"></script>
     <script type="text/javascript" src="static/doctools.js"></script>
-    <link rel="top" title="python-odesk 0.5.5 documentation" href="index.html" /> 
+    <link rel="top" title="python-odesk 0.5.6 documentation" href="index.html" /> 
   </head>
   <body>
     <div class="related">
@@ -35,7 +35,7 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="index.html">python-odesk 0.5.5 documentation</a> &raquo;</li> 
+        <li><a href="index.html">python-odesk 0.5.6 documentation</a> &raquo;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar">
@@ -96,9 +96,10 @@ Using the API you can build apps that will help you:</p>
 <p>API is the best way to comunicate between apps.</p>
 <div class="section" id="requirements">
 <h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
-<p>httplib2&gt;=0.8
-oauth2&gt;=1.5.211
-urllib3&gt;=1.7</p>
+<p>httplib2==0.9
+oauth2==1.5.211
+urllib3==1.10
+httplib2.system-ca-certs-locater==0.1.1</p>
 </div>
 <div class="section" id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
@@ -108,18 +109,15 @@ urllib3&gt;=1.7</p>
 </div>
 <div class="section" id="ssl-certificates-note">
 <h2>SSL Certificates Note<a class="headerlink" href="#ssl-certificates-note" title="Permalink to this headline">¶</a></h2>
-<p>Unfortunately SSL certificates for oDesk are not included in the <tt class="docutils literal"><span class="pre">httplib==0.8</span></tt>.</p>
-<p>Threrefore if you use Debian/Ubuntu/Archlinux,
-we recomend to install a package <tt class="docutils literal"><span class="pre">httplib2.system_ca_certs_locater</span></tt>:</p>
+<p>We recomend to install a package <tt class="docutils literal"><span class="pre">httplib2.system_ca_certs_locater</span></tt> (it is installed by default during <tt class="docutils literal"><span class="pre">python_odesk</span></tt> installation):</p>
 <div class="highlight-python"><div class="highlight"><pre>pip install pbr httplib2.system_ca_certs_locater
 </pre></div>
 </div>
 <p>It will force <tt class="docutils literal"><span class="pre">httplib2</span></tt> to use the OS&#8217;s certificates file.</p>
-<p>Another option is to create a <tt class="docutils literal"><span class="pre">ca_certs_locater.py</span></tt> in your projects directory
-and following the example from <a class="reference external" href="https://github.com/dreamhost/httplib2-ca_certs_locater">https://github.com/dreamhost/httplib2-ca_certs_locater</a>
-load patched <tt class="docutils literal"><span class="pre">ca_certs.txt</span></tt> file.</p>
-<p>You can find patched <tt class="docutils literal"><span class="pre">ca_certs.txt</span></tt> here:
-<a class="reference external" href="https://github.com/kipanshi/odesk_meter/blob/master/lib/httplib2/cacerts.txt">https://github.com/kipanshi/odesk_meter/blob/master/lib/httplib2/cacerts.txt</a></p>
+<p>If you want to use your own certificates, put the following code during initialization:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s">&#39;HTTPLIB_CA_CERTS_PATH&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;/path/to/my/ca_certs.txt&#39;</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="quickstart">
 <h2>Quickstart<a class="headerlink" href="#quickstart" title="Permalink to this headline">¶</a></h2>
@@ -165,7 +163,7 @@ obtain oauth access tokens for web application and desktop application.</p>
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="index.html">python-odesk 0.5.5 documentation</a> &raquo;</li> 
+        <li><a href="index.html">python-odesk 0.5.6 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

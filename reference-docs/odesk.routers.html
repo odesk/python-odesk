@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>odesk.routers package &mdash; python-odesk 0.5.5 documentation</title>
+    <title>odesk.routers package &mdash; python-odesk 0.5.6 documentation</title>
     
     <link rel="stylesheet" href="../static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.5.5',
+        VERSION:     '0.5.6',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="../static/jquery.js"></script>
     <script type="text/javascript" src="../static/underscore.js"></script>
     <script type="text/javascript" src="../static/doctools.js"></script>
-    <link rel="top" title="python-odesk 0.5.5 documentation" href="../index.html" />
+    <link rel="top" title="python-odesk 0.5.6 documentation" href="../index.html" />
     <link rel="up" title="odesk package" href="odesk.html" />
     <link rel="next" title="Changelog" href="../changelog.html" />
     <link rel="prev" title="odesk package" href="odesk.html" /> 
@@ -44,7 +44,7 @@
         <li class="right" >
           <a href="odesk.html" title="odesk package"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">python-odesk 0.5.5 documentation</a> &raquo;</li>
+        <li><a href="../index.html">python-odesk 0.5.6 documentation</a> &raquo;</li>
           <li><a href="../reference_docs.html" >Reference Documentation: Classes and Methods</a> &raquo;</li>
           <li><a href="odesk.html" accesskey="U">odesk package</a> &raquo;</li> 
       </ul>
@@ -1025,7 +1025,7 @@ they have access to.</p>
 
 <dl class="method">
 <dt id="odesk.routers.hr.HR.post_job">
-<tt class="descname">post_job</tt><big>(</big><em>buyer_team_reference</em>, <em>title</em>, <em>job_type</em>, <em>description</em>, <em>visibility</em>, <em>category</em>, <em>subcategory</em>, <em>budget=None</em>, <em>duration=None</em>, <em>start_date=None</em>, <em>end_date=None</em>, <em>skills=None</em><big>)</big><a class="headerlink" href="#odesk.routers.hr.HR.post_job" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">post_job</tt><big>(</big><em>buyer_team_reference</em>, <em>title</em>, <em>job_type</em>, <em>description</em>, <em>visibility</em>, <em>category=None</em>, <em>subcategory=None</em>, <em>budget=None</em>, <em>duration=None</em>, <em>start_date=None</em>, <em>skills=None</em>, <em>subcategory2=None</em><big>)</big><a class="headerlink" href="#odesk.routers.hr.HR.post_job" title="Permalink to this definition">¶</a></dt>
 <dd><p>Post a job.</p>
 <dl class="docutils">
 <dt><em>Parameters:</em></dt>
@@ -1073,11 +1073,11 @@ the potential applicants</li>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">category:</th><td class="field-body"><p class="first">The category of job, e.g. &#8216;Web Development&#8217;
+<tr class="field-even field"><th class="field-name">category:</th><td class="field-body"><p class="first">(conditionally optional) The category of job, e.g. &#8216;Web Development&#8217;
 (where to get? - see Metadata API)</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">subcategory:</th><td class="field-body"><p class="first">The subcategory of job, e.g.
+<tr class="field-odd field"><th class="field-name">subcategory:</th><td class="field-body"><p class="first">(conditionally optional) The subcategory of job, e.g.
 &#8216;Web Programming&#8217;
 (where to get? - see Metadata API)</p>
 </td>
@@ -1098,14 +1098,14 @@ included the job will default to
 starting immediately.</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">end_date:</th><td class="field-body"><p class="first">(deprecated) This parameter remains
-for compatibility reasons and
-will be removed in future.</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">skills:</th><td class="field-body"><p class="first last">(optional) Skills required for the job.
+<tr class="field-odd field"><th class="field-name">skills:</th><td class="field-body"><p class="first">(optional) Skills required for the job.
 Must be a list or tuple even of one item,
 e.g. <tt class="docutils literal"><span class="pre">['python']</span></tt></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">subcategory2:</th><td class="field-body"><p class="first last">(conditionally optional) The subcategory (V2) of job, e.g.
+&#8216;Web &amp; Mobile Programming&#8217;
+(where to get? - see Metadata API, List Categories (V2))</p>
 </td>
 </tr>
 </tbody>
@@ -1203,7 +1203,7 @@ and start working or decline the offer.</p>
 
 <dl class="method">
 <dt id="odesk.routers.hr.HR.post_team_adjustment">
-<tt class="descname">post_team_adjustment</tt><big>(</big><em>team_reference</em>, <em>engagement_reference</em>, <em>comments</em>, <em>amount=None</em>, <em>charge_amount=None</em>, <em>notes=None</em><big>)</big><a class="headerlink" href="#odesk.routers.hr.HR.post_team_adjustment" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">post_team_adjustment</tt><big>(</big><em>team_reference</em>, <em>engagement_reference</em>, <em>comments</em>, <em>charge_amount</em>, <em>notes=None</em><big>)</big><a class="headerlink" href="#odesk.routers.hr.HR.post_team_adjustment" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add bonus to an engagement.</p>
 <dl class="docutils">
 <dt><em>Parameters:</em></dt>
@@ -1219,13 +1219,9 @@ and start working or decline the offer.</p>
 <tr class="field-odd field"><th class="field-name">comments:</th><td class="field-body">Comments about this adjustment, e.g.
 &#8220;Bonus for a good job&#8221;</td>
 </tr>
-<tr class="field-even field"><th class="field-name">amount:</th><td class="field-body">(conditionally optional) The amount that
-the provider should receive, e.g. 100</td>
+<tr class="field-even field"><th class="field-name">charge_amount:</th><td class="field-body">The amount that will be charged to the employer, e.g. 110</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">charge_amount:</th><td class="field-body">(conditionally optional) The amount that
-will be charged to the employer, e.g. 110</td>
-</tr>
-<tr class="field-even field"><th class="field-name">notes:</th><td class="field-body">(optional) Notes</td>
+<tr class="field-odd field"><th class="field-name">notes:</th><td class="field-body">(optional) Notes</td>
 </tr>
 </tbody>
 </table>
@@ -1281,7 +1277,7 @@ will be charged to the employer, e.g. 110</td>
 
 <dl class="method">
 <dt id="odesk.routers.hr.HR.update_job">
-<tt class="descname">update_job</tt><big>(</big><em>job_id</em>, <em>buyer_team_reference</em>, <em>title</em>, <em>description</em>, <em>visibility</em>, <em>category=None</em>, <em>subcategory=None</em>, <em>budget=None</em>, <em>duration=None</em>, <em>start_date=None</em>, <em>end_date=None</em>, <em>status=None</em><big>)</big><a class="headerlink" href="#odesk.routers.hr.HR.update_job" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">update_job</tt><big>(</big><em>job_id</em>, <em>buyer_team_reference</em>, <em>title</em>, <em>description</em>, <em>visibility</em>, <em>category=None</em>, <em>subcategory=None</em>, <em>budget=None</em>, <em>duration=None</em>, <em>start_date=None</em>, <em>status=None</em><big>)</big><a class="headerlink" href="#odesk.routers.hr.HR.update_job" title="Permalink to this definition">¶</a></dt>
 <dd><p>Update a job.</p>
 <dl class="docutils">
 <dt><em>Parameters:</em></dt>
@@ -1348,12 +1344,7 @@ included the job will default to
 starting immediately.</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">end_date:</th><td class="field-body"><p class="first">(deprecated) This parameter remains
-for compatibility reasons and
-will be removed in future.</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">status:</th><td class="field-body"><p class="first last">(required) The status of the job,
+<tr class="field-odd field"><th class="field-name">status:</th><td class="field-body"><p class="first last">(required) The status of the job,
 e.g. &#8216;filled&#8217;.
 Possible values are:
 - &#8216;open&#8217;
@@ -2274,7 +2265,7 @@ of entries</td>
 
 <dl class="method">
 <dt id="odesk.routers.offers.Offers.send_client_offer">
-<tt class="descname">send_client_offer</tt><big>(</big><em>title</em>, <em>job_type</em>, <em>charge_rate</em>, <em>message_to_contractor</em>, <em>team__reference=None</em>, <em>client_team_ref=None</em>, <em>contractor_username=None</em>, <em>contractor_reference=None</em>, <em>contractor_key=None</em>, <em>contractor_org=None</em>, <em>context=None</em>, <em>charge_upfront_percent=None</em>, <em>weekly_limit=None</em>, <em>weekly_stipend=None</em>, <em>expires_on=None</em>, <em>close_on_accept=None</em><big>)</big><a class="headerlink" href="#odesk.routers.offers.Offers.send_client_offer" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">send_client_offer</tt><big>(</big><em>title</em>, <em>job_type</em>, <em>charge_rate</em>, <em>message_to_contractor</em>, <em>team__reference=None</em>, <em>client_team_ref=None</em>, <em>contractor_username=None</em>, <em>contractor_reference=None</em>, <em>contractor_key=None</em>, <em>contractor_org=None</em>, <em>context=None</em>, <em>charge_upfront_percent=None</em>, <em>weekly_limit=None</em>, <em>weekly_stipend=None</em>, <em>expires_on=None</em>, <em>close_on_accept=None</em>, <em>related_jobcategory=None</em>, <em>milestone=None</em><big>)</big><a class="headerlink" href="#odesk.routers.offers.Offers.send_client_offer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Send client offer to the freelancer.</p>
 <dl class="docutils">
 <dt><em>Parameters:</em></dt>
@@ -2315,18 +2306,29 @@ Example: <tt class="docutils literal"><span class="pre">context[job_posting_ref]
 where <tt class="docutils literal"><span class="pre">job_posting_ref</span></tt> is a job key, for example <tt class="docutils literal"><span class="pre">~01c8e0xxxxxxxx05255</span></tt>.</td>
 </tr>
 <tr class="field-even field"><th class="field-name" colspan="2">charge_upfront_percent:</th></tr>
-<tr class="field-even field"><td>&nbsp;</td><td class="field-body">The percentage of the budget amount that the freelancer is paid on acceptance of the offer
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body">(deprecated) This parameter remains for compatibility reasons and will be removed 
+in next releases those come after February 6th 2015.
+The percentage of the budget amount that the freelancer is paid on acceptance of the offer
 (for fixed price jobs only).</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">weekly_limit:</th><td class="field-body">The maximum number of hours per week the freelancer can bill for.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">weekly_stipend:</th><td class="field-body">An additional payment to be issued to the freelancer each week.</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">expires_on:</th><td class="field-body">Time when the offer expires. This should be a UNIX UTC timestamp. For example: <tt class="docutils literal"><span class="pre">1400785324</span></tt>.</td>
+<tr class="field-odd field"><th class="field-name">expires_on:</th><td class="field-body">(deprecated) This parameter remains for compatibility reasons and will be removed
+in next releases those come after February 6th 2015.
+Time when the offer expires. This should be a UNIX UTC timestamp. For example: <tt class="docutils literal"><span class="pre">1400785324</span></tt>.</td>
 </tr>
 <tr class="field-even field"><th class="field-name" colspan="2">close_on_accept:</th></tr>
 <tr class="field-even field"><td>&nbsp;</td><td class="field-body">If the value is <tt class="docutils literal"><span class="pre">1</span></tt>, it automatically closes the related job post if this offer is accepted.
 The default value is <tt class="docutils literal"><span class="pre">1</span></tt>. Valid values: <tt class="docutils literal"><span class="pre">0</span></tt>, <tt class="docutils literal"><span class="pre">1</span></tt>.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name" colspan="2">related_jobcategory:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body">Related job category. For example: <tt class="docutils literal"><span class="pre">9</span></tt>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">milestones:</th><td class="field-body">(required after February 6th 2015) Array of milestones for fixed-priced jobs in the following format: 
+<cite>milestones[0][$key]</cite>, ..., <cite>milestones[N][$key]</cite>, where key is one of the following -
+<cite>milestone_description</cite> (string), <cite>deposit_amount</cite> (float), <cite>due_date</cite> (string in format mm-dd-yyyy)</td>
 </tr>
 </tbody>
 </table>
@@ -2766,6 +2768,12 @@ the only available sort field as of now is &#8220;Date Created&#8221;</p>
 <dt id="odesk.routers.provider.Provider_V2.api_url">
 <tt class="descname">api_url</tt><em class="property"> = 'profiles/'</em><a class="headerlink" href="#odesk.routers.provider.Provider_V2.api_url" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="method">
+<dt id="odesk.routers.provider.Provider_V2.get_categories_metadata">
+<tt class="descname">get_categories_metadata</tt><big>(</big><big>)</big><a class="headerlink" href="#odesk.routers.provider.Provider_V2.get_categories_metadata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns list of all categories (v2) available for job/contractor profiles.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="odesk.routers.provider.Provider_V2.search_jobs">
@@ -3822,6 +3830,31 @@ Possible values are (default):</p>
 <dd><p>Retrieve all teamrooms accessible to the authenticated user.</p>
 </dd></dl>
 
+<dl class="method">
+<dt id="odesk.routers.team.Team_V2.get_workdiaries_by_contract">
+<tt class="descname">get_workdiaries_by_contract</tt><big>(</big><em>contract_id</em>, <em>date</em>, <em>tz=None</em><big>)</big><a class="headerlink" href="#odesk.routers.team.Team_V2.get_workdiaries_by_contract" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve workdiary snapshots by contract</p>
+<dl class="docutils">
+<dt><em>Parameters:</em></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">contract_id:</th><td class="field-body">The Contract ID.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">date:</th><td class="field-body">The target date in <cite>yyyymmdd</cite> format.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">tz:</th><td class="field-body">(optional) Time zone to use. Possible values:
+* &#8216;mine&#8217; (default)
+* &#8216;user&#8217;
+* &#8216;gmt&#8217;</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="attribute">
 <dt id="odesk.routers.team.Team_V2.version">
 <tt class="descname">version</tt><em class="property"> = 2</em><a class="headerlink" href="#odesk.routers.team.Team_V2.version" title="Permalink to this definition">¶</a></dt>
@@ -3976,7 +4009,7 @@ Default: <tt class="docutils literal"><span class="pre">False</span></tt></td>
         <li class="right" >
           <a href="odesk.html" title="odesk package"
              >previous</a> |</li>
-        <li><a href="../index.html">python-odesk 0.5.5 documentation</a> &raquo;</li>
+        <li><a href="../index.html">python-odesk 0.5.6 documentation</a> &raquo;</li>
           <li><a href="../reference_docs.html" >Reference Documentation: Classes and Methods</a> &raquo;</li>
           <li><a href="odesk.html" >odesk package</a> &raquo;</li> 
       </ul>
