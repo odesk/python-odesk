@@ -219,3 +219,36 @@ class Team_V2(Namespace):
             snapshots = [snapshots]
 
         return snapshots
+
+    def get_workdiaries_by_contract(self, contract_id, date, tz=None):
+        """
+        Retrieve workdiary snapshots by contract
+
+        *Parameters:*
+          :contract_id: The Contract ID.
+
+          :date:        The target date in `yyyymmdd` format.
+
+          :tz:          (optional) Time zone to use. Possible values:
+                          * 'mine' (default)
+                          * 'user'
+                          * 'gmt'
+
+        """
+        url = 'workdiarie/contracts/{0}/{1}'.format(contract_id, date)
+
+        data = {}
+
+        if tz:
+            assert_parameter('tz', tz, self.TZ_CHOICES)
+            data['tz'] = tz
+
+        result = self.get(url, data)
+        if 'error' in result:
+            return result
+
+        snapshots = result.get('snapshots', data).get('snapshot', [])
+        if not isinstance(snapshots, list):
+            snapshots = [snapshots]
+        
+        return result['snapshots']['user'], snapshots

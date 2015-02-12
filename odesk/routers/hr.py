@@ -175,8 +175,7 @@ class HR(Namespace):
     """team api"""
 
     def post_team_adjustment(self, team_reference, engagement_reference,
-                             comments, amount=None, charge_amount=None,
-                             notes=None):
+                             comments, charge_amount, notes=None):
         """
         Add bonus to an engagement.
 
@@ -188,11 +187,7 @@ class HR(Namespace):
           :comments:              Comments about this adjustment, e.g.
                                  "Bonus for a good job"
 
-          :amount:                (conditionally optional) The amount that
-                                  the provider should receive, e.g. 100
-
-          :charge_amount:         (conditionally optional) The amount that
-                                  will be charged to the employer, e.g. 110
+          :charge_amount:         The amount that will be charged to the employer, e.g. 110
 
           :notes:                 (optional) Notes
 
@@ -206,17 +201,11 @@ class HR(Namespace):
 
         data['engagement__reference'] = engagement_reference
         data['comments'] = comments
+        
+        if charge_amount is None or charge_amount == 0:
+            raise ApiValueError('Missed obligatory parameter ``charge_amount``')
 
-        if (amount and charge_amount) or (amount is None and
-                                          charge_amount is None):
-            raise ApiValueError('Either only one of the parameters ``amount``'
-                                ' or ``charge_amount`` should be specified')
-
-        if amount:
-            data['amount'] = amount
-
-        if charge_amount:
-            data['charge_amount'] = charge_amount
+        data['charge_amount'] = charge_amount
 
         if notes:
             data['notes'] = notes
@@ -350,8 +339,8 @@ class HR(Namespace):
         return result.get('job', result)
 
     def post_job(self, buyer_team_reference, title, job_type, description,
-                 visibility, category, subcategory, budget=None, duration=None,
-                 start_date=None, end_date=None, skills=None):
+                 visibility, category=None, subcategory=None, budget=None, duration=None,
+                 start_date=None, skills=None, subcategory2=None):
         """
         Post a job.
 
@@ -382,10 +371,10 @@ class HR(Namespace):
                                        where the buyer wants to control
                                        the potential applicants
 
-          :category:               The category of job, e.g. 'Web Development'
+          :category:               (conditionally optional) The category of job, e.g. 'Web Development'
                                    (where to get? - see Metadata API)
 
-          :subcategory:            The subcategory of job, e.g.
+          :subcategory:            (conditionally optional) The subcategory of job, e.g.
                                    'Web Programming'
                                    (where to get? - see Metadata API)
 
@@ -402,13 +391,13 @@ class HR(Namespace):
                                    included the job will default to
                                    starting immediately.
 
-          :end_date:               (deprecated) This parameter remains
-                                   for compatibility reasons and
-                                   will be removed in future.
-
           :skills:                 (optional) Skills required for the job.
                                    Must be a list or tuple even of one item,
                                    e.g. ``['python']``
+
+          :subcategory2:           (conditionally optional) The subcategory (V2) of job, e.g.
+                                   'Web & Mobile Programming'
+                                   (where to get? - see Metadata API, List Categories (V2))
 
         """
         url = 'jobs'
@@ -425,8 +414,17 @@ class HR(Namespace):
         assert_parameter('visibility', visibility, self.JOB_VISIBILITY_OPTIONS)
         data['visibility'] = visibility
 
-        data['category'] = category
-        data['subcategory'] = subcategory
+        if (category is None or subcategory is None) and subcategory2 is None:
+            raise ApiValueError('Either one of the sub/category V1 or V2 parameters '
+                                'must be specified')
+        if category:
+            data['category'] = category
+
+        if subcategory:
+            data['subcategory'] = subcategory
+
+        if subcategory2:
+            data['subcategory2'] = subcategory2
 
         if budget is None and duration is None:
             raise ApiValueError('Either one of the ``budget``or ``duration`` '
@@ -446,7 +444,7 @@ class HR(Namespace):
 
     def update_job(self, job_id, buyer_team_reference, title, description,
                    visibility, category=None, subcategory=None, budget=None,
-                   duration=None, start_date=None, end_date=None, status=None):
+                   duration=None, start_date=None, status=None):
         """
         Update a job.
 
@@ -494,10 +492,6 @@ class HR(Namespace):
                                    e.g. 06-15-2011. If start_date is not
                                    included the job will default to
                                    starting immediately.
-
-          :end_date:               (deprecated) This parameter remains
-                                   for compatibility reasons and
-                                   will be removed in future.
 
           :status:                 (required) The status of the job,
                                    e.g. 'filled'.

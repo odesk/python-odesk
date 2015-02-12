@@ -372,6 +372,10 @@ def test_team():
     eq_(te.get_workdiaries(1, 1, 1), (teamrooms_dict['snapshots']['user'],
         [teamrooms_dict['snapshots']['snapshot']]))
 
+    #test get_workdiaries_by_contract
+    eq_(te_v2.get_workdiaries_by_contract(1, 1), (teamrooms_dict['snapshots']['user'],
+        [teamrooms_dict['snapshots']['snapshot']]))
+
 
 teamrooms_dict_none = {'teamrooms': '',
                        'teamroom': '',
@@ -646,31 +650,16 @@ def patched_urlopen_hradjustment(*args, **kwargs):
 def test_hrv2_post_adjustment():
     hr = get_client().hr
 
-    # Using ``amount``
-    result = hr.post_team_adjustment(
-        1, 2, 'a test', amount=100, notes='test note')
-    assert result == adjustments[u'adjustment'], result
-
     # Using ``charge_amount``
     result = hr.post_team_adjustment(
         1, 2, 'a test', charge_amount=100, notes='test note')
     assert result == adjustments[u'adjustment'], result
 
     try:
-        # Using ``amount`` and ``charge_amount`` will raise error
-        hr.post_team_adjustment(
-            1, 2, 'a test', amount=100, charge_amount=110, notes='test note')
-        raise Exception('No error ApiValueError was raised when using'
-                        'both ``amount`` and ``charge_amount``')
-    except ApiValueError:
-        pass
-
-    try:
-        # If both ``amount`` and ``charge_amount`` are absent,
+        # If ``charge_amount`` is absent,
         # error should be raised
-        hr.post_team_adjustment(1, 2, 'a test', notes='test note')
-        raise Exception('No error ApiValueError was raised when both'
-                        'both ``amount`` and ``charge_amount`` are absent')
+        hr.post_team_adjustment(1, 2, 'a test', notes='test note', charge_amount=0)
+        raise Exception('No error ApiValueError was raised when ``charge_amount`` is absent')
     except ApiValueError:
         pass
 
@@ -717,9 +706,44 @@ job_data = {
     'budget': 100,
     'duration': 10,
     'start_date': 'some start date',
-    'end_date': 'some end date',
     'skills': ['Python', 'JS']
 }
+
+
+job_data2 = {
+    'buyer_team_reference': 111,
+    'title': 'Test job from API',
+    'job_type': 'hourly',
+    'description': 'this is test job, please do not apply to it',
+    'visibility': 'odesk',
+    'subcategory2': 'Web & Mobile Development',
+    'budget': 100,
+    'duration': 10,
+    'start_date': 'some start date',
+    'skills': ['Python', 'JS']
+}
+
+
+def patched_urlopen_job_data_parameters2(self, method, url, **kwargs):
+    post_dict = urlparse.parse_qs(kwargs.get('body'))
+    post_dict.pop('oauth_timestamp')
+    post_dict.pop('oauth_signature')
+    post_dict.pop('oauth_nonce')
+    eq_(
+        dict(post_dict.items()),
+        {'buyer_team__reference': ['111'],
+         'subcategory2': ['Web & Mobile Development'],
+         'title': ['Test job from API'],
+         'skills': ['Python;JS'], 'job_type': ['hourly'],
+         'oauth_consumer_key': ['public'],
+         'oauth_signature_method': ['HMAC-SHA1'], 'budget': ['100'],
+         'visibility': ['odesk'],
+         'oauth_version': ['1.0'], 'oauth_token': ['some token'],
+         'oauth_body_hash': ['2jmj7l5rSw0yVb/vlWAYkK/YBwk='],
+         'duration': ['10'],
+         'start_date': ['some start date'],
+         'description': ['this is test job, please do not apply to it']})
+    return MicroMock(data='{"some":"data"}', status=200)
 
 
 def patched_urlopen_job_data_parameters(self, method, url, **kwargs):
@@ -731,7 +755,7 @@ def patched_urlopen_job_data_parameters(self, method, url, **kwargs):
         dict(post_dict.items()),
         {'category': ['Web Development'], 'buyer_team__reference': ['111'],
          'subcategory': ['Other - Web Development'],
-         'end_date': ['some end date'], 'title': ['Test job from API'],
+         'title': ['Test job from API'],
          'skills': ['Python;JS'], 'job_type': ['hourly'],
          'oauth_consumer_key': ['public'],
          'oauth_signature_method': ['HMAC-SHA1'], 'budget': ['100'],
@@ -749,6 +773,22 @@ def test_job_data_parameters():
     hr = get_client().hr
     hr.post_job(**job_data)
 
+
+@patch('urllib3.PoolManager.urlopen', patched_urlopen_job_data_parameters2)
+def test_job_data_parameters_subcategory2():
+    hr = get_client().hr
+    hr.post_job(**job_data2)
+
+
+@patch('urllib3.PoolManager.urlopen', patched_urlopen_job_data_parameters)
+def test_job_data_no_category():
+    hr = get_client().hr
+
+    try:
+        hr.post_job('111', 'test', 'hourly', 'descr', 'odesk')
+        raise Exception('Request should raise ApiValueError exception.')
+    except ApiValueError:
+        pass
 
 provider_dict = {'profile':
                  {u'response_time': u'31.0000000000000000',

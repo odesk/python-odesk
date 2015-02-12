@@ -70,7 +70,7 @@ class Offers(Namespace):
                           contractor_org=None, context=None,
                           charge_upfront_percent=None, weekly_limit=None,
                           weekly_stipend=None, expires_on=None,
-                          close_on_accept=None):
+                          close_on_accept=None, related_jobcategory=None, milestone=None):
         """
         Send client offer to the freelancer.
 
@@ -102,17 +102,27 @@ class Offers(Namespace):
                                      Example: ``context[job_posting_ref] = {{ opening_id }} & context[job_application_ref] = {{ application_id }}``
                                      where ``job_posting_ref`` is a job key, for example ``~01c8e0xxxxxxxx05255``.
 
-          :charge_upfront_percent:   The percentage of the budget amount that the freelancer is paid on acceptance of the offer
+          :charge_upfront_percent:   (deprecated) This parameter remains for compatibility reasons and will be removed 
+                                     in next releases those come after February 6th 2015.
+                                     The percentage of the budget amount that the freelancer is paid on acceptance of the offer
                                      (for fixed price jobs only).
 
           :weekly_limit:             The maximum number of hours per week the freelancer can bill for.
 
           :weekly_stipend:           An additional payment to be issued to the freelancer each week.
 
-          :expires_on:               Time when the offer expires. This should be a UNIX UTC timestamp. For example: ``1400785324``.
+          :expires_on:               (deprecated) This parameter remains for compatibility reasons and will be removed
+                                     in next releases those come after February 6th 2015.
+                                     Time when the offer expires. This should be a UNIX UTC timestamp. For example: ``1400785324``.
 
           :close_on_accept:          If the value is ``1``, it automatically closes the related job post if this offer is accepted.
                                      The default value is ``1``. Valid values: ``0``, ``1``.
+
+          :related_jobcategory:      Related job category. For example: ``9``.
+
+          :milestones:               (required after February 6th 2015) Array of milestones for fixed-priced jobs in the following format: 
+                                     `milestones[0][$key]`, ..., `milestones[N][$key]`, where key is one of the following -
+                                     `milestone_description` (string), `deposit_amount` (float), `due_date` (string in format mm-dd-yyyy)
 
         """
         data = {}
@@ -154,6 +164,12 @@ class Offers(Namespace):
 
         if close_on_accept:
             data['close_on_accept'] = close_on_accept
+
+        if related_jobcategory:
+            data['related_jobcategory'] = related_jobcategory
+
+        if milestones:
+            data['milestones'] = milestones
 
         url = 'clients/offers'
         return self.post(url, data)

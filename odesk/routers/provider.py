@@ -325,6 +325,15 @@ class Provider_V2(Namespace):
     api_url = 'profiles/'
     version = 2
 
+    def get_categories_metadata(self):
+        """
+        Returns list of all categories (v2) available for job/contractor profiles.
+
+        """
+        url = 'metadata/categories'
+        result = self.get(url)
+        return result.get('categories', result)
+
     def search_providers(self, data=None, page_offset=0, page_size=20):
         """Search providers.
 
