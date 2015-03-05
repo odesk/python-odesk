@@ -1,7 +1,6 @@
 odesk.routers package
 =====================
 
-
 Module contents
 ---------------
 
@@ -84,4 +83,3 @@ odesk.routers.timereport module
     :members:
     :undoc-members:
     :show-inheritance:
-

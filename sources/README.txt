@@ -6,6 +6,10 @@
    :target: http://badge.fury.io/py/python-odesk
    :alt: PyPI version
 
+.. image:: https://travis-ci.org/odesk/php-odesk.svg
+   :target: http://travis-ci.org/odesk/php-odesk
+   :alt: Build status
+
 Copyright (c) 2010-2014, oDesk http://www.odesk.com
 All rights reserved.
 

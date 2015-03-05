@@ -1,7 +1,6 @@
 odesk package
 =============
 
-
 Module contents
 ---------------
 
@@ -75,4 +74,3 @@ odesk.utils module
     :members:
     :undoc-members:
     :show-inheritance:
-
