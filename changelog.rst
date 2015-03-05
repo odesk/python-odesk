@@ -5,6 +5,13 @@
 Changelog
 ***************
 
+.. _0.5.7:
+
+Version 0.5.7
+-------------
+* Added new API call - :py:meth:`Accept or decline an offer <odesk.routers.offers.Offers.accept_or_decline>`.
+* Added new conditionally required parameter ``category2`` to :py:meth:`Post job <odesk.routers.hr.HR.post_job>` API.
+
 .. _0.5.6:
 
 Version 0.5.6

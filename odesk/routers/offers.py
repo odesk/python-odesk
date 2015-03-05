@@ -245,3 +245,20 @@ class Offers(Namespace):
 
         url = 'contractors/offers/{0}'.format(offer_id)
         return self.get(url, data)
+
+    def accept_or_decline(self, offer_id, action_name):
+        """
+        Get specific offer as freelancer.
+
+        *Parameters:*
+          :offer_id:         Offer reference ID.
+
+          :action_name:      The name of the action to run.
+
+        """
+        data = {}
+
+        data['action_name'] = action_name
+
+        url = 'contractors/actions/{0}'.format(offer_id)
+        return self.post(url, data)
