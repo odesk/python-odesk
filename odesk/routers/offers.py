@@ -70,7 +70,8 @@ class Offers(Namespace):
                           contractor_org=None, context=None,
                           charge_upfront_percent=None, weekly_limit=None,
                           weekly_stipend=None, expires_on=None,
-                          close_on_accept=None, related_jobcategory=None, milestone=None):
+                          close_on_accept=None, related_jobcategory=None,
+                          milestones=None, related_jobcategory2=None):
         """
         Send client offer to the freelancer.
 
@@ -124,6 +125,8 @@ class Offers(Namespace):
                                      `milestones[0][$key]`, ..., `milestones[N][$key]`, where key is one of the following -
                                      `milestone_description` (string), `deposit_amount` (float), `due_date` (string in format mm-dd-yyyy)
 
+          :related_jobcategory2:     Related job category (V2). For example: ``531770282584862733``.
+
         """
         data = {}
 
@@ -151,7 +154,9 @@ class Offers(Namespace):
             data['charge_upfront_percent'] = charge_upfront_percent
 
         if context:
-            data['context'] = context
+            for k, v in context.iteritems():
+                key = 'context[{0}]'.format(k)
+                data[key] = v
 
         if weekly_limit:
             data['weekly_limit'] = weekly_limit
@@ -168,8 +173,14 @@ class Offers(Namespace):
         if related_jobcategory:
             data['related_jobcategory'] = related_jobcategory
 
+        if related_jobcategory2:
+            data['related_jobcategory2'] = related_jobcategory2
+
         if milestones:
-            data['milestones'] = milestones
+            for idx, val in enumerate(milestones):
+                for k, v in val.iteritems():
+                    key = 'milestones[{0}][{1}]'.format(idx, k)
+                    data[key] = v
 
         url = 'clients/offers'
         return self.post(url, data)

@@ -351,11 +351,22 @@ def test_team():
 
     #test get_teamrooms
     assert te_v2.get_teamrooms() == \
-        [teamrooms_dict['teamrooms']['teamroom']], te.get_teamrooms()
+        [teamrooms_dict['teamrooms']['teamroom']], te_v2.get_teamrooms()
 
     #test get_snapshots
     assert te_v2.get_snapshots(1) == \
-        [teamrooms_dict['teamroom']['snapshot']], te.get_snapshots(1)
+        [teamrooms_dict['teamroom']['snapshot']], te_v2.get_snapshots(1)
+
+    #test get_snapshot by contract
+    assert te_v2.get_snapshot_by_contract(1) == teamrooms_dict['snapshot'], \
+        te_v2.get_snapshot_by_contract(1)
+
+    #test update_snapshot by contract
+    assert te_v2.update_snapshot_by_contract(1, memo='memo') == teamrooms_dict, \
+        te_v2.update_snapshot_by_contract(1, memo='memo')
+
+    #test update_snapshot by contract
+    assert te_v2.delete_snapshot_by_contract(1) == teamrooms_dict, te_v2.delete_snapshot_by_contract(1)
 
     #test get_snapshot
     assert te.get_snapshot(1, 1) == teamrooms_dict['snapshot'], \
@@ -375,6 +386,9 @@ def test_team():
     #test get_workdiaries_by_contract
     eq_(te_v2.get_workdiaries_by_contract(1, 1), (teamrooms_dict['snapshots']['user'],
         [teamrooms_dict['snapshots']['snapshot']]))
+
+    #test get_snapshot_by_contract
+    eq_(te_v2.get_snapshot_by_contract(1), {'status':'private'})
 
 
 teamrooms_dict_none = {'teamrooms': '',
