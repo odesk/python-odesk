@@ -6,24 +6,24 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>odesk.routers package &mdash; python-odesk 0.5.7 documentation</title>
+    <title>odesk.routers package &mdash; python-odesk 0.5.8 documentation</title>
     
-    <link rel="stylesheet" href="../static/sphinxdoc.css" type="text/css" />
-    <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.5.7',
+        VERSION:     '0.5.8',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="../static/jquery.js"></script>
-    <script type="text/javascript" src="../static/underscore.js"></script>
-    <script type="text/javascript" src="../static/doctools.js"></script>
-    <link rel="top" title="python-odesk 0.5.7 documentation" href="../index.html" />
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="python-odesk 0.5.8 documentation" href="../index.html" />
     <link rel="up" title="odesk package" href="odesk.html" />
     <link rel="next" title="Changelog" href="../changelog.html" />
     <link rel="prev" title="odesk package" href="odesk.html" /> 
@@ -44,7 +44,7 @@
         <li class="right" >
           <a href="odesk.html" title="odesk package"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">python-odesk 0.5.7 documentation</a> &raquo;</li>
+        <li><a href="../index.html">python-odesk 0.5.8 documentation</a> &raquo;</li>
           <li><a href="../reference_docs.html" >Reference Documentation: Classes and Methods</a> &raquo;</li>
           <li><a href="odesk.html" accesskey="U">odesk package</a> &raquo;</li> 
       </ul>
@@ -77,7 +77,7 @@
                         title="next chapter">Changelog</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
-    <li><a href="../sources/reference-docs/odesk.routers.txt"
+    <li><a href="../_sources/reference-docs/odesk.routers.txt"
            rel="nofollow">Show Source</a></li>
   </ul>
 <div id="searchbox" style="display: none">
@@ -3803,6 +3803,68 @@ as a range or as a list of values:</p>
 <dd></dd></dl>
 
 <dl class="method">
+<dt id="odesk.routers.team.Team_V2.delete_snapshot_by_contract">
+<tt class="descname">delete_snapshot_by_contract</tt><big>(</big><em>contract_id</em>, <em>datetime=None</em><big>)</big><a class="headerlink" href="#odesk.routers.team.Team_V2.delete_snapshot_by_contract" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete a company&#8217;s user snapshot by contract ID at given time or &#8216;now&#8217;.</p>
+<dl class="docutils">
+<dt><em>Parameters:</em></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">contract_id:</th><td class="field-body"><p class="first">The Contract ID</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">datetime:</th><td class="field-body"><p class="first">(optional)(default &#8216;now&#8217;)
+Timestamp either a datetime object
+or a string in ISO 8601 format (in UTC)
+<tt class="docutils literal"><span class="pre">yyyymmddTHHMMSSZ</span></tt>
+or a string with UNIX timestamp (number of
+seconds after epoch)</p>
+<p>More than one timestamps can be specified either
+as a range or as a list of values:</p>
+<blockquote class="last">
+<div><ul class="simple">
+<li>range: use the comma character (,) e.g.
+20081205T090351Z,20081205T091853Z</li>
+<li>list: use the semicolon character (;) e.g.
+20081205T090351Z;20081405T090851Z;20081705T091853Z</li>
+</ul>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="odesk.routers.team.Team_V2.get_snapshot_by_contract">
+<tt class="descname">get_snapshot_by_contract</tt><big>(</big><em>contract_id</em>, <em>datetime=None</em><big>)</big><a class="headerlink" href="#odesk.routers.team.Team_V2.get_snapshot_by_contract" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve a company&#8217;s user snapshots by contract ID during given time or &#8216;now&#8217;.</p>
+<dl class="docutils">
+<dt><em>Parameters:</em></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">contract_id:</th><td class="field-body">The Contract ID</td>
+</tr>
+<tr class="field-even field"><th class="field-name">datetime:</th><td class="field-body">(optional)(default: &#8216;now&#8217;)
+Timestamp either a datetime object
+or a string in ISO 8601 format (in UTC)
+<tt class="docutils literal"><span class="pre">yyyymmddTHHMMSSZ</span></tt>
+or a string with UNIX timestamp (number of
+seconds after epoch)</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
 <dt id="odesk.routers.team.Team_V2.get_snapshots">
 <tt class="descname">get_snapshots</tt><big>(</big><em>company_or_team_id</em>, <em>online=None</em>, <em>disabled=None</em><big>)</big><a class="headerlink" href="#odesk.routers.team.Team_V2.get_snapshots" title="Permalink to this definition">¶</a></dt>
 <dd><p>Retrieve team member snapshots.</p>
@@ -3868,6 +3930,46 @@ Possible values are (default):</p>
 * &#8216;mine&#8217; (default)
 * &#8216;user&#8217;
 * &#8216;gmt&#8217;</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="odesk.routers.team.Team_V2.update_snapshot_by_contract">
+<tt class="descname">update_snapshot_by_contract</tt><big>(</big><em>contract_id</em>, <em>memo</em>, <em>datetime=None</em><big>)</big><a class="headerlink" href="#odesk.routers.team.Team_V2.update_snapshot_by_contract" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update a company&#8217;s user snapshot memo by contract ID at given time or &#8216;now&#8217;.</p>
+<dl class="docutils">
+<dt><em>Parameters:</em></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">contract_id:</th><td class="field-body"><p class="first">The Contract ID</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">memo:</th><td class="field-body"><p class="first">The Memo text</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">datetime:</th><td class="field-body"><p class="first">(optoinal)(default &#8216;now&#8217;)
+Timestamp either a datetime object
+or a string in ISO 8601 format (in UTC)
+<tt class="docutils literal"><span class="pre">yyyymmddTHHMMSSZ</span></tt>
+or a string with UNIX timestamp (number of
+seconds after epoch)</p>
+<p>More than one timestamps can be specified either
+as a range or as a list of values:</p>
+<blockquote class="last">
+<div><ul class="simple">
+<li>range: use the comma character (,) e.g.
+<tt class="docutils literal"><span class="pre">20081205T090351Z,20081205T091853Z</span></tt></li>
+<li>list: use the semicolon character (;) e.g.
+<tt class="docutils literal"><span class="pre">20081205T090351Z;20081405T090851Z;20081705T091853Z</span></tt></li>
+</ul>
+</div></blockquote>
+</td>
 </tr>
 </tbody>
 </table>
@@ -4029,7 +4131,7 @@ Default: <tt class="docutils literal"><span class="pre">False</span></tt></td>
         <li class="right" >
           <a href="odesk.html" title="odesk package"
              >previous</a> |</li>
-        <li><a href="../index.html">python-odesk 0.5.7 documentation</a> &raquo;</li>
+        <li><a href="../index.html">python-odesk 0.5.8 documentation</a> &raquo;</li>
           <li><a href="../reference_docs.html" >Reference Documentation: Classes and Methods</a> &raquo;</li>
           <li><a href="odesk.html" >odesk package</a> &raquo;</li> 
       </ul>
