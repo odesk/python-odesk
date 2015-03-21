@@ -5,6 +5,18 @@
 Changelog
 ***************
 
+.. _0.5.8:
+
+Version 0.5.8
+-------------
+* Added new API call - :py:meth:`Get Snapshot by Contract <odesk.routers.offers.Offers.get_snapshot_by_contract>`.
+* Added new API call - :py:meth:`Update Snapshot memo by Contract <odesk.routers.team.Team_V2.update_snapshot_by_contract>`.
+* Added new API call - :py:meth:`Delete Snapshot by Contract <odesk.routers.team.Team_V2.delete_snapshot_by_contract>`.
+* Fixed broken API call - :py:meth:`Get Work Diary by Contract <odesk.routers.team.Team_V2.get_workdiaries_by_contract>`.
+* Added support of separate parameter ``related_jobcategory2`` in `Send client offer <odesk.routers.offers.Offers.send_client_offer>`
+* Fixed issue with wrong name of ``milestones`` parameter in `Send client offer <odesk.routers.offers.Offers.send_client_offer>`
+* Fixed issue with passing ``milestones`` and ``context`` parameters in `Send client offer <odesk.routers.offers.Offers.send_client_offer>`
+
 .. _0.5.7:
 
 Version 0.5.7

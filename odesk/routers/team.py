@@ -235,7 +235,7 @@ class Team_V2(Namespace):
                           * 'gmt'
 
         """
-        url = 'workdiarie/contracts/{0}/{1}'.format(contract_id, date)
+        url = 'workdiaries/contracts/{0}/{1}'.format(contract_id, date)
 
         data = {}
 
@@ -252,3 +252,91 @@ class Team_V2(Namespace):
             snapshots = [snapshots]
         
         return result['snapshots']['user'], snapshots
+
+    def get_snapshot_by_contract(self, contract_id, datetime=None):
+        """
+        Retrieve a company's user snapshots by contract ID during given time or 'now'.
+
+        *Parameters:*
+          :contract_id:  The Contract ID
+
+          :datetime:    (optional)(default: 'now')
+                        Timestamp either a datetime object
+                        or a string in ISO 8601 format (in UTC)
+                        ``yyyymmddTHHMMSSZ``
+                        or a string with UNIX timestamp (number of
+                        seconds after epoch)
+
+        """
+        url = 'snapshots/contracts/{0}'.format(contract_id)
+        if datetime:   # date could be a list or a range also
+            url = '{0}/{1}'.format(url, datetime.isoformat())
+
+        result = self.get(url)
+        if 'snapshot' in result:
+            snapshot = result['snapshot']
+        else:
+            snapshot = []
+        if 'error' in result:
+            return result
+        return snapshot
+
+    def update_snapshot_by_contract(self, contract_id, memo, datetime=None):
+        """
+        Update a company's user snapshot memo by contract ID at given time or 'now'.
+
+        *Parameters:*
+          :contract_id:  The Contract ID
+
+          :memo:        The Memo text
+
+          :datetime:    (optoinal)(default 'now')
+                        Timestamp either a datetime object
+                        or a string in ISO 8601 format (in UTC)
+                        ``yyyymmddTHHMMSSZ``
+                        or a string with UNIX timestamp (number of
+                        seconds after epoch)
+
+                        More than one timestamps can be specified either
+                        as a range or as a list of values:
+
+                          - range: use the comma character (,) e.g.
+                            ``20081205T090351Z,20081205T091853Z``
+
+                          - list: use the semicolon character (;) e.g.
+                            ``20081205T090351Z;20081405T090851Z;20081705T091853Z``
+
+        """
+        url = 'snapshots/contracts/{0}'.format(contract_id)
+        if datetime:
+            url = '{0}/{1}'.format(url, datetime.isoformat())
+        return self.put(url, {'memo': memo})
+
+    def delete_snapshot_by_contract(self, contract_id, datetime=None):
+        """
+        Delete a company's user snapshot by contract ID at given time or 'now'.
+
+        *Parameters:*
+          :contract_id:  The Contract ID
+
+          :datetime:    (optional)(default 'now')
+                        Timestamp either a datetime object
+                        or a string in ISO 8601 format (in UTC)
+                        ``yyyymmddTHHMMSSZ``
+                        or a string with UNIX timestamp (number of
+                        seconds after epoch)
+
+                        More than one timestamps can be specified either
+                        as a range or as a list of values:
+
+                          - range: use the comma character (,) e.g.
+                            20081205T090351Z,20081205T091853Z
+
+                          - list: use the semicolon character (;) e.g.
+                            20081205T090351Z;20081405T090851Z;20081705T091853Z
+
+        """
+        url = 'snapshots/contracts/{0}'.format(contract_id)
+        if datetime:
+            url = '{0}/{1}'.format(url, datetime.isoformat())
+        return self.delete(url)
