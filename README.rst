@@ -1,3 +1,6 @@
+**DEPRECATED (use https://github.com/upwork/python-upwork instead)**
+============================
+
 .. image:: http://img.shields.io/packagist/l/odesk/php-odesk.svg
    :target: http://www.apache.org/licenses/LICENSE-2.0.html
    :alt: License
